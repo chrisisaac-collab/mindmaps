@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Advantage Summit – Bonus Day | Igor Pogany & Dean Graziosi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161a23;
+    --surface2: #1e2330;
+    --border: #2a3045;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --accent: #5c6bff;
+    --c1: #5c6bff;
+    --c2: #ff6b6b;
+    --c3: #ffd166;
+    --c4: #06d6a0;
+    --c5: #a29bfe;
+    --c6: #fd79a8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #161a2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 24px 20px;
+    text-align: center;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(92,107,255,0.15);
+    border: 1px solid rgba(92,107,255,0.3);
+    color: var(--c1);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 16px 0;
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 9px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .tab:hover { border-color: var(--accent); color: var(--text); }
+  .tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .panel { display: none; padding: 24px 16px 40px; max-width: 900px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* MIND MAP */
+  .mind-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .center-node {
+    background: linear-gradient(135deg, var(--c1), var(--c5));
+    border-radius: 16px;
+    padding: 20px 32px;
+    text-align: center;
+    max-width: 340px;
+    margin-bottom: 8px;
+  }
+  .center-node h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .center-node p { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+
+  .branch {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .branch:hover { border-color: var(--border); }
+  .branch-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    user-select: none;
+  }
+  .branch-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .branch-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .branch-arrow {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.3s;
+  }
+  .branch.open .branch-arrow { transform: rotate(180deg); }
+  .branch-body {
+    display: none;
+    padding: 4px 18px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .branch.open .branch-body { display: block; }
+  .leaf {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .leaf-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    user-select: none;
+  }
+  .leaf-icon { font-size: 14px; }
+  .leaf-detail {
+    display: none;
+    padding: 0 14px 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .leaf.open .leaf-detail { display: block; }
+  .leaf.open { border-color: #2a3045; }
+
+  /* BRANCH COLORS */
+  .b1 { background: rgba(92,107,255,0.07); } .b1 .branch-header { background: rgba(92,107,255,0.1); } .b1 .branch-dot { background: var(--c1); } .b1 .branch-title { color: var(--c1); }
+  .b2 { background: rgba(255,107,107,0.07); } .b2 .branch-header { background: rgba(255,107,107,0.1); } .b2 .branch-dot { background: var(--c2); } .b2 .branch-title { color: var(--c2); }
+  .b3 { background: rgba(255,209,102,0.07); } .b3 .branch-header { background: rgba(255,209,102,0.1); } .b3 .branch-dot { background: var(--c3); } .b3 .branch-title { color: var(--c3); }
+  .b4 { background: rgba(6,214,160,0.07); } .b4 .branch-header { background: rgba(6,214,160,0.1); } .b4 .branch-dot { background: var(--c4); } .b4 .branch-title { color: var(--c4); }
+  .b5 { background: rgba(162,155,254,0.07); } .b5 .branch-header { background: rgba(162,155,254,0.1); } .b5 .branch-dot { background: var(--c5); } .b5 .branch-title { color: var(--c5); }
+  .b6 { background: rgba(253,121,168,0.07); } .b6 .branch-header { background: rgba(253,121,168,0.1); } .b6 .branch-dot { background: var(--c6); } .b6 .branch-title { color: var(--c6); }
+
+  /* SUMMARY */
+  .summary-section { margin-bottom: 28px; }
+  .summary-section h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-section p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #b0b8cc;
+    margin-bottom: 8px;
+  }
+
+  /* TAKEAWAYS */
+  .takeaway-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .takeaway-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.5;
+    min-width: 32px;
+    line-height: 1;
+  }
+  .takeaway-body h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .takeaway-body p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">AI Advantage Summit 2026 — Bonus Day</div>
+  <h1>Building Your AI DNA</h1>
+  <p>Igor Pogany & Dean Graziosi &nbsp;·&nbsp; April 27, 2026 &nbsp;·&nbsp; AI Advantage Summit</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">📄 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">⚡ Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div class="panel active" id="mindmap">
+  <div class="mind-map">
+    <div class="center-node">
+      <h2>Building Your AI DNA</h2>
+      <p>A repeatable system for personalising AI to work for you</p>
+    </div>
+
+    <!-- Branch 1 -->
+    <div class="branch b1" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot"></div>
+        <div class="branch-title">🧬 What Is "AI DNA"?</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="branch-body">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The Core Concept</div>
+          <div class="leaf-detail">Your "AI DNA" is a structured, personal data set you feed into AI so it understands your voice, values, goals, and context. Rather than starting every prompt from scratch, your AI DNA lets the model respond as if it already knows you deeply — producing far more relevant, personalised outputs from the very first message.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Why Generic AI Fails</div>
+          <div class="leaf-detail">Most people use AI like a search engine — typing short, context-free queries and getting generic answers. Without personal context, even the most powerful model can only deliver average results. AI DNA solves this by turning a blank-slate tool into a personalised strategic partner.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The "Clone" Metaphor</div>
+          <div class="leaf-detail">Igor frames AI DNA as the foundation for building an "AI Clone" — a version of AI trained so thoroughly on who you are that it can think, write, and decide in your style. This clone doesn't replace you; it multiplies your output by handling the tasks that drain your time and energy.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>From Working With AI to AI Working For You</div>
+          <div class="leaf-detail">The 2026 Bootcamp theme reflects a maturation in how people use AI. Year 1 taught you to work alongside AI. Year 2 is about deploying an AI that runs tasks autonomously in the background — scheduling, drafting, researching — while you focus on higher-leverage work.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 2 -->
+    <div class="branch b2" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot"></div>
+        <div class="branch-title">🥪 The Context Sandwich Framework</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="branch-body">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Layer 1 — Who You Are</div>
+          <div class="leaf-detail">The first layer of the Context Sandwich is your identity: your name, background, industry, role, values, and communication style. This anchors every subsequent AI interaction in your real-world context, so outputs don't just sound smart — they sound like you and apply directly to your situation.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Layer 2 — The Task</div>
+          <div class="leaf-detail">The middle layer is the specific task or question you need help with. Because it's sandwiched between rich personal context and a clear output spec, the task gets handled with far more nuance than a standalone prompt. The AI doesn't just answer the question — it answers it for you, in your world.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Layer 3 — The Output Format</div>
+          <div class="leaf-detail">The third layer specifies exactly what you want back: a bullet list, an email, a 200-word social post, a structured plan. This removes guesswork for the AI and ensures you get something immediately usable rather than something you need to edit heavily before applying.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Why Sandwiching Works</div>
+          <div class="leaf-detail">Context Sandwich is a replicable structure, not a one-off trick. Once you build your personal context block, you paste it into the top of any AI conversation and instantly transform a generic tool into a personalised assistant. Igor calls this "the shift from prompting to programming your AI."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 3 -->
+    <div class="branch b3" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot"></div>
+        <div class="branch-title">🎯 Dean's Goal Acceleration Method</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="branch-body">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>90-Day Goal Setting</div>
+          <div class="leaf-detail">Dean emphasises breaking big annual goals into focused 90-day sprints. A goal that's too large creates paralysis; one that's too small creates complacency. The 90-day window is short enough to feel urgent, long enough to create real momentum — and small enough to feed into an AI that can track and support your progress.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The 7 Levels Deep Exercise</div>
+          <div class="leaf-detail">Dean uses a recursive "why" drill — asking yourself why your goal matters, then why that answer matters, seven layers deep. By the seventh level, you typically surface an emotional truth (e.g., "I want to break a cycle my children will inherit"). This emotional root becomes part of your AI DNA, helping AI generate content that actually motivates you.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Stretch Goals and the Brain</div>
+          <div class="leaf-detail">Dean encourages setting goals that are slightly beyond what feels achievable, because a near-impossible goal forces your brain to explore solutions it wouldn't consider for a comfortable target. AI becomes a powerful partner here — it can generate strategies for stretch scenarios your rational mind would dismiss without data to back them up.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>AI as Your Goal Accelerator</div>
+          <div class="leaf-detail">Once your goals are embedded in your AI DNA, the model can proactively identify constraints, generate possible solutions, draft accountability messages, and remind you of your "why" when you're stuck. Dean demonstrated live how asking AI "What are my top three constraints right now?" against your DNA context can surface blind spots within seconds.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 4 -->
+    <div class="branch b4" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot"></div>
+        <div class="branch-title">🤖 The AI Clone — Building & Training</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="branch-body">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The Onboarding Prompt</div>
+          <div class="leaf-detail">Igor walks through a master "onboarding prompt" that positions AI as your personal strategic advisor, efficiency expert, creative partner, and execution engine — all in one. This prompt sets expectations for every future interaction: the AI treats every task with the mindset of a world-class operator who understands your specific business and goals.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Training on Your Voice</div>
+          <div class="leaf-detail">A key step in building your AI Clone is feeding it examples of your actual writing — emails, social posts, sales scripts, even voice memos transcribed to text. The more examples you provide, the more accurately the AI can replicate your tone, vocabulary, and cadence across any type of content.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Teaching It How You Think</div>
+          <div class="leaf-detail">Beyond voice, Igor introduces the idea of teaching AI your decision-making framework — how you prioritise, what trade-offs you prefer, how you handle risk. When AI knows your thinking model, it can draft recommendations that feel like they came from you, not from a generic advisor with no skin in the game.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Automation and Scaling</div>
+          <div class="leaf-detail">The final stage is automating tasks so the clone runs without your active input: drafting your weekly newsletter, responding to common enquiries, updating project trackers, or generating content from raw notes. Igor shows how the 2026 Bootcamp specifically addresses this autonomous layer that didn't exist in last year's program.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 5 -->
+    <div class="branch b5" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot"></div>
+        <div class="branch-title">💡 AI Literacy as the New Business Skill</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="branch-body">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The Internet Parallel</div>
+          <div class="leaf-detail">Dean draws a clear parallel to the early internet: those who learned to use it first didn't need to become engineers — they just needed enough literacy to find, communicate, and create online. AI is at the same inflection point. The window to build an advantage through early adoption is open now, but it won't stay open forever.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Simplicity Over Complexity</div>
+          <div class="leaf-detail">Igor's core teaching philosophy: AI literacy isn't about memorising tools or chasing updates. It's about understanding how to think alongside AI systems and applying them in ways that improve how you work, communicate, and solve problems. Dean reinforces this: your ability to scale is directly tied to your ability to simplify.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The ELI5 Principle</div>
+          <div class="leaf-detail">Igor demonstrates how AI can instantly translate complex, technical, or legal language into plain English — no need to google every term or hire a specialist for basic comprehension. His example: uploading a medical or legal document and asking AI to "explain this like I'm five" eliminates a significant cognitive tax for non-experts.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Two Types of People Right Now</div>
+          <div class="leaf-detail">Dean frames the current moment with a stark binary: people who are building AI habits now and those who are waiting. The program is designed explicitly for people who say "I'm not technical" — its promise is that by Day 30 (or by the end of the 6-week Bootcamp), every participant will have a functioning AI assistant saving measurable time each week.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 6 -->
+    <div class="branch b6" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot"></div>
+        <div class="branch-title">📈 Results, Proof & What Comes Next</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="branch-body">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>Year 1 Bootcamp Results</div>
+          <div class="leaf-detail">The 2025 Bootcamp delivered measurable outcomes: 70% of participants reclaimed 15 or more hours per week, AI confidence scores nearly doubled from an average of 4.1 to 8.1 out of 10, and 99% reported measurable progress within the first 30 days. It became the lowest-refund program Tony and Dean have ever created across their combined 76 years of business.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The 15-Hour Guarantee</div>
+          <div class="leaf-detail">The 2026 Bootcamp ships with an explicit guarantee: if you show up, do the work, and don't reclaim at least 15 hours per week by the end of the program, you get a full refund. Dean notes this guarantee has barely been claimed because the system, when applied, reliably delivers on that number for most participants.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>The 2026 Bootcamp Expansion</div>
+          <div class="leaf-detail">Building on Year 1, the 2026 edition expands from 30 days to a full 6-week guided experience starting May 1. Four existing sessions have been updated to reflect where AI is in 2026, and two entirely new sessions cover autonomous capabilities that didn't exist when the first Bootcamp ran — including background automation and multi-agent workflows.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-header"><span class="leaf-icon">🔹</span>AI Advantage LIVE — Phoenix 2026</div>
+          <div class="leaf-detail">Beyond the Bootcamp, AI Advantage is hosting its first-ever in-person LIVE event in Phoenix, Arizona on July 8–10, 2026 — three full days of hands-on learning with the sharpest minds in AI. The Bonus Day session positions this event as the next step for participants ready to move beyond digital training into immersive, community-based implementation.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="panel" id="summary">
+
+  <div class="summary-section">
+    <h3 style="color:var(--c1)">🧬 What Is "AI DNA" and Why Does It Matter?</h3>
+    <p>The Bonus Day of the 2026 AI Advantage Summit was built around a single, powerful idea: that the reason most people get mediocre results from AI isn't the technology — it's the absence of personal context. Igor Pogany introduced the concept of "AI DNA" as the solution. Your AI DNA is a structured body of information about who you are — your goals, values, communication style, business context, and decision-making framework — that you give to AI so it can respond with the specificity and relevance of a trusted advisor who already knows you well.</p>
+    <p>Without this foundation, even the most sophisticated AI models produce generic output. With it, AI becomes a genuine strategic partner. The session builds directly on Igor's "Context Sandwich" training from Day 1 of the Summit, taking that framework from concept to a clear, repeatable implementation process anyone can follow regardless of technical background.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3 style="color:var(--c2)">🥪 The Context Sandwich in Practice</h3>
+    <p>Igor's Context Sandwich is a three-layer prompting structure designed to give AI everything it needs to produce immediately useful output. The first layer is your personal context — who you are, your industry, your audience, your voice. The second is the specific task or question. The third is the exact output format you want back. Together, these three layers transform a blank-slate AI interaction into a personalised session.</p>
+    <p>The key insight Igor drives home is that your personal context block only needs to be written once. After that, you paste it into the top of any AI conversation and the model is instantly oriented to your world. This is the shift from "prompting" — which is laborious and inconsistent — to "programming your AI" — which is systematic and scalable. The Bonus Day session showed live demonstrations of this in action, with participants seeing how dramatically output quality improves when proper context precedes a task.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3 style="color:var(--c3)">🎯 Dean Graziosi — Goal Architecture with AI</h3>
+    <p>Dean Graziosi's contribution to the Bonus Day focused on the human side of AI adoption: why most people stall isn't because they lack the tools, but because they haven't clearly defined what they want those tools to achieve. Dean introduced his 90-day goal-setting framework, which narrows overwhelming annual ambitions into focused quarterly sprints that create urgency without paralysis.</p>
+    <p>Dean also walked through his famous "7 Levels Deep" exercise — a recursive questioning practice that peels back surface-level goals to reveal the emotional root beneath. At level seven, participants typically surface a profound personal truth (a cycle they want to break, a legacy they want to build) that becomes a powerful driver. When this emotional context is embedded into your AI DNA, the model can generate content and strategies that resonate at a motivational level, not just a logical one. Dean demonstrated how asking AI for goal-specific advice, constraints analysis, and accountability check-ins becomes exponentially more powerful once your goals are part of your personal context block.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3 style="color:var(--c4)">🤖 Building Your AI Clone Step by Step</h3>
+    <p>The centrepiece of the Bonus Day was Igor's step-by-step walkthrough of building an AI Clone — a version of AI so thoroughly trained on who you are that it can think, create, and communicate in your style. This process begins with the master onboarding prompt: a structured instruction that positions AI as your personal strategic advisor, efficiency expert, creative partner, and execution engine simultaneously.</p>
+    <p>From there, the Clone is trained in stages: first on your voice (real examples of your writing, emails, and content), then on your thinking (your decision frameworks, priorities, and risk tolerance), then on your workflows (the tasks you want the Clone to handle autonomously). The 2026 Bootcamp's expanded 6-week format dedicates an entire session to automation — giving the Clone tasks it runs in the background while you focus elsewhere. Igor was clear that this autonomous layer is what separates participants who save 2–3 hours a week from those who reclaim 15 or more.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3 style="color:var(--c5)">💡 AI Literacy as the New Foundational Skill</h3>
+    <p>A recurring theme throughout the Bonus Day was the framing of AI literacy as a structural necessity, not a competitive advantage. Dean's internet parallel was particularly resonant: in the 1990s, you didn't need to understand code to benefit from the internet — you needed just enough literacy to find, create, and communicate. The people who built that literacy early gained advantages that compounded for decades. AI is at exactly that inflection point right now.</p>
+    <p>Igor reinforced that AI literacy doesn't mean chasing every new tool or memorising technical specifications. It means understanding how to think alongside these systems — how to give them context, how to specify outputs, how to review and refine what they produce. The ELI5 (Explain Like I'm Five) technique Igor demonstrated is a perfect example: anyone can use AI to instantly demystify complex documents, contracts, or concepts without hiring a specialist or spending hours on research.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3 style="color:var(--c6)">📈 Proof, Guarantees, and the Road Ahead</h3>
+    <p>The Bonus Day closed with a data-backed review of the Year 1 AI Advantage Bootcamp results — 70% of participants reclaimed 15+ hours per week, AI confidence nearly doubled, and 99% showed measurable progress within the first month. Dean noted it became the lowest-refund program he and Tony have ever created. The 2026 Bootcamp backs this up with an explicit guarantee: 15 hours reclaimed per week or a full refund.</p>
+    <p>The expanded 2026 program runs six weeks from May 1, with four updated sessions and two brand-new modules covering autonomous AI capabilities. Looking further ahead, AI Advantage announced its first in-person LIVE event in Phoenix, Arizona on July 8–10, 2026 — three full days of hands-on learning, real-world implementation, and direct access to the program's leading educators and guest experts.</p>
+  </div>
+
+</div>
+
+<!-- TAKEAWAYS -->
+<div class="panel" id="takeaways">
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">01</div>
+    <div class="takeaway-body">
+      <h4>Write Your Personal Context Block Today</h4>
+      <p>Draft a 200–400 word document describing who you are: your name, role, industry, target audience, communication style, top values, and current goals. Paste this at the top of every AI conversation this week and notice how dramatically the output quality improves — even before you refine it further.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">02</div>
+    <div class="takeaway-body">
+      <h4>Use the Context Sandwich Structure for Every Prompt</h4>
+      <p>Stop writing one-line prompts. Structure every AI request in three parts: (1) your personal context, (2) the specific task, (3) the exact output format you want. This alone will move your results from generic to immediately usable within a single session.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">03</div>
+    <div class="takeaway-body">
+      <h4>Do the 7 Levels Deep Exercise on Your #1 Goal</h4>
+      <p>Pick your most important current goal and ask yourself "why does this matter?" seven times, building on each answer. Record your final answer — this is your emotional root. Add it to your AI DNA so the model understands not just what you want to achieve, but why it matters to you at a core level.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">04</div>
+    <div class="takeaway-body">
+      <h4>Set a 90-Day AI Goal, Not a Vague Annual One</h4>
+      <p>Convert your annual ambitions into a single 90-day sprint goal. Make it specific, slightly uncomfortable, and measurable. Feed it into AI with your personal context and ask: "What are my top three constraints to achieving this in 90 days?" Use the answer to plan your week.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">05</div>
+    <div class="takeaway-body">
+      <h4>Use the Master Onboarding Prompt to Initialise Every Session</h4>
+      <p>Copy Igor's onboarding prompt structure: position AI as your "personal strategic advisor, efficiency expert, creative partner, and execution engine." Tell it to treat every request with the mindset of a world-class operator who understands your specific business and goals. This single prompt transforms the default AI persona into a high-leverage collaborator.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">06</div>
+    <div class="takeaway-body">
+      <h4>Feed AI Real Examples of Your Writing to Train Your Voice</h4>
+      <p>Gather 5–10 examples of your best writing — emails, posts, scripts, proposals — and paste them into a new AI session with the instruction: "Here are examples of how I write. From now on, match this tone and style." The more examples you provide, the more accurately AI can replicate your voice in future content tasks.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">07</div>
+    <div class="takeaway-body">
+      <h4>Use the ELI5 Method to Eliminate Research Drag</h4>
+      <p>Whenever you encounter a complex document, contract, technical report, or dense article, upload it to AI and ask: "Explain this to me like I'm five — what are the three most important things I need to understand?" This takes minutes and eliminates hours of research or expensive specialist consultations for basic comprehension tasks.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">08</div>
+    <div class="takeaway-body">
+      <h4>Identify Your Top Three "Background Tasks" for Automation</h4>
+      <p>List every task you do repeatedly each week that involves writing, summarising, researching, or formatting. Pick the top three by time cost. These are your first automation targets. Write a clear brief for each and start delegating them to AI with your personal context block pre-loaded — you'll reclaim hours within the first week.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">09</div>
+    <div class="takeaway-body">
+      <h4>Ask AI for an Uncomfortable Truth About Your Current Approach</h4>
+      <p>Once your AI DNA is loaded, try Igor's power prompt: "Based on everything you know about me, what is one uncomfortable truth about my current approach that I need to hear right now?" This prompt leverages your personal context to surface blind spots that a generic AI query would never reach — use it monthly as a strategic check-in.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">10</div>
+    <div class="takeaway-body">
+      <h4>Treat AI Literacy as a Compounding Investment</h4>
+      <p>Every hour you invest in building your AI DNA, refining your prompts, and training your Clone compounds over time. The participants who saved 15+ hours a week in Year 1 did so because they built the system in Month 1 and then let it run. Start building your system today — even a rough version — rather than waiting until you have the perfect setup.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>

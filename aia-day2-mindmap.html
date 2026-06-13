@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Advantage Summit 2026 – Day 2 | Grow Faster, Work Smarter</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c1220;
+    --surface: #131d30;
+    --surface2: #1a2540;
+    --border: #253050;
+    --text: #e6eaf5;
+    --muted: #7b8aaa;
+    --c1: #38bdf8;
+    --c2: #fb923c;
+    --c3: #4ade80;
+    --c4: #f472b6;
+    --c5: #a78bfa;
+    --c6: #facc15;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  header {
+    background: linear-gradient(160deg, #0c1220 0%, #0f1e3a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 30px 24px 22px;
+    text-align: center;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(56,189,248,0.12);
+    border: 1px solid rgba(56,189,248,0.25);
+    color: var(--c1);
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    color: #fff; line-height: 1.2;
+  }
+  header p { color: var(--muted); font-size: 13px; margin-top: 8px; }
+
+  .speakers-bar {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 8px;
+    padding: 14px 16px; background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--border);
+  }
+  .speaker-pill {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: var(--muted); font-size: 11px; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  .tabs { display: flex; justify-content: center; gap: 8px; padding: 20px 16px 0; flex-wrap: wrap; }
+  .tab {
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); padding: 9px 20px; border-radius: 8px;
+    cursor: pointer; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .tab:hover { border-color: var(--c1); color: var(--text); }
+  .tab.active { background: var(--c1); border-color: var(--c1); color: #0c1220; }
+
+  .panel { display: none; padding: 24px 16px 48px; max-width: 880px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  .mind-center {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c5) 100%);
+    border-radius: 16px; padding: 22px 32px; text-align: center;
+    max-width: 380px; margin: 0 auto 16px;
+  }
+  .mind-center h2 { font-family: 'DM Serif Display', serif; font-size: 19px; color: #fff; }
+  .mind-center p { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px; }
+
+  .branch {
+    width: 100%; border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; cursor: pointer; margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+  .branch:hover { border-color: var(--border); }
+  .branch-header { display: flex; align-items: center; gap: 12px; padding: 15px 18px; user-select: none; }
+  .branch-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .branch-title { font-size: 14px; font-weight: 700; flex: 1; }
+  .branch-speaker {
+    font-size: 11px; font-weight: 600; color: var(--muted);
+    background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 20px;
+  }
+  .branch-arrow { font-size: 11px; color: var(--muted); transition: transform 0.3s; }
+  .branch.open .branch-arrow { transform: rotate(180deg); }
+  .branch-body {
+    display: none; padding: 4px 18px 16px;
+    border-top: 1px solid var(--border); background: var(--surface);
+  }
+  .branch.open .branch-body { display: block; }
+
+  .leaf {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; margin-top: 8px; cursor: pointer; overflow: hidden;
+  }
+  .leaf-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; font-size: 13px; font-weight: 600; user-select: none;
+  }
+  .leaf-icon { font-size: 14px; }
+  .leaf-detail {
+    display: none; padding: 0 14px 12px;
+    font-size: 12.5px; color: var(--muted); line-height: 1.75;
+  }
+  .leaf.open .leaf-detail { display: block; }
+  .leaf.open { border-color: var(--border); }
+
+  /* SUMMARY */
+  .summary-section { margin-bottom: 28px; }
+  .summary-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .summary-header .sdot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .summary-header h3 { font-family: 'DM Serif Display', serif; font-size: 17px; flex: 1; }
+  .summary-header .slabel { font-size: 11px; color: var(--muted); font-weight: 600; background: var(--surface2); padding: 3px 10px; border-radius: 20px; }
+  .summary-section p { font-size: 14px; line-height: 1.82; color: var(--muted); margin-bottom: 8px; }
+
+  /* TAKEAWAYS */
+  .takeaway-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 12px;
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .takeaway-num {
+    font-family: 'DM Serif Display', serif; font-size: 28px;
+    color: var(--border); min-width: 36px; line-height: 1;
+  }
+  .takeaway-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+  .takeaway-body p { font-size: 13px; color: var(--muted); line-height: 1.72; }
+
+  /* branch bg tints */
+  .b1 { background: rgba(56,189,248,0.04); } .b1 .branch-header { background: rgba(56,189,248,0.08); }
+  .b2 { background: rgba(251,146,60,0.04); } .b2 .branch-header { background: rgba(251,146,60,0.08); }
+  .b3 { background: rgba(74,222,128,0.04); } .b3 .branch-header { background: rgba(74,222,128,0.08); }
+  .b4 { background: rgba(244,114,182,0.04); } .b4 .branch-header { background: rgba(244,114,182,0.08); }
+  .b5 { background: rgba(167,139,250,0.04); } .b5 .branch-header { background: rgba(167,139,250,0.08); }
+  .b6 { background: rgba(250,204,21,0.04); }  .b6 .branch-header { background: rgba(250,204,21,0.08); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">AI Advantage Summit 2026 — Day 2</div>
+  <h1>Grow Faster, Work Smarter<br>& Expand Your Reach With AI</h1>
+  <p>April 24, 2026 &nbsp;·&nbsp; AI Advantage Summit &nbsp;·&nbsp; 3h 29m</p>
+</header>
+
+<div class="speakers-bar">
+  <span class="speaker-pill">🎯 Dean Graziosi</span>
+  <span class="speaker-pill">🧠 Dr. Arthur Brooks</span>
+  <span class="speaker-pill">📱 Sabrina Ramonov</span>
+  <span class="speaker-pill">🏄 Dallas Clounch</span>
+  <span class="speaker-pill">💼 Mark Benioff</span>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">📄 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">⚡ Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div class="panel active" id="mindmap">
+  <div class="mind-center">
+    <h2>Grow Faster With AI — Day 2</h2>
+    <p>Goals, content, human psychology & the AI creator playbook</p>
+  </div>
+
+  <!-- Branch 1: Dean -->
+  <div class="branch b1" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-dot" style="background:var(--c1)"></div>
+      <div class="branch-title" style="color:var(--c1)">🎯 Dean's Goal Accelerator Framework</div>
+      <div class="branch-speaker">Dean Graziosi</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔹</span>The 90-Day Sprint — Why Annual Goals Fail</div>
+        <div class="leaf-detail">Dean opens Day 2 by attacking the myth of the annual goal. Goals set too far in the future trigger procrastination — the brain doesn't feel urgency when the deadline is twelve months away. Collapsing goals into 90-day sprints creates an optimal pressure window: far enough to accomplish something meaningful, close enough to feel real. Dean argues that virtually every entrepreneur would move faster if they stopped thinking in years and started thinking in quarters.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔹</span>The Stretch: Near-Impossible on Purpose</div>
+        <div class="leaf-detail">The counterintuitive layer of Dean's goal method: don't just shrink the timeframe — also stretch the ambition slightly beyond what feels achievable. A goal that's too comfortable doesn't force the brain to explore new solutions. A near-impossible goal forces lateral thinking, resourcefulness, and the kind of creative problem-solving that generates breakthrough results. Dean's framing: make it uncomfortable enough that you have to become someone slightly different to achieve it.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔹</span>The Four Goal Questions</div>
+        <div class="leaf-detail">Dean walks through four questions to put into AI alongside your goal: What are my constraints? (surfacing hidden blockers) What are the possible solutions? (generating options you haven't considered) Why does this matter to your heart, not your head? (connecting to emotional fuel) What happens if you don't achieve it? (negative visualisation as a motivator). These four prompts, fed into AI with your personal context, can produce a strategic roadmap in minutes that would otherwise take days to develop alone.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔹</span>AI as Your Daily Routine Architect</div>
+        <div class="leaf-detail">Dean demonstrates a practical application of AI that surprises many attendees: using it to design and optimise your daily routine. Feed AI your goals, your current schedule, your energy patterns, and your constraints, then ask it to propose a daily structure that maximises your chances of hitting your 90-day target. Dean also shows how AI can draft communications "with the passion of Tony Robbins and the storytelling of Malcolm Gladwell" — illustrating that AI can be instructed to adopt specific stylistic and emotional registers, not just produce generic text.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔹</span>Photo to Recipe — AI in Everyday Life</div>
+        <div class="leaf-detail">Dean closes with a simple, memorable demonstration of multimodal AI: take a photo of whatever food you have in your kitchen, upload it to ChatGPT, and ask what you can cook tonight. It's a small example, but it makes the technology feel immediately personal and accessible. The point is not the recipe — it's the shift in mindset: AI is not just a business tool. It's a life tool, and the entrepreneurs who integrate it across their daily existence gain a compounding advantage that business-only users miss.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 2: Dr. Arthur Brooks -->
+  <div class="branch b2" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-dot" style="background:var(--c2)"></div>
+      <div class="branch-title" style="color:var(--c2)">🧠 Dr. Arthur Brooks — Human Brain in the AI Age</div>
+      <div class="branch-speaker">Dr. Arthur Brooks</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>Complicated vs Complex — Where AI Belongs</div>
+        <div class="leaf-detail">Dr. Brooks draws a precise and important distinction: AI is excellent at complicated problems (those with definable parameters and calculable solutions — logistics, analysis, scheduling, drafting) but is genuinely poor at complex problems (those that involve meaning, relationships, identity, and values). Complicated is the domain of the left brain; complex is the domain of the right. Using AI for right-brain questions — "Why am I here?" "What do I really want?" — produces answers that sound plausible but are ultimately empty, because they lack the lived experience and emotional truth that real answers require.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>The Left-Brain AI Partner</div>
+        <div class="leaf-detail">The prescription Brooks offers is precise: use AI as a thinking partner for your left brain — analysis, research, structuring arguments, stress-testing logic — while protecting your right brain for the work that makes you distinctively human. The practical implication for entrepreneurs is that AI should handle the "what" and "how" questions (data, processes, content, workflows) while you focus the "why" questions on your own reflection, relationships, and intuition — which AI cannot replicate.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>The Simulation of Life Warning</div>
+        <div class="leaf-detail">Brooks offers one of the sharpest warnings of the entire summit: "If you look for love, happiness and meaning in tech, you wind up living in a simulation of life." This is not technophobia — Brooks is enthusiastic about AI's utility — but a clear-eyed psychological caution. AI interactions can mimic the surface characteristics of connection, meaning, and companionship without delivering the neurological and emotional reality. The danger is not dramatic; it's subtle and gradual — a quiet substitution of screen time for real human depth.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>The Complement vs Substitute Test</div>
+        <div class="leaf-detail">Brooks gives entrepreneurs a simple test for evaluating any AI use: does this complement my human relationships or substitute for them? Anything that gives you more time, energy, and presence for the people and experiences that matter — that's complementary, and it makes you happier. Anything that replaces the human contact itself — that's substitution, and it predictably reduces wellbeing over time. Apply this test every time you introduce a new AI habit into your life.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>Exercise Your Right Hemisphere</div>
+        <div class="leaf-detail">Brooks ends with a prescription that feels almost countercultural in an AI summit context: after you've used AI to free up your time, invest that reclaimed time in four right-brain activities — love, worship or spiritual practice, nature, and the processing of suffering. These are the experiences that develop the very human capacities AI cannot access and that make you genuinely irreplaceable as a thinker, leader, and creator. The irony Brooks savours: the better you are at using AI for the left brain, the more important it becomes to invest in your right.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 3: Sabrina Ramonov -->
+  <div class="branch b3" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-dot" style="background:var(--c3)"></div>
+      <div class="branch-title" style="color:var(--c3)">📱 Sabrina Ramonov — The AI Content System</div>
+      <div class="branch-speaker">Sabrina Ramonov</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Step 1 — Ideas: AI as Your Creative Analyst</div>
+        <div class="leaf-detail">The old content ideation process: sit in front of a blank page and try to think of something your audience will find valuable. The new process: feed AI your past content, your audience data, your area of expertise, and ask it to analyse patterns and identify angles you haven't covered. AI can spot what's resonating, what's missing, and what combinations of topics your specific audience responds to — in a fraction of the time a human researcher would take. Sabrina's core prompt for this stage: "Give me 5 viral content ideas for my expertise" followed by "Ask me clarifying questions."</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Step 2 — Create: Three Variations, Then Refine</div>
+        <div class="leaf-detail">Rather than asking AI to produce a single piece of content and hoping it's right, Sabrina's method is to ask for three variations of the same content in different formats — a list, an infographic brief, a narrative post — and then refine the one that feels closest to what you need. This dramatically reduces back-and-forth and produces better output faster than iterating on a single draft. The key prompt structure: "Write a viral social media post for my expertise. Ask me clarifying questions until you are 95% confident you can complete the task successfully."</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Step 3 — Publish: One Video, Every Platform</div>
+        <div class="leaf-detail">The old publishing workflow required a separate content calendar, individual formatting for each platform, and manual scheduling. The new workflow uses AI to take a single video or piece of original content and automatically repurpose it for every distribution channel: a YouTube video becomes a newsletter, a LinkedIn post, a Twitter/X thread, an Instagram caption, and a short-form clip — each formatted to the conventions of its platform. Sabrina's advice to overwhelmed creators: start with just one platform, nail the AI repurposing workflow for that, then expand.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Original Content Stays Human — AI Handles Repurposing</div>
+        <div class="leaf-detail">A key principle Sabrina reinforces from the Day 2 Q&A: your main content should remain original and authentically human. The authenticity and unique perspective are what build your audience and brand — AI cannot replicate genuine lived insight. Where AI earns its keep is in the downstream work: taking that original insight and distributing it across every channel in the right format. This division of labour keeps your content authentic at its source while dramatically multiplying its reach.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 4: Dallas the AI Surfer -->
+  <div class="branch b4" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-dot" style="background:var(--c4)"></div>
+      <div class="branch-title" style="color:var(--c4)">🏄 Dallas Clounch — The 90/10 AI Creator Model</div>
+      <div class="branch-speaker">Dallas Clounch</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>90% AI, 10% Human — The Creator Math</div>
+        <div class="leaf-detail">Dallas presents what he calls the creator equation for the AI era: 90% of the production process is handled by AI, 10% is human input and curation. His own content operation runs on this ratio — AI handles ideation, drafting, editing, formatting, and scheduling, while he contributes the directional vision, the authentic story angle, and the final quality pass. The result is a content output that far exceeds what any single human creator could produce manually, while maintaining a discernible human voice at its core.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Building an AI Clone to Partner With</div>
+        <div class="leaf-detail">Dallas goes further than most Day 2 speakers in his AI Clone implementation: his clone is trained so thoroughly on his voice, values, and content style that it can serve as a co-creator rather than a tool. He describes the clone not as something that produces content for him to review, but as a genuine creative partner — one that can initiate content ideas, draft full pieces, and even represent his perspective in conversations he's too busy to have. The 90/10 split is the key: Dallas is always the 10% that makes the final call.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Role → Context → Goals: The Prompt Architecture</div>
+        <div class="leaf-detail">Dallas reveals his foundational prompt architecture, which mirrors and extends Igor's Context Sandwich: first assign the AI a specific role (strategic advisor, content creator, marketing expert), then provide full context (your business, your audience, your voice, your current situation), then define the goal for this specific interaction. This three-layer structure ensures the AI is oriented correctly before it produces any output — and Dallas argues it's the single most important habit that separates creators who get great AI results from those who don't.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Omnipresence as the New Creator Goal</div>
+        <div class="leaf-detail">Dallas articulates the business goal underlying his 90/10 model: omnipresence — being everywhere, all the time, across every platform where your audience spends time, with content that feels consistent and authentically you. Without AI, omnipresence requires a large team or sacrificing quality for volume. With a well-built AI Clone, a single creator can maintain a credible presence across YouTube, LinkedIn, Instagram, email, podcasts, and emerging platforms simultaneously — without the burnout that comes with trying to do it manually.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 5: Mark Benioff -->
+  <div class="branch b5" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-dot" style="background:var(--c5)"></div>
+      <div class="branch-title" style="color:var(--c5)">💼 Mark Benioff — Don't Fear the Wave, Surf It</div>
+      <div class="branch-speaker">Mark Benioff</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>The Fear of Job Loss — Reframed</div>
+        <div class="leaf-detail">Benioff addresses the elephant in the room for many attendees: the anxiety that AI will eliminate their livelihood. His reframe is grounded in his decades of experience building and leading Salesforce through multiple technological transitions. The people who were displaced by previous technological waves were not the ones who engaged with the new technology — they were the ones who waited, resisted, or assumed their current skills would be sufficient indefinitely. Engagement is the only reliable form of protection.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>The Wave Is Here — Get on a Board</div>
+        <div class="leaf-detail">Benioff's surfing metaphor is deliberately accessible: you don't need to be a professional surfer to benefit from a wave — you need to be in the water with a board before the wave arrives. For entrepreneurs, the wave is AI adoption at scale. The board is building even basic AI literacy and one or two concrete AI workflows into your business right now. The people who are already in the water will ride the wave; the people on the beach will watch it pass and then struggle in the chop left behind.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>Enterprise-Scale AI Is Already Here</div>
+        <div class="leaf-detail">Benioff provides a reality check on the enterprise side of AI adoption: the Fortune 500 is already deploying AI at scale across sales, service, marketing, and operations. The competitive gap between AI-native organisations and traditional ones is widening every quarter. For entrepreneurs, this is both a warning and an opportunity — the tools available to individuals in 2026 are the same tools that enterprises are paying millions to deploy, meaning small and nimble operators can move faster than large incumbents if they act now.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>Miss the Wave, Face the Chop</div>
+        <div class="leaf-detail">Benioff's closing thought on the wave metaphor: it's not just about missing the opportunity — it's about what happens after. When a wave breaks, the water churns. Those in the water without direction get tumbled. In business terms, the aftermath of a major technology wave is a period of disruption that punishes the unprepared disproportionately. The entrepreneurs who build AI capability now are not just gaining an advantage — they're insulating themselves against the turbulence that's coming for those who don't.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 6: Day 2 Q&A Insights -->
+  <div class="branch b6" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-dot" style="background:var(--c6)"></div>
+      <div class="branch-title" style="color:var(--c6)">💬 Day 2 Q&A — Key Insights & Best Practices</div>
+      <div class="branch-speaker">Panel</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>Feed AI Everything — Including Screenshots</div>
+        <div class="leaf-detail">One of the most practical Q&A exchanges: a participant asks how to get AI to give brutally honest feedback rather than flattering responses. The answer from the panel is to give AI everything — context, screenshots, analytics, results, past attempts — and then ask specifically: "Where do I need to improve?" or "What are the top 5% of my strengths and how should I double down on them?" The more complete the data, the more honest and useful the diagnosis.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>Original Content First, AI for Distribution</div>
+        <div class="leaf-detail">The panel reinforces a key content principle in response to a question about authenticity: your original content — the unique insight, the personal story, the distinctive perspective — must come from you. AI handles the downstream work: formatting it for different platforms, writing variations for different audiences, and scheduling for optimal times. This division preserves authenticity at the source while dramatically multiplying reach. Fully AI-generated content without a human anchor tends to feel generic and erodes the trust that builds long-term audiences.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>Seth Godin's Minimum Viable Audience</div>
+        <div class="leaf-detail">Dean references Seth Godin's principle in response to a question about content overwhelm: before trying to reach everyone, find the minimum viable audience — the smallest group of people who would genuinely miss your work if you stopped. AI makes this principle more powerful, not less relevant. Use AI to produce deeply specific content for a precise audience rather than mediocre content for everyone. Specificity, powered by AI's ability to personalise and vary output, is a more durable competitive strategy than scale for most entrepreneurs.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>Start With One Platform, Then Expand</div>
+        <div class="leaf-detail">Sabrina's practical advice for creators overwhelmed by the prospect of omnipresence: start with one platform. Build the AI repurposing workflow for that single platform until it runs reliably and produces quality output consistently. Then add the second platform, using the first as the proven template. Trying to be everywhere simultaneously from the start almost always produces mediocre results across the board. Sequenced expansion — one platform done excellently, then the next — compounds faster than simultaneous spread.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="panel" id="summary">
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c1)"></div>
+      <h3>Dean Graziosi — Goal Architecture & AI in Daily Life</h3>
+      <span class="slabel">Dean Graziosi</span>
+    </div>
+    <p>Dean opened Day 2 by exposing the fundamental flaw in how most entrepreneurs set goals: the twelve-month timeline. Annual goals are psychologically too distant to create consistent urgency, and the brain's natural tendency is to defer action when the deadline feels far away. Dean's solution is the 90-day sprint — a window short enough to feel urgent and long enough to achieve something genuinely significant.</p>
+    <p>The counterintuitive twist is the stretch: make the 90-day goal slightly beyond what feels achievable. This is not motivational rhetoric — it's cognitive strategy. A near-impossible goal forces your brain to explore solutions and resources it would never consider for a comfortable target, because comfort doesn't require creativity. Dean walks through four questions to run through AI alongside any goal: What are my constraints? What are the possible solutions? Why does this matter to my heart? What happens if I don't achieve it? These four prompts, delivered into a well-contextualised AI session, consistently produce strategic roadmaps in minutes that would otherwise take days to develop.</p>
+    <p>Dean also demonstrates the daily life dimension of AI integration — from using it to design optimised daily routines to using multimodal AI to suggest meals from a photo of your kitchen. The larger message: entrepreneurs who integrate AI only into their business but not their daily life leave significant compounding value on the table.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c2)"></div>
+      <h3>Dr. Arthur Brooks — The Psychology of Human-AI Balance</h3>
+      <span class="slabel">Dr. Arthur Brooks</span>
+    </div>
+    <p>Dr. Arthur Brooks delivered the most intellectually distinctive talk of Day 2 — a rigorous psychological framework for understanding where AI genuinely helps and where it quietly harms. His central distinction is between complicated and complex problems. Complicated problems have definable parameters and calculable solutions: AI handles these brilliantly. Complex problems involve meaning, relationships, identity, and values: these require the right hemisphere of the brain, and AI's attempts to engage with them produce outputs that sound plausible but carry none of the lived truth that real answers require.</p>
+    <p>Brooks's prescription is elegant: use AI as a left-brain partner for analysis, research, and structured thinking — and invest the time AI frees up into the four right-brain activities that develop irreplaceable human depth: love, spiritual practice, engagement with nature, and the processing of suffering. His warning about the "simulation of life" — seeking love, happiness, and meaning in technology — is the Day 2 moment most likely to stay with attendees. It's not anti-technology. It's a precise psychological observation about substitution versus complementation, backed by the research Brooks has spent decades conducting on happiness and human flourishing.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c3)"></div>
+      <h3>Sabrina Ramonov — The Three-Step AI Content System</h3>
+      <span class="slabel">Sabrina Ramonov</span>
+    </div>
+    <p>Sabrina Ramonov brings a systems-designer's clarity to AI content creation. Her three-step framework — Ideate, Create, Publish — is the most operationally complete content model presented at the summit, and it maps directly onto the full content workflow most entrepreneurs already follow but execute inefficiently.</p>
+    <p>The Ideate step is where AI's analytical power first shows up: instead of brainstorming in isolation, you feed AI your past content and audience data and ask it to identify patterns, gaps, and high-potential angles. The Create step replaces the paralysis of the blank page with a structured prompt that asks for three variations before selecting and refining one. The Publish step is the multiplier: one original piece of content, repurposed automatically into every format for every platform. Sabrina is careful to reinforce throughout that the original content must be authentically human — AI handles the downstream distribution, not the upstream insight. This preserves the authenticity that builds audiences while dramatically reducing the time cost of maintaining a multi-platform presence.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c4)"></div>
+      <h3>Dallas Clounch — The 90/10 AI Creator and Omnipresence</h3>
+      <span class="slabel">Dallas Clounch</span>
+    </div>
+    <p>Dallas Clounch (The AI Surfer) represents the most advanced creator application on Day 2 — a fully operational AI-native content business running on a 90/10 production model. Ninety percent of every piece of content he produces is AI-generated; ten percent is his human direction, curation, and quality pass. The result is a content operation that achieves genuine omnipresence — consistent, high-quality output across multiple platforms simultaneously — that a solo creator couldn't sustain manually.</p>
+    <p>His prompt architecture — Role → Context → Goals — is the operational complement to Igor's Context Sandwich. Assigning AI a specific role before giving it context and then defining the goal for each interaction consistently produces better output than context-only prompting. Dallas frames his AI Clone not as a tool but as a genuine creative partner: something trained so thoroughly on his voice and values that it can initiate ideas and draft content that accurately reflects his perspective. His central business goal, omnipresence, is made achievable by this Clone infrastructure in a way that would be impossible without it.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c5)"></div>
+      <h3>Mark Benioff — Fear Is Not a Strategy</h3>
+      <span class="slabel">Mark Benioff</span>
+    </div>
+    <p>Salesforce CEO Mark Benioff's Day 2 appearance is brief but pointed. His role is to address the fear that underlies many attendees' AI ambivalence — the worry that AI adoption is not an opportunity but a threat. Benioff's reframe draws on his forty years of building technology companies through multiple waves of disruption: the people who suffer in technology transitions are not the ones who engaged with the new technology, but the ones who didn't.</p>
+    <p>His surfing metaphor is memorable: you don't need to be a champion surfer to benefit from a wave — you need to be in the water with a board before the wave arrives. The entrepreneurs in the AI Advantage Summit audience are, in Benioff's view, already ahead — they've shown up, which means they're at least in the water. The next step is to get the board, which in this context means building even one concrete AI workflow into their business before leaving the summit.</p>
+  </div>
+
+</div>
+
+<!-- TAKEAWAYS -->
+<div class="panel" id="takeaways">
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">01</div>
+    <div class="takeaway-body">
+      <h4>Convert Your #1 Annual Goal Into a 90-Day Sprint Right Now</h4>
+      <p>Take the most important goal you're currently working toward and reframe it as a 90-day target. Make it specific, slightly uncomfortable, and measurable. Write it down and feed it into AI with your personal context — then ask: "What are my top three constraints to achieving this in 90 days, and what are three possible solutions for each?" Use the output as your weekly planning anchor.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">02</div>
+    <div class="takeaway-body">
+      <h4>Run Dean's Four Goal Questions Through AI This Week</h4>
+      <p>With your 90-day goal in hand, ask AI four questions in sequence: What are my constraints? What are possible solutions? Why does this matter to my heart, not just my head? What happens if I don't achieve it? Feed these into a well-contextualised AI session and work through each answer. The fourth question — the negative visualisation — is often the most motivating and the most consistently skipped.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">03</div>
+    <div class="takeaway-body">
+      <h4>Apply Brooks's Complement vs Substitute Test to Every AI Habit</h4>
+      <p>For every AI tool or workflow you use this week, ask: does this give me more time and presence for the people and experiences that matter (complement), or does it replace a human interaction I should be having instead (substitute)? Build a personal rule: if it's a substitute, redesign the workflow so the time saved goes into something genuinely human — a conversation, time in nature, a creative pursuit that has nothing to do with output.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">04</div>
+    <div class="takeaway-body">
+      <h4>Use AI for What and How — Protect Your Why</h4>
+      <p>Following Brooks's framework, write down the questions in your life and business that truly require your own reflection: questions about purpose, direction, values, and relationships. These are your "why" questions — and they belong to you, not to AI. Then list the "what" and "how" questions: research, analysis, content, scheduling, formatting. These belong to AI. This simple division will immediately improve both your AI results and your sense of personal agency.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">05</div>
+    <div class="takeaway-body">
+      <h4>Build Sabrina's Three-Step Content System for One Platform</h4>
+      <p>Pick one content platform where you want to grow. Apply Ideate → Create → Publish in sequence: ask AI to generate five content ideas from your expertise, use clarifying questions to refine one idea, ask for three format variations, refine your favourite, then ask AI to repurpose it into three pieces for your chosen platform. Do this once this week and evaluate the time saving versus your current process.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">06</div>
+    <div class="takeaway-body">
+      <h4>Use Sabrina's 95% Confidence Prompt for Content</h4>
+      <p>Replace generic content prompts with Sabrina's structure: "Write [content type] for my expertise. Ask me clarifying questions until you are 95% confident you can complete the task successfully." This single change shifts the dynamic from you guessing what AI needs to AI actively gathering what it requires — producing significantly better first drafts with less back-and-forth.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">07</div>
+    <div class="takeaway-body">
+      <h4>Adopt Dallas's Role → Context → Goals Prompt Architecture</h4>
+      <p>For every significant AI task, structure your prompt in three layers: assign a specific role ("You are my senior marketing strategist"), provide full context (your business, audience, current situation), then define the precise goal for this interaction. This three-layer structure consistently outperforms context-only prompting and is the single habit Dallas credits for the quality of his AI Clone output.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">08</div>
+    <div class="takeaway-body">
+      <h4>Map Your Omnipresence Goal and Pick Your First Platform</h4>
+      <p>Dallas's omnipresence model starts with clarity about where your audience actually is, not where you wish they were. List every platform where your ideal audience spends time. Rank them by relevance. Pick the top one and commit to building a consistent AI-assisted presence there for 90 days before adding the second. Omnipresence is built sequentially, not simultaneously — start with one platform done excellently.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">09</div>
+    <div class="takeaway-body">
+      <h4>Invest the Time AI Saves Into a Right-Brain Activity</h4>
+      <p>Brooks's prescription is concrete: after you've used AI to reclaim time, deliberately invest that time in one of four right-brain activities — love (a deeper conversation, quality time with someone important), spiritual or reflective practice, time in nature, or sitting with a difficult emotion rather than distracting from it. This is not optional self-care advice — it's a strategy for developing the capacities that make you genuinely irreplaceable as AI becomes more capable.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">10</div>
+    <div class="takeaway-body">
+      <h4>Get in the Water — Build One AI Workflow Before the Week Ends</h4>
+      <p>Benioff's surfing metaphor has a practical conclusion: you need to be in the water before the wave arrives. Choose one recurring task in your business this week — a piece of content, a research task, a draft communication — and run it through AI using the frameworks from Day 2. It doesn't need to be perfect. It needs to exist. One completed AI workflow this week is worth a hundred plans to start next month.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>

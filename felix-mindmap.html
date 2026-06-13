@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ben Felix – Money Expert | Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;400i&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#f6f4ef;--surface:#fff;--surface2:#f0ede6;--border:#e2ddd6;--border-dark:#c9c2b5;--text:#1a1710;--muted:#7a7468;--c1:#2d6a4f;--c2:#1d3a5f;--c3:#b5621e;--c4:#6b3fa0;--c5:#b52b2b;--c6:#1a6b8a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+  .header{background:var(--text);color:#fff;padding:28px 32px 20px}
+  .header-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9a9488;margin-bottom:8px}
+  .header h1{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,30px)}
+  .header-meta{font-size:13px;color:#9a9488;margin-top:6px}
+  .tabs{display:flex;gap:4px;padding:16px 32px 0;background:var(--surface);border-bottom:1px solid var(--border)}
+  .tab{padding:10px 22px;font-size:13px;font-weight:500;cursor:pointer;border-radius:6px 6px 0 0;color:var(--muted);border:1px solid transparent;border-bottom:none;transition:all .2s}
+  .tab.active{background:var(--bg);color:var(--text);border-color:var(--border)}
+  .tab:hover:not(.active){color:var(--text)}
+  .panel{display:none;padding:32px}
+  .panel.active{display:block}
+  .mindmap{max-width:900px;margin:0 auto}
+  .central-node{background:linear-gradient(135deg,#1d3a5f,#2d6a4f);border-radius:16px;padding:24px 32px;text-align:center;margin-bottom:28px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+  .central-node h2{font-family:'Playfair Display',serif;font-size:21px;color:#fff}
+  .central-node p{font-size:13px;color:rgba(255,255,255,.7);margin-top:5px}
+  .branch{border-radius:12px;margin-bottom:10px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:box-shadow .2s;background:var(--surface)}
+  .branch:hover{box-shadow:0 4px 18px rgba(0,0,0,.07)}
+  .branch-header{display:flex;align-items:center;gap:14px;padding:15px 20px;font-weight:600;font-size:14px;user-select:none}
+  .branch-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .branch-arrow{margin-left:auto;font-size:11px;color:var(--muted);transition:transform .25s}
+  .branch.open .branch-arrow{transform:rotate(180deg)}
+  .leaves{display:none;padding:0 16px 16px}
+  .branch.open .leaves{display:block}
+  .leaf{border-radius:8px;margin-top:8px;overflow:hidden;cursor:pointer}
+  .leaf-header{display:flex;align-items:center;gap:10px;padding:10px 14px;font-size:13px;font-weight:500;background:var(--surface2)}
+  .leaf-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .leaf-arrow{margin-left:auto;font-size:10px;color:var(--muted);transition:transform .2s}
+  .leaf.open .leaf-arrow{transform:rotate(180deg)}
+  .leaf-detail{display:none;padding:12px 14px;font-size:13px;line-height:1.75;color:var(--muted);background:rgba(0,0,0,.015);border-top:1px solid var(--border)}
+  .leaf.open .leaf-detail{display:block}
+  .b1 .branch-header{background:rgba(45,106,79,.07)}.b1 .branch-icon{background:rgba(45,106,79,.15)}.b1 .leaf-dot{background:var(--c1)}
+  .b2 .branch-header{background:rgba(29,58,95,.07)}.b2 .branch-icon{background:rgba(29,58,95,.15)}.b2 .leaf-dot{background:var(--c2)}
+  .b3 .branch-header{background:rgba(181,98,30,.07)}.b3 .branch-icon{background:rgba(181,98,30,.15)}.b3 .leaf-dot{background:var(--c3)}
+  .b4 .branch-header{background:rgba(107,63,160,.07)}.b4 .branch-icon{background:rgba(107,63,160,.15)}.b4 .leaf-dot{background:var(--c4)}
+  .b5 .branch-header{background:rgba(181,43,43,.07)}.b5 .branch-icon{background:rgba(181,43,43,.15)}.b5 .leaf-dot{background:var(--c5)}
+  .b6 .branch-header{background:rgba(26,107,138,.07)}.b6 .branch-icon{background:rgba(26,107,138,.15)}.b6 .leaf-dot{background:var(--c6)}
+  .summary{max-width:760px;margin:0 auto}
+  .summary-section{margin-bottom:36px}
+  .summary-section h3{font-size:17px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .summary-section h3 span{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+  .summary-section p{font-size:14px;line-height:1.85;color:var(--muted)}
+  .summary-section p+p{margin-top:10px}
+  .takeaways{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .takeaway-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;gap:16px;align-items:flex-start}
+  .takeaway-num{font-size:28px;font-weight:700;line-height:1;flex-shrink:0;font-family:'Playfair Display',serif}
+  .takeaway-card h4{font-size:14px;font-weight:600;margin-bottom:6px}
+  .takeaway-card p{font-size:13px;color:var(--muted);line-height:1.65}
+  @media(max-width:600px){.panel,.tabs,.header{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">The Diary of a CEO · April 30, 2026</div>
+  <h1>Money Expert: Buying A House Is A Mistake! Becoming Rich Is Simple But You Won't Do It!</h1>
+  <div class="header-meta">Ben Felix · Portfolio Manager &amp; CIO, PWL Capital · Host: Steven Bartlett · 2h 14m</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('mindmap',this)">🧠 Mind Map</div>
+  <div class="tab" onclick="switchTab('summary',this)">📄 Full Summary</div>
+  <div class="tab" onclick="switchTab('takeaways',this)">⚡ Actionable Takeaways</div>
+</div>
+
+<div class="panel active" id="mindmap">
+<div class="mindmap">
+  <div class="central-node">
+    <h2>Investing Has Been Solved — Your Brain Hasn't</h2>
+    <p>Ben Felix · Evidence-based investing · PWL Capital</p>
+  </div>
+
+  <div class="branch b1" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">📈</div>Index Funds — The Only Framework You Need<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Investing Has Been Solved<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Felix's core thesis is simple: use low-cost global index funds, capture market returns, and stop there. Academic literature consistently shows the vast majority of active fund managers underperform the index over the long run after fees. The solution is not complicated — the hard part is the psychology of actually sticking with it when markets get volatile and narratives turn scary.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>The Case for Knowing Just Enough<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Counterintuitively, people who know a little — just enough to have conviction in index funds — outperform people who know a lot. More knowledge often leads to over-tinkering, stock-picking, and trying clever strategies that underperform. The person who buys a global index fund and ignores it beats the person who thinks they can outsmart the market.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Your First $10,000 — Three Steps<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Step one: build a small emergency fund covering 3–6 months of expenses. Step two: pay off high-interest debt — anything costing more than 6–7% is a guaranteed negative return on investment. Step three: invest the remainder in a low-cost global index fund and automate contributions so psychology cannot get in the way of execution.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Don't Look at Your Portfolio<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Academic research shows that more frequent portfolio monitoring leads to less risk-taking and lower returns. Daily fluctuations trigger loss aversion — the pain of a 5% drop outweighs the pleasure of a 6% gain. Investors who check quarterly or annually make far better decisions than those who monitor daily, because they experience smooth trends rather than terrifying noise.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Asset Allocation and Time Horizon<div class="leaf-arrow">▼</div></div><div class="leaf-detail">How much to hold in stocks versus bonds depends on your time horizon and ability to tolerate volatility without panic-selling. Young investors with decades ahead can hold almost entirely equities — downturns allow them to buy more cheaply. Those nearing retirement need more stability to avoid sequence-of-returns risk, where a market crash early in retirement permanently impairs withdrawals.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b2" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🏠</div>Renting vs Buying — The 5% Rule<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>The Hidden Unrecoverable Costs of Owning<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Homeowners systematically undercount the true cost of ownership. Property taxes (approximately 1% per year), maintenance (approximately 1% — likely more for older properties), and cost of capital (approximately 3% — either mortgage interest or the opportunity cost of equity tied up in the home) total roughly 5% of the home's value annually, none of which builds equity.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Applying the 5% Rule<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Multiply the home's purchase price by 5%, then divide by 12. This gives the break-even monthly rent. If you can rent an equivalent property for less, renting is the better financial decision. Example: a $300,000 home has a break-even rent of $1,250/month. Rent a comparable home for less and invest the difference — you come out ahead financially over the long run.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Renting Is Not Throwing Money Away<div class="leaf-arrow">▼</div></div><div class="leaf-detail">The cultural belief that "rent is dead money" is financially illiterate. A renter who invests the down payment and monthly cost difference into a global index fund will in many markets end up with more wealth than the homeowner after 25 years. The renter is not throwing money away — they are paying for housing, exactly as the homeowner pays for unrecoverable costs.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>When Buying Does Make Sense<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Buying makes financial sense when monthly ownership costs compare favourably to equivalent rent, when you plan to stay for 5+ years to amortise transaction costs, and when you have strong job security. Non-financial benefits — stability, the ability to renovate, pets, community — are real and worth valuing, but should be understood as lifestyle benefits, not financial returns.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b3" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🛠️</div>Human Capital — Your Most Valuable Asset<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Under-Earning Is the #1 Financial Mistake<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Felix's most controversial point: treating income as fixed is the biggest financial error most people make. Academic data shows a strong mechanical relationship between investment in human capital and lifetime earnings. Formal education, trade skills, and entrepreneurship all increase your most important financial asset — yourself. The biggest lever is almost always on the income side, not the expenses side.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Rare and Complementary Skill Stacks<div class="leaf-arrow">▼</div></div><div class="leaf-detail">The highest earnings come not from deepening a single skill but from combining rare and complementary skills the market values uniquely. Felix himself combined finance expertise with accessible content creation — making him one of a tiny number of finance professionals who can communicate academic research to millions. A biotech writer earns five times a general writer's rate simply by adding domain expertise to an existing writing skill.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Young People May Not Need to Save as Much<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Academic lifecycle consumption research suggests young people with low current but high expected future earnings may be suboptimal to save aggressively now. The principle: smooth consumption across your lifetime, saving more when you earn more. The critical caveat is that this requires actually increasing savings as income grows — which many people fail to do, ending up in trouble at 50.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Knowledge and Skills Are Indestructible<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Bartlett's five-bucket framework: knowledge, skills, resources, network, and reputation. Career earthquakes can drain the last three, but cannot take away what you know and can do. Early career focus should be entirely on filling the knowledge and skills buckets as deeply as possible — they compound quietly and cannot be taken away.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b4" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🧠</div>The Psychology of Money<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Your Brain Was Not Designed for Investing<div class="leaf-arrow">▼</div></div><div class="leaf-detail">The human brain evolved for immediate survival, not for abstract long-term wealth accumulation. This creates systematic biases — loss aversion, present bias, recency bias — that cause people to sell at market bottoms, chase recent winners, and under-save for retirement. Understanding that these impulses are biological, not personal failures, is the first step to building systems that work around them.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>The PERMA Model and What Wealth Is For<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Felix references the PERMA model from positive psychology — Positive emotion, Engagement, Relationships, Meaning, Accomplishment — as a framework for understanding what wealth is actually for. Money is a means to these ends, not an end in itself. Understanding which ends matter most to you shapes how much you need to save, how much risk to take, and how to avoid accumulating wealth with no clear purpose.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Tightwads, Spendthrifts and Relationships<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Research shows tightwads (chronic under-spenders) and spendthrifts (chronic over-spenders) are attracted to each other but end up in conflict. Tightwads fail to convert wealth into wellbeing; spendthrifts fail to build any. Understanding your own money personality — and your partner's — before combining finances prevents one of the most reliable sources of both financial and relationship damage.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Never Decide from Financial Urgency<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Financial urgency — the panic of feeling "behind" — reliably produces the worst decisions: speculative FOMO investing at market peaks, panic-selling at bottoms, taking on debt to chase returns. Felix argues that when you feel financial urgency, that is precisely the moment to slow down, revert to your pre-set systematic framework, and do nothing until the emotion passes.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b5" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">⚠️</div>Top Financial Mistakes<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Products That Sound Good but Aren't<div class="leaf-arrow">▼</div></div><div class="leaf-detail">The financial industry is structured around selling products, not providing advice. Actively managed funds, whole life insurance as an investment vehicle, structured products, and certain annuities consistently underperform simpler alternatives after fees. Felix's engineering test: what does the peer-reviewed academic evidence say about this product's expected net-of-fee return relative to an index fund?</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Underestimating Catastrophic Risk<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Most financial plans account for expected scenarios but ignore tail risks — job loss, serious illness, divorce, long-term care. Felix argues for adequate insurance (disability, life, liability) as a financial foundation before optimising investments. Catastrophic risks that can wipe out decades of savings are systematically underpriced by individuals because they feel abstract and unlikely until they happen.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Crypto and Speculation<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Felix takes a measured academic view: assets without earnings, dividends, or a clear mechanism for value creation are speculative. That doesn't mean crypto can't go up, but it means there is no principled way to value it or size it in a portfolio. FOMO-driven allocation to speculative assets at market peaks is one of the most reliable wealth destroyers across history.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Holding Too Much Cash<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Cash feels safe but loses value in real terms every year through inflation. Many people hold far more cash than their emergency fund requires because comfort feels like security. For any money not needed within 2–3 years, academic evidence is clear: being out of the market has a very high expected cost in forgone returns over a multi-decade investing horizon.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b6" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🌐</div>AI, War and the Future of Wealth<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Should You Invest in AI?<div class="leaf-arrow">▼</div></div><div class="leaf-detail">A global index fund already owns AI companies proportional to their market weight. Trying to overweight AI is a bet that you know more than every sophisticated institutional investor in the world — a high bar to clear. The academic evidence for most individual sector bets versus the broad index is not encouraging. If AI takes over the economy, your index fund will reflect it automatically.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>AI Displacement and Human Capital<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Felix acknowledges AI displacement as a real economic force, particularly for routine cognitive tasks. His response connects back to human capital: the skills that remain valuable are those requiring creative combination, relationship-building, and judgment in novel situations — precisely the rare and complementary skill stacks he recommends building. Investing in yourself is the best hedge against AI disruption.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>How War Changes Investing<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Geopolitical conflict creates volatility and narrative-driven market moves, but historical data shows that even major wars have not derailed long-run global equity returns for diversified investors. Geographic diversification — not concentrating in any single country — is the key protection. A global index fund provides this automatically without requiring any prediction of which conflicts will escalate.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Remortgage or Invest?<div class="leaf-arrow">▼</div></div><div class="leaf-detail">This is a mathematical question that depends on your mortgage rate versus expected equity returns. At high rates (above 5–6%), paying down mortgage debt offers a guaranteed risk-free return equal to the rate — hard to beat. At low rates, equities have a higher expected return, but with volatility. Model your specific numbers rather than applying a blanket cultural rule either way.</div></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="panel" id="summary">
+<div class="summary">
+  <div class="summary-section">
+    <h3><span style="background:var(--c1)"></span>Index Funds — The Only Framework You Need</h3>
+    <p>Ben Felix's central argument is disarmingly simple: investing has been solved. Low-cost global index funds, held for the long term, are the academically validated answer for virtually every individual investor. The challenge is not finding the right strategy — it's having the psychological conviction to stick with it. Felix came to finance with an engineering mindset, frustrated that the industry operates more like a car dealership than an evidence-based discipline, and spent years building his practice on academic literature rather than product sales.</p>
+    <p>His advice for someone starting with $10,000: build an emergency fund, eliminate high-interest debt, then invest the remainder in a diversified index fund and automate it. One counterintuitive finding from academic research: looking at your portfolio less often leads to better returns. Frequent monitoring triggers loss aversion, causing investors to take less risk and earn lower long-run returns than those who check quarterly and ignore the noise in between.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c2)"></span>Renting vs Buying — The 5% Rule</h3>
+    <p>The episode's most provocative segment dismantles the cultural belief that buying a home is always superior to renting. Felix's 5% rule captures the true unrecoverable annual cost of homeownership: roughly 1% in property taxes, 1% in maintenance, and 3% in cost of capital — whether mortgage interest or the opportunity cost of equity locked in the property. Multiply the home value by 5% and divide by 12 to get the break-even monthly rent. If you can rent an equivalent property for less, renting and investing the difference is the superior financial strategy.</p>
+    <p>The renter who invests the down payment and monthly cost difference into a global index fund will, in many scenarios, accumulate more wealth than the homeowner over 25 years. Buying makes sense when costs genuinely compare favourably, when you plan to stay long enough to amortise transaction costs (5+ years), and when non-financial benefits — stability, customisation, community — are correctly valued as lifestyle choices, not financial returns.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c3)"></span>Human Capital — Your Most Valuable Asset</h3>
+    <p>Felix identifies under-earning as the most underrated financial mistake. Most people treat income as fixed, but academic data shows a clear mechanical relationship between investment in human capital and lifetime earnings. The key insight, contributed by Bartlett, is that the highest earnings come not from deepening a single skill but from building rare and complementary skill stacks uniquely valued by the market. Felix himself combined finance expertise with content creation — making him one of a tiny number of people globally who can communicate academic investment research to a mass audience.</p>
+    <p>Early in a career, optimising for filling knowledge and skills — the only indestructible buckets — is more valuable than optimising for salary. Career earthquakes can drain resources, network, and reputation, but cannot take away what you know and can do. The lifecycle savings research also suggests young people with high expected future earnings should not feel compelled to save aggressively now, provided they actually increase savings as income grows later.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c4)"></span>The Psychology of Money</h3>
+    <p>The hardest part of investing is not the strategy — it's managing the deeply human impulses that work against it. Felix draws on positive psychology's PERMA model to frame what wealth is actually for: Positive emotion, Engagement, Relationships, Meaning, and Accomplishment. Money is a means to these ends, and understanding which ends matter most shapes how much you need to save, how much risk to take, and how to avoid accumulating wealth with no clear purpose.</p>
+    <p>Behavioural research reveals that tightwads and spendthrifts are attracted to each other but end up in financial conflict. Neither extreme is optimal — tightwads fail to convert wealth into wellbeing; spendthrifts fail to build any. Financial urgency — the panic of feeling behind — is the emotion most reliably associated with poor financial decisions, from panic-selling at market bottoms to speculative FOMO investing at peaks.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c5)"></span>Top Financial Mistakes</h3>
+    <p>Felix's most common mistakes span both product selection and behaviour. On products: actively managed funds, complex structured products, and crypto speculation consistently fail to deliver risk-adjusted returns that justify their costs relative to simple index alternatives. The financial industry's incentive structure — advisers rewarded for selling rather than advising — means retail investors are systematically steered toward products that benefit the seller.</p>
+    <p>On behaviour: holding excess cash beyond the emergency fund, failing to insure against catastrophic risk, and making financial decisions driven by urgency or FOMO are the most reliable wealth destroyers. Felix's engineering test for every financial decision: what does the peer-reviewed academic evidence say about the expected net-of-fee outcome relative to simply owning the index?</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c6)"></span>AI, War and the Future of Wealth</h3>
+    <p>Felix applies his evidence-based framework to contemporary concerns. On AI investing: a global index fund already owns AI companies at their market weight — trying to overweight AI is a bet that you know more than every sophisticated institutional investor in the world. On AI job displacement: invest in rare and complementary human skills that machines cannot easily replicate — the same advice that applies to every other period of technological disruption.</p>
+    <p>On geopolitical conflict: historical data shows even major wars have not derailed long-run global equity returns for diversified investors. Geographic diversification, which a global index fund provides automatically, is the key protection. The remortgage-versus-invest question is purely mathematical — compare your mortgage rate to expected equity returns with your specific numbers, rather than applying a blanket cultural rule in either direction.</p>
+  </div>
+</div>
+</div>
+
+<div class="panel" id="takeaways">
+<div class="takeaways">
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c1)">01</div><div><h4>Use a global index fund and stop there</h4><p>Pick a low-cost global index fund, set up automatic contributions, and resist the urge to tinker. Knowing just enough to stay the course beats knowing enough to hurt yourself with cleverness.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c2)">02</div><div><h4>Apply the 5% rule before buying a home</h4><p>Multiply the purchase price by 5% and divide by 12. If you can rent an equivalent property for less than this figure, renting and investing the difference is likely the superior financial decision.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c3)">03</div><div><h4>Check your portfolio quarterly, not daily</h4><p>Academic research confirms frequent portfolio monitoring leads to lower risk-taking and lower returns. Set a calendar reminder for quarterly reviews and ignore everything in between.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c4)">04</div><div><h4>Build a rare and complementary skill stack</h4><p>Adding one rare skill to an existing expertise can multiply earning power far more than deepening the existing skill. Identify what combination would make you one of a handful of people globally with that pairing.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c5)">05</div><div><h4>Emergency fund first, then invest</h4><p>Three to six months of expenses in cash before any investment. Without this buffer, the first financial shock forces you to sell at the worst possible time, turning temporary volatility into permanent losses.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c6)">06</div><div><h4>Pay off high-interest debt before investing</h4><p>Any debt costing more than 6–7% per year is a guaranteed negative return that no investment can reliably beat on a risk-adjusted basis. Clear it before directing money to the stock market.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c1)">07</div><div><h4>Know your money personality and your partner's</h4><p>Discuss tightwad vs spendthrift tendencies explicitly before combining finances. Misalignment here is one of the most reliable sources of both financial damage and relationship conflict.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c2)">08</div><div><h4>Insure against catastrophe before optimising returns</h4><p>Disability insurance, adequate life cover, and liability protection should be in place before focusing on investment returns. One uninsured catastrophic event can destroy decades of careful wealth accumulation.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c3)">09</div><div><h4>Never make financial decisions from urgency</h4><p>Financial urgency reliably produces the worst decisions. When you feel panic about money, slow down, revert to your pre-set framework, and do nothing until the emotion passes.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c4)">10</div><div><h4>Ask "what does the evidence say?" about every product</h4><p>Before buying any financial product — fund, insurance wrapper, crypto, structured note — ask what peer-reviewed academic research says about its expected net-of-fee return versus a simple index fund. The evidence will usually save you.</p></div></div>
+</div>
+</div>
+
+<script>
+function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>

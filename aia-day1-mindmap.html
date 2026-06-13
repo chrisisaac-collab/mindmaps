@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Advantage Summit 2026 – Day 1 | Tony Robbins, Dean Graziosi, Igor Pogany</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #f0efe9;
+    --border: #dddbd3;
+    --text: #1a1a18;
+    --muted: #6b6a62;
+    --accent: #2b5cff;
+    --c1: #2b5cff;
+    --c2: #e8480a;
+    --c3: #0a8a5c;
+    --c4: #7c3aed;
+    --c5: #c5860a;
+    --c6: #c5196e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1a18 0%, #2b2b28 100%);
+    padding: 32px 24px 24px;
+    text-align: center;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+  }
+  header p {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .speakers-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
+    background: #1a1a18;
+    border-bottom: 1px solid #2f2f2c;
+  }
+  .speaker-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 16px 0;
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    padding: 9px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .tab:hover { border-color: var(--accent); color: var(--text); }
+  .tab.active {
+    background: var(--text);
+    border-color: var(--text);
+    color: #fff;
+  }
+  .panel { display: none; padding: 24px 16px 48px; max-width: 880px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* MIND MAP */
+  .mind-center {
+    background: var(--text);
+    border-radius: 16px;
+    padding: 22px 32px;
+    text-align: center;
+    max-width: 360px;
+    margin: 0 auto 16px;
+  }
+  .mind-center h2 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; }
+  .mind-center p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 5px; }
+
+  .branch {
+    width: 100%;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: box-shadow 0.2s;
+  }
+  .branch:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+  .branch-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 18px;
+    user-select: none;
+  }
+  .branch-color-bar {
+    width: 4px;
+    height: 32px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .branch-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    flex: 1;
+  }
+  .branch-speaker {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .branch-arrow { font-size: 11px; color: var(--muted); transition: transform 0.3s; }
+  .branch.open .branch-arrow { transform: rotate(180deg); }
+  .branch-body {
+    display: none;
+    padding: 4px 18px 16px 18px;
+    border-top: 1.5px solid var(--border);
+    background: var(--surface2);
+  }
+  .branch.open .branch-body { display: block; }
+
+  .leaf {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    margin-top: 8px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .leaf-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    user-select: none;
+    color: var(--text);
+  }
+  .leaf-icon { font-size: 15px; }
+  .leaf-detail {
+    display: none;
+    padding: 0 14px 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .leaf.open .leaf-detail { display: block; }
+  .leaf.open { border-color: #c5c3bb; }
+
+  /* SUMMARY */
+  .summary-section { margin-bottom: 30px; }
+  .summary-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .summary-header .spkr-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .summary-header h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; }
+  .summary-header .spkr-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-left: auto; background: var(--surface2); padding: 3px 10px; border-radius: 20px; }
+  .summary-section p { font-size: 14px; line-height: 1.82; color: var(--muted); margin-bottom: 8px; }
+
+  /* TAKEAWAYS */
+  .takeaway-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .takeaway-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--border);
+    min-width: 36px;
+    line-height: 1;
+  }
+  .takeaway-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+  .takeaway-body p { font-size: 13px; color: var(--muted); line-height: 1.72; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">AI Advantage Summit 2026 — Day 1</div>
+  <h1>Understanding the AI Shift:<br>What's Coming & How to Get Ahead</h1>
+  <p>April 23, 2026 &nbsp;·&nbsp; AI Advantage Summit &nbsp;·&nbsp; Free Virtual Event</p>
+</header>
+
+<div class="speakers-bar">
+  <span class="speaker-pill">🎤 Dean Graziosi</span>
+  <span class="speaker-pill">⚡ Tony Robbins</span>
+  <span class="speaker-pill">🤖 Igor Pogany</span>
+  <span class="speaker-pill">💡 Zack Kass</span>
+  <span class="speaker-pill">🚀 Allie Miller</span>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">📄 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">⚡ Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div class="panel active" id="mindmap">
+  <div class="mind-center">
+    <h2>The AI Shift — Day 1</h2>
+    <p>Frameworks, mindset & practical tools for the AI era</p>
+  </div>
+
+  <!-- Branch 1: Dean -->
+  <div class="branch" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-color-bar" style="background:var(--c1)"></div>
+      <div class="branch-title" style="color:var(--c1)">📊 Dean's 4 Levers of Accelerated Success</div>
+      <div class="branch-speaker">Dean Graziosi</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔷</span>Lever 1 — Activate: Train AI to Know You Deeply</div>
+        <div class="leaf-detail">Activation is the foundation of the entire framework. Before AI can help you, it needs to understand who you are — your goals, your voice, your industry, your audience. Dean argues that most people skip this step and treat AI like a Google search. Activation means building a rich personal context layer so that every AI interaction starts from a position of deep familiarity rather than from zero.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔷</span>Lever 2 — Accelerate: Make Smarter Decisions, Faster</div>
+        <div class="leaf-detail">Once AI knows you, the second lever is using it as a thinking partner to speed up decision-making. This means feeding AI the context of a decision — constraints, options, goals — and letting it rapidly surface scenarios, risks, and recommendations that would take you days of research to find manually. Dean frames this as restoring the cognitive capacity most entrepreneurs have quietly outsourced to overthinking and analysis paralysis.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔷</span>Lever 3 — Amplify: Multiply Your Output Exponentially</div>
+        <div class="leaf-detail">Amplification is where AI starts to create visible, measurable results. This lever is about turning one unit of your input (one idea, one voice note, one draft) into multiple high-quality outputs — a blog post becomes a newsletter, a social caption, a short video script, and an email sequence. Dean gives examples of using AI to write communications that blend the passion of Tony Robbins with the storytelling of Malcolm Gladwell.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔷</span>Lever 4 — Augment: Expand Without Adding Overhead</div>
+        <div class="leaf-detail">The final lever is expansion without hiring. Augmentation means using AI agents and automated workflows to build the functional equivalent of a part-time marketer, assistant, salesperson, and operations lead — without the cost, management time, or risk of headcount. Dean positions this as the lever that allows solopreneurs and small teams to compete with enterprises that have ten times the resources.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 2: Zack Kass -->
+  <div class="branch" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-color-bar" style="background:var(--c2)"></div>
+      <div class="branch-title" style="color:var(--c2)">🌐 The Historical Context & AI's Trajectory</div>
+      <div class="branch-speaker">Zack Kass</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>How We Got Here</div>
+        <div class="leaf-detail">Zack Kass contextualises the current AI moment within the history of transformative technologies. Each major technological shift — print, electricity, the internet — followed a pattern: a period of hype, then dismissal, then quiet integration into the fabric of daily life. AI is following the same arc, but compressing it dramatically. The tools available to ordinary entrepreneurs today would have required millions in R&D budget just five years ago.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>AI's Expanding Potential</div>
+        <div class="leaf-detail">Kass maps out the expanding surface area of AI capability — from text and images in 2022 to code, reasoning, data analysis, voice, video, and autonomous agent tasks in 2026. The implication for entrepreneurs is that the number of tasks AI can handle competently is growing faster than most people can track, meaning anyone who built proficiency with AI tools 12 months ago is likely already behind the current capability curve.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>Why Now Is the Window</div>
+        <div class="leaf-detail">Kass argues that every major technology creates a brief window — typically 18 to 36 months — where early adopters gain structural advantages that are difficult for later entrants to close. Those who built websites in 1996, ran Google Ads in 2003, or mastered social media in 2010 compounded those advantages for decades. The AI window is open now. The people who build literacy, systems, and AI-augmented workflows in 2026 will look back on this year the same way early internet adopters look back on the mid-90s.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>AI Is Not About Replacing People</div>
+        <div class="leaf-detail">Kass is direct about the displacement anxiety that surrounds AI: the jobs most at risk are not jobs, but tasks within jobs — specifically the lowest-leverage, most repetitive tasks that drain human energy and suppress creative output. The net effect he projects is not unemployment but a dramatic shift in what humans spend their professional time doing, with AI absorbing the mechanical and humans doubling down on judgment, relationships, and creativity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 3: Igor -->
+  <div class="branch" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-color-bar" style="background:var(--c3)"></div>
+      <div class="branch-title" style="color:var(--c3)">🛠️ Practical AI: Making It Immediately Useful</div>
+      <div class="branch-speaker">Igor Pogany</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>The Biggest Misconception About AI</div>
+        <div class="leaf-detail">Igor opens with what he considers the single most damaging belief holding people back: that AI is for engineers or tech companies. In reality, the most practical AI applications — drafting, summarising, planning, simplifying complex information — require zero technical knowledge. The only barrier is the mental model that says "this isn't for me," and dismantling that model is Igor's primary job on Day 1.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>ELI5: Explain It Like I'm Five</div>
+        <div class="leaf-detail">Igor demonstrates one of the most immediately applicable AI techniques: instead of spending an hour decoding a complex medical report, legal contract, or technical document, simply paste it into ChatGPT with the instruction "explain this to me like I'm five — what are the three most important things I need to understand?" This takes 30 seconds and eliminates a common source of overwhelm for non-specialists dealing with domain-specific language.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>AI Literacy Is a Thinking Skill, Not a Tech Skill</div>
+        <div class="leaf-detail">Igor's framing is precise: AI literacy is about learning how to think alongside these systems, not learning how to operate them technically. The skill is in knowing what context to provide, how to structure a request, and how to evaluate and refine the output. Anyone who can write a clear email already has the foundational skill set needed to get excellent results from AI — they just need to apply those communication skills in a new direction.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Start With Your Zone of Genius</div>
+        <div class="leaf-detail">Igor recommends identifying the tasks pulling you away from your zone of genius — the work only you can do that creates the most value — and flagging those as the first candidates for AI delegation. He walks through a practical audit: list everything you do weekly, monthly, and yearly, then mark which tasks involve writing, researching, summarising, or formatting. Those tasks are all AI-ready today, and reclaiming that time is the first measurable win.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 4: Allie Miller -->
+  <div class="branch" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-color-bar" style="background:var(--c4)"></div>
+      <div class="branch-title" style="color:var(--c4)">🏢 Allie Miller's 3P Business Framework</div>
+      <div class="branch-speaker">Allie Miller</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>P1 — People: Build Your AI Team</div>
+        <div class="leaf-detail">Allie's first P targets the human cost of repetitive, digitised tasks. By deploying AI agents and repeated workflows, entrepreneurs can build the functional equivalent of fractional team members — the equivalent of 20% of a marketer, an assistant, a salesperson, and an operations lead — without full-time hires. This dramatically changes the economics of running a lean business while maintaining the output quality of a fully staffed team.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>P2 — Process: Streamline Your Operations</div>
+        <div class="leaf-detail">The second P addresses back-office efficiency: data insights, system communication, administrative workflows, and operations management. Allie highlights that the administrative burden of running a business is consistently underestimated — scheduling, reporting, follow-ups, documentation — and that AI can handle most of this burden automatically, freeing founders to focus on the decisions that actually grow the business.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>P3 — Product: Scale Your Creative Output</div>
+        <div class="leaf-detail">The third P is growth and creative reinvention. Allie argues that AI allows entrepreneurs to double down on what makes them uniquely human — their perspective, their relationships, their creativity — and use AI to scale that uniqueness across mediums, languages, and channels. A single insight can become a course, a book chapter, a social series, a podcast episode, and an email campaign, all generated from one source of original thinking.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Build Your Own App Without Code</div>
+        <div class="leaf-detail">Allie highlights one of the most exciting capability shifts of 2026: tools like Claude Code, Lovable, and Base44 allow non-technical entrepreneurs to describe software they need in plain English and have functional applications built in hours. This means the gap between "I wish I had a tool that did X" and actually having that tool has collapsed from months and thousands of dollars to an afternoon and a clear description.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 5: Tony Robbins -->
+  <div class="branch" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-color-bar" style="background:var(--c2)"></div>
+      <div class="branch-title" style="color:var(--c2)">🔥 Tony Robbins — The Creator's Mindset</div>
+      <div class="branch-speaker">Tony Robbins</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>The 5 Keys of a Great Creator</div>
+        <div class="leaf-detail">Tony introduces five qualities he argues every successful creator in the AI era must embody: Energy (the physical and mental fuel to sustain output), Vision (a clear picture of what you're building), Decisiveness (the willingness to commit without perfect information), Massive Action & Momentum (movement that compounds over time), and Relentlessness (the refusal to stop when results are slow). These are human qualities that AI amplifies but cannot replace.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>Pattern Recognition</div>
+        <div class="leaf-detail">The first of three skills Tony identifies as essential in the AI era: the ability to recognise repeating patterns in your environment before others do. He uses Warren Buffett as a case study — Buffett's entire investment philosophy is built on recognising the pattern of market fear and using it as a buy signal. Tony connects this to AI: those who recognise the AI adoption pattern early and act on it will capture disproportionate returns, just as Buffett does in markets.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>Pattern Utilisation</div>
+        <div class="leaf-detail">Once you can recognise a pattern, the second skill is leveraging it deliberately. Tony's example: stress is a pattern — it has physical, emotional, and cognitive signatures — and once you can identify it in real time, you can interrupt and redirect it. He runs his classic state-change exercise to demonstrate how quickly the body and mind can shift when you apply a recognised pattern intentionally rather than letting it run automatically.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔸</span>Pattern Creation</div>
+        <div class="leaf-detail">The third and most advanced skill: creating new patterns by combining existing ones in novel ways. Tony's analogy is a musician who first learns to play other people's songs (recognition), then begins to understand what makes them work (utilisation), and eventually creates original compositions that didn't exist before (creation). In the AI era, pattern creation is the skill that produces new products, new businesses, and new categories — the layer where human imagination becomes genuinely irreplaceable.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 6: AI Tools Landscape -->
+  <div class="branch" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-color-bar" style="background:var(--c5)"></div>
+      <div class="branch-title" style="color:var(--c5)">🧰 The AI Tools Landscape in 2026</div>
+      <div class="branch-speaker">Summit Overview</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>No-Code App Builders</div>
+        <div class="leaf-detail">Tools like Claude Code, Lovable, and Base44 have democratised software creation. Anyone can now describe a tool they need in plain language and have a working prototype within hours. This is a fundamental shift in who can build software: the moat around technical expertise has narrowed dramatically, and the advantage now flows to those with clear ideas and the ability to specify outcomes precisely — skills entrepreneurs already possess.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>AI for Content Everywhere</div>
+        <div class="leaf-detail">The summit showcases how AI now handles every stage of content creation: ideation (generating angles and ideas from your expertise), creation (drafting, editing, formatting in your voice), and distribution (repurposing a single piece into multiple formats for different platforms). The net effect is that a solopreneur with an AI-powered content system can produce and distribute as much content as a dedicated marketing team — at a fraction of the cost and time.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>AI Agents for Automation</div>
+        <div class="leaf-detail">2026 marks a genuine inflection point in AI agents — software that can execute multi-step tasks autonomously without step-by-step human instruction. This includes scheduling, email management, research, data entry, follow-up sequences, and workflow coordination. Platforms like Zapier connect AI agents to the tools businesses already use, meaning automation no longer requires code — just clear instructions and a connected tool stack.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟡</span>Multimodal AI: Text, Image, Voice, Video</div>
+        <div class="leaf-detail">A key theme across Day 1 is that AI has moved well beyond text. Modern AI tools can analyse a photo of your fridge and suggest recipes, transcribe and summarise a meeting in real time, generate a professional video from a script, or create a visual asset from a text description. For entrepreneurs, this means the creative and operational bottlenecks that once required specialist skills or expensive contractors can increasingly be handled in-house with AI assistance.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="panel" id="summary">
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="spkr-dot" style="background:var(--c1)"></div>
+      <h3>Dean Graziosi — The 4 Levers of Accelerated Success</h3>
+      <span class="spkr-label">Dean Graziosi</span>
+    </div>
+    <p>Dean opened Day 1 with a framework designed to move entrepreneurs from abstract AI curiosity to concrete, systematic implementation. The Four Levers are sequential: you cannot amplify what you haven't activated, and you cannot augment what you haven't accelerated. Activation is the bedrock — it's the process of training AI to understand who you are so thoroughly that every subsequent interaction benefits from that foundation.</p>
+    <p>The Accelerate lever is where AI becomes a genuine decision-making partner. Dean demonstrated how feeding a business challenge into a well-contextualised AI conversation can surface options and constraints that would take a human consultant days to identify. Amplify is the output multiplier: Dean showed examples of taking a single idea and using AI to produce communications that carry the passion of Tony Robbins and the storytelling depth of Malcolm Gladwell — within minutes. Finally, Augmentation is Dean's answer to the perennial entrepreneur problem of "I need more capacity but can't afford more headcount" — AI agents that work in the background handle the operational load while the founder stays in their zone of genius.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="spkr-dot" style="background:var(--c2)"></div>
+      <h3>Zack Kass — Historical Context and the Opportunity Window</h3>
+      <span class="spkr-label">Zack Kass</span>
+    </div>
+    <p>Zack Kass anchored Day 1 in historical perspective, drawing parallels between AI's current moment and the early internet. Every transformative technology follows a predictable arc: initial excitement, a period of underwhelming early products, quiet integration into daily life, and then the realisation — often too late for laggards — that the landscape has permanently changed. AI is at the integration phase right now, and the window for building structural advantage through early adoption is open but closing.</p>
+    <p>Kass was direct about the displacement concern: AI will eliminate tasks, not people — and specifically the lowest-leverage tasks that prevent people from doing their most creative and strategic work. His message was grounding rather than alarming. The entrepreneurs in the room who build AI fluency in 2026 will look back on this year the way early internet adopters look back at 1996: as the moment that made everything that came after possible.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="spkr-dot" style="background:var(--c3)"></div>
+      <h3>Igor Pogany — Making AI Practical Right Now</h3>
+      <span class="spkr-label">Igor Pogany</span>
+    </div>
+    <p>Igor's session was the most immediately actionable of Day 1. His opening premise — that AI is not for engineers and never was — sets the tone for everything that follows. The tools available in 2026 are designed for ordinary, non-technical people, and the skill they reward is clear communication and contextual thinking, not coding or data science.</p>
+    <p>The ELI5 technique is Igor's signature Day 1 demonstration: take any complex document — a medical report, a legal contract, a financial statement — paste it into ChatGPT, and ask for a plain-English breakdown of the three most important points. This one technique alone eliminates a significant tax on the time and mental energy of professionals who regularly encounter domain-specific language outside their expertise. More broadly, Igor introduces the concept of a zone-of-genius audit: mapping every recurring task against what truly requires human judgment and flagging the remainder as AI-ready. This audit typically reveals that 40–60% of an entrepreneur's weekly task list is immediately delegatable to AI.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="spkr-dot" style="background:var(--c4)"></div>
+      <h3>Allie Miller — The 3P Business Framework</h3>
+      <span class="spkr-label">Allie Miller</span>
+    </div>
+    <p>Allie Miller brought a structured business lens to AI adoption with her 3P Framework: People, Process, and Product. The People dimension tackles the most emotionally loaded part of AI adoption — the question of team and labour. Rather than framing AI as a replacement for human workers, Allie frames it as the ability to build a virtual team that handles the work that currently falls through the cracks or lands on the founder's desk at 11pm: the research, the formatting, the scheduling, the follow-ups.</p>
+    <p>The Process dimension is where Allie argues most businesses are leaving the most money on the table. Administrative overhead — the invisible tax of running any organisation — is almost entirely AI-addressable today. And the Product dimension is the growth engine: AI's ability to take a unique human perspective and scale it across formats, languages, and platforms means that a single creator or entrepreneur can now achieve the content reach and product diversity of a much larger operation. Allie also highlights the no-code revolution — tools that allow entrepreneurs to describe and build custom software without hiring a developer — as one of the most underappreciated capability shifts of 2026.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="spkr-dot" style="background:var(--c2)"></div>
+      <h3>Tony Robbins — The Creator Mindset & Three Human Skills</h3>
+      <span class="spkr-label">Tony Robbins</span>
+    </div>
+    <p>Tony's contribution to Day 1 was the counterweight to the technical conversation — a reminder that the human qualities underpinning success don't change when the tools do. His Five Keys of a Great Creator (Energy, Vision, Decisiveness, Massive Action & Momentum, and Relentlessness) are not new ideas, but Tony frames them explicitly within the AI context: these are the qualities that AI amplifies in the people who have them and exposes in the people who don't.</p>
+    <p>The Three Skills — Pattern Recognition, Pattern Utilisation, and Pattern Creation — form the framework Tony uses to explain why some people will dominate the AI era while others struggle despite having access to the same tools. Recognition is about seeing what's happening before others do. Utilisation is about converting that recognition into a competitive action. Creation is the pinnacle: the ability to synthesise existing patterns into something that didn't exist before. Tony uses the musician analogy to make this vivid — you first learn to play other people's songs, then you understand why they work, and finally you write your own. In the AI era, the people who reach Pattern Creation are the ones who will build the businesses and categories that define the next decade.</p>
+  </div>
+
+</div>
+
+<!-- TAKEAWAYS -->
+<div class="panel" id="takeaways">
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">01</div>
+    <div class="takeaway-body">
+      <h4>Run a Zone-of-Genius Audit This Week</h4>
+      <p>List every task you perform weekly and monthly. Highlight the ones that only you can do — your zone of genius. Mark everything else as a potential AI delegation target. Most entrepreneurs discover 40–60% of their task list is immediately delegatable, representing hours of reclaimed time available right now without any new tools or skills.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">02</div>
+    <div class="takeaway-body">
+      <h4>Use ELI5 on the Next Complex Document You Encounter</h4>
+      <p>The next time you receive a legal contract, medical report, financial statement, or technical brief that feels overwhelming, paste it into ChatGPT and type: "Explain this like I'm five — what are the three most important things I need to understand?" This one habit alone eliminates hours of research and specialist consultations for basic comprehension tasks.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">03</div>
+    <div class="takeaway-body">
+      <h4>Apply Dean's 4 Levers in Order — Start With Activation</h4>
+      <p>Don't skip to Amplify before you've completed Activate. Write your personal context document first: who you are, your industry, your audience, your voice, your goals. This foundation makes every subsequent AI interaction exponentially more useful. The levers only compound if they're applied in sequence — Activate → Accelerate → Amplify → Augment.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">04</div>
+    <div class="takeaway-body">
+      <h4>Build Your "AI Team" Using Allie's People Layer</h4>
+      <p>Identify the functional roles you can't afford to hire for right now — marketing, operations, sales support, administrative assistance. For each role, define the top three recurring tasks and start delegating those tasks to AI this week. You're building fractional AI team members, not experimenting with a tool. Treat it with the same intentionality you'd give an onboarding process.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">05</div>
+    <div class="takeaway-body">
+      <h4>Practise Tony's 3 Skills — Start With Pattern Recognition</h4>
+      <p>This week, pick one domain in your business or market and ask: what repeating patterns do I see here? Write them down. Then ask AI: "Based on these patterns, what opportunities or risks should I be aware of?" You're practising the skill of recognition consciously before moving to utilisation and eventually creation — the sequence Tony argues is non-negotiable for sustained advantage.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">06</div>
+    <div class="takeaway-body">
+      <h4>Try a No-Code App Builder for Your Next Internal Tool</h4>
+      <p>If you've ever said "I wish I had a tool that did X," now is the time to build it. Tools like Claude Code, Lovable, or Base44 allow you to describe what you need in plain English and generate a functional prototype. Pick one recurring workflow that feels clunky and see if a custom lightweight app would solve it. The barrier is describing the problem clearly — the tool does the rest.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">07</div>
+    <div class="takeaway-body">
+      <h4>Assess Your Business Through Allie's 3P Lens</h4>
+      <p>Take 20 minutes to map your business against People, Process, and Product. For each: where is AI already helping? Where is there an obvious gap? Where could one AI implementation save the most time or money? This structured audit gives you a prioritised AI roadmap rather than a random collection of tools to try.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">08</div>
+    <div class="takeaway-body">
+      <h4>Reframe "AI Is Not for Me" as "I Haven't Been Shown How Yet"</h4>
+      <p>Igor's core message: the mental model that AI is for technical people is the single biggest barrier to adoption for most entrepreneurs. Replace it with the belief that AI rewards clear communication — a skill you already have. The next time you catch yourself thinking a task requires technical knowledge, ask first whether you could explain what you need in plain language. If you can, AI can probably help.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">09</div>
+    <div class="takeaway-body">
+      <h4>Use Zack Kass's Window Framing to Create Urgency</h4>
+      <p>Remind yourself: every major technology creates an 18–36 month window of advantage for early adopters. That window for AI is open right now. The entrepreneurs who build AI systems, habits, and literacy in 2026 will have compounding structural advantages by 2028 that will be genuinely difficult for late entrants to close. Urgency isn't hype — it's pattern recognition applied to your own situation.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num">10</div>
+    <div class="takeaway-body">
+      <h4>Ask AI to Amplify Your Best Content Immediately</h4>
+      <p>Take your single best piece of original content — a talk, an email, a post, a video script — and ask AI to repurpose it into five different formats: a newsletter section, a LinkedIn post, a Twitter thread, a short video script, and an email subject line sequence. This is Dean's Amplify lever in immediate practice and the fastest way to experience what AI content leverage feels like at first hand.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>

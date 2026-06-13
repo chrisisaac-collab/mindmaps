@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomas DeLauer – The Key to Losing Belly Fat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d12;
+    --surface: #121720;
+    --surface2: #1a2030;
+    --border: #252e40;
+    --text: #e8edf5;
+    --muted: #6b7a99;
+    --accent: #00c9a7;
+    --c1: #ff6b6b;
+    --c2: #ffa94d;
+    --c3: #74c7ec;
+    --c4: #a6e3a1;
+    --c5: #cba6f7;
+    --c6: #f38ba8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 32px 24px 24px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0d1118 0%, var(--bg) 100%);
+  }
+  .header-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text);
+    max-width: 640px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .header-meta span {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+  .header-meta strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .tab {
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── PANELS ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── MIND MAP ── */
+  #panel-map {
+    padding: 32px 24px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .map-intro {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .branch {
+    margin-bottom: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .branch:hover { border-color: var(--muted); }
+
+  .branch-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: var(--surface);
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .branch-header:hover { background: var(--surface2); }
+
+  .branch-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .branch-label {
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .branch-count {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+  .branch-arrow {
+    font-size: 11px;
+    color: var(--muted);
+    transition: transform 0.25s;
+  }
+  .branch.open .branch-arrow { transform: rotate(90deg); }
+
+  .leaves {
+    display: none;
+    padding: 0 0 8px 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+  .branch.open .leaves { display: block; }
+
+  .leaf {
+    padding: 12px 20px 12px 44px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .leaf:last-child { border-bottom: none; }
+  .leaf:hover { background: var(--surface2); }
+
+  .leaf-title {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+  }
+  .leaf-title::before {
+    content: '›';
+    color: var(--muted);
+    font-size: 16px;
+    transition: color 0.2s;
+  }
+  .leaf.open .leaf-title::before { color: var(--accent); }
+
+  .leaf-detail {
+    display: none;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-top: 8px;
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+  .leaf.open .leaf-detail { display: block; }
+
+  /* ── SUMMARY ── */
+  #panel-summary {
+    padding: 32px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .summary-section {
+    margin-bottom: 36px;
+  }
+  .summary-section h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-section h2 .s-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .summary-section p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #b0bcce;
+    margin-bottom: 12px;
+  }
+  .summary-section p:last-child { margin-bottom: 0; }
+
+  /* ── TAKEAWAYS ── */
+  #panel-takeaways {
+    padding: 32px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .takeaways-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .takeaway-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .takeaway-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .takeaway-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .takeaway-text {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 20px; }
+    .tab { padding: 12px 14px; font-size: 12px; }
+    .takeaways-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Mind Map</div>
+  <h1>We Found the Key to Losing Belly Fat, Metabolism & More</h1>
+  <div class="header-meta">
+    <span><strong>Thomas DeLauer</strong></span>
+    <span>ThomasDeLauerOfficial</span>
+    <span>2025–2026</span>
+    <span>Nutrition &amp; Longevity · Physical Health</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('panel-map', this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('panel-summary', this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('panel-takeaways', this)">Actionable Takeaways</button>
+</div>
+
+<!-- ═══════════════ MIND MAP ═══════════════ -->
+<div id="panel-map" class="panel active">
+  <div style="max-width:960px;margin:0 auto;padding:32px 24px;">
+    <p class="map-intro">Click a branch to expand topics. Click any leaf for detail.</p>
+
+    <!-- Branch 1 -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c1)"></div>
+        <span class="branch-label" style="color:var(--c1)">The Cortisol–Insulin Fat Storage Loop</span>
+        <span class="branch-count">5 nodes</span>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves" onclick="event.stopPropagation()">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The "Survival Mode" Mechanism</div>
+          <div class="leaf-detail">When cortisol and insulin are elevated simultaneously, the body enters what DeLauer calls "survival mode." Cortisol signals the liver to produce glucose via gluconeogenesis — even when fasted — and the resulting blood sugar spike forces an insulin response. Rather than fueling muscle, this double-hormone state routes glucose straight into fat storage.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Lipoprotein Lipase 5× Amplification</div>
+          <div class="leaf-detail">Research from the Journal of Clinical Endocrinology &amp; Metabolism found that when human fat cells are exposed to both cortisol and insulin together, activity of lipoprotein lipase — the key fat-storage enzyme — increases over fivefold. This means the combined hormonal state is dramatically more powerful at storing fat than either hormone alone.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Muscles Blocked From Using Glucose</div>
+          <div class="leaf-detail">Cortisol impairs insulin receptor substrate 1 (IRS1) and GLUT4 activity, preventing muscle tissue from absorbing the glucose that cortisol itself triggered. The glucose has nowhere to go but fat cells. DeLauer describes it as pressing the gas and brake pedal simultaneously — energy is manufactured but cannot be used productively.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Visceral Fat: The Primary Target</div>
+          <div class="leaf-detail">When the cortisol–insulin loop fires, fat accumulates preferentially around the internal organs as visceral fat — not as subcutaneous fat under the skin. Visceral fat is metabolically active and particularly linked to cardiovascular disease, type 2 diabetes, and systemic inflammation. It is also the most resistant to conventional diet and exercise.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Why "Eating Clean" Still Fails</div>
+          <div class="leaf-detail">If cortisol remains chronically elevated — through stress, poor sleep, or overtraining — it continuously triggers liver glucose production regardless of dietary quality. This is why people eating whole foods in a calorie deficit can still struggle to lose belly fat: the hormonal environment overrides the dietary intention.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 2 -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c2)"></div>
+        <span class="branch-label" style="color:var(--c2)">The Hidden Cortisol Amplifier (11β-HSD1)</span>
+        <span class="branch-count">4 nodes</span>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves" onclick="event.stopPropagation()">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Fat Cells Make Their Own Cortisol</div>
+          <div class="leaf-detail">Fat tissue contains an enzyme called 11-beta-hydroxysteroid dehydrogenase type 1 (11β-HSD1) that converts inactive cortisone into active cortisol inside the fat cell itself. This means belly fat can sustain a high-cortisol microenvironment even when circulating blood cortisol reads as normal — making standard lab tests misleading.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The Vicious Cycle: More Fat = More Cortisol</div>
+          <div class="leaf-detail">11β-HSD1 expression is significantly higher in the visceral fat and livers of obese individuals. The more visceral fat someone carries, the more locally produced cortisol their fat generates, which stimulates further fat storage. This self-reinforcing cycle is why belly fat becomes increasingly difficult to shift as it accumulates.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Three Downstream Harms</div>
+          <div class="leaf-detail">Elevated local cortisol reactivates lipoprotein lipase to store more fat, promotes adipocyte differentiation (literally manufacturing new fat cells), and worsens insulin resistance by boosting inflammatory cytokines including IL-6 and TNF-alpha — primarily targeting muscle tissue and further blocking glucose uptake.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Why Blood Tests Miss This</div>
+          <div class="leaf-detail">Because the cortisol amplification happens locally within fat cells, standard serum cortisol tests may look normal even while belly fat is internally perpetuating the fat-storage cycle. DeLauer emphasises this is why some people feel "metabolically stuck" despite what appears to be healthy bloodwork.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 3 -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c3)"></div>
+        <span class="branch-label" style="color:var(--c3)">Hormone Timing: Working With Your Biology</span>
+        <span class="branch-count">5 nodes</span>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves" onclick="event.stopPropagation()">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Separating Cortisol and Insulin Peaks</div>
+          <div class="leaf-detail">The solution is not eliminating either hormone — both serve critical functions — but preventing them from spiking simultaneously. The goal is to design a daily pattern where cortisol and insulin peaks occur at different times, allowing each hormone to do its job without triggering the fat-storage combination.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Leverage Morning Cortisol for Fat Burning</div>
+          <div class="leaf-detail">Cortisol naturally peaks in the first hour after waking (the cortisol awakening response). While fasted, insulin is simultaneously at its lowest. This window creates ideal fat-oxidation conditions — cortisol mobilises fat, and without insulin blunting this process, the body burns it efficiently. Fasted movement and sunlight exposure in this window amplify the effect.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The Evening Reversal Rule</div>
+          <div class="leaf-detail">As the day progresses, cortisol should naturally decline while insulin rises with meals — a healthy circadian rhythm. Problems arise when evening stress, late training, or high-carbohydrate meals under pressure stack both hormones together again. DeLauer recommends treating evenings as a cortisol-clearance window, not a second activation window.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Never Combine Stress With High-Carb Meals</div>
+          <div class="leaf-detail">When cortisol is already elevated from psychological stress, a high-carbohydrate meal triggers the exact cortisol–insulin collision that drives fat storage. DeLauer's practical rule: if you are genuinely stressed, avoid high-carb meals for that sitting. Protein and fat-dominant meals produce far less insulin, breaking the dual-spike cycle.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Late Training as a Hidden Risk</div>
+          <div class="leaf-detail">Intense exercise after ~7pm elevates cortisol at a time when it should be declining. Combined with a post-workout carbohydrate meal, this creates prime fat-storage conditions — particularly for visceral fat. DeLauer advocates morning or early-afternoon training to align exercise-induced cortisol with the body's natural high-cortisol window.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 4 -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c4)"></div>
+        <span class="branch-label" style="color:var(--c4)">Natural Compounds That Inhibit 11β-HSD1</span>
+        <span class="branch-count">4 nodes</span>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves" onclick="event.stopPropagation()">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Berberine (300–500 mg/day)</div>
+          <div class="leaf-detail">Berberine directly inhibits the 11β-HSD1 enzyme, reducing cortisol amplification inside fat cells. It also activates AMPK, a cellular energy sensor that improves insulin sensitivity and promotes fat oxidation. DeLauer recommends 300–500 mg daily, particularly during periods of high stress or intense training when the cortisol–insulin risk is greatest.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">EGCG from Green Tea</div>
+          <div class="leaf-detail">The primary catechin in green tea (epigallocatechin gallate) directly reduces 11β-HSD1 activity. DeLauer recommends decaffeinated green tea extract in the afternoon — this provides enzyme-suppressing benefits without the caffeine that could disrupt evening cortisol clearance. Consistent, sustained intake matters more than high single doses.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Omega-3 Fatty Acids (2–3g EPA/DHA)</div>
+          <div class="leaf-detail">Quality omega-3s blunt the inflammatory cytokine cascade that keeps the cortisol-amplifying enzyme overactive. By reducing IL-6 and TNF-alpha levels, omega-3s help restore normal 11β-HSD1 expression. Together with berberine and EGCG, DeLauer describes this trio as restoring "metabolic flexibility" — the body's ability to switch cleanly between fuel sources.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Sulforaphane &amp; Liver Support</div>
+          <div class="leaf-detail">Cruciferous vegetables (broccoli, broccoli sprouts, sauerkraut, kimchi) provide sulforaphane, which supports the liver's Phase 2 detoxification pathways responsible for clearing excess cortisol from circulation. Milk thistle and choline from eggs provide complementary liver support. DeLauer frames the liver as the master cortisol clearance organ.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 5 -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c5)"></div>
+        <span class="branch-label" style="color:var(--c5)">Cortisol Clearance: Supporting the Liver</span>
+        <span class="branch-count">4 nodes</span>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves" onclick="event.stopPropagation()">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Sleep as the Primary Reset</div>
+          <div class="leaf-detail">Deep sleep is the most powerful cortisol-clearance mechanism. DeLauer highlights glycine (3g before bed) as a research-backed tool for promoting deeper, more restorative sleep while also supporting cortisol regulation. Poor sleep both elevates morning cortisol beyond its healthy peak and blunts the normal evening decline, worsening the next day's hormonal environment.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Alcohol: The Cortisol Clearance Blocker</div>
+          <div class="leaf-detail">Alcohol impairs the liver's ability to process and excrete cortisol, leaving circulating levels elevated far longer than they should be. Even moderate evening alcohol consumption can prevent the normal overnight cortisol reduction, resulting in the next morning's cortisol starting from a higher baseline. DeLauer identifies this as an underappreciated driver of stubborn belly fat.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Cut Stimulants After Noon</div>
+          <div class="leaf-detail">Caffeine stimulates cortisol release. Even when sleep quantity appears adequate, afternoon caffeine consumption disrupts internal cortisol dynamics — keeping levels artificially elevated during the window when they should be declining. DeLauer recommends cutting all caffeine after 12–1pm, particularly for those with stubborn belly fat or chronic high-stress patterns.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">TMG and Choline for Liver Detox</div>
+          <div class="leaf-detail">Trimethylglycine (TMG / betaine) supports methylation pathways in the liver that are critical for hormone metabolism and cortisol clearance. Choline — abundant in eggs — is a closely related nutrient that provides phospholipid building blocks for liver cell membranes. Together these compounds help the liver maintain its capacity as the body's primary cortisol processing centre.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch 6 -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c6)"></div>
+        <span class="branch-label" style="color:var(--c6)">Metabolic Flexibility: The End Goal</span>
+        <span class="branch-count">4 nodes</span>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves" onclick="event.stopPropagation()">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">What Metabolic Flexibility Actually Means</div>
+          <div class="leaf-detail">Metabolic flexibility is the body's ability to efficiently switch between burning fat and burning carbohydrates based on what's available and needed. It is something all humans are biologically built with, but it degrades with chronic stress, processed food intake, sedentarism, and hormonal disruption. Restoring it is the underlying goal of all DeLauer's recommendations.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Why Long-Term Low-Carb Can Backfire</div>
+          <div class="leaf-detail">Extended ketogenic or very-low-carb protocols improve fat-burning efficiency but, over time, impair the body's ability to utilise carbohydrates. DeLauer warns against becoming a "one-trick pony" that burns fat well but cannot efficiently use glucose. This metabolic rigidity creates problems when carbohydrates are reintroduced and reduces overall hormonal resilience.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Walking as the Mitochondrial Foundation</div>
+          <div class="leaf-detail">DeLauer describes daily walking as the most underrated metabolic tool available. Walking at a low-to-moderate intensity trains mitochondria to oxidise fat without triggering a significant cortisol response. It also improves insulin sensitivity and builds the aerobic base required for the body to burn fat efficiently throughout the day — not just during structured exercise.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Hormone Timing Over Hormone Levels</div>
+          <div class="leaf-detail">The central insight of the video is that stubborn belly fat is often a timing problem, not a level problem. Cortisol and insulin both need to be present and functioning normally — but separated in their peaks. When the circadian pattern of hormone release is aligned, the same hormones that cause fat storage in the wrong context actively promote fat burning in the right one.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ SUMMARY ═══════════════ -->
+<div id="panel-summary" class="panel">
+  <div id="panel-summary" style="max-width:720px;margin:0 auto;padding:32px 24px;">
+
+    <div class="summary-section">
+      <h2><span class="s-dot" style="background:var(--c1)"></span>The Hidden Cortisol–Insulin Fat Storage Loop</h2>
+      <p>Thomas DeLauer opens by challenging the conventional framing of belly fat loss as purely a calories-in, calories-out problem. The real obstacle, he argues, is a hormonal one: what happens when cortisol and insulin are both elevated at the same time. Cortisol — typically understood as a stress hormone — triggers the liver to produce glucose through gluconeogenesis even in the absence of food. This manufactured glucose forces an insulin response. But here is the critical twist: cortisol simultaneously blocks muscle tissue from absorbing that glucose by impairing the IRS1 signalling pathway and GLUT4 transporter activity.</p>
+      <p>The result is a hormonal deadlock. Glucose floods the bloodstream with nowhere to go except fat cells — and specifically into visceral fat surrounding the organs. Research published in the Journal of Clinical Endocrinology &amp; Metabolism confirms the severity: when fat cells are exposed to both cortisol and insulin simultaneously, the activity of lipoprotein lipase, the primary fat-storage enzyme, increases by more than fivefold. DeLauer characterises this as pressing the gas and brake at once — the body is simultaneously producing and trapping energy, with belly fat as the overflow depot.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="s-dot" style="background:var(--c2)"></span>The Cortisol Amplifier Hidden Inside Fat Cells</h2>
+      <p>What makes the situation particularly difficult to solve is that visceral fat does not merely respond to cortisol — it produces its own. An enzyme called 11-beta-hydroxysteroid dehydrogenase type 1 (11β-HSD1) converts inactive cortisone into active cortisol within fat cells themselves. DeLauer calls this the "cortisol amplifier," and its implications are significant: even when circulating blood cortisol levels test as normal, belly fat can be operating in a high-cortisol microenvironment that perpetuates fat storage independently of systemic hormone levels.</p>
+      <p>This creates a self-reinforcing vicious cycle. 11β-HSD1 expression is significantly elevated in the visceral fat and livers of obese individuals, meaning the more belly fat someone carries, the more local cortisol their fat produces, which in turn promotes more fat accumulation. The cycle has three downstream consequences: it reactivates lipoprotein lipase for further fat storage, promotes the differentiation of pre-adipocytes into new fat cells, and worsens systemic insulin resistance by elevating inflammatory cytokines — particularly IL-6 and TNF-alpha — in a way that specifically impairs muscle glucose uptake.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="s-dot" style="background:var(--c3)"></span>Hormone Timing as the Core Strategy</h2>
+      <p>DeLauer's primary intervention is not the elimination of either hormone but the strategic separation of their daily peaks. The body has a natural circadian cortisol pattern: it rises sharply in the first hour after waking (the cortisol awakening response), then gradually declines across the day. Insulin, meanwhile, remains low during the overnight fast and rises with meals. Morning represents the ideal hormonal window — cortisol is naturally high while insulin is low, creating a fat-oxidation-favouring environment. Fasted movement and morning sunlight exposure amplify this window further.</p>
+      <p>The danger zone is the evening. Late training, psychological stress, and high-carbohydrate meals consumed under pressure can all spike cortisol at precisely the time it should be declining — colliding it with the elevated insulin from food. DeLauer distils this into one actionable rule: never combine genuine stress with high-carbohydrate meals. If cortisol is elevated, avoid carbs for that meal and lean into protein and fat, which produce a far smaller insulin response and prevent the dual-spike scenario.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="s-dot" style="background:var(--c4)"></span>Shutting Down the Enzyme With Targeted Compounds</h2>
+      <p>Three natural compounds have research support for directly inhibiting 11β-HSD1 activity and restoring metabolic flexibility. Berberine (300–500 mg daily) both suppresses the cortisol-amplifying enzyme and activates AMPK, a cellular energy-sensing pathway that promotes fat oxidation and improves insulin sensitivity. EGCG, the primary catechin in green tea, provides direct 11β-HSD1 inhibition and is best taken as decaffeinated extract in the afternoon to avoid evening cortisol disruption from caffeine. Quality omega-3 fatty acids at 2–3 grams of EPA and DHA daily address the upstream inflammatory state that keeps the enzyme chronically overactive.</p>
+      <p>For liver support — critical because the liver is the primary site of cortisol clearance — DeLauer recommends sulforaphane from cruciferous vegetables (broccoli, sauerkraut, kimchi), milk thistle, choline from eggs, and TMG (betaine) to support the methylation pathways through which cortisol is metabolised and excreted.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="s-dot" style="background:var(--c5)"></span>Cortisol Clearance: Sleep, Alcohol, and Stimulants</h2>
+      <p>Reducing cortisol production is only half the equation — the body's ability to clear it is equally important. Sleep is the most powerful cortisol reset available. Glycine at 3 grams before bed has research support for promoting deeper, more restorative sleep while directly supporting cortisol regulation. Insufficient or poor-quality sleep both elevates the morning cortisol awakening response beyond its healthy peak and prevents the normal overnight decline, compounding the following day's hormonal environment.</p>
+      <p>Alcohol is identified as a significant but underappreciated driver of stubborn belly fat. Even moderate evening drinking impairs the liver's ability to process and excrete cortisol, extending its circulation well beyond its normal window. Afternoon caffeine presents a similar problem: even when sleep appears normal, stimulants after midday maintain cortisol at artificially elevated levels during the critical window when it should be declining. Both habits are framed not as vices but as specific biochemical obstacles to the hormonal rhythm that enables fat loss.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="s-dot" style="background:var(--c6)"></span>Metabolic Flexibility as the True Goal</h2>
+      <p>DeLauer frames all of these strategies within the broader goal of restoring metabolic flexibility — the body's capacity to switch efficiently between burning fat and carbohydrates. He cautions that extended low-carbohydrate protocols, while effective at improving fat-burning in the short term, can degrade carbohydrate-utilisation capacity over time. True metabolic health is not being maximally adapted to one fuel source but moving fluidly between both. Daily walking is positioned as the foundational metabolic tool because it trains mitochondria to oxidise fat without triggering a significant cortisol response.</p>
+      <p>The central conclusion is that stubborn belly fat is primarily a timing problem, not a hormone-level problem. Both cortisol and insulin are essential, normal hormones. When their daily rhythms are properly separated and each peaks in its appropriate window — cortisol high and insulin low in the morning, cortisol declining and insulin rising with evening meals — the same hormones that drive fat storage in the wrong context actively promote fat burning in the right one.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ TAKEAWAYS ═══════════════ -->
+<div id="panel-takeaways" class="panel">
+  <div style="max-width:800px;margin:0 auto;padding:32px 24px;">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:24px;font-family:'Space Mono',monospace;">10 science-grounded actions from this episode</p>
+    <div class="takeaways-grid">
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">01</div>
+        <div class="takeaway-text">Move fasted in the morning. Your cortisol is naturally highest and insulin lowest in the first hour after waking — this is your peak fat-burning window. A 20–30 minute walk or light session before eating leverages this biology rather than fighting it.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">02</div>
+        <div class="takeaway-text">Never eat a high-carb meal when you're stressed. Stress + carbs = cortisol + insulin spiking simultaneously, which activates fat storage at over five times the normal rate. When stress is high, default to a protein and fat-dominant meal instead.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">03</div>
+        <div class="takeaway-text">Cut all caffeine after noon. Afternoon stimulants keep cortisol elevated during the window it should be declining, disrupting the circadian hormone pattern essential for fat loss. Shift your last coffee to before midday and watch the evening cortisol profile normalise over 2–3 weeks.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">04</div>
+        <div class="takeaway-text">Eliminate or strictly limit evening alcohol. Even one or two drinks impairs the liver's cortisol clearance capacity overnight, raising your baseline into the next day. If belly fat is a priority, treat evening alcohol as a direct hormonal obstacle, not just empty calories.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">05</div>
+        <div class="takeaway-text">Take 3g of glycine before bed. Glycine promotes deeper slow-wave sleep and supports cortisol regulation overnight. Better sleep is the single highest-leverage lever for reducing cortisol — more impactful than any supplement taken during the day.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">06</div>
+        <div class="takeaway-text">Add berberine (300–500 mg/day) during high-stress periods. Berberine inhibits the 11β-HSD1 enzyme that produces cortisol inside fat cells, activates AMPK for fat oxidation, and improves insulin sensitivity — addressing the root enzyme at the centre of the belly fat feedback loop.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">07</div>
+        <div class="takeaway-text">Drink decaffeinated green tea or take EGCG extract in the afternoon. EGCG directly suppresses the cortisol amplifier enzyme in fat cells. The decaf form avoids the afternoon cortisol spike that caffeinated tea would produce, giving you the enzyme-inhibiting benefit without the drawback.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">08</div>
+        <div class="takeaway-text">Eat eggs, broccoli, and fermented vegetables regularly for liver support. Choline from eggs, sulforaphane from cruciferous vegetables, and probiotics from fermented foods all support the liver's ability to clear cortisol from circulation. Think of these as your daily cortisol detox foods.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">09</div>
+        <div class="takeaway-text">Prioritise 2–3g of EPA/DHA omega-3s daily. Quality fish oil blunts the inflammatory cytokines (IL-6, TNF-alpha) that keep the 11β-HSD1 enzyme chronically overexpressed. This addresses the upstream inflammation driving local cortisol production in visceral fat.</div>
+      </div>
+
+      <div class="takeaway-card">
+        <div class="takeaway-num">10</div>
+        <div class="takeaway-text">Walk daily as your metabolic baseline. A 30-minute brisk walk daily trains mitochondria to oxidise fat without triggering cortisol, builds insulin sensitivity, and contributes to the metabolic flexibility that allows your body to shift cleanly between fuel sources. It's not supplementary — it's foundational.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>

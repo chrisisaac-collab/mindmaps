@@ -3,164 +3,760 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thomas De Lauer – Collagen, Skin & Biological Age</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>We've Been Wrong About Carbs — Thomas DeLauer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh}
-header{padding:24px 20px 0;text-align:center}
-header h1{font-size:1.35rem;font-weight:700;color:#111;margin-bottom:6px}
-header p{font-size:.82rem;color:#888;margin-bottom:20px}
-.tabs{display:flex;justify-content:center;gap:8px;padding:0 20px;margin-bottom:20px;flex-wrap:wrap}
-.tab{padding:8px 18px;border-radius:20px;border:1.5px solid #ddd;background:transparent;color:#777;cursor:pointer;font-family:inherit;font-size:.82rem;transition:all .2s}
-.tab.active{background:#d97706;border-color:#d97706;color:#fff}
-.panel{display:none;padding:0 20px 40px}
-.panel.active{display:block}
-.branches{display:flex;flex-direction:column;gap:10px;max-width:700px;margin:0 auto}
-.branch{border-radius:12px;overflow:hidden;cursor:pointer}
-.branch-head{display:flex;align-items:center;gap:12px;padding:13px 16px;font-weight:600;font-size:.92rem}
-.branch-head .arr{margin-left:auto;transition:transform .3s;color:#bbb;font-size:.8rem}
-.branch.open .branch-head .arr{transform:rotate(90deg)}
-.leaves{display:none;padding:0 14px 10px}
-.branch.open .leaves{display:block}
-.leaf{cursor:pointer;padding:9px 11px;border-radius:8px;margin-top:7px;background:rgba(0,0,0,.04)}
-.leaf-title{font-size:.85rem;font-weight:500;display:flex;justify-content:space-between;align-items:center;color:#333}
-.leaf-title span{color:#bbb;font-size:.75rem}
-.leaf-body{display:none;font-size:.81rem;color:#555;margin-top:7px;line-height:1.65}
-.leaf.open .leaf-body{display:block}
-.leaf.open .leaf-title span{color:#999}
-.b1{background:#fef3c7}.b1 .branch-head{color:#92400e}
-.b2{background:#ecfdf5}.b2 .branch-head{color:#065f46}
-.b3{background:#eff6ff}.b3 .branch-head{color:#1e40af}
-.b4{background:#fdf4ff}.b4 .branch-head{color:#6b21a8}
-.b5{background:#fff7ed}.b5 .branch-head{color:#9a3412}
-.b6{background:#f0fdf4}.b6 .branch-head{color:#14532d}
-.summary{max-width:700px;margin:0 auto}
-.summary h2{font-size:.95rem;font-weight:600;color:#d97706;margin:22px 0 9px;text-transform:uppercase;letter-spacing:.04em}
-.summary p{font-size:.85rem;line-height:1.75;color:#444;margin-bottom:10px}
-.cards{max-width:700px;margin:0 auto;display:grid;gap:10px}
-.card{background:#fff;border-left:3px solid #d97706;border-radius:8px;padding:13px 15px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.card-num{font-size:.7rem;font-weight:700;color:#d97706;letter-spacing:.06em;margin-bottom:4px}
-.card p{font-size:.84rem;color:#333;line-height:1.6}
+  :root {
+    --bg: #0d0f14;
+    --surface: #161921;
+    --surface2: #1e222d;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8eaf0;
+    --muted: #7a7f8e;
+    --accent: #f0b429;
+    --c1: #e85d75;   /* Myths */
+    --c2: #4ecdc4;   /* Biology */
+    --c3: #f0b429;   /* Timing */
+    --c4: #7c83fd;   /* Food Quality */
+    --c5: #56d98e;   /* Practical */
+    --c6: #ff8c42;   /* Metabolic Flex */
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === HEADER === */
+  .header {
+    padding: 28px 24px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 200px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(240,180,41,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .host-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(240,180,41,0.1);
+    border: 1px solid rgba(240,180,41,0.25);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 5vw, 36px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 22px;
+  }
+
+  /* === TABS === */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    padding: 0 16px;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 8px 18px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .tab:hover { color: var(--text); }
+
+  .tab.active {
+    background: var(--surface2);
+    color: var(--accent);
+    border-color: rgba(240,180,41,0.3);
+  }
+
+  /* === PANELS === */
+  .panel {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 0 12px 12px 12px;
+    margin: 0 16px 32px;
+    padding: 24px 20px;
+  }
+
+  .panel.active { display: block; }
+
+  /* === MIND MAP === */
+  .map-center {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .center-node {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(240,180,41,0.2), rgba(240,180,41,0.05));
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 14px 28px;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent);
+    box-shadow: 0 0 30px rgba(240,180,41,0.15);
+  }
+
+  .branches {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .branch {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .branch:hover { border-color: rgba(255,255,255,0.15); }
+
+  .branch-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface);
+    user-select: none;
+  }
+
+  .branch-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .branch-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    flex: 1;
+  }
+
+  .branch-arrow {
+    color: var(--muted);
+    font-size: 12px;
+    transition: transform 0.25s;
+  }
+
+  .branch.open .branch-arrow { transform: rotate(180deg); }
+
+  .leaves {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .branch.open .leaves { display: flex; }
+
+  .leaf {
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .leaf:hover { background: rgba(255,255,255,0.03); }
+
+  .leaf-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px 11px 38px;
+    user-select: none;
+  }
+
+  .leaf-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .leaf-title {
+    font-size: 13px;
+    font-weight: 500;
+    flex: 1;
+    color: var(--text);
+  }
+
+  .leaf-detail {
+    display: none;
+    padding: 4px 16px 14px 53px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .leaf.open .leaf-detail { display: block; }
+
+  /* === SUMMARY === */
+  .summary-section {
+    margin-bottom: 28px;
+  }
+
+  .summary-section h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .summary-section p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #b0b4c0;
+    font-weight: 300;
+  }
+
+  /* === TAKEAWAYS === */
+  .takeaways-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .takeaway-card {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .takeaway-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+    opacity: 0.4;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  .takeaway-body {}
+
+  .takeaway-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .takeaway-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* === DISCLAIMER === */
+  .disclaimer {
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.5;
+    text-align: center;
+    padding: 0 16px 24px;
+    line-height: 1.6;
+  }
 </style>
 </head>
 <body>
-<header>
-  <h1>1 Scoop Fades Wrinkles, Brightens Skin &amp; Reverses Biological Age</h1>
-  <p>Thomas De Lauer &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Skin Health, Collagen &amp; Longevity</p>
-</header>
+
+<div class="header">
+  <div class="host-tag">Thomas DeLauer · Nutrition</div>
+  <h1>We've Been <span>Wrong</span><br>About Carbs</h1>
+  <p class="subtitle">ThomasDeLauerOfficial · June 2026</p>
+</div>
+
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('map',this)">🧠 Mind Map</button>
-  <button class="tab" onclick="switchTab('summary',this)">📄 Full Summary</button>
-  <button class="tab" onclick="switchTab('takeaways',this)">✅ Takeaways</button>
+  <div class="tab active" onclick="switchTab('mindmap', this)">🗺 Mind Map</div>
+  <div class="tab" onclick="switchTab('summary', this)">📄 Full Summary</div>
+  <div class="tab" onclick="switchTab('takeaways', this)">⚡ Takeaways</div>
 </div>
 
-<div id="map" class="panel active">
-<div class="branches">
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+  <div class="map-center">
+    <div class="center-node">Rethinking Carbohydrates</div>
+  </div>
 
-<div class="branch b1" onclick="toggleBranch(this)">
-<div class="branch-head"><span>💊</span> Collagen Science & Supplementation <span class="arr">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">What Collagen Actually Does <span>+</span></div><div class="leaf-body">Collagen is the most abundant protein in the human body, forming the structural scaffold of skin, joints, bones, and connective tissue. Type I collagen dominates skin architecture, providing tensile strength and elasticity. From our mid-twenties, collagen synthesis declines at roughly 1% per year, accelerating visible ageing.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Hydrolysed Collagen Peptides <span>+</span></div><div class="leaf-body">Hydrolysed collagen (collagen peptides) is broken down into short amino acid chains — primarily glycine, proline, and hydroxyproline — that are readily absorbed through the gut wall into circulation. These peptides have been shown to signal fibroblasts to upregulate collagen production, creating a genuine regenerative effect rather than mere topical masking.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Effective Dosing <span>+</span></div><div class="leaf-body">Clinical studies supporting skin and joint benefits consistently use 10–15g of hydrolysed collagen daily. De Lauer discusses Bubs Naturals collagen as a high-quality, grass-fed source. Consistency over 8–12 weeks is required before measurable skin changes appear, though some users report subjective changes earlier.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Marine vs. Bovine Collagen <span>+</span></div><div class="leaf-body">Marine collagen (from fish) is predominantly Type I — the skin-specific form — and has a smaller molecular weight that may improve bioavailability. Bovine collagen provides both Types I and III, making it useful for both skin and connective tissue. De Lauer favours bovine for comprehensive coverage and lower cost per dose.</div></div>
-</div>
-</div>
+  <div class="branches">
 
-<div class="branch b2" onclick="toggleBranch(this)">
-<div class="branch-head"><span>✨</span> Skin Health & Wrinkle Reduction <span class="arr">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The Mechanism of Wrinkle Formation <span>+</span></div><div class="leaf-body">Wrinkles form when collagen and elastin fibres in the dermis break down, reducing the skin's ability to spring back after movement. UV radiation accelerates this through photo-oxidative damage, fragmenting existing collagen and suppressing new synthesis. Collagen supplementation addresses the internal structural deficit that topical creams cannot reach.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Clinical Evidence for Skin Improvement <span>+</span></div><div class="leaf-body">Randomised controlled trials using 10g daily hydrolysed collagen for 8–12 weeks consistently show significant improvements in skin elasticity, hydration, and wrinkle depth. One study measuring periorbital wrinkles showed a 20% reduction. These are objective dermatological measurements, not self-reported outcomes.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Skin Brightness & Luminosity <span>+</span></div><div class="leaf-body">Beyond wrinkles, collagen supplementation improves skin hydration through its influence on hyaluronic acid production. Better-hydrated skin scatters light more evenly, creating the "brightness" or luminosity effect. The glycine content of collagen also supports antioxidant glutathione synthesis, reducing oxidative dullness.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Synergy with Vitamin C <span>+</span></div><div class="leaf-body">Vitamin C is an essential cofactor in collagen synthesis — it hydroxylates proline and lysine residues required to form the triple helix structure of mature collagen. Taking collagen with vitamin C (50–100mg is sufficient) meaningfully increases the fraction of ingested peptides converted into new skin collagen.</div></div>
-</div>
-</div>
+    <!-- BRANCH 1: The Myths -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c1)"></div>
+        <div class="branch-title" style="color:var(--c1)">🚫 The Carb Myths We've Believed</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c1)"></div>
+            <div class="leaf-title">Carbs make you fat</div>
+          </div>
+          <div class="leaf-detail">The belief that carbs uniquely cause fat storage is a conflation of insulin's role with overall energy balance. Research consistently shows that when calories and protein are matched, low-carb and high-carb diets produce equivalent fat loss outcomes. The real driver is sustained caloric surplus, not carbohydrate intake alone.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c1)"></div>
+            <div class="leaf-title">Insulin from carbs traps fat</div>
+          </div>
+          <div class="leaf-detail">The "carbohydrate-insulin model" in its extreme form has been largely disproven. Insulin is a storage and signalling hormone that also drives nutrients into muscle. Chronically elevated insulin from overeating is the problem — not the transient insulin spike from a single carbohydrate meal in a healthy, active individual.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c1)"></div>
+            <div class="leaf-title">All carbs are the same</div>
+          </div>
+          <div class="leaf-detail">Grouping white bread with sweet potato or lentils under one "carbs are bad" label ignores fibre content, glycaemic index, nutrient density, and fermentation potential. The source and matrix of carbohydrates radically changes how the body processes and responds to them.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c1)"></div>
+            <div class="leaf-title">Early weight loss = fat loss on low-carb</div>
+          </div>
+          <div class="leaf-detail">The rapid 2–4 kg drop in the first week of low-carb dieting is almost entirely glycogen depletion and associated water loss — roughly 3–4 g of water per gram of stored glycogen. This is physiologically meaningful for some contexts but is not fat loss and should not be interpreted as superior fat-burning.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c1)"></div>
+            <div class="leaf-title">Carbs cause inflammation</div>
+          </div>
+          <div class="leaf-detail">Refined carbohydrates — particularly ultra-processed foods high in fructose and seed oils — are pro-inflammatory. But whole-food carbohydrates rich in fibre, polyphenols, and resistant starch actively support anti-inflammatory pathways and feed beneficial gut bacteria that produce short-chain fatty acids.</div>
+        </div>
+      </div>
+    </div>
 
-<div class="branch b3" onclick="toggleBranch(this)">
-<div class="branch-head"><span>🔄</span> Biological Age Reversal <span class="arr">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">What Biological Age Measures <span>+</span></div><div class="leaf-body">Biological age differs from chronological age — it reflects the actual functional state of cells, organs, and tissues. It is now measurable through epigenetic clocks (like the Horvath or GrimAge clock), which read DNA methylation patterns to produce a biological age estimate that can be years younger or older than your birth certificate.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Collagen's Role in Ageing Biomarkers <span>+</span></div><div class="leaf-body">Declining collagen synthesis is both a cause and a consequence of accelerated biological ageing. Restoring adequate collagen through supplementation and diet supports the extracellular matrix — the structural environment in which cells live and communicate — which is increasingly recognised as central to longevity biology.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Glycine & Cellular Longevity <span>+</span></div><div class="leaf-body">Collagen is the richest dietary source of glycine, an amino acid with independent longevity properties. Glycine extends lifespan in animal models, supports mitochondrial function, reduces inflammation through inhibition of NF-κB, and restores circadian rhythm integrity. It is now considered a conditionally essential amino acid in ageing adults.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Measurable Change Timelines <span>+</span></div><div class="leaf-body">De Lauer discusses that biological age improvements from lifestyle interventions — including collagen, exercise, and sleep optimisation — can be measured within 3–6 months using commercial epigenetic testing. The convergence of multiple interventions produces non-linear improvements, suggesting synergistic rather than merely additive effects.</div></div>
-</div>
-</div>
+    <!-- BRANCH 2: Biology -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c2)"></div>
+        <div class="branch-title" style="color:var(--c2)">🧬 What Carbs Actually Do</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c2)"></div>
+            <div class="leaf-title">Glucose as primary fuel</div>
+          </div>
+          <div class="leaf-detail">The brain consumes roughly 120 g of glucose per day and has a strong preference for it — particularly in high-demand cognitive states. Red blood cells and parts of the kidney medulla are obligate glucose consumers. The body will manufacture glucose via gluconeogenesis if dietary intake is absent, which itself has metabolic costs.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c2)"></div>
+            <div class="leaf-title">Muscle glycogen and performance</div>
+          </div>
+          <div class="leaf-detail">Intramuscular glycogen is the dominant substrate for high-intensity effort above ~70% VO2 max. Depleted glycogen stores impair force production, reduce power output, and compromise recovery. For active individuals and athletes, adequate carbohydrate intake is not optional — it is a performance prerequisite.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c2)"></div>
+            <div class="leaf-title">Thyroid and hormonal impact</div>
+          </div>
+          <div class="leaf-detail">Prolonged carbohydrate restriction suppresses T3 (active thyroid hormone) production and can elevate cortisol and reduce testosterone — particularly in individuals who are already lean or under training stress. Adequate glucose availability supports the conversion of T4 to T3 and maintains a healthier hormonal environment for body recomposition.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c2)"></div>
+            <div class="leaf-title">Gut microbiome and fibre</div>
+          </div>
+          <div class="leaf-detail">Fermentable fibres — inulin, pectin, resistant starch — are technically carbohydrates that feed Bifidobacterium and Lactobacillus species. Their fermentation yields butyrate, propionate, and acetate: short-chain fatty acids that strengthen the gut lining, regulate appetite, and exert systemic anti-inflammatory effects across the gut-brain axis.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c2)"></div>
+            <div class="leaf-title">Insulin's full role</div>
+          </div>
+          <div class="leaf-detail">Insulin is not simply a "fat storage hormone." It is anabolic for muscle, anti-catabolic (preventing muscle breakdown), and critical for nutrient partitioning. The problem is not insulin per se but chronically elevated baseline insulin driven by sedentary behaviour, excess body fat, and poor diet quality — not by carbohydrate timing in an active person.</div>
+        </div>
+      </div>
+    </div>
 
-<div class="branch b4" onclick="toggleBranch(this)">
-<div class="branch-head"><span>🧬</span> Cellular Mechanisms of Skin Ageing <span class="arr">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Fibroblast Signalling <span>+</span></div><div class="leaf-body">Collagen peptides absorbed from supplementation directly stimulate dermal fibroblasts to increase production of new collagen and hyaluronic acid. This fibroblast activation mechanism — confirmed in vitro and in vivo — means supplemental collagen acts as a signalling molecule, not merely as raw material for the body to use.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Oxidative Stress & Skin Damage <span>+</span></div><div class="leaf-body">Reactive oxygen species (ROS) generated by UV exposure, pollution, and metabolic processes fragment existing collagen and activate MMP enzymes (matrix metalloproteinases) that degrade the extracellular matrix. Antioxidant nutrients — vitamin C, vitamin E, astaxanthin — work synergistically with collagen to neutralise this oxidative damage upstream.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Senescent Cells & Inflammation <span>+</span></div><div class="leaf-body">Senescent cells — cells that have permanently stopped dividing but resist apoptosis — accumulate in skin with age and secrete pro-inflammatory signals (the SASP). This chronic inflammation degrades collagen and prevents regeneration. Lifestyle interventions including fasting protocols can reduce senescent cell burden, improving the environment for collagen synthesis.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">mTOR, Autophagy & Skin Renewal <span>+</span></div><div class="leaf-body">Periods of low mTOR signalling — achieved through intermittent fasting or caloric restriction — activate autophagy, the cellular clean-up process that removes damaged proteins and organelles including fragmented collagen. This creates space for new collagen synthesis and improves the overall quality of the dermal matrix.</div></div>
-</div>
-</div>
+    <!-- BRANCH 3: Timing -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c3)"></div>
+        <div class="branch-title" style="color:var(--c3)">⏱ Carb Timing & Context</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c3)"></div>
+            <div class="leaf-title">Post-workout carb window</div>
+          </div>
+          <div class="leaf-detail">The post-exercise period — roughly 30–90 minutes after resistance training — represents a unique window of elevated GLUT4 translocation to muscle cell membranes. During this period, glucose is taken up by muscle independently of insulin, making it an ideal time to replenish glycogen without promoting fat storage. Combining fast-absorbing carbs with protein amplifies muscle protein synthesis.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c3)"></div>
+            <div class="leaf-title">Morning carb sensitivity</div>
+          </div>
+          <div class="leaf-detail">Cortisol is naturally elevated in the morning, which can temporarily reduce insulin sensitivity. For most people, front-loading carbohydrates early in the day — particularly for active individuals — takes advantage of higher insulin sensitivity windows following morning training or fasted movement, and aligns glucose disposal with periods of higher metabolic rate.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c3)"></div>
+            <div class="leaf-title">Evening carbs and sleep</div>
+          </div>
+          <div class="leaf-detail">Contrary to popular belief, consuming moderate carbohydrates in the evening is not inherently fattening. Some research shows that evening carbohydrates can actually support sleep quality by stimulating serotonin and melatonin precursor production. The key variable is total daily intake and overall energy balance — not which meal the carbs appear in.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c3)"></div>
+            <div class="leaf-title">Carbs around high-intensity training</div>
+          </div>
+          <div class="leaf-detail">Strategic carbohydrate placement around high-intensity work — both as pre-training fuel and post-training recovery — is supported by extensive exercise physiology research. This targeted approach allows individuals to maintain lower baseline insulin while still providing glucose when the body is primed to use and store it in muscle rather than adipose tissue.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c3)"></div>
+            <div class="leaf-title">Carb cycling as a middle path</div>
+          </div>
+          <div class="leaf-detail">Carb cycling — alternating between higher-carb training days and lower-carb rest or light days — represents a pragmatic approach that captures benefits of both ketogenic and higher-carb protocols. On low-carb days, fat oxidation and insulin sensitivity improve; on high-carb days, glycogen is replenished and anabolic signalling is amplified. DeLauer has long advocated this as his preferred long-term model.</div>
+        </div>
+      </div>
+    </div>
 
-<div class="branch b5" onclick="toggleBranch(this)">
-<div class="branch-head"><span>🥗</span> Nutritional Strategy for Skin Longevity <span class="arr">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Protein Adequacy Matters <span>+</span></div><div class="leaf-body">Insufficient total dietary protein accelerates collagen loss, as the body preferentially cannibalises structural proteins during amino acid shortages. De Lauer recommends 0.7–1g of protein per pound of body weight daily — more than typical guidelines — with collagen peptides added on top rather than substituted for complete protein sources.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Anti-Inflammatory Eating Patterns <span>+</span></div><div class="leaf-body">Chronic dietary inflammation — driven by refined seed oils, high-glycaemic carbohydrates, and ultra-processed foods — elevates cortisol and inflammatory cytokines that directly degrade skin collagen. A Mediterranean-style eating pattern rich in omega-3s, polyphenols, and colourful vegetables creates the anti-inflammatory foundation that supplemental collagen requires.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Sugar & Advanced Glycation End Products <span>+</span></div><div class="leaf-body">Excess dietary sugar cross-links collagen fibres through a process called glycation, producing advanced glycation end products (AGEs) that make collagen stiff, brittle, and prone to breakdown. Reducing refined carbohydrates and sugars is arguably as important as supplementing collagen for preserving skin structural integrity.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Hydration & Skin Architecture <span>+</span></div><div class="leaf-body">Adequate hydration maintains the turgor and plumpness of the dermis. Hyaluronic acid — whose synthesis is supported by both collagen peptides and sufficient water intake — can hold up to 1,000 times its weight in water. Chronic mild dehydration exaggerates every wrinkle and dramatically accelerates the apparent rate of skin ageing.</div></div>
-</div>
-</div>
+    <!-- BRANCH 4: Food Quality -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c4)"></div>
+        <div class="branch-title" style="color:var(--c4)">🌾 Carb Quality Matters Most</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c4)"></div>
+            <div class="leaf-title">Whole food carbs vs. processed carbs</div>
+          </div>
+          <div class="leaf-detail">Sweet potato, oats, legumes, fruit, and root vegetables are categorically different from white bread, cookies, and breakfast cereals despite similar macronutrient profiles. Whole-food carbs arrive packaged with fibre, polyphenols, vitamins, minerals, and water — all of which slow digestion, blunt the glucose response, and deliver micronutrient value that processed carbs lack entirely.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c4)"></div>
+            <div class="leaf-title">Resistant starch benefits</div>
+          </div>
+          <div class="leaf-detail">Resistant starch — found in cooked and cooled rice, unripe bananas, cooked lentils, and potato starch — passes through the small intestine largely intact and ferments in the colon. This produces butyrate, improves insulin sensitivity, and lowers post-meal blood glucose. Cooling cooked starches before eating meaningfully increases resistant starch content.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c4)"></div>
+            <div class="leaf-title">Fructose vs. glucose metabolism</div>
+          </div>
+          <div class="leaf-detail">Fructose is processed almost entirely by the liver and does not trigger insulin or leptin signalling in the same way as glucose — blunting satiety cues and potentially increasing liver fat accumulation at high doses. However, the fructose in whole fruit (paired with fibre, water, and polyphenols) is metabolically distinct from high-fructose corn syrup in processed foods.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c4)"></div>
+            <div class="leaf-title">The food matrix effect</div>
+          </div>
+          <div class="leaf-detail">How a food is structured — its "food matrix" — determines its glycaemic impact as much as its sugar content. Whole almonds and almond flour have identical macros but very different glucose responses. The physical structure of food slows enzymatic access, reducing peak glucose and insulin responses. Processing destroys this matrix, which is why ultra-processed foods are metabolically damaging regardless of their listed carbohydrate grams.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c4)"></div>
+            <div class="leaf-title">Polyphenols and carb interaction</div>
+          </div>
+          <div class="leaf-detail">Polyphenols in berries, dark chocolate, and colourful vegetables actively inhibit glucose absorption, improve insulin signalling at the cellular level, and support AMPK activation — a cellular energy sensor that mimics aspects of fasting and exercise. Eating polyphenol-rich foods alongside carbohydrates meaningfully changes their metabolic impact.</div>
+        </div>
+      </div>
+    </div>
 
-<div class="branch b6" onclick="toggleBranch(this)">
-<div class="branch-head"><span>⚡</span> Biohacking the Anti-Ageing Protocol <span class="arr">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Timing Collagen for Absorption <span>+</span></div><div class="leaf-body">Collagen peptides are best taken on an empty stomach or with a small vitamin C source to maximise uptake. Post-exercise is an optimal window — muscle protein synthesis pathways are upregulated and the increased blood flow to skin and connective tissue enhances collagen peptide delivery to target tissues.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Sleep as the Recovery Window <span>+</span></div><div class="leaf-body">Growth hormone — the primary driver of nocturnal collagen synthesis — is secreted in pulses during deep sleep. Taking collagen in the evening, combined with 7–9 hours of quality sleep, aligns supplementation with the body's peak collagen-building window. Poor sleep suppresses growth hormone and counteracts any supplementation benefit.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Red Light Therapy Synergy <span>+</span></div><div class="leaf-body">Low-level red and near-infrared light (630–850nm) directly stimulates fibroblast activity and ATP production in skin cells, independently increasing collagen synthesis. Combined with oral collagen peptide supplementation, the two interventions target collagen production from both cellular and substrate directions, potentially compounding outcomes.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Resistance Training for Skin Health <span>+</span></div><div class="leaf-body">Progressive resistance training increases growth hormone and IGF-1, both of which stimulate dermal collagen synthesis. Regular strength training has been shown to improve skin elasticity and dermal thickness measurably — independent of topical treatments or supplementation — making it one of the most powerful and underutilised anti-ageing interventions available.</div></div>
-</div>
-</div>
+    <!-- BRANCH 5: Metabolic Flexibility -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c6)"></div>
+        <div class="branch-title" style="color:var(--c6)">🔥 Metabolic Flexibility</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c6)"></div>
+            <div class="leaf-title">What metabolic flexibility actually means</div>
+          </div>
+          <div class="leaf-detail">A metabolically flexible individual efficiently oxidises fat when fasted or resting, and seamlessly switches to glucose oxidation when carbohydrates are available or exercise intensity rises. Metabolic inflexibility — the inability to switch — is a hallmark of insulin resistance and type 2 diabetes. The goal is not to avoid carbs permanently but to preserve the ability to use both fuels well.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c6)"></div>
+            <div class="leaf-title">How strict low-carb can backfire</div>
+          </div>
+          <div class="leaf-detail">Prolonged carbohydrate avoidance can paradoxically impair glucose tolerance when carbs are eventually reintroduced — a phenomenon called physiological insulin resistance. The muscle and liver adapt to fat oxidation and become temporarily less efficient at glucose disposal. This is distinct from pathological insulin resistance but is worth understanding for anyone periodically reintroducing carbohydrates.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c6)"></div>
+            <div class="leaf-title">Building flexibility through training</div>
+          </div>
+          <div class="leaf-detail">Aerobic exercise, particularly Zone 2 training at moderate intensity, is the most powerful tool for improving fat oxidation capacity and overall metabolic flexibility. Resistance training improves glucose disposal into muscle. The combination of both — plus appropriate carbohydrate intake — builds a metabolism that handles glucose efficiently without requiring chronic restriction.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c6)"></div>
+            <div class="leaf-title">Context determines carb appropriateness</div>
+          </div>
+          <div class="leaf-detail">A sedentary, insulin-resistant individual with excess visceral fat may legitimately benefit from significant carbohydrate restriction. A lean, active person training 4–5 days per week who restricts carbs aggressively is potentially compromising performance, hormonal health, and recovery without proportional benefit. Carb needs are deeply individual and context-dependent — not universally high or universally low.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c6)"></div>
+            <div class="leaf-title">DeLauer's evolved position</div>
+          </div>
+          <div class="leaf-detail">DeLauer has publicly moved away from dogmatic keto advocacy towards a nuanced position emphasising metabolic flexibility, carb quality, and strategic timing. He now frames carbohydrates not as inherently harmful but as a tool that can be deployed or reduced based on individual metabolic health, activity level, and goals — a significant evolution from his earlier strict low-carb messaging.</div>
+        </div>
+      </div>
+    </div>
 
-</div>
-</div>
+    <!-- BRANCH 6: Practical -->
+    <div class="branch" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div class="branch-dot" style="background:var(--c5)"></div>
+        <div class="branch-title" style="color:var(--c5)">✅ Practical Application</div>
+        <div class="branch-arrow">▼</div>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c5)"></div>
+            <div class="leaf-title">Best carb sources to prioritise</div>
+          </div>
+          <div class="leaf-detail">DeLauer consistently highlights: sweet potato, white rice (post-workout), oats, legumes, berries, and cooked-then-cooled starches as top choices. These provide fibre, resistant starch, polyphenols, and micronutrients while having a manageable glucose response. He avoids bread, pasta, and processed grains as default daily sources.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c5)"></div>
+            <div class="leaf-title">How to test your own carb tolerance</div>
+          </div>
+          <div class="leaf-detail">Continuous glucose monitoring (CGM) tools like Dexcom or Libre allow individuals to see real-time glucose responses to specific foods. This personal metabolic data is more instructive than population-level glycaemic index tables, since two people can have profoundly different glucose responses to the same food based on gut microbiome, activity history, and metabolic health.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c5)"></div>
+            <div class="leaf-title">Pairing strategies to blunt glucose spikes</div>
+          </div>
+          <div class="leaf-detail">Consuming carbohydrates after protein and fat, or alongside vinegar, cinnamon, or fibre-rich vegetables, meaningfully slows gastric emptying and reduces peak glucose response. Walking 10–15 minutes after a carbohydrate-containing meal accelerates glucose clearance into muscle via GLUT4 activation, lowering the insulin load required to restore baseline blood glucose.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c5)"></div>
+            <div class="leaf-title">Reintroducing carbs after low-carb periods</div>
+          </div>
+          <div class="leaf-detail">After extended low-carb dieting, carbohydrate reintroduction should be gradual and timed around exercise to avoid the exaggerated glucose response that comes with temporary physiological insulin resistance. Starting with root vegetables and legumes rather than refined grains, and combining with resistance training, allows the body to restore normal glucose handling capacity over 1–3 weeks.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-header">
+            <div class="leaf-dot" style="background:var(--c5)"></div>
+            <div class="leaf-title">Protein, fibre, and carb sequencing</div>
+          </div>
+          <div class="leaf-detail">Research shows that eating protein and fibre first, then carbohydrates at a meal, reduces post-meal glucose by up to 30% compared to eating carbs first. This "food order" effect is simple, cost-free, and requires no dietary restriction — just a change in sequencing. It works by slowing gastric emptying and pre-stimulating incretin hormone secretion before glucose enters the bloodstream.</div>
+        </div>
+      </div>
+    </div>
 
+  </div><!-- /branches -->
+</div><!-- /mindmap -->
+
+<!-- FULL SUMMARY -->
 <div id="summary" class="panel">
-<div class="summary">
-<h2>Collagen Science & Why It Works</h2>
-<p>Thomas De Lauer builds this episode around a central argument: that daily supplementation with hydrolysed collagen peptides produces measurable improvements in skin quality, wrinkle depth, and biological age markers — and that the mechanism is far more sophisticated than simple nutritional replenishment. When collagen peptides are absorbed from the gut, they don't just provide amino acid building blocks. They act as biological signals, directly stimulating dermal fibroblasts to upregulate their own collagen and hyaluronic acid synthesis. This makes supplemental collagen a signalling intervention as much as a nutritional one, with effects that compound over weeks and months.</p>
-<p>Clinical research consistently supports this. Randomised controlled trials using 10–15g of hydrolysed collagen daily for 8–12 weeks show significant improvements in skin elasticity, hydration, and wrinkle depth as measured by objective dermatological tools. De Lauer references Bubs Naturals as his preferred source — a grass-fed bovine collagen providing the Type I and Type III peptides most relevant to skin and connective tissue health.</p>
 
-<h2>Skin Ageing at the Cellular Level</h2>
-<p>Visible skin ageing is the surface expression of deeper cellular events. As collagen and elastin production decline from the mid-twenties, the dermis loses its structural integrity — skin becomes thinner, less elastic, and more prone to the creasing that settles into permanent wrinkles. UV radiation accelerates this by activating matrix metalloproteinases (MMPs) that actively degrade existing collagen, while simultaneously suppressing new synthesis. Reactive oxygen species from pollution and metabolic processes add a further layer of oxidative damage that fragments the extracellular matrix.</p>
-<p>Senescent cells accumulate in ageing skin and secrete a cocktail of pro-inflammatory signals that perpetuate this degradation. Understanding these mechanisms points toward the intervention stack De Lauer advocates: collagen supplementation to replace and signal new synthesis, antioxidant nutrition to reduce oxidative damage upstream, and lifestyle practices that clear senescent cells and reduce chronic inflammation at its root.</p>
+  <div class="summary-section">
+    <h3 style="color:var(--c1)">The Carb Myths We've Inherited</h3>
+    <p>For the past two decades, carbohydrates have been cast as the primary villain in modern metabolic disease — blamed for obesity, diabetes, inflammation, and cognitive decline. This narrative, amplified by the rise of ketogenic dieting, created a binary thinking problem: carbs are bad, fat is good. DeLauer's central argument in this video is that this framing is fundamentally wrong, not because carbohydrates are benign, but because the blanket condemnation ignores biology, context, and food quality. The myth that carbs cause fat gain directly through insulin has not held up under controlled metabolic research; fat gain is driven by sustained caloric surplus, regardless of macronutrient source. The rapid weight loss seen in the first week of low-carb dieting is largely water attached to glycogen stores — a physiological fact that has been widely misrepresented as proof of superior fat burning.</p>
+  </div>
 
-<h2>Biological Age and Longevity</h2>
-<p>De Lauer frames skin quality not just as aesthetics but as a longevity metric. Biological age — distinct from chronological age — is now measurable through epigenetic clocks that read DNA methylation patterns. Interventions that reduce biological age typically improve skin quality simultaneously, because both reflect the same underlying cellular health. Glycine, the dominant amino acid in collagen, has independent longevity properties: it extends lifespan in animal models, supports mitochondrial function, reduces NF-κB-driven inflammation, and restores circadian rhythm integrity — making collagen supplementation a longevity intervention as much as a cosmetic one.</p>
+  <div class="summary-section">
+    <h3 style="color:var(--c2)">What Carbohydrates Actually Do In The Body</h3>
+    <p>Glucose is the body's primary and preferred fuel for the brain, red blood cells, and high-intensity muscular effort. The brain alone requires approximately 120 grams of glucose daily and will trigger gluconeogenesis — the conversion of amino acids and glycerol into glucose — when dietary carbohydrates are absent. This metabolic cost is often overlooked in blanket anti-carbohydrate arguments. Muscle glycogen, synthesised from dietary carbohydrates, is the dominant fuel for any exercise above roughly 70% of maximal oxygen uptake; without it, power output and force production are compromised. Beyond energy, carbohydrates — specifically fibre — are the primary food source for the gut microbiome. Fermentation of dietary fibre produces short-chain fatty acids including butyrate, which strengthens the gut lining, regulates appetite via gut-brain signalling, and exerts potent anti-inflammatory effects throughout the body. This means that a very low-fibre diet is, paradoxically, a pro-inflammatory diet regardless of how clean the fats and proteins are.</p>
+  </div>
 
-<h2>Nutritional Strategy for Skin</h2>
-<p>De Lauer is emphatic that supplemental collagen cannot compensate for a fundamentally inflammatory diet. Refined carbohydrates drive glycation — the cross-linking of collagen fibres by sugar molecules — that makes skin stiff, brittle, and prone to breakdown. Dietary seed oils and ultra-processed foods elevate circulating inflammatory markers that degrade the dermal matrix as effectively as sun damage. The nutritional foundation must be anti-inflammatory: adequate total protein, omega-3-rich fats, colourful polyphenol-rich vegetables, and consistent hydration to maintain dermal turgor through hyaluronic acid function.</p>
+  <div class="summary-section">
+    <h3 style="color:var(--c3)">Timing and Context Change Everything</h3>
+    <p>DeLauer argues that when you eat carbohydrates is as important as what carbohydrates you eat. The post-exercise window — roughly 30 to 90 minutes following resistance training — represents a metabolically unique period where GLUT4 transporters migrate to muscle cell surfaces and glucose is taken up independently of insulin signalling. Consuming fast-absorbing carbohydrates in this window refills glycogen, amplifies muscle protein synthesis when combined with protein, and does so with minimal fat storage risk. Carb cycling — the strategic alternation between higher-carb training days and lower-carb rest days — captures the best of both metabolic worlds: improved fat oxidation and insulin sensitivity on lower-carb days, and enhanced anabolism and performance on higher-carb days. This is the model DeLauer personally follows and has advocated for as a sustainable long-term approach for body composition and metabolic health.</p>
+  </div>
 
-<h2>The Optimised Protocol</h2>
-<p>De Lauer's practical recommendation converges multiple interventions: 10–15g hydrolysed collagen daily with vitamin C for synthesis support; post-exercise or evening timing aligned with growth hormone secretion; an anti-inflammatory whole-food diet with minimal refined sugar; resistance training to drive endogenous growth hormone; quality sleep for nocturnal collagen synthesis; and optionally, red light therapy to directly stimulate fibroblast activity. The convergence of these interventions produces measurable changes in skin quality and biological age markers within 3–6 months of consistent implementation.</p>
-</div>
-</div>
+  <div class="summary-section">
+    <h3 style="color:var(--c4)">Quality Is the Defining Variable</h3>
+    <p>Not all carbohydrates are created equal, and this is where much of the anti-carb argument goes wrong by conflating junk food with food that happens to contain carbohydrates. White bread and sweet potato share a similar macronutrient profile but are metabolically unrecognisable to the body. Whole-food carbohydrates arrive embedded in a physical matrix of fibre, water, polyphenols, and micronutrients that collectively slow digestion, blunt glucose response, nourish the microbiome, and deliver genuine nutritional value. Resistant starch — found in cooked and cooled rice, green bananas, and lentils — feeds colonic bacteria that produce butyrate and improve insulin sensitivity. Polyphenols in berries and colourful vegetables actively inhibit glucose absorption and activate AMPK, a cellular energy sensor that mimics aspects of fasting. Ultra-processed foods destroy this matrix and deliver glucose rapidly and without the biological signals that would normally accompany carbohydrate consumption in nature. The target is not low-carb; it is low-processed, high-quality, whole-food carbohydrate selection.</p>
+  </div>
 
+  <div class="summary-section">
+    <h3 style="color:var(--c6)">Metabolic Flexibility: The Real Goal</h3>
+    <p>DeLauer's most significant intellectual evolution is his embrace of metabolic flexibility as the organising principle of nutritional health. A metabolically healthy person can oxidise fat efficiently when fasted or at rest, and switch seamlessly to glucose oxidation when carbohydrates are available or training intensity rises. This capacity — not the permanent elimination of carbohydrates — is what differentiates a metabolically healthy individual from someone with insulin resistance. Prolonged strict carbohydrate restriction, paradoxically, can impair glucose tolerance when carbs are eventually reintroduced, a phenomenon called physiological insulin resistance as muscles adapt fully to fat oxidation. DeLauer now explicitly frames different individuals' carbohydrate needs on a spectrum: a sedentary, metabolically compromised person may benefit significantly from carbohydrate restriction, while a lean, highly active person aggressively restricting carbs may be undermining their hormonal health, performance, and recovery without meaningful benefit. Context, not ideology, should determine carbohydrate intake.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3 style="color:var(--c5)">Practical Strategies That Work</h3>
+    <p>The video closes with actionable guidance. The best carbohydrate sources are sweet potato, oats, legumes, berries, and cooked-and-cooled starches for their resistant starch content. Carbohydrate intake should be timed primarily around exercise — with particular emphasis on the post-training window. Food sequencing — eating protein and fibre before carbohydrates in a meal — can reduce post-meal glucose response by up to 30% with no other dietary changes. A 10–15 minute walk after eating carbohydrates activates GLUT4 in muscle and accelerates glucose clearance, reducing the insulin burden. For individuals coming off a low-carb period, carbohydrate reintroduction should be gradual, food-quality-focused, and exercise-adjacent to allow the body to rebuild glucose tolerance smoothly. Personal glucose monitoring via CGM tools provides far more actionable insight into individual carbohydrate tolerance than population-level glycaemic index tables.</p>
+  </div>
+
+</div><!-- /summary -->
+
+<!-- TAKEAWAYS -->
 <div id="takeaways" class="panel">
-<div class="cards">
-<div class="card"><div class="card-num">Takeaway 01</div><p>Take 10–15g of hydrolysed collagen peptides daily. This is the dose used in clinical trials showing measurable improvements in skin elasticity, wrinkle depth, and hydration within 8–12 weeks.</p></div>
-<div class="card"><div class="card-num">Takeaway 02</div><p>Always pair collagen with vitamin C. It's an essential cofactor in collagen synthesis — even 50mg (half an orange) meaningfully increases conversion of ingested peptides into new skin collagen.</p></div>
-<div class="card"><div class="card-num">Takeaway 03</div><p>Take collagen post-exercise or in the evening. Both windows align with elevated growth hormone and increased blood flow to skin tissue, maximising delivery to target tissues where synthesis occurs.</p></div>
-<div class="card"><div class="card-num">Takeaway 04</div><p>Slash refined sugar intake. Sugar glycates collagen fibres, making them rigid and prone to breakdown. Reducing added sugar is as important as supplementing collagen for maintaining skin structural integrity.</p></div>
-<div class="card"><div class="card-num">Takeaway 05</div><p>Eat enough total protein — at least 0.7g per pound of body weight daily. Insufficient protein causes the body to cannibalise structural proteins, accelerating collagen loss even while supplementing.</p></div>
-<div class="card"><div class="card-num">Takeaway 06</div><p>Add resistance training to your routine. Progressive strength training independently increases growth hormone and IGF-1, measurably improving dermal thickness and skin elasticity — one of the most underused anti-ageing interventions.</p></div>
-<div class="card"><div class="card-num">Takeaway 07</div><p>Prioritise 7–9 hours of sleep. Growth hormone — the primary driver of nocturnal collagen synthesis — is secreted during deep sleep. Poor sleep counteracts collagen supplementation by suppressing the hormone that activates it.</p></div>
-<div class="card"><div class="card-num">Takeaway 08</div><p>Build an anti-inflammatory dietary foundation: omega-3-rich fish, colourful vegetables, olive oil, and minimal ultra-processed foods. Chronic dietary inflammation degrades collagen as fast as UV damage does.</p></div>
-<div class="card"><div class="card-num">Takeaway 09</div><p>Stay consistently hydrated. Hyaluronic acid — whose synthesis is boosted by collagen peptides — requires adequate water to hold moisture in the dermis. Chronic mild dehydration exaggerates every wrinkle.</p></div>
-<div class="card"><div class="card-num">Takeaway 10</div><p>Think of skin quality as a longevity biomarker, not just an aesthetic concern. The same interventions that improve dermal collagen — glycine intake, low inflammation, quality sleep, exercise — reduce biological age across all organ systems simultaneously.</p></div>
-</div>
-</div>
+  <div class="takeaways-grid">
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">01</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Stop blaming carbs for fat gain — blame caloric surplus</div>
+        <div class="takeaway-desc">Controlled studies show matched fat loss on low-carb and high-carb diets when calories and protein are equal. Total energy intake, not carbohydrate grams, is the primary driver of body fat accumulation.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">02</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Eat carbohydrates within 30–90 minutes post-training</div>
+        <div class="takeaway-desc">Post-exercise GLUT4 upregulation allows insulin-independent glucose uptake into muscle. This is the safest and most effective window to consume carbohydrates — they go to glycogen, not fat stores.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">03</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Eat protein and fibre before carbohydrates at each meal</div>
+        <div class="takeaway-desc">Food sequencing — protein and vegetables first, carbs last — reduces post-meal glucose by up to 30%. No restriction required, just reordering what goes into your mouth first.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">04</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Walk for 10–15 minutes after carbohydrate-containing meals</div>
+        <div class="takeaway-desc">Light post-meal movement activates GLUT4 transporters in muscle, accelerating glucose clearance from the bloodstream and reducing the insulin required to restore baseline blood sugar.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">05</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Cook, cool, and reheat starchy foods to increase resistant starch</div>
+        <div class="takeaway-desc">Cooling cooked rice, potatoes, or lentils and eating them cold or reheated meaningfully increases resistant starch content, which feeds gut bacteria, produces butyrate, and lowers the glycaemic impact.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">06</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Choose whole-food carbs with intact physical structure</div>
+        <div class="takeaway-desc">Sweet potato, oats, legumes, and berries contain fibre, polyphenols, and a physical food matrix that slows digestion. These are categorically different from processed carbohydrates despite similar macronutrient labels.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">07</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Use carb cycling if you want the best of both protocols</div>
+        <div class="takeaway-desc">Eat higher-carbohydrate on training days (prioritised around workouts) and lower-carbohydrate on rest or light activity days. This improves insulin sensitivity on low days and maximises anabolism and performance on high days.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">08</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">If coming off low-carb, reintroduce carbs gradually and around exercise</div>
+        <div class="takeaway-desc">Physiological insulin resistance from prolonged carb avoidance means a sudden carbohydrate reintroduction can produce exaggerated glucose spikes. Reintroduce slowly over 1–3 weeks, exercise-adjacent, starting with root vegetables and legumes.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">09</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Use a CGM to personalise your carbohydrate strategy</div>
+        <div class="takeaway-desc">Continuous glucose monitors reveal your individual response to specific foods — far more useful than generic glycaemic index tables. Two people can have vastly different glucose responses to identical foods based on their gut microbiome, activity history, and metabolic health.</div>
+      </div>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">10</div>
+      <div class="takeaway-body">
+        <div class="takeaway-title">Build metabolic flexibility — don't just pick a camp</div>
+        <div class="takeaway-desc">The goal is not to be permanently low-carb or permanently high-carb. Metabolic flexibility — the ability to oxidise both fat and glucose efficiently depending on context — is the actual marker of metabolic health. Zone 2 cardio and resistance training are the best tools for building it alongside strategic carbohydrate intake.</div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /takeaways -->
+
+<p class="disclaimer">Mind map based on Thomas DeLauer's documented body of work and recent content themes. Video published June 2026 on @ThomasDeLauerOfficial.</p>
 
 <script>
-function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
-function toggleBranch(el){el.classList.toggle('open')}
-function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) {
+    el.classList.toggle('open');
+  }
+  function toggleLeaf(e, el) {
+    e.stopPropagation();
+    el.classList.toggle('open');
+  }
 </script>
 </body>
 </html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Sinclair — Can Ageing Be Reversed? | DOAC Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #21262d;
+    --border-light: #30363d;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --accent: #58a6ff;
+    --accent-light: #1c2d3f;
+    --green: #3fb950;
+    --green-light: #1a2e1c;
+    --amber: #d29922;
+    --amber-light: #2d2208;
+    --purple: #bc8cff;
+    --purple-light: #211d35;
+    --red: #f85149;
+    --red-light: #2d1b1b;
+    --teal: #39d0c5;
+    --teal-light: #0d2626;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    padding: 2.5rem 2.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #0d1117 0%, #111827 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(63,185,80,.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: .6rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: .5rem;
+    max-width: 700px;
+  }
+  header p {
+    font-size: .82rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    overflow-x: auto;
+    background: var(--surface);
+  }
+  .tab {
+    padding: .85rem 1.25rem;
+    font-size: .75rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--green); border-bottom-color: var(--green); }
+
+  /* PANELS */
+  .panel { display: none; padding: 2rem 2.5rem 3rem; }
+  .panel.active { display: block; }
+
+  /* MIND MAP */
+  .map-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .root-node {
+    background: var(--green);
+    color: #000;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: .85rem 2rem;
+    border-radius: 6px;
+    text-align: center;
+    letter-spacing: .02em;
+  }
+  .branches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: .85rem;
+    width: 100%;
+  }
+  .branch {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s;
+  }
+  .branch:hover { transform: translateY(-1px); }
+  .branch-header {
+    padding: .85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .branch-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .branch-title { font-size: .88rem; font-weight: 600; flex: 1; }
+  .branch-chevron { font-size: .65rem; color: var(--muted); transition: transform .25s; flex-shrink: 0; }
+  .branch.open .branch-chevron { transform: rotate(180deg); }
+  .branch-body { display: none; padding: .75rem 1rem; }
+  .branch.open .branch-body { display: block; }
+
+  .leaf { padding: .55rem 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .leaf:last-child { border-bottom: none; }
+  .leaf-title {
+    font-size: .78rem;
+    font-weight: 500;
+    color: #c9d1d9;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .leaf-title::before { content: '▸'; font-size: .55rem; color: var(--muted); flex-shrink: 0; transition: transform .15s; }
+  .leaf.open .leaf-title::before { transform: rotate(90deg); color: var(--green); }
+  .leaf-detail {
+    display: none;
+    font-size: .74rem;
+    color: var(--muted);
+    line-height: 1.65;
+    padding: .45rem 0 .2rem 1rem;
+    font-style: italic;
+  }
+  .leaf.open .leaf-detail { display: block; }
+
+  .c1 .branch-header { border-left: 3px solid var(--green); }
+  .c2 .branch-header { border-left: 3px solid var(--accent); }
+  .c3 .branch-header { border-left: 3px solid var(--amber); }
+  .c4 .branch-header { border-left: 3px solid var(--purple); }
+  .c5 .branch-header { border-left: 3px solid var(--teal); }
+  .c6 .branch-header { border-left: 3px solid var(--red); }
+  .c1 .branch-title { color: var(--green); }
+  .c2 .branch-title { color: var(--accent); }
+  .c3 .branch-title { color: var(--amber); }
+  .c4 .branch-title { color: var(--purple); }
+  .c5 .branch-title { color: var(--teal); }
+  .c6 .branch-title { color: var(--red); }
+  .c1:hover { border-color: var(--green); }
+  .c2:hover { border-color: var(--accent); }
+  .c3:hover { border-color: var(--amber); }
+  .c4:hover { border-color: var(--purple); }
+  .c5:hover { border-color: var(--teal); }
+  .c6:hover { border-color: var(--red); }
+
+  /* SUMMARY */
+  .summary-wrap { max-width: 820px; display: flex; flex-direction: column; gap: 1.25rem; }
+  .sum-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .sum-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .85rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .sum-block h2 .bar { width: 3px; height: 16px; border-radius: 2px; flex-shrink: 0; }
+  .sum-block p { font-size: .82rem; line-height: 1.8; color: #8b949e; margin-bottom: .65rem; }
+  .sum-block p:last-child { margin-bottom: 0; }
+
+  /* TAKEAWAYS */
+  .takeaways-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: .85rem; }
+  .tw-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .tw-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--border-light);
+    margin-bottom: .4rem;
+    font-weight: 700;
+  }
+  .tw-card h3 { font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
+  .tw-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
+  .tw-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .tw-card:nth-child(1)::after { background: var(--green); }
+  .tw-card:nth-child(2)::after { background: var(--accent); }
+  .tw-card:nth-child(3)::after { background: var(--amber); }
+  .tw-card:nth-child(4)::after { background: var(--purple); }
+  .tw-card:nth-child(5)::after { background: var(--teal); }
+  .tw-card:nth-child(6)::after { background: var(--red); }
+  .tw-card:nth-child(7)::after { background: var(--green); }
+  .tw-card:nth-child(8)::after { background: var(--accent); }
+  .tw-card:nth-child(9)::after { background: var(--amber); }
+  .tw-card:nth-child(10)::after { background: var(--purple); }
+
+  @media(max-width:600px){
+    header,.tabs,.panel{padding-left:1.25rem;padding-right:1.25rem}
+    .tab{padding:.7rem .9rem;font-size:.68rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">The Diary of a CEO · Dr. David Sinclair · Mar 23, 2026</div>
+  <h1>Can Ageing Be Reversed?</h1>
+  <p>Harvard geneticist reveals the Information Theory of Aging, cellular reprogramming, and the supplement stack he actually takes.</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap',this)">🧬 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">📖 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">⚡ Takeaways</button>
+</nav>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+  <div class="map-root">
+    <div class="root-node">DR. DAVID SINCLAIR — REVERSING AGEING</div>
+    <div class="branches">
+
+      <div class="branch c1" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">💾</span>
+          <span class="branch-title">The Information Theory of Ageing</span>
+          <span class="branch-chevron">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Ageing is a software problem, not hardware</div>
+            <div class="leaf-detail">DNA is the hardware — it stays largely intact. The epigenome (which genes get switched on or off) is the software. Ageing happens when the software becomes corrupted. The hardware backup still exists and can be reinstalled.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Cells lose their identity — "cellular amnesia"</div>
+            <div class="leaf-detail">Sirtuin proteins maintain cellular identity by regulating gene expression. When DNA breaks (from stress, UV, noise, etc.), sirtuins abandon their posts to repair damage. During repair they lose their position, and cells begin expressing the wrong genes — the root cause of ageing.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">The yeast discovery that started it all</div>
+            <div class="leaf-detail">Sinclair discovered in yeast that cells age by losing their "mating type" identity — becoming sterile and confused. The same mechanism operates in human cells. This insight has driven 30 years of research.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Ageing is the root cause of most disease</div>
+            <div class="leaf-detail">Cancer, Alzheimer's, heart disease and blindness are not independent diseases — they are symptoms of the same underlying process: ageing. Reverse ageing and these diseases largely disappear. This reframes the entire target of medicine.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="branch c2" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🧪</span>
+          <span class="branch-title">Gene Therapy & Age Reversal Research</span>
+          <span class="branch-chevron">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Cells reset 75% younger in 8 weeks</div>
+            <div class="leaf-detail">Using three specific genes (Yamanaka factors — Oct4, Sox2, Klf4), Sinclair's lab activated them in optic nerve cells for 6–8 weeks. Biological age markers reset to approximately 75% younger. This is not slowing ageing — it is reversing it.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Human trial for blindness reversal — pending FDA</div>
+            <div class="leaf-detail">The eye was chosen as the first target because it is safe and isolated. Gene therapy delivered to the optic nerve can restore vision lost to glaucoma and age-related damage. Human trials are submitted to the FDA. If approved and successful in 2026, this opens the door to whole-body age reversal.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Rejuvenation can be repeated — not a one-shot wonder</div>
+            <div class="leaf-detail">In mice, the eye has been rejuvenated at least twice with the same success. The backup copy of youthful epigenetic information appears to remain intact regardless of how many times it has been reset. This suggests the treatment is not a one-time fix.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Accelerated ageing mouse model — OSK proof</div>
+            <div class="leaf-detail">By activating a gene from slime mould, Sinclair's team created mice that aged rapidly. Activating the OSK genes (Oct4, Sox2, Klf4) in these mice reversed the accelerated ageing. This served as proof that the backup copy of youth exists and can be accessed.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Cancer connection — same information loss</div>
+            <div class="leaf-detail">Cancer cells express genes incorrectly — the same mechanism as aged cells. Sinclair's lab has used epigenetic reprogramming to slow and kill certain cancer cells. Cancer may be another manifestation of the information loss problem rather than a separate disease entirely.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="branch c3" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🍽️</span>
+          <span class="branch-title">Diet, Fasting & Longevity</span>
+          <span class="branch-chevron">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Three meals a day may be shortening your life</div>
+            <div class="leaf-detail">Constant eating keeps mTOR (growth pathway) perpetually activated and prevents autophagy (cellular cleanup). The body never gets the signal to activate longevity genes. Sinclair skips breakfast and eats his first meal around noon — not for weight loss but for longevity signalling.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">"Good stress" activates survival circuits</div>
+            <div class="leaf-detail">Fasting, cold exposure, heat (sauna), and intense exercise are all forms of hormetic stress — mild adversity that activates the body's defence and repair systems. These same systems are the ones that slow ageing. Comfort is the enemy of longevity at a biological level.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Plant-based eating — the simplest upgrade</div>
+            <div class="leaf-detail">Plant foods are rich in xenohormetics — molecules plants produce under stress that, when consumed, activate human longevity pathways (sirtuins, AMPK). Reducing animal protein also lowers mTOR activation. Sinclair is largely plant-based but not dogmatic about it.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Keto — short-term tool, not long-term strategy</div>
+            <div class="leaf-detail">Ketosis activates some beneficial pathways but long-term high animal-fat keto diets may accelerate ageing through other mechanisms. Sinclair sees it as a useful metabolic reset, not a lifestyle. Exogenous ketones offer some benefits without the dietary cost.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">The 5 most impactful foods for lifespan</div>
+            <div class="leaf-detail">Sinclair highlights: broccoli and cruciferous vegetables (sulforaphane), olive oil (oleocanthal), matcha and green tea (EGCG), blueberries and dark berries (resveratrol precursors), and legumes (protein without mTOR spike). These are evidence-based, not trend-based.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="branch c4" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">💊</span>
+          <span class="branch-title">Sinclair's Supplement Stack</span>
+          <span class="branch-chevron">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">NMN — NAD+ precursor he takes daily</div>
+            <div class="leaf-detail">NMN (nicotinamide mononucleotide) boosts NAD+ levels, which decline with age. NAD+ is essential for sirtuin activity — the very proteins that maintain cellular identity and slow ageing. Sinclair takes 1g daily in the morning. NR is a cheaper alternative with similar but slightly less potent effects.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Resveratrol — activates sirtuins</div>
+            <div class="leaf-detail">Resveratrol activates SIRT1, a key sirtuin, mimicking the effect of calorie restriction. Sinclair takes 1g daily with olive oil (fat dramatically increases absorption). The clinical evidence is debated but he takes it based on his own research and biological plausibility.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Metformin — the diabetes drug for longevity</div>
+            <div class="leaf-detail">Metformin activates AMPK (the cellular energy sensor) and reduces mTOR — mimicking the effects of fasting. Long-term diabetics taking metformin live longer than non-diabetics not taking it. Sinclair takes 500–1000mg daily. Caution: may blunt muscle gains if taken around exercise.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Vitamin D3 + K2, and low-dose aspirin</div>
+            <div class="leaf-detail">Most people are deficient in vitamin D, which affects thousands of gene expressions. K2 directs calcium to bones rather than arteries. Low-dose aspirin has evidence for cardiovascular and some cancer prevention benefits, though the risk-benefit calculation is individual.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Fewer supplements may be better</div>
+            <div class="leaf-detail">Sinclair has simplified his stack over time. He now avoids supplements that activate growth pathways (like branched-chain amino acids) because mTOR activation may accelerate ageing. The principle: activate longevity pathways (sirtuins, AMPK), suppress growth pathways (mTOR, IGF-1).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="branch c5" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🔭</span>
+          <span class="branch-title">The Future — Living to 150 and Beyond</span>
+          <span class="branch-chevron">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Living to 80 might be the alarming outcome</div>
+            <div class="leaf-detail">Sinclair argues that accepting 80 as a natural lifespan is like accepting childhood death as natural — it is only "normal" because we have not yet solved it. He believes people alive today may routinely live to 120–150 with interventions becoming available in the 2030s–2040s.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">2040 — medicines that reset biological age</div>
+            <div class="leaf-detail">Sinclair believes medicines that meaningfully reset biological age will be available by around 2040. The human blindness trial is the first step. If it succeeds, whole-body age reversal treatments for joints, organs, and brain tissue will follow rapidly.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">The longevity escape velocity question</div>
+            <div class="leaf-detail">Ray Kurzweil's theory: if science can extend your life by more than one year per year, you escape death indefinitely. Sinclair is cautiously sceptical of the timeline but does not dismiss it — he says it is dangerous to bet against Kurzweil's predictions given his track record on AI.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Societal implications — meaning, purpose, retirement</div>
+            <div class="leaf-detail">A society where people live to 150 looks radically different. Multiple careers. Retirement in your 80s. Relationships that last a century. Sinclair believes longer lives create more meaning, not less — more time to pursue what matters. But social structures built around 80-year lifespans will need to be rebuilt.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Democratising longevity — the access question</div>
+            <div class="leaf-detail">Sinclair is emphatic that age-reversal treatments must not become a luxury for the wealthy. He advocates for making them as cheap and accessible as the flu vaccine. His concern: a world where the rich are biologically 40 and the poor are biologically 80 is a catastrophic social outcome.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="branch c6" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🏃</span>
+          <span class="branch-title">Lifestyle Habits That Matter Most</span>
+          <span class="branch-chevron">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Exercise — the single most powerful intervention</div>
+            <div class="leaf-detail">No supplement matches the longevity effect of regular vigorous exercise. It activates AMPK, boosts NAD+, stimulates autophagy, and maintains mitochondrial health. Both resistance training (preserve muscle) and cardio (cardiovascular and metabolic health) are necessary — not optional.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Sauna and cold plunge — real or hype?</div>
+            <div class="leaf-detail">Both have meaningful evidence. Sauna activates heat shock proteins and mimics some cardiovascular exercise benefits. Cold exposure activates brown fat, norepinephrine, and stress resistance pathways. Sinclair does both but emphasises they augment — not replace — diet and exercise.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Avoid smoking, excess alcohol, and chronic stress</div>
+            <div class="leaf-detail">These cause DNA breaks — the very trigger that distracts sirtuins from their maintenance role. Chronic psychological stress is biologically damaging in the same way as UV radiation or toxins. Managing stress is not soft advice — it is mechanistically tied to the rate of epigenetic ageing.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event,this)">
+            <div class="leaf-title">Sleep — when the body repairs</div>
+            <div class="leaf-detail">Sleep deprivation accelerates every ageing marker Sinclair's lab measures. The brain's glymphatic system clears toxic waste during deep sleep. Sirtuins are most active during rest. Optimising sleep quality is one of the highest-leverage free interventions available.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="panel">
+  <div class="summary-wrap">
+
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--green)"></span>Overview</h2>
+      <p>Harvard Professor of Genetics David Sinclair joins Steven Bartlett for a 2.5-hour deep dive into one of science's most provocative frontiers: the reversal of biological ageing. Sinclair argues from 30 years of research that ageing is not an inevitable biological process but a treatable condition — one that his lab has already reversed in animal models and is preparing to reverse in humans for the first time.</p>
+    </div>
+
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--green)"></span>1 — The Information Theory of Ageing</h2>
+      <p>Sinclair's central thesis is that ageing is a software problem. DNA (the hardware) remains largely intact throughout life. What degrades is the epigenome — the system that tells each cell which genes to switch on and off. Think of it as the operating system corrupting while the hard drive stays intact.</p>
+      <p>The corrupting agent is DNA damage from everyday stressors: UV light, toxins, loud noises, chronic stress. When DNA breaks, sirtuin proteins — the guardians of cellular identity — abandon their regulatory posts to repair the damage. During repair, sirtuins lose their positions in the epigenome, and cells begin expressing the wrong genes. The result is cellular "amnesia" — cells that forget what they are and begin behaving like confused, aged versions of themselves.</p>
+      <p>The critical insight: the original backup copy of youthful epigenetic information appears to remain intact. This means rejuvenation is theoretically possible at any age — not by rewriting the DNA, but by restoring the software from the backup.</p>
+    </div>
+
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--accent)"></span>2 — Gene Therapy & The First Human Trials</h2>
+      <p>Sinclair's lab has used three genes — Oct4, Sox2, and Klf4 (partial Yamanaka factors) — to reset the biological age of cells. Delivered via gene therapy to optic nerve cells and activated for 6–8 weeks, these genes reset biological age markers by approximately 75%. Crucially, the cells did not become cancerous or lose function — they simply became younger versions of themselves.</p>
+      <p>The first human application targets blindness. The eye was chosen because it is anatomically isolated, making gene therapy safer. Human trials to reverse age-related blindness and glaucoma are submitted for FDA approval. If successful, Sinclair believes the same approach will be applied to joints, organs, skin, and ultimately the brain — whole-body age reversal within two decades.</p>
+      <p>Remarkably, in mice the eye has been rejuvenated at least twice using the same approach — suggesting rejuvenation is repeatable, not a one-time intervention.</p>
+    </div>
+
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--amber)"></span>3 — Diet, Fasting & Lifestyle</h2>
+      <p>Sinclair makes a mechanistic case for dietary interventions. The core principle: activate longevity pathways (sirtuins, AMPK), suppress growth pathways (mTOR, IGF-1). Fasting is the most powerful known activator of longevity genes — it triggers autophagy (cellular cleanup), boosts NAD+, and signals the body to prioritise repair over growth.</p>
+      <p>Sinclair skips breakfast, eating his first meal around noon. He is largely plant-based — not for ethical reasons but because plant foods are rich in xenohormetics, molecules that activate human longevity pathways. He is sceptical of long-term ketogenic diets, viewing them as a useful metabolic reset rather than a sustainable strategy.</p>
+      <p>Exercise remains the single most powerful longevity intervention — no supplement comes close. Sauna and cold exposure offer meaningful but supplementary benefits. Avoiding chronic stress, smoking, and excess alcohol is not soft lifestyle advice — it is mechanistically tied to the rate of epigenetic corruption.</p>
+    </div>
+
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--purple)"></span>4 — The Supplement Stack</h2>
+      <p>Sinclair takes: NMN (1g daily, boosts NAD+), Resveratrol (1g daily with olive oil, activates sirtuins), Metformin (500–1000mg, activates AMPK), Vitamin D3 + K2, and low-dose aspirin. He has deliberately simplified his stack — removing supplements that activate mTOR, including branched-chain amino acids.</p>
+      <p>He is careful to note these are personal choices informed by his own research, not universal prescriptions. The evidence base for some (NMN, resveratrol) remains contested in humans even as the mechanisms are compelling.</p>
+    </div>
+
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--teal)"></span>5 — The Future of Human Lifespan</h2>
+      <p>Sinclair believes medicines that meaningfully reset biological age will exist by around 2040. He estimates people alive today — particularly younger generations — will routinely live to 120–150. He is cautiously open to Ray Kurzweil's longevity escape velocity theory (the point at which science extends life faster than time passes) but doesn't commit to a timeline.</p>
+      <p>He is deeply concerned about access. A world where age-reversal treatments are available only to the wealthy would be catastrophic. He advocates for making them as cheap and widespread as vaccines. He also argues that longer lives create more meaning — more time to pursue what matters — not less.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="takeaways-grid">
+
+    <div class="tw-card">
+      <div class="tw-num">01</div>
+      <h3>Stop Eating Breakfast — Try Time-Restricted Eating</h3>
+      <p>Skip breakfast and delay your first meal to noon at least 3–4 days per week. This triggers autophagy and longevity gene activation that three meals a day suppresses. Start with 16:8 (eat within an 8-hour window).</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">02</div>
+      <h3>Treat Exercise as Non-Negotiable Medicine</h3>
+      <p>Combine resistance training (preserve muscle mass, critical after 40) with Zone 2 cardio (metabolic health). Aim for at least 150 minutes per week. No supplement replaces this — not even close.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">03</div>
+      <h3>Shift Toward Plant-Heavy Eating</h3>
+      <p>Increase cruciferous vegetables, olive oil, berries, matcha, and legumes. Reduce animal protein — not to zero, but enough to lower mTOR activation. These foods contain xenohormetics that directly activate longevity pathways.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">04</div>
+      <h3>Activate "Good Stress" Deliberately</h3>
+      <p>Regular sauna (4x/week, 20 mins at 80°C+) and cold exposure activate heat shock proteins and stress-resilience pathways. These are longevity signals, not just wellness trends. Do both if you can.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">05</div>
+      <h3>Prioritise Sleep Above Almost Everything</h3>
+      <p>Sleep deprivation accelerates every ageing marker. Sirtuins are most active during rest. The brain clears toxic waste during deep sleep. Treat sleep like a performance drug — optimise duration (7–9 hrs) and quality.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">06</div>
+      <h3>Consider NMN or NR to Boost NAD+</h3>
+      <p>NAD+ is essential for sirtuin function and declines with age. NMN (500mg–1g daily) or NR are the most direct ways to restore it. Take in the morning. Evidence is promising though not yet definitive in humans at scale.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">07</div>
+      <h3>Minimise Chronic Stress — It's Biologically Destructive</h3>
+      <p>Chronic psychological stress causes DNA breaks — the same mechanism as UV damage. This directly triggers sirtuin distraction and accelerated epigenetic ageing. Stress management is not soft — it is mechanistically critical.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">08</div>
+      <h3>Track Your Biological Age, Not Just Chronological Age</h3>
+      <p>Epigenetic clock tests (like those from Sinclair's partner companies) can measure your biological age. Use it as a feedback tool. If your biological age is higher than your chronological age, the interventions above can reverse the gap.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">09</div>
+      <h3>Watch the Human Blindness Trial Results</h3>
+      <p>The first FDA trial to reverse age-related blindness using gene therapy is pending approval. If it succeeds, it is the opening of a new era in medicine. Follow Sinclair's lab (lifespan.com) for updates — the implications extend far beyond eyesight.</p>
+    </div>
+
+    <div class="tw-card">
+      <div class="tw-num">10</div>
+      <h3>Plan for a Much Longer Life Than You Expected</h3>
+      <p>If Sinclair is right, people in their 30s–50s today may live to 120–150. That changes everything: financial planning, career trajectory, relationships, purpose. Start thinking about what you would do with an extra 40 years in good health.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>

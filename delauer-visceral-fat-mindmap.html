@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Routine that Shrinks Visceral Fat In Days — Thomas DeLauer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e2d45;
+    --text: #e8ecf4;
+    --muted: #6b7fa0;
+    --accent: #3b82f6;
+
+    --c1: #f97316;   /* Nervous System — amber-orange */
+    --c2: #8b5cf6;   /* Supplements — violet */
+    --c3: #10b981;   /* Evening Nutrition — emerald */
+    --c4: #f59e0b;   /* Bonus tips — gold */
+    --c5: #ec4899;   /* Core mechanism — pink */
+
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-head);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 32px 24px 20px;
+    border-bottom: 1px solid var(--border);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .meta {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+  .meta span { color: var(--accent); }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    padding: 16px 24px 0;
+    max-width: 960px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-head);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+  /* ── PANELS ── */
+  .panel { display: none; max-width: 960px; margin: 0 auto; padding: 28px 24px 60px; }
+  .panel.active { display: block; }
+
+  /* ── MECHANISM BANNER ── */
+  .mechanism {
+    background: linear-gradient(135deg, #1a0d2e 0%, #0d1a2e 100%);
+    border: 1px solid #2a1a4e;
+    border-left: 3px solid var(--c5);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+  }
+  .mechanism h3 {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c5);
+    margin-bottom: 8px;
+  }
+  .mechanism p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #c4cfe8;
+  }
+  .mechanism strong { color: var(--c5); }
+
+  /* ── CATEGORY BLOCK ── */
+  .category { margin-bottom: 24px; }
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .cat-header:hover { background: var(--surface2); }
+  .cat-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .cat-label {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .cat-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    opacity: 0.8;
+  }
+  .cat-arrow {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.25s;
+  }
+  .category.open .cat-arrow { transform: rotate(90deg); }
+
+  .cat-body {
+    display: none;
+    padding: 8px 0 0 0;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .category.open .cat-body { display: flex; }
+
+  /* ── LEAF ── */
+  .leaf {
+    margin-left: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .leaf:hover { border-color: var(--muted); }
+  .leaf-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .leaf-icon {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .leaf-title {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .leaf-toggle {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    transition: transform 0.2s;
+  }
+  .leaf.open .leaf-toggle { transform: rotate(45deg); }
+
+  .leaf-detail {
+    display: none;
+    padding: 0 14px 14px 48px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #a8b8d4;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 0;
+  }
+  .leaf.open .leaf-detail {
+    display: block;
+    padding: 12px 14px 14px 48px;
+  }
+  .leaf-detail strong { color: var(--text); }
+
+  /* ── SUMMARY TAB ── */
+  .sum-section {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sum-section:last-child { border-bottom: none; }
+  .sum-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .sum-section h2 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .sum-section p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #b0c0dc;
+    margin-bottom: 12px;
+  }
+  .sum-section p:last-child { margin-bottom: 0; }
+
+  /* ── TAKEAWAYS TAB ── */
+  .takeaway-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .takeaway-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 16px;
+    position: relative;
+  }
+  .t-num {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.12;
+    position: absolute;
+    top: 12px;
+    right: 14px;
+  }
+  .t-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .takeaway-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    padding-right: 24px;
+  }
+  .takeaway-card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #8ea0be;
+  }
+
+  /* ── COLOUR HELPERS ── */
+  .clr1 { color: var(--c1); }
+  .clr2 { color: var(--c2); }
+  .clr3 { color: var(--c3); }
+  .clr4 { color: var(--c4); }
+  .clr5 { color: var(--c5); }
+
+  .bg1 { background: #291407; color: var(--c1); }
+  .bg2 { background: #1a0e36; color: var(--c2); }
+  .bg3 { background: #061e15; color: var(--c3); }
+  .bg4 { background: #231600; color: var(--c4); }
+  .bg5 { background: #250d1c; color: var(--c5); }
+
+  .bd1 { background: rgba(249,115,22,0.08); border-color: rgba(249,115,22,0.25); }
+  .bd2 { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.25); }
+  .bd3 { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25); }
+
+  .dot1 { background: var(--c1); }
+  .dot2 { background: var(--c2); }
+  .dot3 { background: var(--c3); }
+
+  @media (max-width: 600px) {
+    .tab { padding: 8px 12px; font-size: 12px; }
+    h1 { font-size: 20px; }
+    .leaf.open .leaf-detail { padding-left: 14px; }
+    .takeaway-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Thomas DeLauer · Nov 24 2025</div>
+  <h1>The Routine that Shrinks Visceral Fat In Days (Not Months)</h1>
+  <div class="meta">
+    <span>@ThomasDeLauerOfficial</span> &nbsp;·&nbsp; 3 categories &nbsp;·&nbsp; 10 protocols
+  </div>
+</header>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="switchTab('mindmap',this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+</div>
+
+<!-- ════════════════════ MIND MAP ════════════════════ -->
+<div id="mindmap" class="panel active">
+
+  <div class="mechanism">
+    <h3>Core Mechanism</h3>
+    <p>Visceral fat has a <strong>high density of glucocorticoid receptors</strong>, making it uniquely sensitive to cortisol. When cortisol stays chronically elevated — especially alongside elevated insulin — the body preferentially stores energy in deep abdominal fat. This routine targets three windows: <strong>nervous system tone, cortisol-lowering supplements, and evening nutrition timing</strong>, all working to break the cortisol–insulin fat-storage loop.</p>
+  </div>
+
+  <!-- CATEGORY 1 -->
+  <div class="category" id="cat1">
+    <div class="cat-header" onclick="toggleCat('cat1')">
+      <div class="cat-dot dot1"></div>
+      <span class="cat-label clr1">Category 1 — Nervous System Reset</span>
+      <span class="cat-badge bg1">3 Protocols</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="leaf bd1" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg1">🌿</div>
+          <span class="leaf-title">Grounding (Earthing)</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          Direct contact with the earth's surface — barefoot on grass, soil, or sand — allows negatively charged electrons to flow into the body. These electrons act as antioxidants, quenching free radicals and reducing systemic inflammation. <strong>Research suggests grounding lowers evening cortisol</strong> by normalising the cortisol circadian rhythm, which tends to become flattened or dysregulated in chronically stressed individuals. Even 10–20 minutes daily can meaningfully shift the autonomic nervous system toward parasympathetic dominance. This is especially valuable for anyone with poor sleep or high psychological stress — two of the biggest drivers of visceral fat accumulation.
+        </div>
+      </div>
+
+      <div class="leaf bd1" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg1">🫁</div>
+          <span class="leaf-title">Vagus Nerve Reset</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          The vagus nerve is the primary conduit of the parasympathetic nervous system, connecting the brainstem to the gut, heart, and lungs. <strong>Low vagal tone is directly linked to elevated cortisol and visceral fat accumulation</strong> via the gut–brain axis. DeLauer recommends cold-water face immersion (the "diving reflex"), humming, or diaphragmatic breathing exercises to rapidly activate vagal output. High cortisol suppresses vagal tone over time, slowing digestion and altering gut microbiome balance — resetting this daily creates a buffer against stress-driven fat storage. Consistency over time raises baseline vagal tone and improves heart rate variability (HRV).
+        </div>
+      </div>
+
+      <div class="leaf bd1" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg1">🍎</div>
+          <span class="leaf-title">Pre-Meal Apple Cider Vinegar Shot</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          1–2 tablespoons of ACV diluted in water, taken 10–15 minutes before a meal. The acetic acid in ACV <strong>blunts postprandial glucose spikes</strong> by slowing gastric emptying and impairing salivary amylase activity — meaning carbohydrates are broken down more slowly, reducing the glycaemic load of the meal. Lower insulin spikes matter because cortisol co-elevating with insulin is the precise scenario where visceral fat storage is maximised. ACV also appears to improve insulin sensitivity in muscle tissue (GLUT4 translocation), so the same glucose load produces less fat-storage signalling. Best used before the largest carbohydrate meal of the day.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 2 -->
+  <div class="category" id="cat2">
+    <div class="cat-header" onclick="toggleCat('cat2')">
+      <div class="cat-dot dot2"></div>
+      <span class="cat-label clr2">Category 2 — Cortisol-Lowering Supplements</span>
+      <span class="cat-badge bg2">3 Supplements + Bonus</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="leaf bd2" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg2">💊</div>
+          <span class="leaf-title">Glycine (3g before bed)</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          Glycine is an inhibitory neurotransmitter and amino acid that promotes deeper, more restorative slow-wave sleep by lowering core body temperature. <strong>Poor sleep is one of the strongest drivers of next-day cortisol elevation</strong>, so improving sleep architecture directly attacks the cortisol–visceral fat cycle. Glycine also supports gluconeogenesis regulation in the liver, reducing overnight glucose production that can elevate morning insulin. Additionally, it is a precursor to glutathione (the body's master antioxidant), which helps clear locally produced cortisol in visceral adipose tissue. Dose: 3 grams in water, 30–45 minutes before sleep.
+        </div>
+      </div>
+
+      <div class="leaf bd2" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg2">🧠</div>
+          <span class="leaf-title">Phosphatidylserine (PS)</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          Phosphatidylserine is a phospholipid found in cell membranes, particularly concentrated in brain tissue. It works by <strong>blunting the HPA axis response</strong> — specifically reducing ACTH (adrenocorticotropic hormone) secretion from the pituitary, which directly lowers cortisol output from the adrenal glands. Multiple RCTs have shown PS supplementation reduces exercise-induced cortisol by 20–30%, with particular effectiveness in individuals under chronic psychological or physical stress. Dose: 300–400 mg, taken with the evening meal. DeLauer flags this as one of the most evidence-backed interventions for blunting chronic cortisol elevation without suppressing healthy acute stress responses.
+        </div>
+      </div>
+
+      <div class="leaf bd2" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg2">🌑</div>
+          <span class="leaf-title">Magnesium (glycinate or threonate)</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          Magnesium is a cofactor in over 300 enzymatic reactions and plays a critical role in regulating the HPA axis. <strong>Deficiency (extremely common in Western populations) is strongly associated with elevated cortisol and impaired sleep</strong>. Magnesium glycinate is preferred for stress and sleep due to superior absorption and minimal GI side effects. Magnesium threonate crosses the blood-brain barrier most effectively and is preferred for cognitive or mood-related stress. Dose: 200–400 mg in the evening. It also supports GABA receptor activity, further promoting parasympathetic tone and suppressing the cortisol spike that typically occurs in the late evening in stressed individuals.
+        </div>
+      </div>
+
+      <div class="leaf bd2" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg2">🧂</div>
+          <span class="leaf-title">Bonus: Salt + Electrolytes in the AM</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          A pinch of quality salt (or a full electrolyte product like LMNT) upon waking supports adrenal function by providing sodium — the primary electrolyte the adrenal glands require to manage aldosterone and cortisol secretion. <strong>Morning hyponatraemia (low sodium) can stress the adrenals</strong>, triggering a compensatory cortisol spike that sets a high-cortisol tone for the rest of the day. This is especially relevant for those doing morning fasted exercise or following low-carb or low-sodium diets. Adequate morning sodium also stabilises blood pressure, reducing cardiovascular stress signalling that feeds into the HPA axis.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 3 -->
+  <div class="category" id="cat3">
+    <div class="cat-header" onclick="toggleCat('cat3')">
+      <div class="cat-dot dot3"></div>
+      <span class="cat-label clr3">Category 3 — Evening Nutrition Timing</span>
+      <span class="cat-badge bg3">4 Strategies</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+
+      <div class="leaf bd3" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg3">🌙</div>
+          <span class="leaf-title">Break From Carbs Before Bed</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          Avoiding dense carbohydrates in the 2–3 hours before sleep prevents a nocturnal insulin spike that impairs overnight fat oxidation. <strong>Growth hormone (GH) — the body's primary overnight fat-burning hormone — is suppressed by elevated insulin</strong>. GH secretion peaks in the first 90 minutes of deep sleep and drives visceral fat mobilisation; a high-carb dinner undermines this entirely. This doesn't require eliminating carbs from dinner entirely — timing and volume matter more than total restriction. Moving carbs earlier in the day and keeping the pre-bed window protein and fat dominant preserves the overnight GH pulse.
+        </div>
+      </div>
+
+      <div class="leaf bd3" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg3">🫐</div>
+          <span class="leaf-title">Bowl of Berries for Dessert</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          If a sweet craving hits in the evening, berries (blueberries, raspberries, blackberries) are DeLauer's recommended substitute for refined sugar. Berries are <strong>high in polyphenols — particularly anthocyanins — which directly inhibit the 11β-HSD1 enzyme</strong>, the same enzyme that converts inactive cortisone into active cortisol inside visceral fat cells. This means berries attack visceral fat at the local tissue level, not just systemically. Their low glycaemic load avoids a significant insulin spike, and their fibre content feeds short-chain fatty acid-producing gut bacteria, which further improve insulin sensitivity. Serves the craving while actively working against fat storage.
+        </div>
+      </div>
+
+      <div class="leaf bd3" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg3">🥩</div>
+          <span class="leaf-title">Protein-Only Snack Before Bed</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          A small protein-only snack (cottage cheese, Greek yoghurt, or a protein shake with no carbs) before sleep provides amino acids for overnight muscle protein synthesis while keeping insulin low. <strong>Casein protein in particular has a slow, sustained release profile</strong> that maintains amino acid availability through the night without disrupting the GH pulse. This strategy combats the muscle protein breakdown that can occur during long overnight fasts — particularly relevant as people age and become more susceptible to overnight catabolism. More muscle mass increases basal metabolic rate and improves insulin sensitivity, both of which reduce visceral fat long-term.
+        </div>
+      </div>
+
+      <div class="leaf bd3" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg3">🌾</div>
+          <span class="leaf-title">Psyllium Husk</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          Psyllium husk (5–10g in water) taken in the evening acts as a <strong>soluble fibre that forms a viscous gel in the gut, slowing glucose absorption and blunting insulin release</strong> from any remaining food in the digestive tract. It also feeds beneficial gut bacteria (particularly Akkermansia muciniphila and Bifidobacterium), which produce short-chain fatty acids like butyrate — a key regulator of both gut barrier integrity and systemic inflammation. Chronic low-grade inflammation is one of the mechanisms that perpetuates cortisol elevation and visceral fat retention. Psyllium additionally supports overnight bowel regularity, reducing endotoxin recirculation from the gut that can trigger a stress response.
+        </div>
+      </div>
+
+      <div class="leaf bd3" onclick="toggleLeaf(this)">
+        <div class="leaf-head">
+          <div class="leaf-icon bg3">🚿</div>
+          <span class="leaf-title">Bonus: Warm Shower Before Bed</span>
+          <span class="leaf-toggle">+</span>
+        </div>
+        <div class="leaf-detail">
+          A warm (not hot) shower 60–90 minutes before sleep triggers peripheral vasodilation, which <strong>draws heat from the body's core and accelerates the natural drop in core temperature</strong> that signals the brain to initiate sleep onset. Lower core body temperature is required for deep slow-wave sleep — the same stage in which GH is secreted and cortisol is cleared. This is distinct from a cold shower (which is stimulating and cortisol-raising in the short term). The warm shower also activates the parasympathetic nervous system via temperature receptors, further shifting the body out of the sympathetic, cortisol-producing state that most people remain in through the evening due to screen exposure and artificial light.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end mindmap panel -->
+
+
+<!-- ════════════════════ SUMMARY ════════════════════ -->
+<div id="summary" class="panel">
+
+  <div class="sum-section">
+    <div class="sum-eyebrow clr5">Core Thesis</div>
+    <h2>Why Standard Advice Misses Visceral Fat</h2>
+    <p>DeLauer opens by distinguishing visceral fat from subcutaneous fat. Visceral fat — the metabolically active fat surrounding the organs in the abdominal cavity — is not simply an energy storage problem. It has a uniquely high concentration of glucocorticoid receptors, making it disproportionately responsive to cortisol. The real mechanism driving visceral fat accumulation in modern life is the simultaneous elevation of both cortisol and insulin — a combination that is historically unusual but has become routine through chronic psychological stress, processed food consumption, poor sleep, and sedentary behaviour.</p>
+    <p>When cortisol rises, the liver produces glucose through gluconeogenesis. That glucose triggers insulin release. Cortisol simultaneously blocks muscle GLUT4 transporters, preventing glucose from entering muscle tissue. The result: glucose is diverted into fat storage — specifically visceral fat, which has the receptor density to absorb it preferentially. DeLauer's framework targets interrupting this cycle at three distinct intervention points across the day rather than relying solely on caloric deficit or exercise.</p>
+  </div>
+
+  <div class="sum-section">
+    <div class="sum-eyebrow clr1">Category 1</div>
+    <h2>Nervous System Reset: Shifting from Sympathetic to Parasympathetic</h2>
+    <p>The first category focuses on interventions that actively lower the sympathetic nervous system's activity — the "fight or flight" state that keeps cortisol elevated. Grounding (earthing) is the entry point: direct contact with the earth's surface allows free electrons to neutralise oxidative stress, and research suggests it can normalise a dysregulated cortisol curve, particularly in people with flattened diurnal variation. DeLauer is careful to frame this not as fringe wellness but as a low-cost, practical parasympathetic activator.</p>
+    <p>Vagus nerve activation follows — whether through cold-water face immersion, humming, or slow diaphragmatic breathing. The vagus nerve is the structural link between the nervous system and the gut; low vagal tone is directly measurable via heart rate variability and is associated with both higher cortisol and worse body composition. The third intervention is pre-meal apple cider vinegar: acetic acid slows gastric emptying and enzyme activity, reducing the postprandial glucose spike that, when paired with stress-driven cortisol, accelerates visceral fat deposition.</p>
+  </div>
+
+  <div class="sum-section">
+    <div class="sum-eyebrow clr2">Category 2</div>
+    <h2>Targeted Supplementation to Blunt the HPA Axis</h2>
+    <p>DeLauer's second category centres on three evidence-supported compounds that work through distinct but complementary pathways to reduce cortisol output. Glycine (3g before sleep) improves slow-wave sleep depth and lowers core body temperature, addressing the cortisol–sleep feedback loop. Poor sleep is one of the strongest known elevators of next-day cortisol, so improving sleep architecture is mechanistically upstream of visceral fat accumulation rather than downstream.</p>
+    <p>Phosphatidylserine directly suppresses ACTH secretion from the pituitary gland, reducing the hormonal signal to produce cortisol at the adrenal level. Multiple trials have confirmed 20–30% reductions in exercise-induced cortisol at doses of 300–400 mg. Magnesium (glycinate or threonate forms) addresses what DeLauer notes is near-universal deficiency in Western populations — inadequate magnesium impairs HPA axis regulation and blunts GABA activity, preventing the evening parasympathetic shift that should naturally lower cortisol before sleep. A morning salt or electrolyte intake is added as a bonus to prevent adrenal stress from morning hyponatraemia, particularly relevant for fasted exercisers.</p>
+  </div>
+
+  <div class="sum-section">
+    <div class="sum-eyebrow clr3">Category 3</div>
+    <h2>Evening Nutrition: Protecting the Overnight GH Window</h2>
+    <p>The third category is entirely structured around protecting overnight fat oxidation. Growth hormone — secreted in a major pulse during the first cycle of deep slow-wave sleep — is the body's primary visceral fat-mobilising hormone. Insulin is its direct antagonist: even a modest insulin elevation in the hours before sleep suppresses the GH pulse almost entirely. DeLauer therefore recommends shifting carbohydrate intake earlier in the day and keeping the 2–3 hours before sleep to protein, fat, and fibre.</p>
+    <p>Berries serve double duty as an evening dessert substitute: their anthocyanin content inhibits 11β-HSD1 (the enzyme that generates active cortisol locally within fat cells), while their low glycaemic load avoids insulin disruption. A protein-only pre-sleep snack (particularly casein-rich foods) supports overnight muscle protein synthesis without triggering insulin. Psyllium husk slows any residual postprandial glucose absorption, feeds gut microbiota that reduce systemic inflammation, and reduces endotoxin recirculation from the gut. The warm shower closes the routine by physically initiating the core temperature drop required for quality deep sleep — completing the loop back to protecting the GH pulse.</p>
+  </div>
+
+  <div class="sum-section">
+    <div class="sum-eyebrow clr4">Truth About Avocados</div>
+    <h2>Bonus: Avocados and the 11β-HSD1 Enzyme</h2>
+    <p>DeLauer ends with a note on avocados, which contain beta-sitosterol — a phytosterol shown to inhibit the same 11β-HSD1 enzyme targeted by polyphenols in berries. Visceral fat cells can produce their own cortisol locally through this enzyme, meaning that even individuals with normal circulating cortisol levels on a blood test may have elevated cortisol activity within the fat tissue itself. This local cortisol amplification creates a self-reinforcing fat retention loop that is invisible to standard testing. Foods like avocados and berries directly interrupt this mechanism at the tissue level, offering a dietary lever that operates independently of systemic stress management.</p>
+  </div>
+
+</div><!-- end summary panel -->
+
+
+<!-- ════════════════════ TAKEAWAYS ════════════════════ -->
+<div id="takeaways" class="panel">
+  <div style="margin-bottom:22px;">
+    <div class="sum-eyebrow clr5" style="margin-bottom:6px;">10 Protocol-Level Actions</div>
+    <p style="font-size:14px;color:var(--muted);line-height:1.6;">Concrete daily implementations from this episode. Each one can be started immediately.</p>
+  </div>
+  <div class="takeaway-grid">
+
+    <div class="takeaway-card">
+      <div class="t-num">01</div>
+      <div class="t-tag bg1">Nervous System</div>
+      <h4>10–20 min of barefoot grounding daily</h4>
+      <p>Stand or walk on grass, soil, or sand barefoot — ideally morning or late afternoon. It normalises your cortisol diurnal rhythm and reduces systemic inflammation via electron transfer.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">02</div>
+      <div class="t-tag bg1">Nervous System</div>
+      <h4>Vagus nerve reset once daily</h4>
+      <p>Choose one: 30 seconds cold water on your face, 5 minutes diaphragmatic breathing (4-7-8 pattern), or 2 minutes of humming. Raises vagal tone and shifts you out of sympathetic dominance.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">03</div>
+      <div class="t-tag bg1">Nervous System</div>
+      <h4>ACV shot before your highest-carb meal</h4>
+      <p>1–2 tbsp apple cider vinegar in 200ml water, 10–15 minutes before eating. Blunts the postprandial glucose and insulin spike — particularly valuable if that meal contains >50g carbohydrates.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">04</div>
+      <div class="t-tag bg2">Supplements</div>
+      <h4>3g glycine powder 30–45 min before bed</h4>
+      <p>Dissolve in water. Deepens slow-wave sleep architecture, lowers core body temperature for sleep onset, and reduces overnight gluconeogenesis — directly cutting next-day cortisol.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">05</div>
+      <div class="t-tag bg2">Supplements</div>
+      <h4>300–400mg phosphatidylserine with evening meal</h4>
+      <p>Most evidence-backed supplement for blunting chronic cortisol at the HPA axis level. Particularly useful during periods of high training load, work stress, or sleep disruption.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">06</div>
+      <div class="t-tag bg2">Supplements</div>
+      <h4>200–400mg magnesium glycinate at night</h4>
+      <p>Addresses the near-universal deficiency that impairs HPA regulation and GABA activity. Glycinate form for best absorption; threonate if stress is predominantly cognitive/anxiety-driven.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">07</div>
+      <div class="t-tag bg3">Evening Nutrition</div>
+      <h4>Move dense carbs to earlier in the day</h4>
+      <p>Keep the 2–3 hours before sleep as protein, fat, and fibre only. Preserves the overnight growth hormone pulse — the body's primary mechanism for mobilising visceral fat during sleep.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">08</div>
+      <div class="t-tag bg3">Evening Nutrition</div>
+      <h4>Swap dessert for a bowl of mixed berries</h4>
+      <p>Blueberries, raspberries, and blackberries directly inhibit 11β-HSD1 — the enzyme that generates active cortisol inside visceral fat cells — while avoiding the insulin spike of refined sugar.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">09</div>
+      <div class="t-tag bg3">Evening Nutrition</div>
+      <h4>5g psyllium husk in water before bed</h4>
+      <p>Slows residual glucose absorption, feeds short-chain fatty acid-producing gut bacteria, and reduces gut endotoxin recirculation — all pathways that suppress the chronic inflammation driving cortisol retention.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="t-num">10</div>
+      <div class="t-tag bg3">Evening Nutrition</div>
+      <h4>Warm shower 60–90 min before bed</h4>
+      <p>Not hot — warm. Peripheral vasodilation draws core heat outward, accelerating the core temperature drop that initiates deep slow-wave sleep and protects the GH pulse. Finish the day in parasympathetic mode.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleCat(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+  function toggleLeaf(el) {
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

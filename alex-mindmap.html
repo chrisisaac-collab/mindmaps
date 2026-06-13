@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr Alex – 9 Foods to Target Visceral Fat | Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0e1117;--surface:#161b25;--surface2:#1d2435;--border:#272f42;--text:#e8eaf2;--muted:#8890aa;--c1:#4caf7d;--c2:#4fc3f7;--c3:#ffb74d;--c4:#f06292;--c5:#81c784;--c6:#ce93d8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+  .header{background:linear-gradient(135deg,#0a1f12 0%,#0d1a2e 100%);border-bottom:1px solid var(--border);padding:28px 32px 20px}
+  .header-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--c1);margin-bottom:8px}
+  .header h1{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,30px);color:#fff}
+  .header-meta{font-size:13px;color:var(--muted);margin-top:6px}
+  .tabs{display:flex;gap:4px;padding:16px 32px 0;background:var(--surface);border-bottom:1px solid var(--border)}
+  .tab{padding:10px 22px;font-size:13px;font-weight:500;cursor:pointer;border-radius:6px 6px 0 0;color:var(--muted);border:1px solid transparent;border-bottom:none;transition:all .2s}
+  .tab.active{background:var(--bg);color:var(--text);border-color:var(--border)}
+  .tab:hover:not(.active){color:var(--text)}
+  .panel{display:none;padding:32px}
+  .panel.active{display:block}
+  .mindmap{max-width:900px;margin:0 auto}
+  .central-node{background:linear-gradient(135deg,#0a3d1f,#0d2b4a);border:1px solid #2a4a35;border-radius:16px;padding:24px 32px;text-align:center;margin-bottom:28px;box-shadow:0 0 40px rgba(76,175,125,.15)}
+  .central-node h2{font-family:'Playfair Display',serif;font-size:21px;color:#fff}
+  .central-node p{font-size:13px;color:rgba(255,255,255,.6);margin-top:5px}
+  .branch{border-radius:12px;margin-bottom:10px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:box-shadow .2s;background:var(--surface)}
+  .branch:hover{box-shadow:0 4px 20px rgba(0,0,0,.4)}
+  .branch-header{display:flex;align-items:center;gap:14px;padding:15px 20px;font-weight:600;font-size:14px;user-select:none}
+  .branch-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .branch-arrow{margin-left:auto;font-size:11px;color:var(--muted);transition:transform .25s}
+  .branch.open .branch-arrow{transform:rotate(180deg)}
+  .leaves{display:none;padding:0 16px 16px}
+  .branch.open .leaves{display:block}
+  .leaf{border-radius:8px;margin-top:8px;overflow:hidden;cursor:pointer}
+  .leaf-header{display:flex;align-items:center;gap:10px;padding:10px 14px;font-size:13px;font-weight:500;background:var(--surface2)}
+  .leaf-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .leaf-arrow{margin-left:auto;font-size:10px;color:var(--muted);transition:transform .2s}
+  .leaf.open .leaf-arrow{transform:rotate(180deg)}
+  .leaf-detail{display:none;padding:12px 14px;font-size:13px;line-height:1.75;color:var(--muted);background:rgba(255,255,255,.02);border-top:1px solid var(--border)}
+  .leaf.open .leaf-detail{display:block}
+  .b1 .branch-header{background:rgba(76,175,125,.1)}.b1 .branch-icon{background:rgba(76,175,125,.2)}.b1 .leaf-dot{background:var(--c1)}
+  .b2 .branch-header{background:rgba(79,195,247,.1)}.b2 .branch-icon{background:rgba(79,195,247,.2)}.b2 .leaf-dot{background:var(--c2)}
+  .b3 .branch-header{background:rgba(255,183,77,.1)}.b3 .branch-icon{background:rgba(255,183,77,.2)}.b3 .leaf-dot{background:var(--c3)}
+  .b4 .branch-header{background:rgba(240,98,146,.1)}.b4 .branch-icon{background:rgba(240,98,146,.2)}.b4 .leaf-dot{background:var(--c4)}
+  .b5 .branch-header{background:rgba(129,199,132,.1)}.b5 .branch-icon{background:rgba(129,199,132,.2)}.b5 .leaf-dot{background:var(--c5)}
+  .b6 .branch-header{background:rgba(206,147,216,.1)}.b6 .branch-icon{background:rgba(206,147,216,.2)}.b6 .leaf-dot{background:var(--c6)}
+  .summary{max-width:760px;margin:0 auto}
+  .summary-section{margin-bottom:36px}
+  .summary-section h3{font-size:17px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .summary-section h3 span{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+  .summary-section p{font-size:14px;line-height:1.85;color:var(--muted)}
+  .summary-section p+p{margin-top:10px}
+  .takeaways{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .takeaway-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;gap:16px;align-items:flex-start}
+  .takeaway-num{font-size:28px;font-weight:700;line-height:1;flex-shrink:0;font-family:'Playfair Display',serif}
+  .takeaway-card h4{font-size:14px;font-weight:600;margin-bottom:6px}
+  .takeaway-card p{font-size:13px;color:var(--muted);line-height:1.65}
+  @media(max-width:600px){.panel,.tabs,.header{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Doctor Alex · April 30, 2026</div>
+  <h1>9 Best Foods To Target Visceral Fat (Backed by Science)</h1>
+  <div class="header-meta">Dr Alex George · A&amp;E Doctor &amp; Health Educator · YouTube</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('mindmap',this)">🧠 Mind Map</div>
+  <div class="tab" onclick="switchTab('summary',this)">📄 Full Summary</div>
+  <div class="tab" onclick="switchTab('takeaways',this)">⚡ Actionable Takeaways</div>
+</div>
+
+<div class="panel active" id="mindmap">
+<div class="mindmap">
+  <div class="central-node">
+    <h2>The Dangerous Fat You Can't See</h2>
+    <p>Visceral fat surrounds your organs, drives disease silently — and these 9 foods are proven to reduce it</p>
+  </div>
+
+  <!-- B1: Understanding Visceral Fat -->
+  <div class="branch b1" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🫀</div>Understanding Visceral Fat — Why It Matters<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>What Visceral Fat Actually Is<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Visceral fat is not the fat you can pinch under your skin — that is subcutaneous fat. Visceral fat sits deep inside the abdominal cavity, wrapped around the liver, intestines, and pancreas. Dr Alex has seen it first-hand during surgery: a dense, yellow mass physically getting in the way of organs, and releasing inflammatory chemicals into the bloodstream 24 hours a day.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Why It Drives So Much Disease<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Unlike subcutaneous fat, visceral fat is metabolically active tissue. It continuously releases pro-inflammatory cytokines and free fatty acids directly into the portal vein, which flows straight to the liver. This drives insulin resistance, fatty liver disease, elevated triglycerides, systemic inflammation, and dramatically increases risk of type 2 diabetes, heart disease, stroke, and early death.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>You Can Have It at Normal Weight<div class="leaf-arrow">▼</div></div><div class="leaf-detail">This is the critical insight — and the reason BMI is a poor screening tool. A person can appear lean, have a normal BMI, yet carry significant visceral fat. This is sometimes called TOFI: Thin Outside, Fat Inside. The scale tells you nothing about where fat is stored. Two people at the same weight can have vastly different visceral fat levels and therefore vastly different disease risk.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>The Waist-to-Height Ratio Test<div class="leaf-arrow">▼</div></div><div class="leaf-detail">A simple screening tool backed by systematic review: divide your waist circumference by your height (both in the same unit). A ratio above 0.5 — meaning your waist is more than half your height — signals elevated visceral fat risk and increased cardiometabolic risk. This measure outperforms BMI for predicting cardiovascular disease and diabetes. To measure: tape around the navel after a normal exhale.</div></div>
+    </div>
+  </div>
+
+  <!-- B2: The Mediterranean Foundation -->
+  <div class="branch b2" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🫒</div>Extra Virgin Olive Oil &amp; the Mediterranean Foundation<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Why EVOO Is the Cornerstone<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Extra virgin olive oil is the most studied single food for cardiovascular and metabolic benefit. The landmark PREDIMED trial — one of the largest nutrition studies ever conducted — found that a Mediterranean diet supplemented with EVOO significantly reduced major cardiovascular events. EVOO is rich in oleocanthal, a natural anti-inflammatory compound with a similar mechanism to ibuprofen, and in oleic acid which improves insulin sensitivity.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>How It Targets Visceral Fat Specifically<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Research shows regular EVOO intake independently associates with lower abdominal obesity even after controlling for total diet quality. The polyphenols in EVOO downregulate genes involved in fat storage and inflammation in visceral adipose tissue. The key is regularity — using EVOO as the primary cooking fat daily, not occasionally, is what drives the benefit seen in long-term studies.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>How to Use It Practically<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Drizzle over vegetables before roasting, use as a salad dressing base, cook eggs and fish in it at medium heat (EVOO is stable up to about 190°C), or add a tablespoon to soups. Look for "extra virgin" on the label — not just "olive oil" — as this preserves the polyphenol content that provides the health benefit. Store in a dark bottle away from heat.</div></div>
+    </div>
+  </div>
+
+  <!-- B3: Fibre-Rich Foods -->
+  <div class="branch b3" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🫘</div>Fibre Powerhouses — Legumes &amp; Whole Grains<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Legumes — The Underrated Superfood<div class="leaf-arrow">▼</div></div><div class="leaf-detail">An RCT showed that eating pulses (lentils, chickpeas, black beans, kidney beans) for 8 weeks significantly reduced metabolic syndrome risk factors in overweight adults. Legumes combine high soluble fibre with plant protein — a powerful pairing that slows glucose absorption, blunts insulin spikes, and feeds beneficial gut bacteria that produce short-chain fatty acids reducing visceral inflammation.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Whole Grains vs Refined Grains<div class="leaf-arrow">▼</div></div><div class="leaf-detail">The Framingham Heart Study data found that whole grain intake is inversely associated with abdominal visceral fat, while refined grain intake is positively associated with it — even when total calories are similar. The fibre in whole grains slows digestion, prevents blood sugar spikes, and feeds gut bacteria. Refined grains (white bread, white rice, pasta) have the opposite effect, spiking insulin and promoting visceral fat storage.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>How Fibre Reduces Visceral Fat<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Soluble fibre forms a gel in the gut that slows glucose absorption, reducing the insulin response after meals. Lower insulin means less fat storage signalling. Insoluble fibre feeds gut microbiome diversity, which produces butyrate and other short-chain fatty acids that reduce gut permeability and systemic inflammation — one of the key drivers of visceral fat accumulation and metabolic dysfunction.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Practical Ways to Eat More<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Add a tin of chickpeas or lentils to any salad, soup, or curry. Swap white rice for brown rice or quinoa. Choose oats over processed breakfast cereals. Use wholegrain bread. Hummus on wholegrain crackers is an ideal snack combining legumes and whole grain. Even small consistent swaps — one refined grain meal replaced per day — produce measurable differences in visceral fat over months.</div></div>
+    </div>
+  </div>
+
+  <!-- B4: Omega-3 and Anti-inflammatory Foods -->
+  <div class="branch b4" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🐟</div>Fatty Fish, Nuts &amp; Anti-inflammatory Fats<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Fatty Fish and Omega-3s<div class="leaf-arrow">▼</div></div><div class="leaf-detail">An RCT of fish oil supplementation in overweight men showed significant reductions in hepatic (liver) fat and visceral fat compared to placebo. The omega-3 fatty acids EPA and DHA reduce triglycerides, downregulate inflammatory gene expression in fat tissue, and improve insulin sensitivity. Aim for 2–3 portions of oily fish per week — salmon, mackerel, sardines, anchovies, trout — as the primary protein source.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Nuts — Calorie Dense but Fat Reducing<div class="leaf-arrow">▼</div></div><div class="leaf-detail">A meta-analysis of prospective cohorts and RCTs found that regular nut consumption does not cause weight gain despite their calorie density — and is associated with lower abdominal adiposity. Nuts provide unsaturated fats, fibre, magnesium, and polyphenols that improve insulin sensitivity. The satiety effect of nuts also reduces overall calorie intake by displacing less nutritious snacks. Walnuts, almonds, and Brazil nuts are particularly beneficial.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Avocado — Fat That Fights Fat<div class="leaf-arrow">▼</div></div><div class="leaf-detail">A clinical study in overweight adults found that daily avocado consumption was associated with reduced abdominal adiposity and improved oral glucose tolerance. Avocados are rich in monounsaturated oleic acid (the same fat as olive oil), soluble fibre, and potassium. The combination of healthy fat and fibre produces strong satiety, reduces post-meal glucose spikes, and provides anti-inflammatory compounds that target visceral fat specifically.</div></div>
+    </div>
+  </div>
+
+  <!-- B5: Berries, Greens & Cruciferous -->
+  <div class="branch b5" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🫐</div>Berries, Leafy Greens &amp; Cruciferous Vegetables<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Berries and Insulin Sensitivity<div class="leaf-arrow">▼</div></div><div class="leaf-detail">An RCT found that blueberry bioactives significantly improved insulin sensitivity in obese, insulin-resistant adults. Berries are uniquely high in anthocyanins — pigments that activate AMPK (the body's metabolic master switch), improve glucose uptake by muscle cells, and reduce inflammatory markers. They are also low-glycaemic, meaning they do not spike blood sugar despite their sweetness. Blueberries, raspberries, strawberries, and blackberries all show benefit.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Dark Leafy Greens<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Spinach, kale, Swiss chard, and rocket are extremely low in calories but rich in magnesium, folate, vitamin K, and chlorophyll. Magnesium deficiency is strongly associated with insulin resistance — and visceral fat accumulation is driven by chronically elevated insulin. Leafy greens are also rich in nitrates that improve blood vessel function and reduce blood pressure, a key cardiovascular risk factor associated with visceral fat.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Cruciferous Vegetables and Glucosinolates<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Broccoli, cauliflower, Brussels sprouts, and cabbage contain glucosinolates — compounds that break down into sulforaphane and other bioactives with potent anti-inflammatory and anti-cancer properties. Research confirms glucosinolates play a role in reducing chronic disease risk partly through their effect on visceral adipose tissue inflammation. Cruciferous vegetables are also high in fibre, vitamin C, and folate, making them among the most nutrient-dense foods available.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>How to Build Meals Around These<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Practical combinations: spinach and berry smoothie with a handful of nuts; salmon with roasted broccoli and brown rice drizzled in EVOO; chickpea and kale soup; avocado and sardine on wholegrain toast. The goal is not perfection but consistently building meals around these food groups rather than treating them as occasional sides. A Mediterranean-pattern plate — half vegetables, quarter protein, quarter whole grain — naturally incorporates most of these foods.</div></div>
+    </div>
+  </div>
+
+  <!-- B6: The Bigger Picture -->
+  <div class="branch b6" onclick="toggleBranch(this)">
+    <div class="branch-header"><div class="branch-icon">🔬</div>The Bigger Picture — Metabolic Health Strategy<div class="branch-arrow">▼</div></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Insulin Sensitivity Is the Master Lever<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Every food on this list shares a common mechanism: improving insulin sensitivity. Chronically elevated insulin is the primary driver of visceral fat storage — it signals fat cells to absorb glucose and store it as fat, and suppresses fat burning. Reducing post-meal insulin spikes through high-fibre, low-glycaemic, anti-inflammatory foods is the most direct dietary lever for reducing visceral fat over time.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>The Liver Connection<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Visceral fat and liver fat are closely linked. Excess visceral fat releases free fatty acids into the portal vein, driving non-alcoholic fatty liver disease (NAFLD). Conversely, reducing liver fat through diet — particularly through omega-3s, EVOO, and reduced refined carbohydrates — simultaneously reduces visceral fat. The two conditions drive each other and respond to the same dietary interventions.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>What Prevention Looked Like in A&E<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Dr Alex's clinical experience in A&E gave him a visceral (literal) understanding of chronic disease endpoints. The heart attacks, strokes, diabetic emergencies, and surgical complications he treated were overwhelmingly in patients whose conditions had been developing silently for decades. Visceral fat is the common upstream driver. The intervention window is years before symptoms appear — which is exactly when dietary change is both easiest and most effective.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-header"><span class="leaf-dot"></span>Screen Yourself Today<div class="leaf-arrow">▼</div></div><div class="leaf-detail">Calculate your waist-to-height ratio: measure your waist at the navel after a normal exhale, divide by your height in the same unit. Above 0.5 is the evidence-based threshold for elevated risk. If you are above 0.5 regardless of your weight or BMI, dietary and lifestyle intervention is warranted. Track this number monthly rather than stepping on the scales — it is a far more meaningful measure of metabolic progress.</div></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="panel" id="summary">
+<div class="summary">
+  <div class="summary-section">
+    <h3><span style="background:var(--c1)"></span>Why Visceral Fat Is So Dangerous</h3>
+    <p>Visceral fat is not the fat you can see or pinch — it is stored deep inside the abdominal cavity, wrapped around the liver, intestines, and pancreas. Dr Alex, drawing on nearly a decade in A&E and direct surgical observation, describes it as metabolically active tissue that continuously releases inflammatory chemicals and free fatty acids into the bloodstream. This drives insulin resistance, fatty liver disease, systemic inflammation, and dramatically raises the risk of type 2 diabetes, heart disease, stroke, and early death.</p>
+    <p>Crucially, you can carry significant visceral fat at a completely normal body weight. BMI tells you nothing about fat distribution. The most reliable simple screening tool is the waist-to-height ratio: divide waist circumference by height. A ratio above 0.5 — meaning your waist is more than half your height — is the evidence-based threshold for elevated cardiometabolic risk, supported by systematic review data on cardiovascular disease and diabetes prediction.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c2)"></span>Extra Virgin Olive Oil — The Cornerstone</h3>
+    <p>EVOO is the most comprehensively studied single food for metabolic and cardiovascular benefit. The landmark PREDIMED trial found that a Mediterranean diet supplemented with EVOO significantly reduced major cardiovascular events. More specifically, research shows regular EVOO intake independently associates with lower abdominal obesity even after controlling for overall diet quality. The polyphenols in EVOO — particularly oleocanthal and oleuropein — reduce inflammation in visceral adipose tissue and improve insulin sensitivity. The key is using it as the primary daily cooking and dressing fat, not occasionally.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c3)"></span>Fibre Powerhouses — Legumes and Whole Grains</h3>
+    <p>An RCT showed that eating pulses for 8 weeks significantly reduced metabolic syndrome risk factors in overweight adults. Legumes combine high soluble fibre with plant protein — slowing glucose absorption, blunting insulin spikes, and feeding gut bacteria that reduce visceral inflammation. Framingham Heart Study data found whole grain intake inversely associated with visceral fat, while refined grain intake showed the opposite association — even at similar calorie levels. The mechanism is fibre: soluble fibre slows glucose absorption, while insoluble fibre feeds a diverse gut microbiome that produces anti-inflammatory short-chain fatty acids.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c4)"></span>Fatty Fish, Nuts and Avocado</h3>
+    <p>An RCT of fish oil supplementation in overweight men showed reductions in both hepatic and visceral fat. The omega-3 fatty acids EPA and DHA reduce triglycerides, downregulate inflammatory gene expression in fat tissue, and improve insulin sensitivity. Aim for oily fish 2–3 times per week. A meta-analysis of nut consumption found no weight gain despite calorie density, and association with lower abdominal adiposity — the satiety and anti-inflammatory effects appear to outweigh the calories. A clinical study in overweight adults found daily avocado consumption associated with reduced abdominal adiposity and improved glucose tolerance, driven by its combination of monounsaturated fat, fibre, and bioactive compounds.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c5)"></span>Berries, Leafy Greens and Cruciferous Vegetables</h3>
+    <p>An RCT found blueberry bioactives significantly improved insulin sensitivity in obese, insulin-resistant adults. Berries' anthocyanins activate AMPK — the body's metabolic master switch — and improve glucose uptake by muscle cells. Dark leafy greens provide magnesium, whose deficiency is strongly linked to insulin resistance. Cruciferous vegetables — broccoli, Brussels sprouts, cauliflower — contain glucosinolates that break down into sulforaphane, with potent anti-inflammatory and anti-cancer properties shown in clinical research to reduce chronic disease risk partly through effects on visceral adipose tissue inflammation.</p>
+  </div>
+  <div class="summary-section">
+    <h3><span style="background:var(--c6)"></span>The Bigger Picture — Insulin and the Liver</h3>
+    <p>Every food on the list shares a common mechanism: improving insulin sensitivity. Chronically elevated insulin is the primary hormonal driver of visceral fat storage — it signals cells to store fat and suppresses fat burning. Reducing post-meal insulin spikes through high-fibre, low-glycaemic, anti-inflammatory foods is the most direct dietary lever available. Visceral fat and liver fat are also tightly linked: visceral fat releases free fatty acids into the portal vein, driving fatty liver disease, which in turn worsens visceral fat accumulation. The same dietary interventions target both.</p>
+    <p>Dr Alex's clinical perspective adds urgency: the conditions treated in A&E — heart attacks, strokes, diabetic emergencies — had been developing silently for decades, with visceral fat as the common upstream driver. The intervention window is years before symptoms appear, and dietary change is both most effective and most achievable at that stage. Tracking waist-to-height ratio monthly — not weight — is the most meaningful measure of metabolic progress.</p>
+  </div>
+</div>
+</div>
+
+<div class="panel" id="takeaways">
+<div class="takeaways">
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c1)">01</div><div><h4>Calculate your waist-to-height ratio today</h4><p>Measure your waist at the navel after a normal exhale and divide by your height (same unit). Above 0.5 signals elevated visceral fat risk regardless of your weight or BMI. Track this monthly, not your weight.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c2)">02</div><div><h4>Switch to extra virgin olive oil as your primary fat</h4><p>Use EVOO for cooking, dressings, and drizzling daily — not occasionally. Look for "extra virgin" on the label to ensure polyphenol content. It is the single most evidence-backed dietary change for reducing visceral fat.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c3)">03</div><div><h4>Add legumes to at least one meal per day</h4><p>A tin of chickpeas, lentils, or black beans added to any meal — salad, soup, curry, stir-fry — provides the soluble fibre and plant protein combination shown to reduce metabolic syndrome markers in 8 weeks.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c4)">04</div><div><h4>Eat oily fish 2–3 times per week</h4><p>Salmon, mackerel, sardines, anchovies, or trout provide EPA and DHA omega-3s shown in RCTs to reduce both liver fat and visceral fat. These are among the most cost-effective protein sources for metabolic health.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c5)">05</div><div><h4>Swap refined grains for whole grains consistently</h4><p>White bread → wholegrain bread. White rice → brown rice or quinoa. White pasta → wholegrain pasta. Framingham data shows this single swap is independently associated with lower visceral fat even at the same calorie intake.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c6)">06</div><div><h4>Add a handful of berries daily</h4><p>Blueberries, raspberries, strawberries, or blackberries — fresh or frozen — provide anthocyanins that improve insulin sensitivity and activate AMPK. Add to oats, yogurt, or smoothies. Frozen berries are equally effective and far cheaper.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c1)">07</div><div><h4>Snack on nuts instead of processed foods</h4><p>30g of walnuts, almonds, or mixed nuts provides anti-inflammatory unsaturated fats, fibre, and magnesium. Meta-analyses show nut-eaters have lower abdominal adiposity despite the calorie density, because nuts displace worse snacks and improve satiety.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c2)">08</div><div><h4>Build half your plate from vegetables at every meal</h4><p>Prioritise dark leafy greens (spinach, kale) and cruciferous vegetables (broccoli, Brussels sprouts, cauliflower). These provide magnesium, glucosinolates, and fibre — the trifecta that reduces visceral inflammation and improves insulin sensitivity.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c3)">09</div><div><h4>Include avocado regularly — not as a treat</h4><p>Half an avocado with meals 4–5 times per week provides monounsaturated fat and fibre shown to reduce abdominal adiposity and improve glucose tolerance. Use as a spread, in salads, or with eggs instead of butter or processed condiments.</p></div></div>
+  <div class="takeaway-card"><div class="takeaway-num" style="color:var(--c4)">10</div><div><h4>Think Mediterranean pattern, not individual foods</h4><p>The most powerful effect comes from combining these foods consistently — olive oil + vegetables + legumes + fish + whole grains + nuts + berries. This is the Mediterranean pattern. Build meals around it rather than adding single "superfoods" to an otherwise poor diet.</p></div></div>
+</div>
+</div>
+
+<script>
+function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Advantage Summit 2026 – Day 3 | Proven AI Playbooks for Scalable Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --surface: #ffffff;
+    --surface2: #f3f0e8;
+    --border: #e4e0d4;
+    --text: #1c1a14;
+    --muted: #6b6655;
+    --c1: #c2410c;   /* warm orange-red */
+    --c2: #1d4ed8;   /* blue */
+    --c3: #15803d;   /* green */
+    --c4: #7c3aed;   /* purple */
+    --c5: #b45309;   /* amber */
+    --c6: #be185d;   /* pink */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; min-height: 100vh; }
+
+  header {
+    background: var(--text);
+    padding: 32px 24px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(194,65,12,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 50%, rgba(29,78,216,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.65);
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    color: #fff; line-height: 1.15; position: relative;
+  }
+  header p { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 8px; position: relative; }
+
+  .speakers-bar {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 8px;
+    padding: 14px 16px; background: #161410;
+    border-bottom: 1px solid #2a2720;
+  }
+  .speaker-pill {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.55); font-size: 11px; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  .tabs { display: flex; justify-content: center; gap: 8px; padding: 20px 16px 0; flex-wrap: wrap; }
+  .tab {
+    background: var(--surface); border: 1.5px solid var(--border);
+    color: var(--muted); padding: 9px 20px; border-radius: 8px;
+    cursor: pointer; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; font-family: 'Outfit', sans-serif;
+  }
+  .tab:hover { border-color: var(--c1); color: var(--text); }
+  .tab.active { background: var(--text); border-color: var(--text); color: #fff; }
+
+  .panel { display: none; padding: 24px 16px 48px; max-width: 880px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  .mind-center {
+    background: var(--text); border-radius: 16px;
+    padding: 22px 32px; text-align: center;
+    max-width: 400px; margin: 0 auto 16px;
+    position: relative; overflow: hidden;
+  }
+  .mind-center::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(194,65,12,0.3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .mind-center h2 { font-family: 'Playfair Display', serif; font-size: 18px; color: #fff; position: relative; }
+  .mind-center p { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 5px; position: relative; }
+
+  .branch {
+    width: 100%; border-radius: 14px; overflow: hidden;
+    cursor: pointer; margin-bottom: 10px;
+    border: 1.5px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .branch:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+  .branch-header { display: flex; align-items: center; gap: 12px; padding: 15px 18px; user-select: none; }
+  .branch-stripe { width: 4px; height: 34px; border-radius: 4px; flex-shrink: 0; }
+  .branch-title { font-size: 14px; font-weight: 700; flex: 1; }
+  .branch-speaker {
+    font-size: 11px; font-weight: 600; color: var(--muted);
+    background: var(--surface2); padding: 3px 10px; border-radius: 20px;
+  }
+  .branch-arrow { font-size: 11px; color: var(--muted); transition: transform 0.3s; }
+  .branch.open .branch-arrow { transform: rotate(180deg); }
+  .branch-body {
+    display: none; padding: 4px 18px 16px;
+    border-top: 1.5px solid var(--border); background: var(--surface2);
+  }
+  .branch.open .branch-body { display: block; }
+
+  .leaf {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 10px; margin-top: 8px; cursor: pointer; overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .leaf:hover { border-color: #ccc; }
+  .leaf-header { display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: 13px; font-weight: 600; user-select: none; }
+  .leaf-icon { font-size: 15px; }
+  .leaf-detail { display: none; padding: 0 14px 12px; font-size: 12.5px; color: var(--muted); line-height: 1.78; }
+  .leaf.open .leaf-detail { display: block; }
+  .leaf.open { border-color: var(--border); }
+
+  /* SUMMARY */
+  .summary-section { margin-bottom: 30px; }
+  .summary-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1.5px solid var(--border); }
+  .sdot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .summary-header h3 { font-family: 'Playfair Display', serif; font-size: 17px; flex: 1; }
+  .slabel { font-size: 11px; color: var(--muted); font-weight: 600; background: var(--surface2); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .summary-section p { font-size: 14px; line-height: 1.82; color: var(--muted); margin-bottom: 8px; }
+
+  /* TAKEAWAYS */
+  .takeaway-card {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 12px;
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .tnum { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--border); min-width: 36px; line-height: 1; }
+  .takeaway-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+  .takeaway-body p { font-size: 13px; color: var(--muted); line-height: 1.72; }
+
+  /* branch tints */
+  .b1 { background: rgba(194,65,12,0.03); } .b1 .branch-header { background: rgba(194,65,12,0.07); }
+  .b2 { background: rgba(29,78,216,0.03); } .b2 .branch-header { background: rgba(29,78,216,0.07); }
+  .b3 { background: rgba(21,128,61,0.03); } .b3 .branch-header { background: rgba(21,128,61,0.07); }
+  .b4 { background: rgba(124,58,237,0.03); } .b4 .branch-header { background: rgba(124,58,237,0.07); }
+  .b5 { background: rgba(180,83,9,0.03); } .b5 .branch-header { background: rgba(180,83,9,0.07); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">AI Advantage Summit 2026 — Day 3 · Grand Finale</div>
+  <h1>The Proven AI Playbooks<br>to Create Scalable Results</h1>
+  <p>April 25, 2026 &nbsp;·&nbsp; AI Advantage Summit &nbsp;·&nbsp; 4h 36m &nbsp;·&nbsp; 632,000+ Participants</p>
+</header>
+
+<div class="speakers-bar">
+  <span class="speaker-pill">📈 Dean Graziosi</span>
+  <span class="speaker-pill">⚙️ Rachel Woods</span>
+  <span class="speaker-pill">💻 Amjad Masad</span>
+  <span class="speaker-pill">🔥 Tony Robbins</span>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">📄 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">⚡ Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div class="panel active" id="mindmap">
+
+  <div class="mind-center">
+    <h2>Scale With AI Playbooks — Day 3</h2>
+    <p>Simplification, systems, code-free software & the power of decision</p>
+  </div>
+
+  <!-- Branch 1: Dean -->
+  <div class="branch b1" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-stripe" style="background:var(--c1)"></div>
+      <div class="branch-title" style="color:var(--c1)">📈 Dean Graziosi — Scale Through Simplification</div>
+      <div class="branch-speaker">Dean Graziosi</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔴</span>Simplicity Is the Only Path to Scale</div>
+        <div class="leaf-detail">Dean opens the final day with what he considers the most misunderstood truth about growth: scaling does not mean adding complexity — it means ruthlessly removing it. Every layer of complexity you add to your business becomes friction that slows everything down. AI is the most powerful simplification tool ever built, because it absorbs the complexity of execution while leaving you to operate at the level of strategy and vision. The formula is precise: as your ability to simplify increases, your ability to scale increases proportionally.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔴</span>The Transformation Equation</div>
+        <div class="leaf-detail">Dean presents what he calls the transformation equation — four elements that must be present simultaneously for real change to occur: the right Mindset (believing that transformation is possible and that you deserve it), a clear Strategy (knowing the specific steps that move you from where you are to where you want to be), relevant Context (understanding your specific situation, constraints, and opportunities), and effective Tools (the AI systems, playbooks, and workflows that execute the strategy). Remove any one of these four elements and transformation stalls.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔴</span>The 7 Levels Deep — Finding Your Unstoppable Why</div>
+        <div class="leaf-detail">Dean returns to his 7 Levels Deep exercise on Day 3 in the context of scale: why are you actually trying to grow? The exercise peels back surface motivations through seven recursive "why" questions until you reach the emotional core. When that core is exposed — the desire to break a generational cycle, to provide what you never had, to build a legacy your children will inherit — it becomes the fuel that makes fear irrelevant. Dean argues that entrepreneurs who quit when things get hard simply haven't found their true why yet. The exercise makes the why undeniable.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔴</span>Time Freedom as the True ROI of AI</div>
+        <div class="leaf-detail">Dean reframes the return-on-investment conversation for AI: the primary metric is not revenue or efficiency — it's time. The 15+ hours per week reclaimed by Bootcamp participants represents the most valuable resource in any entrepreneur's life: the hours that can be redirected toward the high-leverage work, the relationships, and the experiences that create genuine legacy. Revenue and efficiency follow naturally when you have the time to think clearly and act strategically. If AI isn't buying back your time, you're not using it correctly.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔴</span>Deciders vs. Delayers</div>
+        <div class="leaf-detail">Dean closes his Day 3 session with a stark binary that has echoed throughout the summit: in every technological shift in history, there are deciders and delayers. Deciders engage early, build skills and systems during the learning curve, and compound their advantage over years. Delayers wait until the technology is "more mature" or "less overwhelming" — and by the time they engage, the advantage gap is too wide to close easily. The AI window is open right now. The decision to engage or delay is being made implicitly every day that passes without action.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 2: Rachel Woods -->
+  <div class="branch b2" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-stripe" style="background:var(--c2)"></div>
+      <div class="branch-title" style="color:var(--c2)">⚙️ Rachel Woods — AI Operations & The Playbook System</div>
+      <div class="branch-speaker">Rachel Woods</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>AI Operations: The Invisible Engine of Modern Business</div>
+        <div class="leaf-detail">Rachel Woods introduces "AI Operations" as the discipline that makes the difference between businesses that experiment with AI and those that actually run on it. Historically, growth was limited by human capacity — you could only do as much as your team could execute. AI Operations eliminates this constraint by shifting execution from humans to AI systems. Time is no longer the bottleneck. The businesses that master AI Ops in 2026 will operate with a structural cost and speed advantage that compounds every quarter.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>Operational Debt: The Hidden Tax on Growth</div>
+        <div class="leaf-detail">Rachel diagnoses the core problem in most growing businesses as "operational debt" — the accumulation of manual processes, inconsistent workflows, undocumented procedures, and team chaos that builds up as a company scales. Every hour lost to unclear handoffs, repeated questions, and reinvented wheels is operational debt being charged to your growth budget. AI Operations is the solution: it converts the informal, inconsistent, human-dependent processes into structured, reliable, AI-executable systems that eliminate the debt at its source.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>What Is an AI Playbook?</div>
+        <div class="leaf-detail">An AI Playbook is a structured document that instructs an AI system how to execute a specific process from start to finish. It's not a simple prompt — it's a complete operational specification that includes the goal, the steps, the success criteria for each step, the inputs the AI needs, and the format of the outputs it should produce. A newsletter playbook, for example, specifies how to source topics, the angle to take, the tone and structure of the writing, how to generate the subject line, and how to format the final piece for send. The AI follows the playbook; you review and approve the output.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>Building Your First Playbook — Rachel's 3-Step Method</div>
+        <div class="leaf-detail">Rachel's playbook-building process has three steps. First, get clear on your process: map every step you currently take to complete the task manually, in sequence. Second, write success criteria: for each step, define what "done correctly" looks like — be specific enough that an AI can evaluate its own output against the criteria. Third, give the playbook to AI and let it execute, then refine based on the output quality. Rachel demonstrates with a newsletter playbook: once built correctly, the AI can draft a full newsletter from a brief, matching your voice and structure, in a fraction of the time the manual process takes.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🔵</span>The Future Role: The AI Operator</div>
+        <div class="leaf-detail">Rachel introduces the emerging professional role of the "AI Operator" — the person in a business whose job is to translate strategic intent into functional AI playbooks and systems. This is not a developer or data scientist; it's a systems thinker who understands business processes deeply enough to document them and savvy enough with AI tools to build the automation layer. Rachel argues that every entrepreneur needs to develop some version of this skill, even if they eventually hire someone to operationalise it at scale. The ability to think in playbooks is the new operational literacy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 3: Amjad Masad -->
+  <div class="branch b3" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-stripe" style="background:var(--c3)"></div>
+      <div class="branch-title" style="color:var(--c3)">💻 Amjad Masad — Talk-to-Code & The Software Revolution</div>
+      <div class="branch-speaker">Amjad Masad, Replit CEO</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Talk-to-Code: Human Intention Becomes Software</div>
+        <div class="leaf-detail">Amjad Masad introduces Replit's core innovation for 2026: Talk-to-Code, a system where the Replit Agent translates natural language descriptions of what you want software to do directly into working code. The traditional model of software development — hire a developer, explain what you need, wait weeks, review, iterate — is replaced by a conversation. You describe the tool you need as if you were explaining it to a smart colleague, and the agent builds it. The skill required is not coding; it's clarity of thought and precision of description.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>The Doctor Who Saved $99,700</div>
+        <div class="leaf-detail">Amjad's case study is the most striking of Day 3: a doctor who needed a custom patient management platform received quotes of $100,000 from traditional software agencies. Using Replit's AI agent, the doctor built a functional version of the platform for a few hundred dollars. This is not an edge case — it's the new normal. The cost of custom software has collapsed by 99% or more for a growing category of business applications, and the barrier is no longer budget or technical skill — it's knowing what you want and being able to describe it clearly.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Off-the-Shelf vs. Custom — The Trade-off Eliminated</div>
+        <div class="leaf-detail">Amjad frames the traditional software dilemma: off-the-shelf products are affordable but force you to adapt your processes to their constraints, while custom software fits your exact needs but costs enormous amounts of time and money. Talk-to-Code eliminates this trade-off. You can now build software that fits your specific workflow perfectly, at off-the-shelf pricing, without waiting months for delivery. The implication for entrepreneurs: every tool you've been using that doesn't quite fit your process is now a candidate for replacement with something that does, built in hours.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>Build Your AI Thought Partner</div>
+        <div class="leaf-detail">Amjad's practical recommendation for Day 3 attendees: build your own AI thought partner by uploading your data — your notes, your past decisions, your processes, your goals — to create a persistent, context-aware agent that knows your business intimately. Unlike a general-purpose AI that starts from zero with every conversation, an AI thought partner loaded with your data can answer questions, evaluate options, and generate recommendations that are grounded in your specific reality. This is the enterprise version of what Igor calls the "AI Clone" applied to analytical and strategic thinking.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟢</span>The Playful Hackathon Approach to Overwhelm</div>
+        <div class="leaf-detail">Amjad addresses the overwhelm that many non-technical entrepreneurs feel when confronted with the idea of building software: he recommends treating the first attempt as a playful hackathon rather than a production deployment. Give yourself two hours. Describe what you want. See what the agent builds. It doesn't need to be perfect — it needs to demonstrate what's possible so that the mental model of "I can't build software" is replaced by "I just built something." That shift in identity is the breakthrough that opens the door to everything that follows.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 4: Tony Robbins -->
+  <div class="branch b4" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-stripe" style="background:var(--c4)"></div>
+      <div class="branch-title" style="color:var(--c4)">🔥 Tony Robbins — The Power of Decision</div>
+      <div class="branch-speaker">Tony Robbins</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Transformation Requires Decision, Not Knowledge</div>
+        <div class="leaf-detail">Tony's closing session delivers the summit's most psychologically direct message: the gap between knowing what to do and actually doing it is not a knowledge gap — it's a decision gap. Most people leave events, read books, and attend seminars with more knowledge than they had before, and then do nothing different. The reason is not laziness or lack of discipline; it's that they never made a real decision. A real decision cuts off every other option. It reroutes your identity and your energy. Knowing that AI is an opportunity is not a decision. Deciding to build an AI system this week is.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Creation vs. Circumstance Management</div>
+        <div class="leaf-detail">Tony draws a sharp line between two modes of living: circumstance management and creation. Most people operate in circumstance management — responding to what happens, putting out fires, adapting to conditions that others create. Stress, Tony argues, is largely the result of operating in this reactive mode. Creation is the alternative: deciding what outcome you want, committing to it, and taking the actions required to bring it into existence regardless of current conditions. AI is a creation tool, not a circumstance-management tool — and it only works at full power when wielded by someone in creation mode.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>The 3-Level Decision Framework</div>
+        <div class="leaf-detail">Tony presents decision-making as a three-level architecture. Level 1 is the Decision itself — choosing an action in this moment. Level 2 is Commitment — connecting strong enough reasons to the decision that your drive sustains through difficulty. Level 3 is Resolve — declaring the decision final with absolute certainty, removing the mental escape hatch of "maybe I'll reconsider if it gets hard enough." Most people operate at Level 1. The entrepreneurs who transform consistently operate at Level 3. The shift from Level 1 to Level 3 is not about willpower — it's about the quality and depth of your reasons.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Successful People Decide Fast, Change Slow</div>
+        <div class="leaf-detail">One of Tony's most counterintuitive insights: research on high performers consistently shows that they make decisions faster than average, not more slowly. They don't wait for more information. They act on available information, observe the result, and adjust — a cycle Tony calls "massive action and course correction." The corollary is that they change their decisions slowly and deliberately, not reactively. This is the opposite of how most people operate: slow to decide, then impulsive about changing course when things don't immediately go as planned. Speed of decision, combined with deliberate course correction, is the high-performer's operating system.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟣</span>Never Leave the Decision Site Without a Follow-Through Action</div>
+        <div class="leaf-detail">Tony closes the entire summit with what he considers the single most actionable instruction: never leave the moment of decision without taking at least one immediate follow-through action. The reason is neurological — action immediately after decision dramatically increases the probability that the decision becomes behaviour rather than an unfulfilled intention. If you've decided to build an AI system, take one step before you close your laptop: open the tool, write the first prompt, set the calendar block, send the first message. The action anchors the decision in reality. Without it, even a strong decision tends to dissolve within 48 hours.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 5: Synthesis -->
+  <div class="branch b5" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-stripe" style="background:var(--c5)"></div>
+      <div class="branch-title" style="color:var(--c5)">🎯 Summit Synthesis — The Full AI Advantage System</div>
+      <div class="branch-speaker">All Speakers</div>
+      <div class="branch-arrow">▼</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟠</span>The Three-Day Arc: Awareness → Systems → Decision</div>
+        <div class="leaf-detail">The summit's three days form a deliberate progression. Day 1 built awareness: the AI shift is real, the opportunity window is open, and the tools are accessible to non-technical people right now. Day 2 built systems: specific frameworks for setting goals, creating content, building a Clone, and applying AI across business and life. Day 3 converts awareness and systems into committed action through playbooks, no-code software, and Tony's decision framework. Each day is incomplete without the others — the full AI Advantage system is only assembled when all three are integrated.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟠</span>Failure Is Feedback — Build the Decision Muscle</div>
+        <div class="leaf-detail">A thread that runs through Day 3 from both Dean and Tony: the relationship with failure must change for AI adoption to succeed. Every AI system you build will be imperfect at first. Every playbook will need iteration. Every automation will have edge cases it handles badly. This is not failure — it's the feedback loop through which mastery is built. The entrepreneurs who succeed with AI are not the ones who get it right immediately; they're the ones who treat each imperfect output as data and iterate without losing confidence in the direction.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟠</span>The Bootcamp as the Implementation Bridge</div>
+        <div class="leaf-detail">The summit closes with the introduction of the 2026 AI Advantage Bootcamp as the structured implementation path for everything covered across three days. The six-week program covers building the AI Clone (Week 1), training it on voice and thinking (Weeks 2–3), creating alongside it (Week 4), automating tasks (Week 5), and scaling across every area of life and business (Week 6). The Delegation Blueprint — 25 ready-to-use tasks from Tony Robbins's own AI playbook — is included, along with prompt libraries, templates, and three months in the AI Advantage Club.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-header"><span class="leaf-icon">🟠</span>Zapier: Connecting AI to the Tools You Already Use</div>
+        <div class="leaf-detail">Rachel Woods highlights Zapier as the connective tissue between AI playbooks and the business tools already in use. Once an AI playbook is built, Zapier can trigger it automatically — when a new lead fills out a form, when a customer sends an email, when a weekly report is due, or when any other defined event occurs. This transforms AI from a tool you actively use into a system that runs in the background, executing your playbooks without your involvement. The combination of a well-built playbook and Zapier automation is what Rachel means by "AI doing the operations."</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="panel" id="summary">
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c1)"></div>
+      <h3>Dean Graziosi — The Grand Finale: Scale Through Simplification</h3>
+      <span class="slabel">Dean Graziosi</span>
+    </div>
+    <p>Dean opened Day 3 with the declaration that serves as the summit's closing thesis: scaling is not about adding — it's about subtracting. Every complexity you add to your business creates friction, and friction is the enemy of growth. AI is the most powerful friction-removal tool ever placed in an entrepreneur's hands, because it absorbs the complexity of execution — the drafting, the research, the scheduling, the formatting, the follow-ups — while leaving you to operate at the level of strategy, creativity, and vision.</p>
+    <p>The Transformation Equation Dean presents is the conceptual backbone of Day 3: Mindset + Strategy + Context + Tools = Transformation. Remove any one element and the equation breaks down. An entrepreneur with the right tools but the wrong mindset will self-sabotage. One with the right mindset but no strategy will spin. One with strategy but no context will execute in the wrong direction. Day 3 is designed to deliver all four elements simultaneously. The 7 Levels Deep exercise recurs in this context as the mechanism for anchoring the mindset element: knowing your true why makes fear irrelevant and commitment automatic. Dean measures the ROI of the entire summit in one number: 15+ hours per week reclaimed — and frames that number as the beginning of time freedom, which is the point of scale in the first place.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c2)"></div>
+      <h3>Rachel Woods — AI Operations & The Playbook Revolution</h3>
+      <span class="slabel">Rachel Woods, The AI Exchange</span>
+    </div>
+    <p>Rachel Woods delivers the most operationally rigorous presentation of the entire summit — a complete framework for converting AI from a tool you use into a system that runs your business. Her central concept, AI Operations, is the discipline of designing processes specifically for AI to execute, rather than designing processes for humans to execute and then hoping AI can slot in. The distinction matters enormously: human-designed processes are full of implied knowledge, contextual judgment, and informal communication that AI cannot navigate. AI-designed processes are explicit, structured, and self-documenting.</p>
+    <p>The AI Playbook is Rachel's core deliverable: a structured document that specifies the goal, the steps, the success criteria, the inputs, and the output format for a complete business process. A newsletter playbook, a client onboarding playbook, a weekly report playbook, a content repurposing playbook — each one eliminates a category of operational debt and converts a human-dependent process into an AI-executable system. Rachel's three-step building method (Map the process, Write success criteria, Give to AI and refine) is immediately actionable and requires no technical knowledge. Her vision of the emerging "AI Operator" role — the person who translates strategic intent into functional playbooks — points to where the most valuable AI-related business skills will sit in the next three to five years.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c3)"></div>
+      <h3>Amjad Masad — When Anyone Can Build Software</h3>
+      <span class="slabel">Amjad Masad, CEO of Replit</span>
+    </div>
+    <p>Amjad Masad's contribution to Day 3 is a ground-level demonstration of the most dramatic capability shift in 2026: the collapse of the barrier between "I need software that does X" and "I have software that does X." Talk-to-Code — Replit's natural language to working code pipeline — makes the traditional software development process optional for a growing category of business applications. The doctor case study is the summit's sharpest illustration of this: a $100,000 quote from a developer agency versus a few hundred dollars and an afternoon with Replit's AI agent, producing a functional patient platform. The trade-off between affordability and customisation has effectively dissolved.</p>
+    <p>Amjad's practical advice — build your AI thought partner by uploading your own data to a persistent agent — extends the AI Clone concept into the analytical domain. Rather than asking a general AI for strategic advice from scratch, a thought partner loaded with your business data, your past decisions, and your goals can provide recommendations that are grounded in your specific reality rather than generic best practices. His recommendation to treat the first build as a playful hackathon rather than a production project addresses the psychological barrier most directly: the goal is to replace the identity "I can't build software" with the lived experience of having built something, regardless of its imperfection.</p>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="sdot" style="background:var(--c4)"></div>
+      <h3>Tony Robbins — The Power of Decision: Summit Closing</h3>
+      <span class="slabel">Tony Robbins</span>
+    </div>
+    <p>Tony's closing session is the summit's emotional and psychological climax. His central argument is precise and uncomfortable: the reason most people who attend events, read books, and consume content don't transform is not that they lack knowledge — it's that they never make a real decision. A real decision, in Tony's framework, is not a preference or an intention — it's a commitment that cuts off the alternatives and reroutes your identity and energy toward a single outcome. Three days of AI education creates knowledge. Tony's session is designed to convert that knowledge into a decision.</p>
+    <p>The three-level decision framework — Decision, Commitment, Resolve — gives attendees a precise model for understanding why their past decisions haven't stuck. Most operate at Level 1 (the momentary choice) without ever reaching Level 3 (the irreversible declaration). The research finding that successful people decide faster than average is counterintuitive but consistent: speed of decision reduces the overthinking window that kills most good intentions before they become actions. The summit's final instruction — never leave the moment of decision without a follow-through action — is Tony's most practically important contribution, because it addresses the 48-hour decay window during which most good intentions dissolve before they've had a chance to take root.</p>
+  </div>
+
+</div>
+
+<!-- TAKEAWAYS -->
+<div class="panel" id="takeaways">
+
+  <div class="takeaway-card">
+    <div class="tnum">01</div>
+    <div class="takeaway-body">
+      <h4>Map One Process for Your First AI Playbook This Week</h4>
+      <p>Choose one recurring process in your business — a newsletter, a client proposal, a weekly report, a social media post. Write down every step you currently take manually, in order. Then write one sentence defining what "done correctly" looks like for each step. You now have the raw material for an AI Playbook. Give it to AI this week and refine the output. This is Rachel Woods's three-step method compressed into a single action.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">02</div>
+    <div class="takeaway-body">
+      <h4>Do the 7 Levels Deep Exercise on Your Scaling Goal</h4>
+      <p>Take your most important business goal and ask "Why does this matter?" seven times, building on each answer. Record what surfaces at Level 7 — it will almost certainly reveal something more emotionally significant than the goal itself. Add this Level 7 answer to your AI DNA context block. When AI knows your deepest why, every recommendation it generates is filtered through what actually matters to you, not just what sounds strategically sound.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">03</div>
+    <div class="takeaway-body">
+      <h4>Apply Tony's 3-Level Decision Framework to Your #1 AI Commitment</h4>
+      <p>Make a real decision about one AI system you're going to build or implement, using all three levels. Level 1: decide specifically what you're doing. Level 2: write down three compelling reasons why this matters enough to sustain effort through difficulty. Level 3: declare the decision final — write it down as a statement of resolve, not an intention. Then take one immediate action before you do anything else today. The action is what makes the decision real.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">04</div>
+    <div class="takeaway-body">
+      <h4>Try Amjad's Hackathon: Build Something in Two Hours</h4>
+      <p>Identify a tool you wish existed in your business — a simple tracker, an intake form, a reporting dashboard, a client portal. Open Replit (or Claude Code, Lovable, or Base44). Describe what you want in plain English. Set a two-hour timer and see what the agent produces. It won't be perfect. That's not the goal. The goal is to replace the belief "I can't build software" with the experience of having built something. That identity shift is the breakthrough.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">05</div>
+    <div class="takeaway-body">
+      <h4>Connect Your First AI Playbook to Zapier</h4>
+      <p>Once you have a working AI Playbook, identify the trigger that should kick it off automatically — a new form submission, a weekly calendar event, an incoming email from a specific sender. Set up a Zapier automation that fires the playbook when the trigger occurs. This converts an AI tool you actively use into an AI system that runs in the background without you. Even one automated playbook changes your relationship with AI from "tool I use" to "system that works for me."</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">06</div>
+    <div class="takeaway-body">
+      <h4>Build Your AI Thought Partner With Your Own Data</h4>
+      <p>Following Amjad's advice, gather the documents that represent your business brain: your goals, your past strategic decisions and their outcomes, your customer insights, your processes, your values. Upload them to a persistent AI agent or paste them into a dedicated AI context block. Then ask the agent a strategic question you've been sitting with. Compare the quality of that answer to what you'd get from a generic AI with no context. The difference is your thought partner coming online.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">07</div>
+    <div class="takeaway-body">
+      <h4>Audit Your Business for Operational Debt</h4>
+      <p>Using Rachel's framework, identify three categories of operational debt in your business: processes that live in your head but are undocumented, recurring tasks that require you to explain them repeatedly, and workflows where inconsistency creates quality variation. These are your highest-priority Playbook candidates. Eliminating operational debt through AI doesn't just save time — it makes the business less dependent on you personally, which is the foundation of genuine scale.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">08</div>
+    <div class="takeaway-body">
+      <h4>Use Dean's Transformation Equation as a Diagnostic</h4>
+      <p>If your AI adoption has stalled, run the Transformation Equation as a diagnostic: Is the Mindset aligned (do you genuinely believe this will work for you)? Is the Strategy clear (do you know the specific next steps)? Is the Context accurate (does AI know enough about your specific situation)? Are the Tools right (are you using the right AI tools for the task)? The equation breaks down if any one element is missing — and knowing which element is absent points directly to what needs fixing.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">09</div>
+    <div class="takeaway-body">
+      <h4>Treat Every Imperfect AI Output as Feedback, Not Failure</h4>
+      <p>When an AI Playbook produces something that's not quite right, or when a prompt gives you an output that misses the mark, resist the urge to conclude that "AI doesn't work for this." Instead, ask: what specific information did the AI lack? What instruction was ambiguous? What success criterion did I fail to include? Each imperfect output is a diagnostic for what the system needs to produce the result you want. The iteration cycle is how mastery is built — not from getting it right the first time.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="tnum">10</div>
+    <div class="takeaway-body">
+      <h4>Never Leave This Summit Without a Follow-Through Action</h4>
+      <p>Tony's final instruction applied directly to you, right now: before you close this mind map, take one follow-through action that makes your AI decision real. Open a tool. Write the first playbook step. Set the calendar block for your hackathon. Send a message to someone you're going to build this with. The action doesn't need to be large — it needs to be real. It anchors the decision in physical reality and starts the momentum that makes everything else possible. Don't let 48 hours pass without it.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>

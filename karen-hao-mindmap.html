@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Hao — Empire of AI | DOAC Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --border: #e8e6e0;
+    --border-dark: #d0cdc5;
+    --text: #1c1c1a;
+    --muted: #888580;
+    --accent: #c0392b;
+    --accent-light: #fdf2f1;
+    --blue: #2563eb;
+    --blue-light: #eff6ff;
+    --amber: #b45309;
+    --amber-light: #fffbeb;
+    --green: #15803d;
+    --green-light: #f0fdf4;
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+    --slate: #475569;
+    --slate-light: #f8fafc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+  /* HEADER */
+  header {
+    background: var(--text);
+    color: #fff;
+    padding: 2.5rem 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: 'EMPIRE OF AI';
+    position: absolute;
+    right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Fraunces', serif;
+    font-size: 8rem;
+    font-weight: 300;
+    color: rgba(255,255,255,.04);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: .05em;
+  }
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: .6rem; }
+  header h1 { font-family: 'Fraunces', serif; font-size: clamp(1.6rem,4vw,2.8rem); font-weight: 600; line-height: 1.1; margin-bottom: .5rem; }
+  header p { font-size: .82rem; color: #9ca3af; font-family: 'JetBrains Mono', monospace; }
+
+  /* TABS */
+  .tabs { display: flex; border-bottom: 1px solid var(--border); padding: 0 2.5rem; background: var(--surface); overflow-x: auto; }
+  .tab { padding: .85rem 1.25rem; font-size: .72rem; font-family: 'JetBrains Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border: none; border-bottom: 2px solid transparent; background: none; cursor: pointer; transition: all .15s; white-space: nowrap; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* PANELS */
+  .panel { display: none; padding: 2rem 2.5rem 3rem; }
+  .panel.active { display: block; }
+
+  /* MIND MAP */
+  .map-root { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+  .root-node { background: var(--accent); color: #fff; font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; padding: .85rem 2rem; border-radius: 4px; text-align: center; letter-spacing: .02em; }
+  .branches { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: .85rem; width: 100%; }
+
+  .branch { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+  .branch:hover { box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+  .branch-header { padding: .85rem 1rem; display: flex; align-items: center; gap: .65rem; border-bottom: 1px solid var(--border); }
+  .branch-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .branch-title { font-size: .85rem; font-weight: 600; flex: 1; }
+  .branch-chevron { font-size: .6rem; color: var(--muted); transition: transform .25s; flex-shrink: 0; }
+  .branch.open .branch-chevron { transform: rotate(180deg); }
+  .branch-body { display: none; padding: .75rem 1rem; }
+  .branch.open .branch-body { display: block; }
+
+  .leaf { padding: .55rem 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .leaf:last-child { border-bottom: none; }
+  .leaf-title { font-size: .78rem; font-weight: 500; color: #374151; display: flex; align-items: center; gap: .5rem; }
+  .leaf-title::before { content: '▸'; font-size: .55rem; color: var(--muted); flex-shrink: 0; transition: transform .15s; }
+  .leaf.open .leaf-title::before { transform: rotate(90deg); color: var(--accent); }
+  .leaf-detail { display: none; font-size: .74rem; color: var(--muted); line-height: 1.65; padding: .45rem 0 .2rem 1rem; }
+  .leaf.open .leaf-detail { display: block; }
+
+  .c1 .branch-header { border-left: 3px solid var(--accent); } .c1 .branch-title { color: var(--accent); } .c1:hover { border-color: var(--accent); }
+  .c2 .branch-header { border-left: 3px solid var(--blue); } .c2 .branch-title { color: var(--blue); } .c2:hover { border-color: var(--blue); }
+  .c3 .branch-header { border-left: 3px solid var(--amber); } .c3 .branch-title { color: var(--amber); } .c3:hover { border-color: var(--amber); }
+  .c4 .branch-header { border-left: 3px solid var(--green); } .c4 .branch-title { color: var(--green); } .c4:hover { border-color: var(--green); }
+  .c5 .branch-header { border-left: 3px solid var(--purple); } .c5 .branch-title { color: var(--purple); } .c5:hover { border-color: var(--purple); }
+  .c6 .branch-header { border-left: 3px solid var(--slate); } .c6 .branch-title { color: var(--slate); } .c6:hover { border-color: var(--slate); }
+
+  /* SUMMARY */
+  .summary-wrap { max-width: 820px; display: flex; flex-direction: column; gap: 1.25rem; }
+  .sum-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+  .sum-block h2 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; margin-bottom: .85rem; display: flex; align-items: center; gap: .6rem; }
+  .sum-block h2 .bar { width: 3px; height: 16px; border-radius: 2px; flex-shrink: 0; }
+  .sum-block p { font-size: .82rem; line-height: 1.8; color: #4b5563; margin-bottom: .65rem; }
+  .sum-block p:last-child { margin-bottom: 0; }
+
+  /* TAKEAWAYS */
+  .takeaways-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: .85rem; }
+  .tw-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; position: relative; overflow: hidden; }
+  .tw-num { font-family: 'Fraunces', serif; font-size: 2.8rem; line-height: 1; color: var(--border); margin-bottom: .4rem; font-weight: 600; }
+  .tw-card h3 { font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
+  .tw-card p { font-size: .75rem; color: var(--muted); line-height: 1.65; }
+  .tw-card::after { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; }
+  .tw-card:nth-child(1)::after { background: var(--accent); }
+  .tw-card:nth-child(2)::after { background: var(--blue); }
+  .tw-card:nth-child(3)::after { background: var(--amber); }
+  .tw-card:nth-child(4)::after { background: var(--green); }
+  .tw-card:nth-child(5)::after { background: var(--purple); }
+  .tw-card:nth-child(6)::after { background: var(--slate); }
+  .tw-card:nth-child(7)::after { background: var(--accent); }
+  .tw-card:nth-child(8)::after { background: var(--blue); }
+  .tw-card:nth-child(9)::after { background: var(--amber); }
+  .tw-card:nth-child(10)::after { background: var(--green); }
+
+  @media(max-width:600px){ header,.tabs,.panel{padding-left:1.25rem;padding-right:1.25rem} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">The Diary of a CEO · Karen Hao · Mar 26, 2026</div>
+  <h1>We Are Being Gaslit By The AI Companies</h1>
+  <p>Investigative journalist reveals what 250 OpenAI insiders told her — and why AGI is a marketing scam.</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap',this)">🗺 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">📖 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">⚡ Takeaways</button>
+</nav>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+  <div class="map-root">
+    <div class="root-node">KAREN HAO — EMPIRE OF AI</div>
+    <div class="branches">
+
+      <div class="branch c1" onclick="toggleBranch(this)">
+        <div class="branch-header"><span class="branch-icon">🏛️</span><span class="branch-title">AI Companies as Empires</span><span class="branch-chevron">▼</span></div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The colonial metaphor — and why it fits</div><div class="leaf-detail">Hao argues AI companies mirror colonial empires: they seize resources not their own — artists' work, individuals' data, communities' land and water — to build systems that consolidate power in the hands of a few. The comparison is not rhetorical flourish; it describes the actual mechanics of how these companies operate.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">An imperial agenda — not a humanitarian one</div><div class="leaf-detail">After interviewing 300+ people including 250 OpenAI insiders, Hao's conclusion is that the primary driver is an imperial agenda — the accumulation of data, compute, capital, and political power — dressed in the language of benefiting humanity. The humanitarian framing is largely a PR strategy.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Gaslighting the public on AI capabilities</div><div class="leaf-detail">AI companies overstate what their systems can do, creating a gap between public perception and reality. This serves two purposes: attracting investment and pre-empting regulation. When the public believes AI is already superhuman, they accept the argument that heavy-handed regulation would kill progress.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Quashing inconvenient research</div><div class="leaf-detail">Google fired Timnit Gebru and Margaret Mitchell — both heads of its Ethical AI team — when their research showed LLMs causing harmful outcomes. OpenAI has subpoenaed critics. Companies systematically suppress research that challenges the narrative of AI as unambiguously beneficial.</div></div>
+        </div>
+      </div>
+
+      <div class="branch c2" onclick="toggleBranch(this)">
+        <div class="branch-header"><span class="branch-icon">🔍</span><span class="branch-title">Inside OpenAI — The Sam Altman Story</span><span class="branch-chevron">▼</span></div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Why the board fired Altman</div><div class="leaf-detail">Ilya Sutskever's reported view — that Altman was not the right person to have "the finger on the button for AGI" — reflects a genuine safety concern. The board believed Altman was prioritising commercial growth over the safety-focused mission OpenAI was founded on. The firing was a governance crisis, not a personality clash.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Why employees revolted and brought him back</div><div class="leaf-detail">When staff threatened to follow Altman to Microsoft, it was not necessarily because they agreed with him — it was because their equity was tied to OpenAI's survival. The "revolt" was partly a financial calculation. Microsoft's involvement as the only investor gave them decisive leverage over the outcome.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Altman's true nature — neither villain nor hero</div><div class="leaf-detail">Hao resists casting Altman as simply evil. He is a product of Silicon Valley's growth-at-all-costs culture — genuinely believes in what he's building, is politically skilled, and is driven by a mixture of mission and empire-building that makes him both compelling and dangerous.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">OpenAI refused to engage with the book</div><div class="leaf-detail">OpenAI declined to participate in Hao's reporting. The company's refusal to engage with critical journalism while simultaneously claiming to be the most safety-conscious AI lab is itself revealing about how it manages its public narrative.</div></div>
+        </div>
+      </div>
+
+      <div class="branch c3" onclick="toggleBranch(this)">
+        <div class="branch-header"><span class="branch-icon">🎯</span><span class="branch-title">AGI — Marketing Scam or Real Goal?</span><span class="branch-chevron">▼</span></div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">AGI as a shifting definition — by design</div><div class="leaf-detail">The definition of AGI changes whenever AI systems get close to the current definition. This is not accidental. A perpetually receding goalpost justifies perpetual investment, perpetual urgency, and perpetual deference to the companies building it. It is a mechanism for maintaining power.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Used to justify trillion-dollar power consolidation</div><div class="leaf-detail">The AGI narrative creates a "we must move fast or be left behind" logic that overrides normal regulatory, ethical, and democratic checks. It is the most effective marketing concept in tech history — a speculative future product used to justify present-day power accumulation.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The US-China AI arms race — politically driven</div><div class="leaf-detail">Hao argues the framing of a US-China AI race is largely manufactured by companies lobbying for deregulation and government contracts. It creates a national security justification for moving fast and breaking things. The actual state of Chinese AI development is more nuanced than the arms race narrative suggests.</div></div>
+        </div>
+      </div>
+
+      <div class="branch c4" onclick="toggleBranch(this)">
+        <div class="branch-header"><span class="branch-icon">⚖️</span><span class="branch-title">The Hidden Human Cost</span><span class="branch-chevron">▼</span></div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Data labellers — the invisible workforce</div><div class="leaf-detail">AI models are trained on data labelled by human workers in Kenya, the Philippines, and other low-income countries — paid poverty wages to categorise violent, disturbing content and correct model errors. These workers are the hidden foundation of every AI product, and their exploitation is structural, not incidental.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Intellectual property seized without consent</div><div class="leaf-detail">Artists, writers, journalists, and creators have had their work scraped and used to train models without permission or payment. This is an unprecedented seizure of intellectual property at scale — one that courts are only beginning to grapple with. The companies' legal strategy is to move fast and settle later.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Environmental cost — land, water, energy</div><div class="leaf-detail">Data centres require massive amounts of water for cooling and energy for computing. Communities in Chile and elsewhere have had water rights threatened by AI infrastructure. The environmental footprint of AI development is largely hidden from the public discourse around AI's benefits.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Pentagon using AI for military strikes</div><div class="leaf-detail">Hao reveals that Claude (Anthropic's AI) has been used by the Pentagon for military applications. The fact that the most safety-focused AI company's product is being used for lethal military decision-making illustrates how abstract commitments to safety dissolve under commercial and government pressure.</div></div>
+        </div>
+      </div>
+
+      <div class="branch c5" onclick="toggleBranch(this)">
+        <div class="branch-header"><span class="branch-icon">🤖</span><span class="branch-title">The Future — Jobs, Automation & Control</span><span class="branch-chevron">▼</span></div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Agentic AI will automate desk jobs within 18 months</div><div class="leaf-detail">Hao takes seriously the near-term threat to white-collar work. Agentic AI systems — which can take sequences of actions autonomously — are already beginning to replace roles in legal research, data analysis, customer service, and coding. The timeline is months, not years.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Which jobs survive — and who gets left behind</div><div class="leaf-detail">Jobs requiring genuine human relationship, physical presence, creative judgment, and contextual wisdom are most resilient. Jobs involving pattern-matching, information retrieval, document processing, and repetitive decision-making are most vulnerable. The burden of displacement will fall most heavily on lower-income workers with fewer resources to adapt.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Self-improving AI — the control problem</div><div class="leaf-detail">AI systems that update themselves present a qualitative shift in the risk landscape. Once a system can improve its own capabilities, human oversight becomes progressively harder. Hao does not dismiss this concern as science fiction — she sees it as a genuine near-term governance challenge that companies are not equipped to manage.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Are we past the point of control?</div><div class="leaf-detail">Hao's honest answer is: possibly. The competitive dynamics between companies and between nations create a race-to-the-bottom on safety. No single actor — company, government, or regulator — has both the will and the power to slow the race. The question is whether democratic institutions can move fast enough.</div></div>
+        </div>
+      </div>
+
+      <div class="branch c6" onclick="toggleBranch(this)">
+        <div class="branch-header"><span class="branch-icon">🌍</span><span class="branch-title">What Should Happen — Hao's Prescription</span><span class="branch-chevron">▼</span></div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">A global, human-centred AI dialogue</div><div class="leaf-detail">The decisions being made by a handful of Silicon Valley companies will affect every human on earth. Hao argues those decisions must involve global democratic input — not just the US and China, and not just technologists. The people most affected by AI (workers, communities, artists) must have a voice in how it develops.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Politicians cannot be trusted to regulate alone</div><div class="leaf-detail">Most legislators lack the technical understanding to regulate AI effectively, and many are financially compromised by tech industry lobbying. Hao is not anti-regulation — she is pro-informed regulation, which requires building genuine technical capacity inside government and independent of industry.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">AI's cost to meaning, health and democracy</div><div class="leaf-detail">Beyond jobs, Hao is concerned about subtler harms: AI-mediated social interaction eroding human connection, AI-generated content flooding the information environment, and AI systems being used to concentrate political and economic power. These are civilisational risks that don't fit neatly into existing regulatory frameworks.</div></div>
+          <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The window for safe AI is closing</div><div class="leaf-detail">Hao's overall message is one of urgency without fatalism. It is still possible to build AI systems that distribute power rather than concentrate it, that pay their workers fairly, that respect intellectual property, and that are subject to democratic accountability. But the window is narrowing. The time to act is now.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="panel">
+  <div class="summary-wrap">
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--accent)"></span>Overview</h2>
+      <p>Investigative journalist Karen Hao — who spent years reporting on AI for the Wall Street Journal and MIT Technology Review, and interviewed over 300 people including 250 OpenAI insiders for her book "Empire of AI" — joins Steven Bartlett for one of the most important AI conversations of 2026. Her central argument: the public is being systematically misled about AI's capabilities, costs, and true motivations.</p>
+    </div>
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--accent)"></span>1 — AI Companies as Colonial Empires</h2>
+      <p>Hao's central metaphor — empire — is not rhetorical. She argues it is the only framework that captures all dimensions of what these companies do. Like colonial powers, they seize resources not their own: the creative work of artists and writers, the personal data of billions, the land and water of communities where data centres are built. They accumulate political power, suppress dissent, and frame their extraction as civilising progress.</p>
+      <p>The humanitarian language — "benefiting all of humanity," "the most important technology ever built" — functions as the modern equivalent of colonial mission statements. It provides moral cover for what is fundamentally an imperial project of power and resource accumulation.</p>
+    </div>
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--blue)"></span>2 — Inside OpenAI</h2>
+      <p>Drawing on 250 insider interviews, Hao reconstructs the internal dynamics of OpenAI with unprecedented detail. The firing of Sam Altman was a genuine governance crisis — the board, led by Ilya Sutskever, believed Altman was prioritising commercial scale over the safety mission the company was founded on. Sutskever reportedly said Altman should not have "the finger on the button for AGI."</p>
+      <p>Altman's reinstatement was driven less by employee loyalty than by financial self-interest — staff equity was tied to OpenAI's survival, and Microsoft's decisive investor leverage made the outcome almost inevitable once Altman threatened to take his team to Microsoft. The episode revealed how fragile OpenAI's safety-first governance actually was under commercial pressure.</p>
+    </div>
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--amber)"></span>3 — AGI as a Marketing Construct</h2>
+      <p>Hao argues that AGI — Artificial General Intelligence — functions primarily as a marketing and power-consolidation tool. Its definition shifts whenever AI systems approach the current goalposts, creating a perpetually receding horizon that justifies perpetual investment and perpetual deference to the companies building it. The US-China AI arms race narrative similarly serves to override democratic and regulatory checks in the name of national security.</p>
+    </div>
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--green)"></span>4 — The Hidden Human Cost</h2>
+      <p>The true cost of AI development is invisible to most users. Data labellers in Kenya and the Philippines — paid poverty wages to process violent content — are the hidden foundation of every AI product. Artists and creators have had their work seized without consent or compensation. Communities have had water rights threatened by data centre infrastructure. And Hao reveals that even Anthropic's Claude has been used by the Pentagon for military applications — illustrating how quickly abstract safety commitments dissolve under commercial and government pressure.</p>
+    </div>
+    <div class="sum-block">
+      <h2><span class="bar" style="background:var(--purple)"></span>5 — The Future of Work and Control</h2>
+      <p>Hao takes seriously the near-term automation threat to white-collar work — she believes agentic AI will replace significant categories of desk jobs within 18 months. The burden of displacement will fall most heavily on lower-income workers. On the question of control, she is sobering: the competitive dynamics between companies and nations create structural incentives to race rather than pause. The window for genuinely democratic, human-centred AI governance is open — but narrowing fast.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="takeaways-grid">
+    <div class="tw-card"><div class="tw-num">01</div><h3>Don't Take AI Company Claims at Face Value</h3><p>When AI companies announce breakthroughs, apply critical scrutiny. Ask: who benefits from this claim? What is the evidence? What is being left unsaid? The gap between marketing language and technical reality is large and deliberate.</p></div>
+    <div class="tw-card"><div class="tw-num">02</div><h3>Understand the True Cost of AI You Use</h3><p>Every AI tool you use has hidden costs: underpaid data labellers, stolen creative work, environmental impact. This doesn't mean don't use AI — but informed use is better than naive use. Support companies that pay data workers fairly and respect IP.</p></div>
+    <div class="tw-card"><div class="tw-num">03</div><h3>Treat AGI Headlines as Marketing, Not Science</h3><p>When you read that a company is "close to AGI," recognise it as a fundraising and influence tool. The definition of AGI shifts to stay permanently out of reach. Focus on what the system actually does today, not what it might become.</p></div>
+    <div class="tw-card"><div class="tw-num">04</div><h3>Audit Your Job's Vulnerability to Agentic AI</h3><p>Hao believes agentic AI will automate significant desk work within 18 months. Honestly assess which parts of your role involve pattern-matching and information retrieval (vulnerable) versus human judgment, relationship, and creativity (resilient). Act now, not when displacement arrives.</p></div>
+    <div class="tw-card"><div class="tw-num">05</div><h3>Build Skills That AI Cannot Replicate</h3><p>Genuine human connection, contextual wisdom, physical presence, ethical judgment, and creative risk-taking are the most durable skills. Invest in becoming more human, not in becoming a better AI operator.</p></div>
+    <div class="tw-card"><div class="tw-num">06</div><h3>Demand Elected Representatives Who Understand AI</h3><p>Most legislators are technically illiterate on AI and financially compromised by tech lobbying. Use your vote and your voice to demand representatives who have genuine technical understanding and who are not captured by industry money.</p></div>
+    <div class="tw-card"><div class="tw-num">07</div><h3>Support Independent AI Journalism and Research</h3><p>The most important accountability work on AI comes from independent journalists like Hao and researchers at universities free from industry funding. Subscribe, donate, share, and amplify this work. It is the early warning system for civilisational risks.</p></div>
+    <div class="tw-card"><div class="tw-num">08</div><h3>Be Sceptical of the US-China AI Arms Race Narrative</h3><p>The framing of an existential AI race between the US and China is largely manufactured to justify deregulation and government contracts. It creates false urgency that benefits companies, not citizens. Demand more nuanced public conversation.</p></div>
+    <div class="tw-card"><div class="tw-num">09</div><h3>Protect Human Connection Deliberately</h3><p>AI-mediated interaction is eroding the quality of human relationships at a civilisational scale. Hao sees this as one of AI's subtlest and most serious costs. Deliberately protect time for unmediated human connection — it is not a luxury, it is a necessity.</p></div>
+    <div class="tw-card"><div class="tw-num">10</div><h3>Act Now — The Window Is Closing</h3><p>Hao's overall message is urgent but not fatalistic. Democratic, human-centred AI is still possible — but the competitive dynamics are hardening fast. Engage with AI governance now: read, vote, speak, organise. Waiting for someone else to fix it is how we lose.</p></div>
+  </div>
+</div>
+
+<script>
+  function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+  function toggleBranch(el){el.classList.toggle('open')}
+  function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>

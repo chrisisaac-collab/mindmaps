@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Eagleman — The Brain | DOAC Mind Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --panel: #111118;
+    --border: #1e1e2e;
+    --accent: #e8c547;
+    --accent2: #5bc8af;
+    --accent3: #e87b5a;
+    --accent4: #9b7fe8;
+    --text: #d4d4e0;
+    --muted: #6b6b80;
+    --node-bg: #16161f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 2.5rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+  }
+  .kicker {
+    font-size: .7rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    letter-spacing: .04em;
+    line-height: 1;
+    color: #fff;
+  }
+  header p {
+    font-size: .85rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: .9rem 1.5rem;
+    font-size: .82rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    transition: all .2s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 2rem; }
+  .panel.active { display: block; }
+
+  /* ── MIND MAP ── */
+  .mindmap-container {
+    position: relative;
+    min-height: 600px;
+  }
+
+  .mind-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .root-node {
+    background: var(--accent);
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: .06em;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .branches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .branch {
+    background: var(--node-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color .2s, transform .2s;
+    cursor: pointer;
+  }
+  .branch:hover { transform: translateY(-2px); }
+
+  .branch-header {
+    padding: .9rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    border-bottom: 1px solid var(--border);
+    user-select: none;
+  }
+  .branch-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .branch-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: .06em;
+    flex: 1;
+  }
+  .branch-toggle {
+    font-size: .7rem;
+    color: var(--muted);
+    transition: transform .3s;
+    flex-shrink: 0;
+  }
+  .branch.open .branch-toggle { transform: rotate(180deg); }
+
+  .branch-body {
+    display: none;
+    padding: 1rem 1.2rem;
+  }
+  .branch.open .branch-body { display: block; }
+
+  .leaf {
+    padding: .6rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .leaf:last-child { border-bottom: none; }
+  .leaf-title {
+    font-size: .82rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: #c5c5d5;
+  }
+  .leaf-title::before {
+    content: '▸';
+    font-size: .6rem;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .leaf.open .leaf-title::before { transform: rotate(90deg); color: var(--accent); }
+  .leaf-detail {
+    display: none;
+    font-size: .78rem;
+    color: var(--muted);
+    line-height: 1.6;
+    padding: .5rem 0 .3rem 1rem;
+    font-style: italic;
+  }
+  .leaf.open .leaf-detail { display: block; }
+
+  .color-1 .branch-header { border-left: 3px solid var(--accent); }
+  .color-2 .branch-header { border-left: 3px solid var(--accent2); }
+  .color-3 .branch-header { border-left: 3px solid var(--accent3); }
+  .color-4 .branch-header { border-left: 3px solid var(--accent4); }
+  .color-5 .branch-header { border-left: 3px solid #e87b9a; }
+  .color-6 .branch-header { border-left: 3px solid #7be8c0; }
+
+  .color-1 .branch-title { color: var(--accent); }
+  .color-2 .branch-title { color: var(--accent2); }
+  .color-3 .branch-title { color: var(--accent3); }
+  .color-4 .branch-title { color: var(--accent4); }
+  .color-5 .branch-title { color: #e87b9a; }
+  .color-6 .branch-title { color: #7be8c0; }
+
+  /* ── SUMMARY ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 860px;
+  }
+
+  .sum-section {
+    background: var(--node-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .sum-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: .08em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .sum-section h2 .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .sum-section p {
+    font-size: .84rem;
+    line-height: 1.75;
+    color: #b0b0c8;
+    margin-bottom: .75rem;
+  }
+  .sum-section p:last-child { margin-bottom: 0; }
+
+  /* ── TAKEAWAYS ── */
+  .takeaways-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .takeaway-card {
+    background: var(--node-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .takeaway-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .takeaway-card:nth-child(1)::before { background: var(--accent); }
+  .takeaway-card:nth-child(2)::before { background: var(--accent2); }
+  .takeaway-card:nth-child(3)::before { background: var(--accent3); }
+  .takeaway-card:nth-child(4)::before { background: var(--accent4); }
+  .takeaway-card:nth-child(5)::before { background: #e87b9a; }
+  .takeaway-card:nth-child(6)::before { background: #7be8c0; }
+  .takeaway-card:nth-child(7)::before { background: var(--accent); }
+  .takeaway-card:nth-child(8)::before { background: var(--accent2); }
+  .takeaway-card:nth-child(9)::before { background: var(--accent3); }
+  .takeaway-card:nth-child(10)::before { background: var(--accent4); }
+
+  .takeaway-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--border);
+    margin-bottom: .4rem;
+  }
+  .takeaway-card h3 {
+    font-size: .82rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: .5rem;
+    line-height: 1.4;
+  }
+  .takeaway-card p {
+    font-size: .76rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* responsive */
+  @media (max-width: 600px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .tabs { padding: 0 1rem; }
+    .panel { padding: 1rem; }
+    .tab { padding: .7rem 1rem; font-size: .75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="kicker">The Diary of a CEO · Dr. David Eagleman · Apr 23, 2026</span>
+  <h1>Your Brain Is Not Who You Think It Is</h1>
+  <p>Stanford Neuroscientist reveals the purpose of dreams, the science of habit change, and how to use AI without losing your mind.</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">📖 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">⚡ Actionable Takeaways</button>
+</nav>
+
+<!-- ═══════════════════ MIND MAP ═══════════════════ -->
+<div id="mindmap" class="panel active">
+  <div class="mind-root">
+    <div class="root-node">DR. DAVID EAGLEMAN — THE BRAIN</div>
+    <div class="branches">
+
+      <!-- 1 -->
+      <div class="branch color-1" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🏛️</span>
+          <span class="branch-title">You Are a Neural Parliament</span>
+          <span class="branch-toggle">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">86 billion neurons in competing networks</div>
+            <div class="leaf-detail">Different neural coalitions constantly vote on your behaviour. The "winning" coalition at any given moment determines your action — this is why you argue with yourself.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The "Team of Rivals" model of self</div>
+            <div class="leaf-detail">You are not one person. You are a parliament of sub-selves — part of you wants the cookie, part wants to diet, part wants to compromise. Self-control is a political problem, not a moral one.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Ulysses Contracts — pre-commit your future self</div>
+            <div class="leaf-detail">Remove temptation before the bad coalition gets a vote. AA clears alcohol from the house. You delete the app before deep work. Automated savings remove the decision entirely. Structure your environment, not your willpower.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">"Know thyself" as a practical strategy</div>
+            <div class="leaf-detail">Review your own past behaviour honestly. Notice which contexts trigger which sub-self. That self-knowledge is the foundation of every lasting behaviour change.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="branch color-2" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🔄</span>
+          <span class="branch-title">Brain Plasticity — You Can Rewire Yourself</span>
+          <span class="branch-toggle">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Fluid vs. Crystallised Intelligence</div>
+            <div class="leaf-detail">Fluid intelligence (raw learning ability) peaks at ~age 2. Crystallised intelligence (accumulated expertise) grows with age. Adults aren't less plastic — their brains just don't need to change as often.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Physical proof: pianists, taxi drivers</div>
+            <div class="leaf-detail">London cab drivers grow a larger posterior hippocampus from memorising 25,000 streets. Pianists develop enlarged motor cortex areas for finger control. What you practise physically reshapes the brain.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Critical periods — doors that close</div>
+            <div class="leaf-detail">Language concepts must be acquired in early childhood. Romanian orphans denied social interaction developed permanent cognitive deficits. Some plasticity windows do shut — use them early.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Adults can still change — the key is challenge</div>
+            <div class="leaf-detail">The brain stops changing when it doesn't need to. Novel, difficult experiences force it to rebuild its model of the world. The pandemic — for all its horror — demonstrated that adults can massively adapt when circumstances demand it.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The "sculptor" metaphor</div>
+            <div class="leaf-detail">You are the sculptor of your own brain. Every repeated behaviour carves neural pathways. You choose which pathways to deepen through deliberate practice and challenge.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="branch color-3" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">😴</span>
+          <span class="branch-title">Why We Dream — The Defensive Activation Theory</span>
+          <span class="branch-toggle">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The visual cortex is under siege every night</div>
+            <div class="leaf-detail">When your eyes close, your visual cortex receives no input. Within just 60 minutes (Harvard blindfold study), other senses — touch, hearing — begin colonising visual territory. This happens every single night.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Dreams are a biological fire drill</div>
+            <div class="leaf-detail">Ancient brainstem circuits fire random electrical signals into the visual cortex during REM sleep every ~90 minutes. This "defensive activation" repels the sensory takeover and preserves your visual system.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Dream narratives are a side effect</div>
+            <div class="leaf-detail">The brain is a compulsive pattern-matcher. It takes the random defensive signals and weaves them into stories — which we call dreams. The story is not the point; the activation is.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">REM sleep ∝ brain plasticity across species</div>
+            <div class="leaf-detail">Human infants spend ~50% of sleep in REM (high plasticity). Adults ~20%. Animals with more plastic brains get more REM. Dreaming is not a quirk — it is essential maintenance.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Not remembering dreams ≠ not dreaming</div>
+            <div class="leaf-detail">Dream memory is a separate process from having the dream. You are almost certainly defending your visual cortex every night whether you recall it or not. However, consistently no REM sleep is a warning sign.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="branch color-4" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🤖</span>
+          <span class="branch-title">AI — Amplifier or Atrophy Machine?</span>
+          <span class="branch-toggle">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Virtuous vs. Vicious Friction</div>
+            <div class="leaf-detail">Vicious friction = tedious repetitive tasks (data entry, formatting). Automate these. Virtuous friction = hard, novel thinking challenges. Do NOT outsource these — they are what keeps your brain plastic. The danger of AI is eliminating both indiscriminately.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Use AI as a brutally honest critic</div>
+            <div class="leaf-detail">Don't ask AI to validate you. Ask it to find flaws in your plan, play devil's advocate, identify your blind spots. The pressure-free private dialogue sharpens critical thinking faster than most human conversations.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">AI is a "motorcycle for the mind"</div>
+            <div class="leaf-detail">Like the motorcycle amplifies the human body's travel ability, AI amplifies cognitive capacity. The direction of amplification depends entirely on how you use it. It can make you sharper or lazier — you decide.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">AI remixes — humans select</div>
+            <div class="leaf-detail">AI is excellent at generating novel combinations from existing data. It lacks human discernment: knowing which creation will resonate, matter, or endure. That curatorial faculty — taste — remains distinctly human.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Social media's effect: narrowing, polarising</div>
+            <div class="leaf-detail">Engagement algorithms feed you content confirming existing beliefs, narrowing your neural model of the world rather than expanding it. Actively seeking content that challenges your worldview is now a deliberate, counter-cultural act.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="branch color-5" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🧩</span>
+          <span class="branch-title">Cognitive Reserve & Ageing Well</span>
+          <span class="branch-toggle">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The Catholic Nuns Study</div>
+            <div class="leaf-detail">Nuns who remained intellectually and socially active stayed cognitively sharp into old age — even when their post-mortem brains showed full Alzheimer's pathology. Their mental challenge had built resilience that masked the disease.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Retirement can accelerate cognitive decline</div>
+            <div class="leaf-detail">Early retirement cuts off the messy, effortful social interactions that drive plasticity. Studies suggest early retirement is correlated with earlier death and faster cognitive decline. Stay engaged.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">"Nothing is as hard for the brain as other people"</div>
+            <div class="leaf-detail">Human social interaction demands empathy, negotiation, emotional reading, and real-time adaptation — making it one of the most powerful drivers of brain plasticity. Isolation is cognitively damaging.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The sweet spot: between frustration and achievement</div>
+            <div class="leaf-detail">The optimal zone for brain growth is tasks that are hard but achievable — the edge of your ability. Too easy = no growth. Too hard = shutdown. Seek that edge deliberately and consistently.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="branch color-6" onclick="toggleBranch(this)">
+        <div class="branch-header">
+          <span class="branch-icon">🌍</span>
+          <span class="branch-title">The Next 10 Years & Human Connection</span>
+          <span class="branch-toggle">▼</span>
+        </div>
+        <div class="branch-body">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Real-world experiences making a comeback</div>
+            <div class="leaf-detail">After a decade of digital-first living, people are seeking tactile, embodied, offline experiences — live events, crafts, physical community. This is a neurological craving for the full-sensory engagement screens can't provide.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Human brains are radically individual</div>
+            <div class="leaf-detail">Aphantasia (no visual imagery) vs. Hyperfantasia (ultra-vivid imagery) — most people don't know where they sit on this spectrum. Brain differences are vast and often invisible. There is no single "right" way for a brain to work.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The social media company of 2026</div>
+            <div class="leaf-detail">Eagleman predicts a market opportunity for a platform designed not for engagement at any cost, but to connect people on shared interests — then slowly introduce differing opinions to reduce polarisation. Algorithm design as a public health tool.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Human connection more critical than ever</div>
+            <div class="leaf-detail">In an AI-saturated world, the irreplaceable value is genuine human relationship — unpredictable, effortful, and neurologically nourishing in ways no algorithm can replicate. Protect and prioritise it.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ SUMMARY ═══════════════════ -->
+<div id="summary" class="panel">
+  <div class="summary-grid">
+
+    <div class="sum-section">
+      <h2><span class="dot" style="background:var(--accent)"></span>Overview</h2>
+      <p>Stanford neuroscientist Dr. David Eagleman joins Steven Bartlett to challenge almost every assumption we hold about how our minds work. Across 93 minutes, Eagleman builds one coherent argument: the brain is not a fixed, unified "you" — it is a living, competitive, constantly rewiring system. Everything else in the episode flows from that premise.</p>
+    </div>
+
+    <div class="sum-section">
+      <h2><span class="dot" style="background:var(--accent)"></span>1 — You Are a Neural Parliament</h2>
+      <p>Eagleman opens by dismantling the illusion of a single self. Your 86 billion neurons form competing networks — coalitions with different drives, time horizons, and values. When you "argue with yourself" about eating the cookie or skipping the gym, that is a genuine political contest between neural sub-selves. The winner at any moment determines your action.</p>
+      <p>The practical implication is the Ulysses Contract: bind your future self now, before the wrong coalition is in power. Clear the alcohol from the house, delete the app, set up the automatic savings transfer. These pre-commitments bypass the internal vote entirely by changing the environment rather than fighting willpower.</p>
+    </div>
+
+    <div class="sum-section">
+      <h2><span class="dot" style="background:var(--accent2)"></span>2 — Brain Plasticity: You Really Can Change</h2>
+      <p>The brain is "livewired" — it physically restructures itself in response to what you do. London cab drivers grow larger hippocampi. Pianists grow enlarged motor cortexes. Blind people repurpose their visual cortex for touch. This is not metaphor; it is measurable anatomy.</p>
+      <p>Fluid intelligence (learn-anything ability) peaks around age 2, then slowly shifts to crystallised intelligence (expertise and accumulated knowledge). But plasticity never stops — it just activates less because the brain doesn't need to change. Novel challenge is the key that unlocks it again in adulthood. The pandemic, for all its damage, was a forced plasticity event: everyone had to remodel their mental map of the world.</p>
+    </div>
+
+    <div class="sum-section">
+      <h2><span class="dot" style="background:var(--accent3)"></span>3 — Why We Dream (The Defensive Activation Theory)</h2>
+      <p>This is the episode's most striking insight. Every night, when your eyes close, your visual cortex goes dark. Within 60 minutes — proven in a Harvard blindfold experiment — other senses begin colonising that unused neural territory. Without intervention, hearing and touch would gradually take over the visual cortex, degrading sight.</p>
+      <p>The brain's solution, evolved over millions of years, is dreaming. Ancient brainstem circuits fire random electrical bursts into the visual cortex every ~90 minutes during REM sleep — a biological fire drill that repels sensory invasion and preserves visual territory. The narrative we experience as a dream is simply the brain's pattern-matching machinery making sense of those random signals. The dream story is a side effect; the defensive activation is the point.</p>
+      <p>More plastic brains get more REM. Human infants spend ~50% of sleep in REM; adults ~20%. Not remembering your dreams doesn't mean you're not having them — but consistently poor REM sleep is a genuine structural warning.</p>
+    </div>
+
+    <div class="sum-section">
+      <h2><span class="dot" style="background:var(--accent4)"></span>4 — AI: Cognitive Amplifier or Atrophy Machine?</h2>
+      <p>Eagleman is genuinely optimistic about AI — he calls it a "motorcycle for the mind." But the direction of amplification depends entirely on how you use it. He draws the crucial distinction between vicious friction (tedious, repetitive tasks — automate these without guilt) and virtuous friction (hard, novel cognitive challenges — protect these fiercely).</p>
+      <p>The danger is treating AI as a way to avoid all friction. Outsourcing your thinking also outsources your brain's exercise. The optimal approach: use AI as a brutally honest critic. Ask it to attack your plan, find your blind spots, steelman the counter-argument. That form of engagement deepens thinking rather than replacing it.</p>
+      <p>On creativity: AI excels at generating novel recombinations of existing data but lacks human taste — the curatorial faculty that knows which creation will matter. That selection ability remains distinctly human for now.</p>
+    </div>
+
+    <div class="sum-section">
+      <h2><span class="dot" style="background:#e87b9a)"></span>5 — Cognitive Reserve, Ageing, and the Power of Social Challenge</h2>
+      <p>The famous Catholic nuns study found that women who remained intellectually and socially active stayed cognitively sharp into very old age — even when autopsy revealed their brains had full Alzheimer's pathology. They had built such deep cognitive reserve that the disease had nothing to grip.</p>
+      <p>The single most demanding cognitive activity, Eagleman argues, is other people. Human social interaction — with its real-time demands on empathy, negotiation, and emotional reading — is one of the most powerful plasticity drivers available. Early retirement severs exactly those interactions, which may explain why it correlates with faster cognitive decline and earlier mortality. Stay socially and mentally engaged as long as possible.</p>
+    </div>
+
+    <div class="sum-section">
+      <h2><span class="dot" style="background:#7be8c0"></span>6 — The Future: Connection as the Scarcest Resource</h2>
+      <p>Eagleman closes with a forward-looking view. As AI handles more cognitive tasks and screens mediate more interaction, the neurologically irreplaceable resource becomes genuine human connection — unpredictable, effortful, and deeply nourishing. He predicts a strong cultural counter-movement toward tactile, embodied, offline experience and sees a market opportunity for social platforms designed not to maximise engagement at any cost but to reduce polarisation and build real relationships.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════ TAKEAWAYS ═══════════════════ -->
+<div id="takeaways" class="panel">
+  <div class="takeaways-grid">
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">01</div>
+      <h3>Build Ulysses Contracts, Not Willpower</h3>
+      <p>Before the "wrong" version of you is in charge, remove the temptation. Clear junk food, delete the app, set the automatic transfer. Pre-commitment is neurologically superior to in-the-moment resistance.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">02</div>
+      <h3>Audit Your Self-Knowledge Honestly</h3>
+      <p>Review your past behaviour across contexts. Notice which situations trigger which sub-self. The ancient instruction "know thyself" is a practical neuroscience tool, not a philosophical platitude.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">03</div>
+      <h3>Seek the Frustration–Achievement Edge</h3>
+      <p>The optimal zone for brain rewiring is tasks that are hard but achievable. Deliberately put yourself at your ability limit — in skills, sports, conversations, creative work — and stay there regularly.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">04</div>
+      <h3>Protect Your REM Sleep</h3>
+      <p>Sleep is not rest — it is structural maintenance for your visual system and overall brain health. Consistently poor REM sleep allows sensory takeover of your visual cortex. Treat sleep quality as non-negotiable.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">05</div>
+      <h3>Use AI to Attack Your Ideas, Not Confirm Them</h3>
+      <p>Prompt AI to find flaws, steelman opponents, and identify assumptions you've missed. This adversarial use sharpens thinking. Using AI to validate what you already believe is cognitively worthless.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">06</div>
+      <h3>Distinguish Virtuous from Vicious Friction</h3>
+      <p>Automate tedious repetitive tasks (vicious friction). Protect hard, novel thinking challenges (virtuous friction). If AI is eliminating the challenges that make you think, it is shrinking your brain, not expanding it.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">07</div>
+      <h3>Never Fully Retire Your Mind</h3>
+      <p>Social engagement and intellectual challenge are the best-evidenced interventions against cognitive decline. Retirement from work does not have to mean retirement from demanding mental and social activity. Build cognitive reserve early.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">08</div>
+      <h3>Treat Other People as Brain Training</h3>
+      <p>Human social interaction is among the most cognitively demanding activities available. Unpredictable, emotionally complex relationships are neurologically nourishing in ways no algorithm can replicate. Prioritise face-to-face connection.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">09</div>
+      <h3>Actively Counteract Your Algorithm's Narrowing Effect</h3>
+      <p>Social media feeds are engineered to narrow your mental model. Deliberately seek content, people, and experiences that contradict your existing worldview to keep your brain's model of reality wide and plastic.</p>
+    </div>
+
+    <div class="takeaway-card">
+      <div class="takeaway-num">10</div>
+      <h3>Pursue Novelty as a Health Strategy</h3>
+      <p>New experiences — new routes, new skills, new languages, new social contexts — force the brain to rebuild its models. Novelty is not entertainment; it is one of the most evidence-backed tools for maintaining cognitive flexibility across a lifetime.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleBranch(el) {
+    // Don't toggle if clicking a leaf
+    el.classList.toggle('open');
+  }
+
+  function toggleLeaf(e, el) {
+    e.stopPropagation();
+    el.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

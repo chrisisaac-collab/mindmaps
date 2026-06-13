@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Insulin Tricks – Dr Mike Diamonds</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #f0a500;
+    --c1: #e05c5c; /* Dawn Phenomenon */
+    --c2: #5c9ee0; /* Fasted Morning Walk */
+    --c3: #f0a500; /* Morning Sunlight */
+    --c4: #5ce07a; /* Protein-First Breakfast */
+    --c5: #c05ce0; /* Overnight Fasting Window */
+    --c6: #e08c5c; /* Insulin Resistance */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    padding: 2rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .episode-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.2rem, 4vw, 1.75rem);
+    line-height: 1.2;
+    color: var(--text);
+  }
+  header p {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ===== MIND MAP ===== */
+  #map { padding: 1.25rem 1rem 2rem; }
+  .map-intro {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--surface2);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+  }
+  .central-node {
+    background: linear-gradient(135deg, #1c2330, #252d3a);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+  .central-node .cn-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .central-node h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    line-height: 1.25;
+    color: var(--text);
+  }
+  .central-node .cn-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* BRANCHES */
+  .branch {
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .branch-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    background: var(--surface);
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .branch-header:hover { background: var(--surface2); }
+  .branch-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .branch-title {
+    flex: 1;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+  .branch-tag {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    opacity: 0.85;
+  }
+  .branch-arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+    transition: transform 0.25s;
+    margin-left: 0.25rem;
+  }
+  .branch.open .branch-arrow { transform: rotate(90deg); }
+  .branch-leaves { display: none; background: var(--surface2); }
+  .branch.open .branch-leaves { display: block; }
+
+  /* LEAVES */
+  .leaf {
+    border-top: 1px solid var(--border);
+  }
+  .leaf-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .leaf-header:hover { background: rgba(255,255,255,0.03); }
+  .leaf-icon { font-size: 0.85rem; margin-top: 0.05rem; flex-shrink: 0; }
+  .leaf-title { font-size: 0.8rem; font-weight: 500; flex: 1; line-height: 1.3; }
+  .leaf-toggle { font-size: 0.65rem; color: var(--muted); transition: transform 0.2s; margin-top: 0.1rem; }
+  .leaf.open .leaf-toggle { transform: rotate(90deg); }
+  .leaf-detail {
+    display: none;
+    padding: 0 1rem 0.85rem 2.35rem;
+    font-size: 0.76rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+  .leaf.open .leaf-detail { display: block; }
+
+  /* ===== SUMMARY ===== */
+  #summary { padding: 1.25rem 1rem 3rem; }
+  .summary-section {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-section:last-child { border-bottom: none; }
+  .summary-section h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .s-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .summary-section p {
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: #c9d1d9;
+  }
+
+  /* ===== TAKEAWAYS ===== */
+  #takeaways { padding: 1.25rem 1rem 3rem; }
+  .takeaways-intro {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .takeaway-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .takeaway-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 1.8rem;
+    text-align: right;
+  }
+  .takeaway-body {}
+  .takeaway-body strong {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text);
+  }
+  .takeaway-body p {
+    font-size: 0.76rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="episode-label">Doctor Mike Diamonds · Jun 2026</div>
+  <h1>#1 Morning Insulin Trick to Lose Weight Faster</h1>
+  <p>4 science-backed morning habits to lower insulin, improve sensitivity &amp; prime fat burning</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('map', this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+</div>
+
+<!-- ===== MIND MAP PANEL ===== -->
+<div id="map" class="panel active">
+  <div class="map-intro">Tap a branch to expand · tap a leaf for detail</div>
+
+  <div class="central-node">
+    <div class="cn-label">Core Concept</div>
+    <h2>Your body starts storing fat before breakfast even begins</h2>
+    <div class="cn-sub">Insulin — not calories — is the primary switch for belly fat. Control it in the morning and fat burning follows.</div>
+  </div>
+
+  <!-- Branch 1: Dawn Phenomenon -->
+  <div class="branch" id="b1">
+    <div class="branch-header" onclick="toggleBranch(document.getElementById('b1'))">
+      <div class="branch-dot" style="background:var(--c1)"></div>
+      <span class="branch-title">The Dawn Phenomenon</span>
+      <span class="branch-tag" style="background:rgba(224,92,92,0.15);color:var(--c1)">Root Cause</span>
+      <span class="branch-arrow">▶</span>
+    </div>
+    <div class="branch-leaves">
+
+      <div class="leaf" id="l1-1">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l1-1'))">
+          <span class="leaf-icon">🌅</span>
+          <span class="leaf-title">What is the Dawn Phenomenon?</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Between roughly 3–8am your body naturally releases cortisol, growth hormone, glucagon and epinephrine. These counter-regulatory hormones raise blood glucose even before you eat a single bite — a process designed to fuel waking. In insulin-sensitive people, a compensating insulin pulse keeps levels in check. In those with insulin resistance, that compensating pulse is insufficient and blood sugar climbs unchecked, driving fat storage before breakfast begins.</div>
+      </div>
+
+      <div class="leaf" id="l1-2">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l1-2'))">
+          <span class="leaf-icon">📉</span>
+          <span class="leaf-title">Why it silently blocks fat loss</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Elevated morning insulin — even from hormonal signalling rather than food — locks fat cells in storage mode. Lipolysis (the release of stored fat as fuel) is suppressed whenever insulin is high. If your fasting glucose is elevated every morning, your body spends those crucial early hours storing rather than burning, creating a daily compounding deficit against your weight loss goals.</div>
+      </div>
+
+      <div class="leaf" id="l1-3">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l1-3'))">
+          <span class="leaf-icon">🩸</span>
+          <span class="leaf-title">Who is most affected?</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">People with insulin resistance, pre-diabetes, type 2 diabetes, or even those who are metabolically healthy but carry excess visceral fat commonly experience amplified dawn phenomenon. The worse insulin sensitivity is, the more pronounced the morning glucose spike. Dr Diamonds argues this means stubborn belly fat and morning fatigue are often downstream symptoms of this pre-breakfast hormonal pattern.</div>
+      </div>
+
+      <div class="leaf" id="l1-4">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l1-4'))">
+          <span class="leaf-icon">🔁</span>
+          <span class="leaf-title">The vicious cycle</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Poor sleep, high stress, and a high-carbohydrate dinner all amplify the dawn phenomenon the following morning. This means lifestyle choices the evening before directly determine how fat-burning-friendly your morning hormonal environment will be. Breaking the cycle requires deliberate morning interventions — which is exactly what the four tricks address.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 2: Fasted Morning Walk -->
+  <div class="branch" id="b2">
+    <div class="branch-header" onclick="toggleBranch(document.getElementById('b2'))">
+      <div class="branch-dot" style="background:var(--c2)"></div>
+      <span class="branch-title">Trick 1 — Fasted Morning Walk</span>
+      <span class="branch-tag" style="background:rgba(92,158,224,0.15);color:var(--c2)">10 min · 2× fat burn</span>
+      <span class="branch-arrow">▶</span>
+    </div>
+    <div class="branch-leaves">
+
+      <div class="leaf" id="l2-1">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l2-1'))">
+          <span class="leaf-icon">🚶</span>
+          <span class="leaf-title">Why fasted exercise burns more fat</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">When you exercise in a fasted state, insulin is at its lowest point of the day. Without insulin suppressing fat release, the body defaults to burning stored fatty acids as fuel. Research comparing fasted vs. fed morning exercise consistently shows greater fat oxidation in the fasted condition, with some studies finding roughly double the fat burned during the same duration and intensity of walking.</div>
+      </div>
+
+      <div class="leaf" id="l2-2">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l2-2'))">
+          <span class="leaf-icon">⚡</span>
+          <span class="leaf-title">How muscle uptake counters the dawn spike</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Exercise activates GLUT4 transporters in muscle cells independently of insulin — meaning working muscle can pull glucose out of the bloodstream without needing an insulin signal. A brisk 10-minute walk is enough to meaningfully reduce the morning blood glucose surge from the dawn phenomenon, blunting the accompanying insulin spike and keeping fat-burning pathways open longer.</div>
+      </div>
+
+      <div class="leaf" id="l2-3">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l2-3'))">
+          <span class="leaf-icon">📊</span>
+          <span class="leaf-title">AMPK activation — the metabolic switch</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Fasted morning exercise upregulates AMPK (AMP-activated protein kinase), which is essentially a cellular energy sensor that promotes fat oxidation and improves long-term insulin sensitivity. Research shows AMPK signalling is stronger in fasted vs. fed exercise, meaning your morning walk does more than burn fat in the moment — it trains the metabolism to be more fat-burning-efficient throughout the day.</div>
+      </div>
+
+      <div class="leaf" id="l2-4">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l2-4'))">
+          <span class="leaf-icon">🎯</span>
+          <span class="leaf-title">Practical implementation</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">The key is keeping it low-to-moderate intensity — a brisk walk, not a run. High-intensity fasted exercise can spike cortisol, which counterproductively raises blood glucose. 10–20 minutes is sufficient to get the metabolic effect. Walking outdoors also combines this trick with the sunlight exposure habit (Trick 2), compounding the benefit in a single activity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 3: Morning Sunlight -->
+  <div class="branch" id="b3">
+    <div class="branch-header" onclick="toggleBranch(document.getElementById('b3'))">
+      <div class="branch-dot" style="background:var(--c3)"></div>
+      <span class="branch-title">Trick 2 — Morning Sunlight Exposure</span>
+      <span class="branch-tag" style="background:rgba(240,165,0,0.15);color:var(--c3)">Circadian Reset</span>
+      <span class="branch-arrow">▶</span>
+    </div>
+    <div class="branch-leaves">
+
+      <div class="leaf" id="l3-1">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l3-1'))">
+          <span class="leaf-icon">☀️</span>
+          <span class="leaf-title">Sunlight anchors your circadian metabolism</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Light hitting the retina in the morning sends a signal to the suprachiasmatic nucleus (the brain's master clock), which then synchronises peripheral clocks in the liver, muscle, and adipose tissue. These peripheral clocks govern insulin sensitivity, which follows a pronounced circadian rhythm — being naturally better in the morning and worse at night. Consistent morning light anchors this pattern and maximises the window of peak insulin sensitivity.</div>
+      </div>
+
+      <div class="leaf" id="l3-2">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l3-2'))">
+          <span class="leaf-icon">😴</span>
+          <span class="leaf-title">Cortisol timing and fat storage</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Morning light triggers a healthy, sharp cortisol peak known as the Cortisol Awakening Response (CAR). This morning cortisol pulse is actually beneficial — it mobilises energy, clears the residual dawn glucose, and sets a healthy hormonal rhythm. Without it (from chronic indoor living or delayed light exposure), cortisol peaks are blunted or delayed, disrupting the metabolic cascade that follows and worsening fat storage patterns.</div>
+      </div>
+
+      <div class="leaf" id="l3-3">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l3-3'))">
+          <span class="leaf-icon">🧬</span>
+          <span class="leaf-title">Melatonin clearance and insulin sensitivity</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Melatonin suppresses insulin secretion through melatonin receptors on pancreatic beta cells. Bright morning light rapidly clears residual melatonin, allowing full insulin function to resume. People who stay in dim indoor light on waking have a slower melatonin clearance, keeping their insulin response blunted during a period when glucose is already rising from the dawn phenomenon — a double hit on metabolic function.</div>
+      </div>
+
+      <div class="leaf" id="l3-4">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l3-4'))">
+          <span class="leaf-icon">⏱️</span>
+          <span class="leaf-title">How much exposure is needed?</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Dr Diamonds recommends 5–10 minutes of direct outdoor light within the first 30–60 minutes of waking. On overcast days, the light intensity is still 10–50× greater than indoor lighting, making outdoor exposure important even in Melbourne winters. The fasted morning walk naturally achieves this simultaneously, making the two tricks synergistic when done together outdoors.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 4: Protein-First Breakfast -->
+  <div class="branch" id="b4">
+    <div class="branch-header" onclick="toggleBranch(document.getElementById('b4'))">
+      <div class="branch-dot" style="background:var(--c4)"></div>
+      <span class="branch-title">Trick 3 — Protein-First Breakfast</span>
+      <span class="branch-tag" style="background:rgba(92,224,122,0.15);color:var(--c4)">Natural GLP-1 Boost</span>
+      <span class="branch-arrow">▶</span>
+    </div>
+    <div class="branch-leaves">
+
+      <div class="leaf" id="l4-1">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l4-1'))">
+          <span class="leaf-icon">🥚</span>
+          <span class="leaf-title">Protein triggers GLP-1 — the Ozempic hormone</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">GLP-1 (glucagon-like peptide-1) is an incretin hormone released from the gut in response to food. It stimulates insulin secretion, suppresses glucagon, slows gastric emptying, and powerfully reduces appetite — the same mechanism targeted by Ozempic and Wegovy. A high-protein breakfast drives a stronger GLP-1 response than a carbohydrate-dominant meal, giving you a natural version of the drug's appetite-suppressing and glucose-controlling effects at no cost.</div>
+      </div>
+
+      <div class="leaf" id="l4-2">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l4-2'))">
+          <span class="leaf-icon">📉</span>
+          <span class="leaf-title">Blunting the post-breakfast glucose spike</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Research comparing protein-rich vs. carbohydrate-rich breakfasts in type 2 diabetics found that protein-first meals produced significantly lower post-breakfast glucose and GIP (another incretin) area-under-the-curve. Slower gastric emptying from protein means glucose enters the bloodstream more gradually, producing a lower insulin demand and preserving the fat-burning window for longer after eating.</div>
+      </div>
+
+      <div class="leaf" id="l4-3">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l4-3'))">
+          <span class="leaf-icon">💪</span>
+          <span class="leaf-title">Muscle preservation during weight loss</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">A high-protein breakfast takes advantage of the post-exercise anabolic window if you've done a fasted walk. Research shows protein intake at breakfast may more effectively preserve muscle mass than protein consumed later in the day, particularly during weight loss phases. Maintaining muscle is critical because muscle tissue is the body's largest site of insulin-mediated glucose disposal — more muscle means better insulin sensitivity long-term.</div>
+      </div>
+
+      <div class="leaf" id="l4-4">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l4-4'))">
+          <span class="leaf-icon">🍳</span>
+          <span class="leaf-title">Practical protein targets and food choices</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Dr Diamonds recommends targeting 30–40g of protein at breakfast. Eggs are ideal — whole eggs provide high bioavailability protein alongside choline, which supports liver fat metabolism. Greek yoghurt, smoked salmon, or a protein shake with minimal carbohydrates all work. The key principle is protein before carbohydrates — even eating in the correct sequence at the same meal (protein and fat first, carbs last) can reduce the glucose spike by up to 30%.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 5: Overnight Fasting Window -->
+  <div class="branch" id="b5">
+    <div class="branch-header" onclick="toggleBranch(document.getElementById('b5'))">
+      <div class="branch-dot" style="background:var(--c5)"></div>
+      <span class="branch-title">Trick 4 — Overnight Fasting Window</span>
+      <span class="branch-tag" style="background:rgba(192,92,224,0.15);color:var(--c5)">Insulin Reset</span>
+      <span class="branch-arrow">▶</span>
+    </div>
+    <div class="branch-leaves">
+
+      <div class="leaf" id="l5-1">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l5-1'))">
+          <span class="leaf-icon">⏰</span>
+          <span class="leaf-title">The 12-hour minimum fasting window</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Dr Diamonds describes the overnight fasting window not as extreme intermittent fasting but as a strategic minimum. A 12-hour window (e.g., finishing dinner by 7pm and eating breakfast at 7am) is sufficient to allow insulin to return to true baseline, deplete liver glycogen partially, and shift the body into a fat-oxidising metabolic state. This is not about skipping meals — it's about not eating late at night, which most people can achieve without difficulty.</div>
+      </div>
+
+      <div class="leaf" id="l5-2">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l5-2'))">
+          <span class="leaf-icon">🏭</span>
+          <span class="leaf-title">Liver glycogen depletion and fat burning</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">After 10–12 hours without eating, liver glycogen stores become partially depleted. This is significant because a full liver glycogen store suppresses fat oxidation — the liver preferentially burns sugar before releasing fat. As glycogen drops, the liver increasingly converts fatty acids into ketone bodies, signalling body-wide fat-burning. The fasted morning walk then deepens this depletion further, amplifying the fat-burning response.</div>
+      </div>
+
+      <div class="leaf" id="l5-3">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l5-3'))">
+          <span class="leaf-icon">🕐</span>
+          <span class="leaf-title">Why late-night eating is particularly damaging</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Insulin sensitivity follows a circadian rhythm, declining significantly in the evening — your muscles and liver are less responsive to insulin at 9pm than at 9am. The same meal eaten late at night produces a higher and more prolonged insulin spike than eaten at breakfast. Late eating means insulin is still elevated when the dawn phenomenon kicks in, compounding the morning glucose problem and shortening the overnight fat-burning window.</div>
+      </div>
+
+      <div class="leaf" id="l5-4">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l5-4'))">
+          <span class="leaf-icon">🌙</span>
+          <span class="leaf-title">Sleep quality as a metabolic tool</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Sleep deprivation acutely worsens insulin resistance — a single night of poor sleep can reduce insulin sensitivity by up to 25%. During the fasting window, deep sleep also drives the release of growth hormone, which promotes fat mobilisation and muscle repair simultaneously. Protecting the overnight fast therefore means protecting sleep quality — finishing eating early enough to allow full digestion before bed improves both sleep architecture and the metabolic reset it enables.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branch 6: The Compounding Effect -->
+  <div class="branch" id="b6">
+    <div class="branch-header" onclick="toggleBranch(document.getElementById('b6'))">
+      <div class="branch-dot" style="background:var(--c6)"></div>
+      <span class="branch-title">How the 4 Tricks Stack Together</span>
+      <span class="branch-tag" style="background:rgba(224,140,92,0.15);color:var(--c6)">Compounding Effect</span>
+      <span class="branch-arrow">▶</span>
+    </div>
+    <div class="branch-leaves">
+
+      <div class="leaf" id="l6-1">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l6-1'))">
+          <span class="leaf-icon">🔗</span>
+          <span class="leaf-title">Why they work synergistically</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Each trick works independently, but their combined effect is multiplicative. The overnight fast depletes glycogen → the fasted walk accelerates fat oxidation in that depleted state → sunlight resets the circadian insulin clock → protein breakfast sustains low insulin while providing satiety and muscle fuel. Together they create a full-morning hormonal environment optimised for fat burning, with each step reinforcing the next.</div>
+      </div>
+
+      <div class="leaf" id="l6-2">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l6-2'))">
+          <span class="leaf-icon">📅</span>
+          <span class="leaf-title">Consistency matters more than perfection</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">Dr Diamonds emphasises that these habits work through cumulative biological adaptation. After several weeks, insulin sensitivity measurably improves, the dawn phenomenon weakens, and the morning fat-burning window naturally extends. Missing one day has minimal impact; inconsistency over weeks matters far more. The goal is a repeatable morning system, not a perfect isolated effort.</div>
+      </div>
+
+      <div class="leaf" id="l6-3">
+        <div class="leaf-header" onclick="toggleLeaf(event, document.getElementById('l6-3'))">
+          <span class="leaf-icon">🎯</span>
+          <span class="leaf-title">Who benefits most</span>
+          <span class="leaf-toggle">▶</span>
+        </div>
+        <div class="leaf-detail">People with insulin resistance, stubborn belly fat, weight loss plateaus, morning cravings, or post-lunch energy crashes are likely experiencing the compounded effect of an unaddressed dawn phenomenon. Dr Diamonds argues that targeting the morning hormonal environment first — before optimising diet calories or gym programming — produces the fastest initial progress because it removes a hormonal block on everything else you're doing.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end #map -->
+
+<!-- ===== FULL SUMMARY PANEL ===== -->
+<div id="summary" class="panel">
+
+  <div class="summary-section">
+    <h3><span class="s-dot" style="background:var(--c1)"></span> The Hidden Morning Saboteur</h3>
+    <p>Dr Mike Diamonds opens with a counterintuitive claim: most people's fat-loss failure starts before they've eaten anything. The culprit is the Dawn Phenomenon — a natural hormonal process that causes blood sugar to rise between 3am and 8am driven by the release of cortisol, growth hormone, glucagon, and epinephrine. In metabolically healthy people with good insulin sensitivity, the body compensates with a matching insulin pulse. In those who are insulin resistant — which includes a large proportion of people carrying excess belly fat — the compensatory response is inadequate, leaving blood glucose and insulin elevated as the morning begins. Since elevated insulin is the body's primary fat-storage signal and direct suppressor of lipolysis, this means fat burning is essentially offline before the day has started. The result is what Dr Diamonds describes as a "silent compounding deficit" — day after day, the morning hormonal environment is working against any caloric or exercise effort made later.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3><span class="s-dot" style="background:var(--c2)"></span> Trick 1: The Fasted Morning Walk</h3>
+    <p>The first intervention is a 10-minute fasted walk before eating anything — and Dr Diamonds cites research suggesting this can double fat burning compared to the same walk performed after breakfast. The mechanism operates on two levels. First, with insulin at its daily low, fat cells are permeable and actively releasing fatty acids as fuel; add even gentle movement and the body burns those fatty acids aggressively. Second, muscular contraction activates GLUT4 glucose transporters independently of insulin, pulling the dawn glucose spike down without requiring the pancreas to respond. This directly counters the morning hormonal disruption at its source. Diamonds also highlights the AMPK upregulation that occurs during fasted exercise — a cellular adaptation that improves long-term insulin sensitivity, meaning the benefit extends well beyond the walk itself. He's emphatic that intensity must stay low-to-moderate: hard fasted exercise elevates cortisol, which raises glucose and undoes the benefit.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3><span class="s-dot" style="background:var(--c3)"></span> Trick 2: Morning Sunlight</h3>
+    <p>Sunlight within the first 30–60 minutes of waking anchors what Dr Diamonds calls the "metabolic clock reset." The photoreceptors in the retina communicate directly with the suprachiasmatic nucleus — the brain's master circadian pacemaker — which then synchronises peripheral tissue clocks in the liver, skeletal muscle, and adipose tissue. These peripheral clocks govern insulin sensitivity, which has a pronounced daily rhythm: peak in the morning, lowest in the evening. Without a clear morning light signal, this rhythm blurs, reducing the peak insulin-sensitivity window. Additionally, morning light triggers the Cortisol Awakening Response — a healthy, sharp cortisol peak that mobilises energy and clears residual dawn glucose — and rapidly clears overnight melatonin, which suppresses pancreatic insulin secretion via MT1 and MT2 receptors. People living under artificial indoor light on waking experience delayed melatonin clearance, keeping their insulin response blunted precisely when the dawn phenomenon is firing. Ten minutes outside resolves this entirely, and when combined with the fasted walk, both habits are achieved in a single outdoor activity.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3><span class="s-dot" style="background:var(--c4)"></span> Trick 3: Protein-First Breakfast</h3>
+    <p>Dr Diamonds positions the protein-first breakfast as the natural, low-cost equivalent of GLP-1 receptor agonist drugs like Ozempic and Wegovy. GLP-1 (glucagon-like peptide-1) is an incretin hormone produced in the gut that slows gastric emptying, suppresses glucagon, amplifies insulin secretion in a glucose-dependent manner, and powerfully signals satiety to the brain. Protein intake is a more potent GLP-1 stimulus than carbohydrates. A high-protein breakfast — targeting 30–40g from sources such as eggs, Greek yoghurt, or smoked salmon — produces a blunted post-meal glucose curve, a lower insulin demand, and appetite suppression that carries through to lunch. Research in type 2 diabetic patients confirms that a protein-dominant breakfast produces significantly lower post-meal glucose area-under-the-curve compared to a carbohydrate-dominant meal. Dr Diamonds also notes the compounding benefit for Pilates practitioners or active individuals: eating protein immediately post-exercise (after the fasted walk) captures the anabolic signalling window while keeping insulin controlled, simultaneously supporting muscle retention and fat loss.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3><span class="s-dot" style="background:var(--c5)"></span> Trick 4: The Overnight Fasting Window</h3>
+    <p>The fourth trick reframes intermittent fasting in accessible terms: not a radical dietary intervention, but simply not eating late at night. A consistent 12-hour window (finishing dinner by 7pm, eating breakfast at 7am) is sufficient to allow insulin to return to true biological baseline, partially deplete liver glycogen, and shift the body into its overnight fat-oxidation and repair state. Dr Diamonds explains why the timing of the last meal is particularly powerful: insulin sensitivity is circadian, declining significantly in the evening. The same 600kJ meal eaten at 7pm generates a larger insulin spike and more prolonged fat-storage signal than the same meal eaten at 7am. Late-night eating therefore overlaps with the dawn phenomenon the following morning — insulin that hasn't cleared meets the hormonal glucose surge, amplifying both. Beyond insulin, the fasting window preserves sleep architecture. Deep sleep drives pulsatile growth hormone secretion, which promotes overnight fat mobilisation and muscle repair. Eating too close to bed impairs sleep quality, shrinks the growth hormone window, and blunts the metabolic reset the body would otherwise achieve during the fast.</p>
+  </div>
+
+  <div class="summary-section">
+    <h3><span class="s-dot" style="background:var(--c6)"></span> The Compounding System</h3>
+    <p>Dr Diamonds closes by framing the four tricks as a system rather than individual hacks. Each habit primes the next: the overnight fast enters a glycogen-depleted state, the fasted walk deepens fat oxidation in that state while countering the dawn glucose spike, sunlight resets the circadian insulin clock for the rest of the day, and protein breakfast sustains low insulin while delivering satiety and anabolic stimulus. Over weeks of consistent practice, the dawn phenomenon weakens as insulin sensitivity improves, the morning fat-burning window extends, cravings diminish, and energy stabilises. His broader argument is that most people optimise the wrong variable — counting calories or adding gym sessions — while leaving the foundational morning hormonal environment untouched. Fixing the mornings first removes the biological brake on everything else.</p>
+  </div>
+
+</div><!-- end #summary -->
+
+<!-- ===== TAKEAWAYS PANEL ===== -->
+<div id="takeaways" class="panel">
+  <p class="takeaways-intro">10 specific actions from this episode</p>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c1)">01</div>
+    <div class="takeaway-body">
+      <strong>Check your fasting glucose first thing</strong>
+      <p>If your fasting blood glucose is consistently above 5.5 mmol/L, the dawn phenomenon is likely working against you. A CGM or finger-prick glucometer in the morning gives you the baseline data needed to know how significant your hormonal sabotage actually is.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c2)">02</div>
+    <div class="takeaway-body">
+      <strong>Walk outside for 10 minutes before eating — every morning</strong>
+      <p>Keep intensity low enough to hold a conversation. The goal is GLUT4 activation and AMPK upregulation, not cortisol elevation. This single habit addresses the dawn glucose spike, starts fat oxidation, and delivers sunlight exposure simultaneously.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c3)">03</div>
+    <div class="takeaway-body">
+      <strong>Get outdoor light within 60 minutes of waking — even on overcast days</strong>
+      <p>Outdoor light is 10–50× brighter than indoor lighting regardless of cloud cover. Five to ten minutes is sufficient to anchor the Cortisol Awakening Response and clear residual melatonin. Combine this with your fasted walk for zero time cost.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c4)">04</div>
+    <div class="takeaway-body">
+      <strong>Target 30–40g protein at breakfast — protein first, carbs last</strong>
+      <p>Eggs, Greek yoghurt, smoked salmon, or a low-sugar protein shake all work well. Even if you eat carbohydrates at breakfast, consuming protein and fat first — before the carbs — blunts the subsequent glucose spike by up to 30%.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c5)">05</div>
+    <div class="takeaway-body">
+      <strong>Finish eating at least 3 hours before bed</strong>
+      <p>Evening insulin sensitivity is significantly lower than morning — the same kilojoule load eaten at 9pm drives a larger fat-storage response than at 7am. Closing the eating window by 7–8pm for most people achieves the 12-hour fasting minimum without any skipping of meals.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c6)">06</div>
+    <div class="takeaway-body">
+      <strong>Don't eat high-carbohydrate food as your first meal of the day</strong>
+      <p>Toast, cereal, fruit juice, or a high-sugar breakfast directly spikes insulin in the morning window — the one period where low insulin is most metabolically advantageous. Even if you eat these foods later in the day, protecting the post-fast, post-walk low-insulin window preserves hours of fat oxidation.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c1)">07</div>
+    <div class="takeaway-body">
+      <strong>Reduce high-carbohydrate dinners to manage the next morning's dawn phenomenon</strong>
+      <p>A high-carbohydrate dinner elevates insulin into the night, worsens the dawn phenomenon the following morning, and shortens the overnight fat-burning window. Shifting the day's carbohydrates earlier (lunch over dinner) is a simple structural fix.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c2)">08</div>
+    <div class="takeaway-body">
+      <strong>Prioritise sleep duration and quality as a metabolic intervention</strong>
+      <p>A single night of poor sleep reduces insulin sensitivity by up to 25% the following day. Protecting 7–9 hours of sleep is not a lifestyle luxury — it is a direct metabolic input. Growth hormone released during deep sleep drives overnight fat mobilisation and muscle repair simultaneously.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c3)">09</div>
+    <div class="takeaway-body">
+      <strong>Implement the system for at least 4 weeks before judging results</strong>
+      <p>The benefits of improved insulin sensitivity are cumulative and biological — they unfold over weeks, not days. Measure progress through fasting glucose trends, energy levels, and reduction in afternoon cravings rather than scale weight alone in the first two weeks.</p>
+    </div>
+  </div>
+
+  <div class="takeaway-card">
+    <div class="takeaway-num" style="color:var(--c4)">10</div>
+    <div class="takeaway-body">
+      <strong>Stack all four habits into a single 30-minute morning routine</strong>
+      <p>The compounding effect is strongest when all four habits run together: fasted 10-minute outdoor walk (combines tricks 1 + 2) → return home → protein-first breakfast (trick 3) → this is already within a 12-hour fasting window if dinner was finished by 7pm (trick 4). Total active investment: ~30 minutes per morning.</p>
+    </div>
+  </div>
+
+</div><!-- end #takeaways -->
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) {
+  el.classList.toggle('open');
+}
+function toggleLeaf(e, el) {
+  e.stopPropagation();
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
