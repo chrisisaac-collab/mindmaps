@@ -39,10 +39,111 @@ header p{font-size:.8rem;color:#94a3b8;margin-top:4px}
 .card-num{font-size:.7rem;font-weight:700;color:#a78bfa;letter-spacing:.05em;margin-bottom:6px}
 .card p{font-size:.82rem;color:#cbd5e1;line-height:1.6}
 @media(max-width:600px){.tabs{overflow-x:auto}.tab{white-space:nowrap}.takeaways{grid-template-columns:1fr}}
-</ayle>
+</p	yle>
 </head>
 <body>
 <header>
-  <h1>Dr. Alex Wibberley – The Diet Swap That Reversed Cancer Risk in 14 Days</h1>
+  <h1>Dr. Alex Wibberley — The Diet Swap That Reversed Cancer Risk in 14 Days</h1>
   <p>Nutrition &amp; Longevity · June 2026 · <a href="https://youtu.be/ghdn9pBxXcM" style="color:#a78bfa" target="_blank">Watch on YouTube</a></p>
 </header>
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('map',this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">📄 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">✅ Actionable Takeaways</button>
+</div>
+<div id="map" class="panel active">
+<div class="mindmap">
+<div class="branch b1" onclick="toggleBranch(this)">
+  <div class="branch-header">🔬 The 14-Day Diet Swap Experiment <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">What was swapped <span class="arr">▾</span></div><div class="leaf-body">Participants replaced a typical Western diet (high in ultra-processed foods and red meat) with a fibre-rich, plant-forward diet for just 14 days. Despite the short window, measurable changes in cancer-risk biomarkers occurred — proving the gut responds to dietary signals far faster than most people assume.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Biomarkers that changed <span class="arr">▾</span></div><div class="leaf-body">Secondary bile acid levels (linked to bowel cancer promotion) dropped, while short-chain fatty acid production — particularly butyrate — increased significantly. These aren't cosmetic markers; they reflect real shifts in how gut bacteria are operating at a molecular level and directly affect cancer risk.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Why 14 days is enough <span class="arr">▾</span></div><div class="leaf-body">The gut microbiome is one of the body's most adaptive ecosystems. Bacterial populations shift within days of changing food inputs, altering their metabolic outputs accordingly. This is profoundly encouraging — meaningful cancer-risk reduction doesn't require a years-long dietary transformation; even short interventions move the needle.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The reversibility problem <span class="arr">▾</span></div><div class="leaf-body">The same plasticity that enables rapid improvement means benefits reverse just as quickly when old habits return. This is why short-term cleanses offer limited protection — they must catalyse permanent dietary change to provide lasting cancer-risk reduction. The biology is forgiving; the behaviours need to be durable.</div></div>
+  </div>
+</div>
+<div class="branch b2" onclick="toggleBranch(this)">
+  <div class="branch-header">🦠 Gut Microbiome &amp; Cancer Biology <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Microbiome as active cancer modulator <span class="arr">▾</span></div><div class="leaf-body">Gut bacteria don't just digest food — they produce a constant stream of metabolites that determine whether the colon wall exists in a protective or pro-carcinogenic chemical environment. Fibre-fermenting species produce butyrate; fat- and protein-dominant environments favour bacteria producing secondary bile acids that promote abnormal cell growth.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Butyrate: the colon's guardian molecule <span class="arr">▾</span></div><div class="leaf-body">Butyrate is the primary fuel for colonocytes (colon wall cells), helping maintain the intestinal barrier and reducing inflammation. Crucially, it promotes apoptosis — programmed cell death — in abnormal cells, acting as a natural quality-control mechanism that destroys pre-cancerous cells before they can proliferate into tumours.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Dysbiosis and chronic inflammation <span class="arr">▾</span></div><div class="leaf-body">Microbiome imbalance (dysbiosis) creates a state of persistent low-grade inflammation in the gut lining. This chronic inflammatory environment damages DNA over time and suppresses immune surveillance of abnormal cells. Ultra-processed foods are among the most potent drivers of dysbiosis, making them structurally problematic beyond their individual nutritional deficits.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Diversity: 30 plants per week <span class="arr">▾</span></div><div class="leaf-body">Microbiome diversity correlates strongly with cancer protection. Research — including the American Gut Project — finds that people eating 30+ different plant foods weekly have significantly more diverse gut ecosystems. Each plant variety selectively feeds different bacterial species. Variety, not just volume, is the key metric for building a resilient gut.</div></div>
+  </div>
+</div>
+<div class="branch b3" onclick="toggleBranch(this)">
+  <div class="branch-header">🚨 Early-Onset Cancer in Young People <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">A disturbing epidemiological trend <span class="arr">▾</span></div><div class="leaf-body">Colorectal cancer rates in under-50s have risen sharply across Western countries over two decades. Dr. Wibberley links this directly to the dramatic increase in ultra-processed food consumption among younger generations — people who grew up eating diets far more processed than any previous generation, and whose gut microbiomes reflect that history.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">How UPFs damage the gut <span class="arr">▾</span></div><div class="leaf-body">Ultra-processed foods disrupt gut health through multiple simultaneous mechanisms: minimal fibre content starves beneficial bacteria; emulsifiers erode the protective mucus layer lining the colon wall; various additives directly alter microbial composition; and their caloric density drives obesity, which independently elevates cancer risk through hormonal and inflammatory pathways.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Sedentary lifestyle as compounding factor <span class="arr">▾</span></div><div class="leaf-body">Physical inactivity slows bowel transit time, extending the duration that potential carcinogens remain in contact with the colon lining. It also promotes insulin resistance and systemic inflammation. Combining a high-UPF diet with a sedentary lifestyle creates a compounding risk profile — each factor amplifies the harm of the other, producing a risk greater than the sum of its parts.</div></div>
+  </div>
+</div>
+<div class="branch b4" onclick="toggleBranch(this)">
+  <div class="branch-header">🌾 Fibre — The Most Underused Cancer Shield <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The intake gap <span class="arr">▾</span></div><div class="leaf-body">UK guidelines recommend 30g of fibre daily; average intake is around 18g. This gap represents one of the most actionable and evidence-backed dietary interventions available for cancer prevention. Crucially, closing it requires no exotic ingredients — wholegrains, beans, lentils, and vegetables consumed in generous portions are entirely sufficient.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Soluble vs insoluble fibre roles <span class="arr">▾</span></div><div class="leaf-body">Soluble fibre (oats, legumes, apples) feeds beneficial bacteria and slows digestion, stabilising blood glucose and insulin responses. Insoluble fibre (wholegrains, bran, skins) speeds bowel transit, reducing carcinogen contact time with the colon wall. Both types are essential and serve complementary protective functions that cannot substitute for each other.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Why supplements don't replicate whole food <span class="arr">▾</span></div><div class="leaf-body">Isolated fibre supplements are far less protective than eating whole plant foods. The full package — fibre, polyphenols, resistant starches, vitamins, minerals, and phytonutrients — works synergistically in ways that cannot be reproduced by extracting one component. Nature packages these compounds together for good reason, and supplementation bypasses the matrix.</div></div>
+  </div>
+</div>
+<div class="branch b5" onclick="toggleBranch(this)">
+  <div class="branch-header">🏃 Lifestyle Medicine Beyond Food <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Exercise and colorectal cancer risk <span class="arr">▾</span></div><div class="leaf-body">Regular moderate exercise reduces colorectal cancer risk by approximately 20–25%, independent of diet. Mechanisms include reduced circulating insulin and IGF-1 (which promote tumour growth), decreased systemic inflammation, improved bowel transit, and a positive modulating effect on microbiome composition. Even consistent brisk walking produces measurable risk reduction.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Alcohol and processed meat: Group 1 carcinogens <span class="arr">▾</span></div><div class="leaf-body">Dr. Wibberley presents the evidence on alcohol (no safe lower limit for cancer risk) and processed meat (WHO Group 1 carcinogen, in the same category as tobacco for colorectal cancer) directly and without softening. Neither substance has any necessary role in the diet, and their carcinogenic effects are well-established across multiple independent lines of evidence.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Sleep and immune surveillance <span class="arr">▾</span></div><div class="leaf-body">Chronic sleep deprivation elevates cortisol, disrupts gut microbiome composition, and — critically — impairs the immune system's ability to conduct the cellular surveillance that identifies and destroys mutated cells before they become cancers. Seven to nine hours is not a luxury; it's when the body performs biological quality control that diet alone cannot replace.</div></div>
+  </div>
+</div>
+<div class="branch b6" onclick="toggleBranch(this)">
+  <div class="branch-header">🔍 Screening, Symptoms &amp; Self-Advocacy <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Warning signs not to dismiss <span class="arr">▾</span></div><div class="leaf-body">Persistent changes in bowel habits lasting more than three weeks, any rectal bleeding, unexplained weight loss, and persistent abdominal pain all warrant prompt medical review. Many younger patients attribute these symptoms to IBS or stress. This delay — often months or years — is exactly the window in which an early-stage cancer can progress to an advanced, harder-to-treat stage.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The FIT test and screening gap <span class="arr">▾</span></div><div class="leaf-body">NHS bowel cancer screening begins at 60 in England, yet the fastest-rising incidence is in people aged 20–50 who receive no systematic screening. At-home FIT (faecal immunochemical) tests detect blood in stool invisible to the naked eye and are available cheaply online or from GPs. Anyone with a family history or persistent symptoms should use one proactively.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Advocating for yourself with GPs <span class="arr">▾</span></div><div class="leaf-body">Dr. Wibberley urges patients — especially younger people who may be dismissed as too young to be at risk — to be persistent advocates. If a GP attributes symptoms to IBS without investigation, ask specifically for a FIT test by name. The test is inexpensive; the diagnostic opportunity is significant. Self-advocacy in this context is not hypochondria; it is appropriate health literacy in action.</div></div>
+  </div>
+</div>
+</div>
+</div>
+<div id="summary" class="panel summary">
+<h2>The 14-Day Diet Swap Experiment</h2>
+<p>Dr. Alex Wibberley opens with a striking clinical observation: participants who replaced a typical Western diet with a fibre-rich, plant-forward diet for just 14 days showed measurable reductions in key cancer-risk biomarkers. Secondary bile acid levels dropped and short-chain fatty acid (particularly butyrate) production increased — direct indicators of reduced colorectal cancer risk. The speed of this change challenges the assumption that meaningful biological improvement requires months of dietary discipline. The gut, it turns out, is profoundly responsive to what we feed it.</p>
+<p>The same plasticity that enables rapid improvement also means the benefits reverse quickly when old habits return. This underscores the importance of sustained dietary change rather than short-term cleanses — temporary interventions provide limited protection unless they catalyse permanent shifts in eating behaviour.</p>
+<h2>The Gut Microbiome as Cancer Sentinel</h2>
+<p>The microbiome sits at the centre of this discussion. Gut bacteria are not passive bystanders — they actively determine the chemical environment the colon wall is exposed to. Feed them fibre, and they produce butyrate, a molecule that fuels colon cells, maintains gut lining integrity, and encourages abnormal cells to self-destruct through apoptosis. Feed them fat and minimal fibre, and dominant bacterial species shift to those producing secondary bile acids — compounds that promote cell proliferation and create fertile ground for cancerous mutations.</p>
+<p>Microbiome diversity is a particularly important protective factor. Eating 30 or more different plant foods per week has emerged from research as one of the most practical targets for diversity, since each plant type selectively feeds different bacterial species. High-diversity gut ecosystems are more stable, more resilient, and associated with lower rates of multiple cancers.</p>
+<h2>Ultra-Processed Foods and Early-Onset Cancer</h2>
+<p>One of the episode's most alarming sections addresses the rise of colorectal cancer in people under 50. Dr. Wibberley connects this directly to ultra-processed food consumption, which has risen dramatically since the 1990s. UPFs disrupt gut health through multiple simultaneous pathways: minimal fibre content starves beneficial bacteria; emulsifiers erode the protective mucus layer; additives alter microbial composition unfavourably; and the combination of excess calories and low nutritional density drives obesity, which independently elevates cancer risk through hormonal and inflammatory mechanisms. When the generation that grew up with these foods as dietary staples enters their 30s and 40s, the downstream cancer risk becomes visible in population statistics.</p>
+<h2>Fibre: Underconsumed, Undervalued</h2>
+<p>Despite overwhelming evidence for its protective role, fibre remains dramatically underconsumed. The gap between the recommended 30g/day and the average intake of around 18g/day is one of the most actionable population-level health issues. Dr. Wibberley advocates for wholegrains, legumes, vegetables, and fruit as the primary vehicles — not fibre supplements, which lack the polyphenols, resistant starches, and synergistic compounds present in whole foods. Both soluble and insoluble fibre serve important and distinct functions, and an optimal diet should include generous amounts of both.</p>
+<h2>Lifestyle Factors Beyond Food</h2>
+<p>Physical activity independently reduces colorectal cancer risk by around 20–25% through multiple pathways, including reduced systemic inflammation, improved insulin sensitivity, and faster bowel transit time. Alcohol and processed meat are both classified as Group 1 carcinogens for colorectal cancer — a fact Dr. Wibberley presents without hedging. Sleep and stress management round out the lifestyle picture: chronic sleep deprivation impairs the immune surveillance that catches pre-cancerous cells before they proliferate, an effect that diet alone cannot compensate for.</p>
+<h2>Screening, Symptoms, and Self-Advocacy</h2>
+<p>NHS screening starts at 60, yet early-onset cases are concentrated in a demographic that receives no systematic screening. Dr. Wibberley urges anyone with persistent gut symptoms — changed bowel habits, rectal bleeding, unexplained weight loss — to seek medical review promptly and, if dismissed, to specifically request a FIT test. Self-advocacy in healthcare, he argues, is a genuine life-or-death skill when younger patients are routinely under-investigated for conditions their demographic was once thought largely exempt from.</p>
+</div>
+<div id="takeaways" class="panel">
+<div class="takeaways">
+<div class="card"><div class="card-num">TAKEAWAY 01</div><p>Eat 30+ different plants per week to build microbiome diversity. Count every vegetable, fruit, legume, grain, nut, seed, and herb separately — variety matters as much as volume.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 02</div><p>Target 30g of dietary fibre daily from whole foods. Swap white bread for wholegrain, add a tin of lentils or beans to dinner 3–4 times per week, and keep the skins on vegetables and fruit.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 03</div><p>Reduce ultra-processed foods to a minority of your diet. A practical rule: if the ingredient list has more than 5 items or includes substances you wouldn't find in a home kitchen, eat it rarely.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 04</div><p>Eliminate or drastically reduce processed meat (bacon, sausages, ham, salami). The WHO's Group 1 carcinogen classification for colorectal cancer is based on robust, consistent evidence across multiple studies.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 05</div><p>Move for at least 30 minutes at moderate intensity daily. Brisk walking counts. Consistent daily movement outperforms occasional intense exercise for long-term cancer risk reduction.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 06</div><p>If you experience changed bowel habits for more than 3 weeks, rectal bleeding, or unexplained weight loss, see a GP promptly and ask specifically for a FIT (faecal immunochemical) test if needed.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 07</div><p>Prioritise 7–9 hours of sleep per night. Good sleep enables immune surveillance — the process by which the body identifies and destroys mutated cells before they can develop into cancers.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 08</div><p>If a first-degree relative has had bowel cancer, discuss earlier screening with your GP. Hereditary risk substantially elevates your baseline and standard age thresholds may not apply to you.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 09</div><p>Try a 14-day fibre reset: deliberately double your plant food intake and cut UPFs for two weeks. Use it as a behavioural bridge — the gut changes you create are real and can anchor new lasting habits.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 10</div><p>Reduce alcohol to a minimum. There is no safe lower limit for cancer risk. If you drink, treat it as an occasional indulgence rather than a daily habit — frequency matters more than quantity per occasion.</p></div>
+</div>
+</div>
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el){el.classList.toggle('open');}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open');}
+</script>
+</body>
+</html>
