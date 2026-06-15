@@ -3,149 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thomas DeLauer — Collagen & Biological Age</title>
+<title>Thomas De Lauer – 1 Scoop Fades Wrinkles, Brightens Skin &amp; Reverses Biological Age</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh}
-header{padding:24px 20px 16px;border-bottom:1px solid #e2e8f0;background:#fff}
-header h1{font-size:1.25rem;font-weight:700;color:#0f172a;margin-bottom:4px}
-header p{font-size:.8rem;color:#94a3b8}
-.tabs{display:flex;gap:2px;padding:12px 20px 0;border-bottom:1px solid #e2e8f0;background:#fff}
-.tab{padding:8px 16px;font-size:.85rem;font-weight:600;color:#94a3b8;cursor:pointer;border-radius:8px 8px 0 0;border:none;background:none;transition:all .2s}
-.tab.active{background:#f1f5f9;color:#6366f1}
-.panel{display:none;padding:20px;background:#f8fafc}
+header{background:#fff;padding:20px 24px;border-bottom:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+header h1{font-size:1.1rem;font-weight:700;color:#0369a1}
+header p{font-size:.8rem;color:#64748b;margin-top:4px}
+.tabs{display:flex;gap:0;background:#fff;border-bottom:2px solid #e2e8f0}
+.tab{padding:12px 20px;cursor:pointer;font-size:.85rem;font-weight:600;color:#94a3b8;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab.active{color:#0369a1;border-bottom-color:#0369a1}
+.panel{display:none;padding:24px}
 .panel.active{display:block}
 .mindmap{display:flex;flex-direction:column;gap:12px}
-.branch{border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid #e2e8f0}
-.branch-header{display:flex;align-items:center;gap:10px;padding:14px 16px;font-weight:600;font-size:.9rem;user-select:none}
-.arrow{font-size:.7rem;transition:transform .25s;margin-left:auto;opacity:.5}
-.branch.open .arrow{transform:rotate(90deg)}
-.leaves{display:none;padding:0 12px 12px}
+.branch{background:#fff;border-radius:12px;overflow:hidden;cursor:pointer;border-left:4px solid #0369a1;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.branch-header{padding:14px 18px;font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;color:#1e293b}
+.branch-header .arrow{transition:transform .3s;color:#94a3b8;font-size:.8rem}
+.branch.open .arrow{transform:rotate(180deg)}
+.leaves{display:none;padding:0 18px 14px}
 .branch.open .leaves{display:block}
-.leaf{border-radius:8px;padding:10px 12px;margin-top:8px;background:#ffffff;border:1px solid #e2e8f0;cursor:pointer}
-.leaf-title{font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:6px;color:#334155}
-.la{font-size:.65rem;transition:transform .25s;opacity:.5}
-.leaf.open .la{transform:rotate(90deg)}
-.leaf-body{display:none;font-size:.78rem;line-height:1.65;color:#64748b;margin-top:8px}
+.leaf{margin-top:10px;cursor:pointer;background:#f1f5f9;border-radius:8px;padding:10px 14px}
+.leaf-title{font-size:.82rem;font-weight:600;color:#0369a1;display:flex;justify-content:space-between}
+.leaf-body{display:none;font-size:.8rem;color:#475569;line-height:1.6;margin-top:8px}
 .leaf.open .leaf-body{display:block}
-.b1{background:#faf5ff}.b1 .branch-header{color:#7c3aed}
-.b2{background:#f0fdf4}.b2 .branch-header{color:#16a34a}
-.b3{background:#fff7ed}.b3 .branch-header{color:#ea580c}
-.b4{background:#eff6ff}.b4 .branch-header{color:#2563eb}
-.b5{background:#fdf2f8}.b5 .branch-header{color:#be185d}
-.b6{background:#f0fdfa}.b6 .branch-header{color:#0d9488}
-.summary .section{margin-bottom:20px}
-.summary .section h3{font-size:.85rem;font-weight:600;color:#7c3aed;margin-bottom:6px}
-.summary p{font-size:.82rem;line-height:1.7;color:#475569}
-.takeaways{display:flex;flex-direction:column;gap:10px}
-.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
-.num{font-size:1.1rem;font-weight:700;color:#6366f1;min-width:28px}
-.card-text{font-size:.82rem;line-height:1.6;color:#475569}
+.leaf.open .leaf-title .arr{transform:rotate(180deg)}
+.arr{transition:transform .3s;display:inline-block}
+.b1{border-left-color:#0369a1}.b2{border-left-color:#059669}.b3{border-left-color:#d97706}
+.b4{border-left-color:#7c3aed}.b5{border-left-color:#dc2626}.b6{border-left-color:#0891b2}
+.summary h2{font-size:1rem;font-weight:700;color:#0369a1;margin:20px 0 8px}
+.summary h2:first-child{margin-top:0}
+.summary p{font-size:.85rem;color:#475569;line-height:1.7;margin-bottom:12px}
+.takeaways{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{background:#fff;border-radius:10px;padding:16px;border-top:3px solid #0369a1;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.card-num{font-size:.7rem;font-weight:700;color:#0369a1;letter-spacing:.05em;margin-bottom:6px}
+.card p{font-size:.82rem;color:#334155;line-height:1.6}
+@media(max-width:600px){.tabs{overflow-x:auto}.tab{white-space:nowrap}.takeaways{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
-<h1>1 Scoop Fades Wrinkles, Brightens Skin & Reverses Biological Age</h1>
-<p>Thomas DeLauer · Nutrition & Longevity · June 2026</p>
+  <h1>Thomas De Lauer — 1 Scoop Fades Wrinkles, Brightens Skin &amp; Reverses Biological Age</h1>
+  <p>Brain &amp; Cognitive Health · Nutrition &amp; Longevity · June 2026 · <a href="https://youtu.be/LI8ddfFrY7M" style="color:#0369a1" target="_blank">Watch on YouTube</a></p>
 </header>
 <div class="tabs">
-<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
-<button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
-<button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+  <button class="tab active" onclick="switchTab('map',this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">📄 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">✅ Actionable Takeaways</button>
 </div>
-
 <div id="map" class="panel active">
 <div class="mindmap">
 
 <div class="branch b1" onclick="toggleBranch(this)">
-<div class="branch-header">🧬 Collagen Science Basics <span class="arrow">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> What Collagen Is</div><div class="leaf-body">Collagen is the most abundant protein in the human body, forming roughly 30% of total protein content. It forms the structural scaffolding of skin, tendons, ligaments, and bones. Production declines at roughly 1-1.5% per year from our mid-20s, accelerating after 40 — making supplementation increasingly relevant with age.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Types of Collagen</div><div class="leaf-body">Type I collagen dominates skin, bone, and tendons and is most relevant for anti-aging skin benefits. Type II supports cartilage and joints. Type III works alongside Type I in skin and vascular tissue. Hydrolysed collagen peptides are broken into short amino acid chains for superior absorption.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Why Supplementation Works</div><div class="leaf-body">When collagen peptides are digested, specific dipeptides (hydroxyproline-proline) reach the dermis and act as signalling molecules, stimulating fibroblasts to produce new collagen and hyaluronic acid. This is a documented mechanism - not just passive amino acid delivery.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Absorption & Bioavailability</div><div class="leaf-body">Hydrolysed collagen peptides have a molecular weight of around 2-5 kDa, small enough for intestinal absorption. Studies show collagen-specific peptides appear in blood within 1 hour of ingestion and accumulate in skin tissue within 12 hours of regular supplementation.</div></div>
-</div>
+  <div class="branch-header">🧬 Collagen: What It Is &amp; Why It Declines <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The structural protein of youth <span class="arr">▾</span></div><div class="leaf-body">Collagen is the most abundant protein in the human body, forming the structural scaffold of skin, tendons, ligaments, cartilage, and bone. In skin specifically, Type I collagen provides tensile strength and elasticity. When collagen fibres are dense and well-organised, skin appears firm, plump, and smooth. As they degrade and thin, wrinkles, sagging, and dullness follow inevitably.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The production cliff after 25 <span class="arr">▾</span></div><div class="leaf-body">Collagen production peaks in early adulthood and declines by approximately 1–1.5% per year from age 25. By 40, many people have lost 10–15% of their original collagen density. By 50, the loss is accelerating further. This is why skin changes that seem sudden in middle age actually represent decades of slow, cumulative decline that becomes visible only after crossing a threshold.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Collagenase: the enzyme breaking you down <span class="arr">▾</span></div><div class="leaf-body">Collagenase enzymes — particularly matrix metalloproteinases (MMPs) — are upregulated by UV radiation, cortisol (chronic stress), advanced glycation end-products (from high-sugar diets), smoking, and environmental pollution. These enzymes actively degrade existing collagen fibres. Slowing collagenase activity is just as important as stimulating new collagen production.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Glycation: sugar's war on your skin <span class="arr">▾</span></div><div class="leaf-body">Excess blood glucose attaches to collagen fibres through a process called glycation, forming advanced glycation end-products (AGEs). Glycated collagen is stiff, cross-linked, and loses its normal springy architecture. It also becomes more resistant to normal turnover, meaning damaged fibres accumulate rather than being replaced. High-glycaemic diets are a primary driver of accelerated skin ageing.</div></div>
+  </div>
 </div>
 
 <div class="branch b2" onclick="toggleBranch(this)">
-<div class="branch-header">✨ Skin & Wrinkle Benefits <span class="arrow">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Wrinkle Reduction Evidence</div><div class="leaf-body">Clinical trials show 6-12 weeks of daily collagen peptide supplementation reduces skin wrinkle volume by up to 46%, wrinkle area by 44%, and wrinkle depth by 9% compared to placebo. These represent genuine, measurable structural improvements in the skin - not marginal changes.</div></div>
-
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Skin Hydration</div><div class="leaf-body">Collagen peptides stimulate hyaluronic acid synthesis in the dermis. Hyaluronic acid holds up to 1,000x its weight in water, directly increasing skin moisture content. Studies report up to 34% improvement in skin moisturisation after 6 weeks of consistent collagen supplementation.</div></div>
-
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Skin Brightness & Tone</div><div class="leaf-body">Collagen supplementation reduces melanin irregularities by improving skin cell turnover and reducing oxidative stress in the dermis. The glycine content also supports glutathione synthesis - the body's master antioxidant - which directly influences skin luminosity and evenness.</div></div>
-
-
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Elasticity & Firmness</div><div class="leaf-body">Collagen peptides stimulate elastin production alongside new collagen fibres, restoring skin elasticity lost through aging. Elasticity decline - the socalled snap-back quality of youthful skin - is directly addressable through consistent supplementation.</div></div>
-</div>
+  <div class="branch-header">💊 Collagen Supplementation — The Evidence <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Does oral collagen actually work? <span class="arr">▾</span></div><div class="leaf-body">Scepticism about oral collagen stems from the assumption that digestion simply breaks it into amino acids indistinguishable from any other protein. However, research shows that hydrolysed collagen peptides — particularly di- and tri-peptides — are absorbed intact through the gut lining and accumulate in skin tissue, where they act as direct building blocks and also stimulate fibroblast activity to produce new collagen.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Clinical evidence for skin outcomes <span class="arr">▾</span></div><div class="leaf-body">Multiple double-blind, placebo-controlled trials show statistically significant improvements in skin elasticity, hydration, and wrinkle depth after 8–12 weeks of daily collagen peptide supplementation (typically 5–10g/day). Effects are most pronounced in older participants whose baseline collagen density is lower, suggesting supplementation provides the greatest benefit to those who need it most.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Type matters: Type I and Type III <span class="arr">▾</span></div><div class="leaf-body">Type I collagen (bovine or marine-sourced) is the dominant structural protein of skin and the primary target for anti-ageing supplementation. Type III collagen, which co-localises with Type I in skin, also declines with age. High-quality supplements contain both. Marine collagen is derived from fish skin and scales, has a lower molecular weight than bovine collagen, and may have marginally superior bioavailability.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Optimal dosing and timing <span class="arr">▾</span></div><div class="leaf-body">Research consistently supports 5–10g of hydrolysed collagen peptides per day. Timing is secondary to consistency, but taking collagen with Vitamin C (which is a cofactor in the collagen synthesis enzyme prolyl hydroxylase) meaningfully enhances conversion into structural collagen. A daily morning routine — one scoop in coffee or a smoothie with citrus — is a practical and evidence-supported protocol.</div></div>
+  </div>
 </div>
 
 <div class="branch b3" onclick="toggleBranch(this)">
-<div class="branch-header">Biological Age Reversal <span class="arrow">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> What Biological Age Measures</div><div class="leaf-body">Biological age reflects the functional state of your cells and tissues - distinct from chronological age. Key markers include DNA methylation patterns (epigenetic clocks), telomere length, and inflammatory biomarkers.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Collagen & Epigenetic Clocks</div><div class="leaf-body">A 2025 clinical trial in npj Aging found that oral collagen supplementation reduced biological age by 1.4 years within 6 months via epigenetic clock algorithms.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Anti-Inflammatory Pathway</div><div class="leaf-body">Glycine inhibits NF-kB and reduces pro-inflammatory cytokines including TNF-alpha and IL-1beta, which drive accelerated biological aging.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Realistic Expectations</div><div class="leaf-body">1.4 years over 6 months is meaningful but modest. Collagen works best as part of a broader anti-aging stack combined with adequate sleep, resistance training, and dietary quality.</div></div>
-</div>
+  <div class="branch-header">🔆 Vitamin C: The Collagen Co-Factor <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Why Vitamin C is non-negotiable <span class="arr">▾</span></div><div class="leaf-body">Collagen synthesis is biochemically impossible without Vitamin C. The enzyme prolyl hydroxylase, which stabilises the collagen triple-helix structure, requires Vitamin C as an essential cofactor. Without adequate Vitamin C, newly synthesised collagen fibres are structurally weak and break down rapidly. Scurvy — extreme Vitamin C deficiency — is fundamentally a collagen synthesis failure disease.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Antioxidant protection of existing collagen <span class="arr">▾</span></div><div class="leaf-body">Beyond its role in synthesis, Vitamin C is a potent antioxidant that neutralises reactive oxygen species (free radicals) — the primary molecular mechanism through which UV radiation, pollution, and metabolic stress degrade existing collagen. Adequate dietary Vitamin C creates a protective buffer around skin tissue, slowing the rate at which collagenase enzymes are activated.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Dietary sources vs supplements <span class="arr">▾</span></div><div class="leaf-body">Vitamin C is readily available from whole food sources — bell peppers, kiwi, strawberries, citrus, broccoli, and kale all provide abundant amounts. For most people, a diet genuinely rich in fresh vegetables and fruit provides sufficient Vitamin C for collagen synthesis. Supplementation (500–1000mg/day) is a practical fallback for those whose diet is inconsistent, but food sources remain the primary recommendation.</div></div>
+  </div>
 </div>
 
 <div class="branch b4" onclick="toggleBranch(this)">
-<div class="branch-header">Optimising Your Protocol <span class="arrow">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Dosage & Timing</div><div class="leaf-body">10-15g of hydrolysed collagen peptides daily, taken with vitamin C. Consistency over at least 8-12 weeks required.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Vitamin C as Cofactor</div><div class="leaf-body">Without ascorbic acid, the body cannot complete the hydroxylation step of collagen synthesis. Take 200-500mg with your collagen dose.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Source Quality Matters</div><div class="leaf-body">Marine collagen has superior bioavailability due to smaller peptide size. Grass-fed bovine is the next best. Avoid low-dose gummies and capsules which rarely reach therapeutic thresholds.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Synergistic Nutrients</div><div class="leaf-body">Znc, copper, silica, and hyaluronic acid amplify structural benefits. Zinc and copper are cofactors for lysyl oxidase, the enzyme that cross-links collagen fibres.</div></div>
-</div>
+  <div class="branch-header">⏱️ Biological Age vs Chronological Age <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">What biological age actually measures <span class="arr">▾</span></div><div class="leaf-body">Biological age is determined not by years lived but by the accumulated cellular and molecular damage in the body. Key markers include telomere length (caps on chromosomes that shorten with each cell division), epigenetic methylation patterns (Horvath's DNAm clock), inflammatory biomarkers (CRP, IL-6), and mitochondrial efficiency. A person can be chronologically 45 and biologically 55 — or vice versa — depending on their lifestyle history.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Skin as a biological age indicator <span class="arr">▾</span></div><div class="leaf-body">Skin collagen density and quality is increasingly being used as a proxy measure of systemic biological ageing. The same processes that degrade skin collagen — oxidative stress, inflammation, glycation, and mitochondrial dysfunction — are occurring throughout the body simultaneously. Skin changes are visible evidence of systemic ageing that is also happening in blood vessels, joints, the brain, and organs.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Can biological age be reversed? <span class="arr">▾</span></div><div class="leaf-body">Emerging research — including studies using epigenetic clocks — demonstrates that biological age can be measurably reduced through dietary intervention, exercise, sleep optimisation, and stress reduction. Studies by Morgan Levine and David Sinclair show meaningful reductions in epigenetic age scores after lifestyle interventions. Collagen peptide supplementation, within a broader anti-ageing protocol, contributes to this reversal particularly at the skin and connective tissue level.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">NAD+ and mitochondrial ageing <span class="arr">▾</span></div><div class="leaf-body">NAD+ (nicotinamide adenine dinucleotide) is a coenzyme essential for mitochondrial energy production and DNA repair. NAD+ levels decline precipitously with age, impairing cellular energy metabolism and reducing the activity of sirtuins — longevity-associated proteins that regulate gene expression, DNA repair, and stress resistance. Precursors such as NMN and NR can partially restore NAD+ levels, and their interaction with collagen metabolism is an active area of research.</div></div>
+  </div>
 </div>
 
 <div class="branch b5" onclick="toggleBranch(this)">
-<div class="branch-header">Collagen Beyond Skin <span class="arrow">▶</span></div>
-
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Joint & Cartilage</div><div class="leaf-body">Randomised trials show reduced joint pain and improved mobility after 24 weeks, particularly for those over 40 with exercise-related joint stress.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Gut Lining</div><div class="leaf-body">Glycine and proline support tight junction integrity in the gut wall, reducing intestinal permeability.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Sleep Benefits</div><div class="leaf-body">3g of glycine before bed reduces core body temperature and improves sleep quality and daytime alertness per multiple RCTs.</div></div>
-</div>
+  <div class="branch-header">☀️ UV, Inflammation &amp; Environmental Ageing <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">UV radiation: the dominant external ager <span class="arr">▾</span></div><div class="leaf-body">Approximately 80% of visible facial ageing is attributable to UV exposure (photoageing), not chronological age. UV radiation directly damages collagen fibres, activates MMP collagenase enzymes, generates reactive oxygen species, and causes cumulative DNA damage in skin cells. Daily broad-spectrum SPF 30+ — even on cloudy days — is the single highest-leverage topical intervention for preserving skin collagen.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Chronic inflammation as internal photoageing <span class="arr">▾</span></div><div class="leaf-body">Inflammageing — the chronic, low-grade systemic inflammation that increases with age — accelerates collagen degradation through the same MMP pathways activated by UV. Poor diet (particularly UPF-heavy and high-glycaemic), inadequate sleep, chronic psychological stress, and lack of exercise all elevate inflammatory markers. In this sense, lifestyle-driven inflammation is internal photoageing occurring around the clock.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Pollution and skin ageing <span class="arr">▾</span></div><div class="leaf-body">Particulate matter (PM2.5) and ground-level ozone penetrate the skin barrier, generate free radicals, and activate inflammatory pathways that degrade collagen. Research from urban populations shows that air pollution independently accelerates skin ageing beyond UV exposure alone. Antioxidant-rich nutrition provides partial systemic protection; physical barriers (clothing, avoiding peak pollution times) offer additional defence.</div></div>
+  </div>
 </div>
 
 <div class="branch b6" onclick="toggleBranch(this)">
-<div class="branch-header">What DeLauer Cautions Against <span class="arrow">▶</span></div>
-<div class="leaves">
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Overhyped Marketing</div><div class="leaf-body">The evidence base is largely from industry-funded trials covering 8-24 week windows. Long-term data beyond 2 years is still limited.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Dose Matters</div><div class="leaf-body">Most gummies contain 1-3g - well below the 10-15g therapeutic threshold. Check the label for actual peptide content.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Sunscreen Comes First</div><div class="leaf-body">UV radiation accounts for up to 80% of visible facial aging. SPF 30+ daily delivers more anti-aging protection than any supplement stack.</div></div>
-<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title"><span class="la">▶</span> Not a Replacement</div><div class="leaf-body">Smoking, poor sleep, excess sugar, and chronic stress degrade collagen faster than a supplement can replace it.</div></div>
+  <div class="branch-header">🥗 Diet &amp; Lifestyle Protocol for Skin Longevity <span class="arrow">▼</span></div>
+  <div class="leaves">
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The anti-glycation diet <span class="arr">▾</span></div><div class="leaf-body">Minimising dietary AGE formation requires reducing high-glycaemic foods (white sugar, refined carbohydrates, high-fructose corn syrup) and — perhaps counterintuitively — favouring low-heat cooking methods. AGEs form most prolifically through high-heat dry cooking (grilling, frying, roasting). Steaming, poaching, and slow-cooking at lower temperatures significantly reduce dietary AGE load without requiring elimination of otherwise healthy foods.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Protein adequacy for collagen synthesis <span class="arr">▾</span></div><div class="leaf-body">Collagen is a protein, and producing it requires adequate dietary protein overall. Glycine, proline, and hydroxyproline are the dominant amino acids in collagen. While the body can synthesise glycine endogenously, production may be insufficient for optimal collagen synthesis — giving dietary sources (bone broth, gelatin, collagen peptide supplements, and glycine-rich foods) a useful complement to general protein intake.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Hydration, sleep, and stress — the underrated triad <span class="arr">▾</span></div><div class="leaf-body">Skin hydration is maintained by hyaluronic acid in the dermis, which itself requires adequate water intake and is impaired by chronic cortisol elevation. Sleep is when growth hormone is secreted, driving cellular repair including collagen synthesis — 7–9 hours is not cosmetically optional. Chronic psychological stress elevates cortisol, which directly suppresses collagen synthesis and upregulates MMP collagenase activity. Managing stress is skin care.</div></div>
+    <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Exercise and collagen remodelling <span class="arr">▾</span></div><div class="leaf-body">Resistance training and moderate aerobic exercise stimulate fibroblast activity and collagen synthesis, both in skin and connective tissue. Studies on exercise timing show that consuming collagen peptides with Vitamin C approximately one hour before exercise further amplifies collagen synthesis in the targeted tissue — a practically usable protocol for those training regularly who want to compound the benefit.</div></div>
+  </div>
+</div>
+
 </div>
 </div>
-</div>
-</div>
+
 <div id="summary" class="panel summary">
-<div class="section"><h3>The Science Behind One Scoop</h3><p>Hydrolysed collagen peptides, taken at therapeutic doses, produce measurable improvements in skin appearance and a modest but real reduction in biological age. When collagen is hydrolysed into short peptide chains, specific dipeptides cross the intestinal wall and travel to the dermis, where they act as signalling molecules that stimulate fibroblasts to produce new collagen and hyaluronic acid.</p></div>
-<div class="section"><h3>Skin Benefits</h3><p>Studies using 10-15g daily for 6-12 weeks show wrinkle volume reductions up to 46%, skin hydration improvement up to 34%, and gains in elasticity and firmness.</p></div>
-<div class="section"><h3>Biological Age</h3><p>A 2025 npj Aging study found 1.4-year reduction in biological age over 6 months via epigenetic clock. Glycine inhibits NF-kB and reduces inflammatory cytokines.</p></div>
-<div class="section"><h3>Caveats</h3><p>Daily SPF 30+ sunscreen delivers more anti-aging benefit than any supplement. Most collagen products are dosed below therapeutic levels. Collagen cannot outwork smoking, poor sleep, or chronic stress.</p></div>
+<h2>Collagen: Structure, Decline, and Why It Matters</h2>
+<p>Thomas De Lauer opens with a foundational explanation of collagen's role as the body's primary structural protein. In skin, Type I collagen provides tensile strength and elasticity; when its fibres are dense and well-organised, skin looks firm and smooth. Production peaks in early adulthood and declines by approximately 1–1.5% per year from around age 25. By middle age, this slow attrition becomes visibly apparent in the form of wrinkles, laxity, and dullness. The mechanism of decline is not simply passive — collagenase enzymes (matrix metalloproteinases, or MMPs) are actively upregulated by UV radiation, sugar-driven glycation, chronic stress, and environmental pollution, and they accelerate degradation of the collagen that remains.</p>
+
+<h2>The Science Behind Collagen Supplementation</h2>
+<p>De Lauer addresses the most common objection to collagen supplementation — that digestion simply breaks collagen into generic amino acids — with the nuance the research warrants. Hydrolysed collagen peptides, specifically, are absorbed partially intact as di- and tri-peptides that cross the gut wall and accumulate in skin tissue. There, they both provide structural building blocks and signal fibroblasts (skin's collagen-producing cells) to increase synthesis. Multiple double-blind, placebo-controlled clinical trials support improvements in skin elasticity, hydration, and wrinkle depth after 8–12 weeks of daily supplementation at 5–10g. Effects are most pronounced in older participants whose collagen baseline is lower — exactly the demographic for whom supplementation makes the most intuitive sense.</p>
+
+<h2>Vitamin C: The Non-Negotiable Co-Factor</h2>
+<p>The episode gives considerable attention to Vitamin C, which is biochemically required for collagen synthesis — not as an optional enhancement but as an enzymatic necessity. Prolyl hydroxylase, the enzyme that stabilises the triple-helix structure of new collagen, cannot function without Vitamin C as a cofactor. Additionally, Vitamin C's role as a free-radical neutraliser provides direct protection of existing collagen from oxidative damage. De Lauer's practical takeaway is simple: take collagen peptides alongside a Vitamin C source, whether that's a squeeze of citrus or a supplement — the combination meaningfully outperforms collagen alone.</p>
+
+<h2>Biological Age, Epigenetics, and Skin as a Window</h2>
+<p>The episode positions skin collagen not merely as a cosmetic concern but as a visible indicator of systemic biological ageing. The same processes degrading skin — oxidative stress, inflammation, glycation, and mitochondrial dysfunction — are occurring simultaneously in blood vessels, cartilage, the brain, and other organs. De Lauer discusses epigenetic clocks (particularly Horvath's DNAm clock) as tools for measuring biological versus chronological age, noting that lifestyle interventions including diet, sleep, and exercise have been shown in clinical research to measurably reduce biological age scores. NAD+ depletion is introduced as a parallel ageing mechanism — declining NAD+ levels impair mitochondrial energy production and sirtuin activity, and precursors such as NMN and NR represent a related intervention space.</p>
+
+<h2>UV, Inflammation, and Environmental Ageing</h2>
+<p>Photoageing — collagen destruction driven by UV radiation — is responsible for approximately 80% of visible facial ageing, making daily SPF use the single most evidence-backed topical intervention available. De Lauer extends this framework to what he terms "internal photoageing": chronic low-grade inflammation driven by poor diet, sleep deprivation, stress, and inactivity activates the same MMP collagenase pathways as UV radiation, degrading collagen from within rather than from without. Air pollution compounds the picture, with particulate matter independently shown to accelerate skin ageing through free-radical generation.</p>
+
+<h2>Practical Protocol: Diet, Lifestyle, and Supplementation</h2>
+<p>The episode closes with a synthesised protocol: reduce dietary AGE formation by minimising refined sugars and favouring lower-heat cooking methods; ensure adequate protein intake with attention to glycine-rich sources; pair collagen supplementation with Vitamin C and time it before resistance training for amplified effect; prioritise 7–9 hours of sleep (when growth hormone drives cellular repair); manage psychological stress to reduce cortisol-driven collagen suppression; and wear broad-spectrum SPF daily without exception. Together, these interventions target collagen synthesis, protection of existing collagen, and reduction of the biological ageing processes that accelerate skin — and systemic — decline.</p>
 </div>
+
 <div id="takeaways" class="panel">
 <div class="takeaways">
-<div class="card"><div class="num">1</div><div class="card-text">Start with 10-15g of hydrolysed collagen peptides daily. Sub-therapeutic doses produce sub-therapeutic results.</div></div>
-<div class="card"><div class="num">2</div><div class="card-text">Always pair collagen with 200-500mg vitamin C. Without ascorbic acid, collagen synthesis cannot complete.</div></div>
-<div class="card"><div class="num">3</div><div class="card-text">Commit to 8-12 weeks before evaluating results. Collagen remodelling is a slow structural process.</div></div>
-<div class="card"><div class="num">4</div><div class="card-text">Use marine collagen or grass-fed bovine for superior bioavailability.</div></div>
-<div class="card"><div class="num">5</div><div class="card-text">Apply SPF 30+ daily. UV radiation destroys collagen faster than any supplement can replace it.</span></div></div>
-<div class="card"><div class="num">6</div><div class="card-text">Take 3g of glycine 30 minutes before bed for improved sleep quality.</div></div>
-<div class="card"><div class="num">7</div><div class="card-text">Add zinc and copper alongside collagen - required cofactors for lysyl oxidase, which cross-links collagen fibres.</div></div>
-<div class="card"><div class="num">8</div><div class="card-text">Reduce added sugar. AGEs from excess sugar stiffen collagen fibres in a way no supplement can reverse without dietary change.</div></div>
-<div class="card"><div class="num">9</div><div class="card-text">Add resistance training 2-3x per week. Collagen synthesis increases during the post-exercise recovery window.</div></div>
-<div class="card"><div class="num">10</div><div class="card-text">Get your biological age tested via an epigenetic clock service at baseline, then retest at 6 months.</div></div>
-</div></div>
+<div class="card"><div class="card-num">TAKEAWAY 01</div><p>Take 5–10g of hydrolysed collagen peptides (Type I, from bovine or marine sources) daily. Consistency over 8–12 weeks is required for measurable skin improvements — don't judge efficacy before that window.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 02</div><p>Always pair collagen with Vitamin C. Vitamin C is a biochemical requirement for collagen synthesis, not an optional add-on. A squeeze of lemon or lime in your collagen drink is sufficient; a 500mg supplement works too.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 03</div><p>Wear SPF 30+ every day — including overcast days and when working near windows. Approximately 80% of visible facial ageing comes from UV exposure, making daily sunscreen the single highest-leverage skin intervention available.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 04</div><p>Reduce refined sugar and high-glycaemic foods. Dietary sugar glycates collagen fibres, making them stiff and damaged. This is a structural change, not just a metabolic one — it directly creates wrinkles and dullness.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 05</div><p>Favour lower-heat cooking methods (steaming, poaching, slow-cooking) where possible. High-heat dry cooking (grilling, frying, roasting) dramatically increases dietary AGE intake, which accelerates collagen cross-linking and degradation.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 06</div><p>Time your collagen supplement approximately 1 hour before resistance training. Research shows this timing amplifies collagen synthesis in musculoskeletal tissue — a compounding benefit for those already exercising regularly.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 07</div><p>Prioritise 7–9 hours of sleep. Growth hormone — the body's primary cellular repair signal — is secreted predominantly during deep sleep. Consistently short sleep suppresses collagen repair at the biological level.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 08</div><p>Treat stress management as part of your skin care routine. Cortisol directly suppresses collagen synthesis and activates MMP enzymes that degrade existing collagen. Chronic unmanaged stress is biologically equivalent to an accelerant on skin ageing.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 09</div><p>Eat a Vitamin C-rich diet — bell peppers, kiwi, strawberries, broccoli, and citrus are all excellent sources. Food-first beats supplementation for a reason: the full antioxidant matrix in whole foods provides broader collagen protection than isolated supplements.</p></div>
+<div class="card"><div class="card-num">TAKEAWAY 10</div><p>Consider getting a biological age test (epigenetic clock via a service like TruDiagnostic or Elysium) as a baseline. It gives you a measurable target for lifestyle interventions — seeing your biological age improve is a powerful motivational anchor for sustaining the habits that got you there.</p></div>
+</div>
+</div>
+
 <script>
-function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
-function toggleBranch(el){el.classList.toggle('open')}
-function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+function switchTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el){el.classList.toggle('open');}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open');}
 </script>
 </body>
 </html>
