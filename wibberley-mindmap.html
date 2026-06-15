@@ -3,145 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Alex Wibberley – Diet Swap &amp; Cancer Risk in 14 Days</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Dr. Alex Wibberley – The Diet Swap That Reversed Cancer Risk in 14 Days</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#0f1117;color:#e2e8f0;min-height:100vh}
-header{background:#1a1d2e;padding:18px 24px;border-bottom:2px solid #2d3748}
-header h1{font-size:1.15rem;color:#90cdf4;margin-bottom:4px}
-header p{font-size:.83rem;color:#718096}
-.tabs{display:flex;gap:4px;padding:14px 24px 0;background:#1a1d2e}
-.tab{padding:9px 18px;border-radius:8px 8px 0 0;cursor:pointer;font-size:.88rem;background:#2d3748;color:#a0aec0;border:none;font-family:inherit}
-.tab.active{background:#0f1117;color:#90cdf4;font-weight:600}
+header{padding:24px 20px 0;text-align:center}
+header h1{font-size:1.3rem;font-weight:700;color:#f0f4ff;line-height:1.4}
+header p{color:#94a3b8;font-size:.85rem;margin-top:6px}
+.tabs{display:flex;justify-content:center;gap:8px;padding:20px 20px 0;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:20px;border:1.5px solid #334155;background:transparent;color:#94a3b8;font-size:.85rem;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.tab.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
 .panel{display:none;padding:20px}
 .panel.active{display:block}
-.mindmap{display:flex;flex-direction:column;align-items:center;gap:10px}
-.center-node{background:linear-gradient(135deg,#667eea,#764ba2);padding:14px 26px;border-radius:50px;font-weight:700;font-size:.95rem;text-align:center;max-width:300px}
-.branches{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:880px;margin-top:6px}
-.branch{border-radius:10px;overflow:hidden;cursor:pointer}
-.branch-header{padding:11px 14px;font-weight:600;font-size:.87rem;display:flex;justify-content:space-between;align-items:center}
-.branch-header::after{content:'▶';font-size:.65rem;transition:transform .2s}
-.branch.open .branch-header::after{transform:rotate(90deg)}
-.leaves{display:none;padding:0 10px 10px}
+.branch{background:#1e2535;border-radius:12px;margin-bottom:10px;overflow:hidden;border:1px solid #2d3748}
+.branch-header{padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem}
+.branch-icon{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.arrow{margin-left:auto;color:#64748b;transition:transform .25s;font-size:.8rem}
+.branch.open .arrow{transform:rotate(90deg)}
+.leaves{display:none;padding:0 16px 14px}
 .branch.open .leaves{display:block}
-.leaf{margin:7px 0;cursor:pointer}
-.leaf-title{font-size:.8rem;font-weight:600;padding:7px 9px;border-radius:5px;display:flex;justify-content:space-between}
-.leaf-title::after{content:'+'}
-.leaf.open .leaf-title::after{content:'−'}
-.leaf-body{display:none;font-size:.78rem;line-height:1.65;padding:7px 9px;color:#cbd5e0}
+.leaf{background:#111827;border-radius:8px;margin-top:8px;overflow:hidden;border:1px solid #1f2d40}
+.leaf-header{padding:10px 12px;cursor:pointer;font-size:.85rem;font-weight:500;display:flex;justify-content:space-between;align-items:center;color:#cbd5e1}
+.leaf-body{display:none;padding:0 12px 10px;font-size:.82rem;color:#94a3b8;line-height:1.6}
 .leaf.open .leaf-body{display:block}
-.b1 .branch-header{background:#c53030}.b1 .leaf-title{background:#742a2a}
-.b2 .branch-header{background:#276749}.b2 .leaf-title{background:#1c4532}
-.b3 .branch-header{background:#975a16}.b3 .leaf-title{background:#5f370e}
-.b4 .branch-header{background:#553c9a}.b4 .leaf-title{background:#322659}
-.b5 .branch-header{background:#2b6cb0}.b5 .leaf-title{background:#1a365d}
-.b6 .branch-header{background:#285e61}.b6 .leaf-title{background:#1d4044}
-.summary h2{color:#90cdf4;margin-bottom:14px;font-size:1.05rem}
-.summary h3{color:#fbd38d;margin:18px 0 7px;font-size:.92rem}
-.summary p{font-size:.85rem;line-height:1.8;color:#cbd5e0;margin-bottom:10px}
-.takeaways{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
-.card{background:#1a1d2e;border:1px solid #2d3748;border-radius:10px;padding:14px}
-.card-num{font-size:1.3rem;font-weight:700;color:#667eea;margin-bottom:5px}
-.card p{font-size:.8rem;line-height:1.6;color:#cbd5e0}
-@media(max-width:600px){.branches,.takeaways{grid-template-columns:1fr}}
+.leaf.open .leaf-header{color:#e2e8f0}
+.b1 .branch-icon{background:#f97316}.b2 .branch-icon{background:#22c55e}.b3 .branch-icon{background:#a78bfa}.b4 .branch-icon{background:#38bdf8}.b5 .branch-icon{background:#fb7185}.b6 .branch-icon{background:#facc15}
+.b1 .branch-header{border-left:3px solid #f97316}.b2 .branch-header{border-left:3px solid #22c55e}.b3 .branch-header{border-left:3px solid #a78bfa}.b4 .branch-header{border-left:3px solid #38bdf8}.b5 .branch-header{border-left:3px solid #fb7185}.b6 .branch-header{border-left:3px solid #facc15}
+.summary-section{margin-bottom:20px}
+.summary-section h3{font-size:.95rem;font-weight:600;color:#60a5fa;margin-bottom:8px}
+.summary-section p{font-size:.85rem;color:#94a3b8;line-height:1.7}
+.takeaway-card{background:#1e2535;border:1px solid #2d3748;border-radius:10px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.takeaway-num{font-size:1.1rem;font-weight:700;color:#3b82f6;flex-shrink:0;min-width:26px}
+.takeaway-text{font-size:.84rem;color:#cbd5e1;line-height:1.6}
 </style>
 </head>
 <body>
 <header>
   <h1>The Diet Swap That Reversed Cancer Risk in 14 Days</h1>
-  <p>Dr. Alex Wibberley &nbsp;·&nbsp; Nutrition &amp; Cancer Prevention &nbsp;·&nbsp; 2026</p>
+  <p>Dr. Alex Wibberley &nbsp;·&nbsp; June 2026</p>
 </header>
 <div class="tabs">
   <button class="tab active" onclick="switchTab('map',this)">🧠 Mind Map</button>
   <button class="tab" onclick="switchTab('summary',this)">📄 Full Summary</button>
-  <button class="tab" onclick="switchTab('takeaways',this)">✅ Takeaways</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">✅ Actionable Takeaways</button>
 </div>
+
 <div id="map" class="panel active">
-  <div class="mindmap">
-    <div class="center-node">Diet Swap &amp;<br>Cancer Risk in 14 Days</div>
-    <div class="branches">
-      <div class="branch b1" onclick="toggleBranch(this)">
-        <div class="branch-header">🔬 The Landmark Study</div>
-        <div class="leaves">
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">The Diet Swap Design</div><div class="leaf-body">Researchers swapped diets between African Americans (high-fat, low-fibre Western eating) and rural South Africans (high-fibre, plant-rich diet) for 14 days. Measurable cancer biomarkers changed dramatically in both groups, proving diet can rapidly alter cancer risk regardless of genetics.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Speed of Change</div><div class="leaf-body">The most striking finding was the 14-day timeline. Conventional wisdom assumed dietary effects on cancer required years. This study showed the biological environment for cancer — or against it — can shift within two weeks of changing what you eat.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Bidirectional Effect</div><div class="leaf-body">Both directions of the swap produced results. Switching to high-fibre reduced cancer markers; switching to Western diet increased them. This bidirectional response confirms the relationship is causal and offers hope: improvement is always within reach.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Colorectal Cancer Context</div><div class="leaf-body">Colorectal cancer rates are up to 60x higher in Western populations than in rural African communities. It is the second leading cause of cancer death globally, yet a large proportion of cases appear preventable through diet alone.</div></div>
-        </div>
-      </div>
-      <div class="branch b2" onclick="toggleBranch(this)">
-        <div class="branch-header">🦠 Gut Microbiome &amp; Cancer</div>
-        <div class="leaves">
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Butyrate — The Key Molecule</div><div class="leaf-body">When gut bacteria ferment dietary fibre, they produce short-chain fatty acids, chief among them butyrate. Butyrate is the primary fuel for colon cells and has potent anti-cancer properties — it inhibits tumour cell growth, promotes healthy programmed cell death, and reduces inflammation in the colon.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Secondary Bile Acids</div><div class="leaf-body">A high-fat, low-fibre diet promotes production of secondary bile acids by gut bacteria. These compounds are directly carcinogenic to colon cells and are significantly elevated in people on Western diets, explaining much of the stark difference in colorectal cancer rates between populations.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Microbiome Diversity</div><div class="leaf-body">A diverse microbiome — fed by a variety of plant foods — is associated with protection from chronic disease and cancer. Each plant species feeds different bacterial strains. Low diversity, typical of Western diets, correlates with higher inflammation and greater cancer risk.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Rapid Microbiome Shifts</div><div class="leaf-body">The gut microbiome begins shifting within 24–48 hours of dietary change. This rapid adaptability means the protective benefits of a high-fibre diet accumulate quickly, not over years, making dietary change a genuinely powerful near-term intervention.</div></div>
-        </div>
-      </div>
-      <div class="branch b3" onclick="toggleBranch(this)">
-        <div class="branch-header">⚠️ The Western Diet Problem</div>
-        <div class="leaves">
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Ultra-Processed Foods</div><div class="leaf-body">UPFs make up over 50% of calories in many Western countries. They are low in fibre, high in additives and emulsifiers, and promote gut inflammation. Their rapid rise closely tracks the surge in early-onset colorectal cancer among people under 50.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Red &amp; Processed Meat</div><div class="leaf-body">Red and processed meats are WHO Group 1 and Group 2A carcinogens. Haem iron causes oxidative damage to the colon lining; cooking at high heat produces HCAs and PAHs; processed meats contain nitrates that form carcinogenic N-nitroso compounds in the gut.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">The Fibre Deficit</div><div class="leaf-body">Average Western fibre intake is roughly 15g per day — half the recommended 30g. This chronic deficit starves butyrate-producing bacteria, leaves the colon lining under-fuelled, and removes the primary substrate for a cancer-protective microbial community.</div></div>
-        </div>
-      </div>
-      <div class="branch b4" onclick="toggleBranch(this)">
-        <div class="branch-header">🌿 High-Fibre Diet Benefits</div>
-        <div class="leaves">
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Plant Diversity Matters</div><div class="leaf-body">Eating 30+ different plant foods per week is associated with a significantly more diverse microbiome. Vegetables, fruits, legumes, whole grains, nuts, seeds, herbs, and spices all count. Variety feeds different bacterial strains and builds a more resilient gut ecosystem.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Fermented Foods</div><div class="leaf-body">Fermented foods — yoghurt, kefir, kimchi, sauerkraut, miso — introduce live beneficial bacteria and can increase microbiome diversity rapidly. Research shows fermented foods can outperform high-fibre diets alone in boosting microbiome diversity in a matter of weeks.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Resistant Starch</div><div class="leaf-body">Resistant starch (in cooled cooked potatoes or rice, green bananas, legumes, and oats) passes through undigested and acts as a powerful prebiotic. It selectively feeds butyrate-producing bacteria and has strong specific evidence for reducing colorectal cancer risk.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Phytochemicals</div><div class="leaf-body">Plants contain thousands of bioactive phytochemicals — polyphenols, flavonoids, carotenoids — that have anti-cancer effects beyond fibre. They reduce oxidative stress, modulate gene expression in colon cells, and some directly inhibit tumour cell proliferation.</div></div>
-        </div>
-      </div>
-      <div class="branch b5" onclick="toggleBranch(this)">
-        <div class="branch-header">📊 Biomarkers Explained</div>
-        <div class="leaves">
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Mucosal Proliferation</div><div class="leaf-body">Biopsies measured cell proliferation rates in the colon lining. Elevated proliferation indicates increased cancer risk. After 14 days on a high-fibre diet, proliferation rates dropped towards levels seen in low-risk African populations, a meaningful biological improvement.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Stool Butyrate Levels</div><div class="leaf-body">Stool tests quantified butyrate as a marker of healthy bacterial fermentation. High-fibre diet groups showed dramatically increased butyrate concentrations, confirming the microbiome had rapidly shifted to produce the protective compounds that defend the colon lining.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Inflammatory Markers</div><div class="leaf-body">Systemic inflammatory markers including CRP dropped in high-fibre diet groups within the 14-day window. Chronic inflammation promotes cancer development across multiple pathways, so a measurable reduction in inflammatory markers represents a meaningful decrease in cancer risk environment.</div></div>
-        </div>
-      </div>
-      <div class="branch b6" onclick="toggleBranch(this)">
-        <div class="branch-header">🛠️ Practical Action Steps</div>
-        <div class="leaves">
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">The 30-Plant Challenge</div><div class="leaf-body">Dr. Wibberley recommends aiming for 30 different plant foods per week as a practical and motivating framework. Achievable even for non-vegetarians, it builds plant variety habits gradually rather than requiring a sudden dietary overhaul.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Simple Swaps First</div><div class="leaf-body">White bread to wholegrain; white rice to brown or mixed grain; one meat-based meal per week replaced with legumes. These low-effort swaps push daily fibre meaningfully towards the 30g target and begin shifting the microbiome without requiring major lifestyle disruption.</div></div>
-          <div class="leaf"><div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Hydration &amp; Pacing</div><div class="leaf-body">Increase fibre gradually over 2–4 weeks and drink 2–3 litres of water daily. Jumping to high fibre too quickly causes bloating and discomfort that deters people from maintaining the change before its benefits can take hold.</div></div>
-        </div>
-      </div>
-    </div>
+
+<div class="branch b1">
+  <div class="branch-header" onclick="toggleBranch(this.parentElement)"><span class="branch-icon"></span>The 14-Day Experiment<span class="arrow">▶</span></div>
+  <div class="leaves">
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">The Core Research<span>+</span></div><div class="leaf-body">Studies, including landmark work by Dr. Stephen O'Keefe, showed that swapping a Western diet for a high-fibre African diet — or vice versa — produces measurable changes in colon cancer biomarkers in as little as 14 days. The speed of change surprised researchers and underscored how powerfully food controls cellular risk.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">What Was Swapped<span>+</span></div><div class="leaf-body">Participants traded ultra-processed foods, red meat, and refined carbohydrates for legumes, vegetables, whole grains, and plant-based proteins. The swap was total — not a partial reduction. Within two weeks, colon mucosal biopsy markers shifted significantly toward reduced cancer risk.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Why 14 Days Is Enough<span>+</span></div><div class="leaf-body">The gut microbiome can shift its composition within days of a dietary change. Bacteria populations that produce protective short-chain fatty acids begin proliferating almost immediately when fibre is introduced, altering the chemical environment of the colon lining before a fortnight is up.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Reversibility — the Warning<span>+</span></div><div class="leaf-body">The same speed of change applies in reverse. Returning to a Western diet rapidly restores elevated risk markers. This highlights that dietary protection is not a one-time fix but requires sustained change — though even temporary improvements may meaningfully reduce cumulative carcinogen exposure.</div></div>
   </div>
 </div>
-<div id="summary" class="panel summary">
-  <h2>Full Summary</h2>
-  <h3>The Landmark Study</h3>
-  <p>Dr. Alex Wibberley examines a remarkable piece of nutritional science: a study in which researchers swapped the diets of African Americans eating a Western diet with rural South Africans eating a traditional, high-fibre, plant-rich diet — for just 14 days. Within that fortnight, measurable cancer risk biomarkers in the colon changed dramatically in both groups. Those who adopted the high-fibre diet showed reduced cancer markers; those who switched to Western eating showed increased ones. The speed and clarity of these changes challenge the assumption that dietary influences on cancer are slow and distant. They are rapid and measurable.</p>
-  <h3>The Gut Microbiome at the Centre</h3>
-  <p>The mechanism sits in the gut microbiome. When dietary fibre reaches the large intestine, bacteria ferment it into short-chain fatty acids — most importantly butyrate. Butyrate is the preferred fuel for colon cells and has well-documented anti-cancer properties: it regulates gene expression, promotes programmed cell death in abnormal cells, and suppresses tumour cell growth. A low-fibre diet starves the bacteria that produce butyrate. Meanwhile, a high-fat diet promotes production of secondary bile acids — compounds that are directly carcinogenic to the colon lining. This two-pronged failure explains much of the gulf in colorectal cancer rates between Western and traditional-diet populations.</p>
-  <h3>Why the Western Diet Creates Risk</h3>
-  <p>Ultra-processed foods now make up the majority of caloric intake in many Western countries. Low in fibre, high in additives and refined ingredients, they actively undermine the gut microbiome. Red and processed meats are classified carcinogens, generating harmful compounds through multiple pathways in the gut. And the average Westerner eats only 15g of fibre daily — half the recommended 30g — leaving beneficial gut bacteria chronically under-fed. The result is an intestinal environment that actively promotes cancer development over decades.</p>
-  <h3>Plant Diversity as the Solution</h3>
-  <p>Dr. Wibberley emphasises that diversity, not just quantity, is the key to a protective diet. Different plant species feed different bacterial strains. The evidence points to 30+ different plant foods per week as a meaningful target. Fermented foods add a further layer by directly introducing beneficial bacteria. Resistant starch — found in cooled cooked potatoes, green bananas, and legumes — provides particularly potent fuel for butyrate-producing species. None of this requires becoming vegetarian; it requires adding variety and prioritising plants.</p>
-  <h3>The Message of Rapid Change</h3>
-  <p>The most empowering conclusion is that improvement does not require years of effort before results appear. The gut microbiome begins shifting within days of dietary change. Meaningful reductions in cancer biomarkers are measurable within two weeks. This reframes dietary change not as a long-term investment in distant health, but as an active biological intervention with rapid, detectable effects — making the next meal a genuinely meaningful opportunity to reduce cancer risk.</p>
+
+<div class="branch b2">
+  <div class="branch-header" onclick="toggleBranch(this.parentElement)"><span class="branch-icon"></span>Cancer Risk Biomarkers<span class="arrow">▶</span></div>
+  <div class="leaves">
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Mucosal Proliferation Rates<span>+</span></div><div class="leaf-body">Colonocytes — the cells lining the colon — can proliferate at normal or elevated rates. Higher proliferation increases the chance of a mutation becoming established. The high-fibre diet dramatically reduced mucosal proliferation rates in trial participants, lowering the window for cancerous changes.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Butyrate Production<span>+</span></div><div class="leaf-body">Butyrate is a short-chain fatty acid produced when gut bacteria ferment dietary fibre. It serves as the primary fuel for colonocytes and also suppresses inflammation and tumour-promoting gene expression. High-fibre diets substantially increase luminal butyrate concentrations within days.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Inflammatory Markers<span>+</span></div><div class="leaf-body">C-reactive protein, interleukin-6, and other systemic inflammatory markers fall on plant-rich diets. Chronic low-grade inflammation is a recognised driver of colorectal cancer progression, so reducing it represents a meaningful intervention even without changing genetic risk factors.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Secondary Bile Acids<span>+</span></div><div class="leaf-body">A Western diet high in fat and red meat increases secondary bile acid production in the colon. These compounds are directly toxic to colonocytes and promote tumour growth. Fibre and plant foods reduce bile acid concentration by binding them and hastening their excretion.</div></div>
+  </div>
 </div>
+
+<div class="branch b3">
+  <div class="branch-header" onclick="toggleBranch(this.parentElement)"><span class="branch-icon"></span>The Gut Microbiome<span class="arrow">▶</span></div>
+  <div class="leaves">
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Microbial Diversity<span>+</span></div><div class="leaf-body">Higher species diversity in the gut microbiome is consistently associated with better health outcomes, including lower cancer risk. Plant-heavy diets feed a wider variety of bacteria. Ultra-processed diets narrow diversity within days, favouring inflammatory species over protective ones.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Fibre Fermenters<span>+</span></div><div class="leaf-body">Species such as Faecalibacterium prausnitzii and Roseburia intestinalis are key fibre fermenters that produce butyrate. Their populations expand rapidly when dietary fibre increases, fundamentally changing the microbiome's metabolic output and its protective capacity for the colon lining.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">The Gut-Immune Axis<span>+</span></div><div class="leaf-body">Roughly 70% of immune cells reside in or near the gut. A diverse, well-fed microbiome keeps immune surveillance active and appropriately calibrated, reducing the chance that pre-cancerous cells escape detection. Disrupted microbiomes are associated with immune dysregulation and poorer tumour surveillance.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Leaky Gut and Cancer<span>+</span></div><div class="leaf-body">Tight junctions in the gut lining can break down with poor diet, allowing bacterial products like LPS to enter the bloodstream and trigger systemic inflammation. Fibre and polyphenols help maintain tight-junction integrity, preventing the chronic low-level immune activation linked to cancer promotion.</div></div>
+  </div>
+</div>
+
+<div class="branch b4">
+  <div class="branch-header" onclick="toggleBranch(this.parentElement)"><span class="branch-icon"></span>Protective Foods to Add<span class="arrow">▶</span></div>
+  <div class="leaves">
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Legumes<span>+</span></div><div class="leaf-body">Lentils, chickpeas, black beans, and kidney beans are among the highest-fibre foods available and are particularly effective at boosting butyrate-producing bacteria. Populations with high legume intake consistently show markedly lower rates of colorectal cancer in epidemiological studies.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Cruciferous Vegetables<span>+</span></div><div class="leaf-body">Broccoli, cauliflower, kale, and Brussels sprouts contain sulforaphane and indole-3-carbinol — compounds that activate detoxification enzymes and suppress tumour growth pathways. Even two to three servings per week show measurable protection in large epidemiological studies.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Whole Grains<span>+</span></div><div class="leaf-body">Oats, brown rice, quinoa, and whole wheat provide resistant starch that bypasses small intestinal digestion and reaches the colon intact to feed beneficial bacteria. Replacing refined grains with whole grains is one of the most evidence-backed single swaps for colon cancer prevention.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Polyphenol-Rich Foods<span>+</span></div><div class="leaf-body">Berries, dark chocolate (>70%), green tea, olive oil, and colourful vegetables are rich in polyphenols that act as prebiotics for protective gut bacteria. They also directly inhibit inflammatory signalling pathways involved in cancer initiation and promotion at the cellular level.</div></div>
+  </div>
+</div>
+
+<div class="branch b5">
+  <div class="branch-header" onclick="toggleBranch(this.parentElement)"><span class="branch-icon"></span>Risk-Increasing Foods to Cut<span class="arrow">▶</span></div>
+  <div class="leaves">
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Processed Meats<span>+</span></div><div class="leaf-body">Bacon, sausages, hot dogs, and deli meats are classified as Group 1 carcinogens by the WHO. Nitrites used in curing form N-nitroso compounds in the colon that directly damage DNA. Even modest habitual consumption (50g/day) raises colorectal cancer risk by approximately 18%.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Red Meat in Excess<span>+</span></div><div class="leaf-body">Red meat — beef, pork, and lamb — is classified as a Group 2A probable carcinogen. Haem iron in red meat promotes the formation of carcinogenic N-nitroso compounds in the gut. Limiting intake to under 500g per week cooked is the current evidence-based recommendation.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Ultra-Processed Foods<span>+</span></div><div class="leaf-body">Foods with long ingredient lists including emulsifiers, artificial flavours, refined seed oils, and added sugars negatively alter the microbiome rapidly. They displace fibre-rich foods, starving protective bacteria and fostering inflammatory species within days of adoption.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Alcohol<span>+</span></div><div class="leaf-body">Alcohol is directly genotoxic to colon cells and disrupts folate metabolism required for DNA repair. It also damages the mucosal barrier and alters the microbiome toward pro-inflammatory compositions. Even moderate consumption is associated with increased colorectal cancer risk in large meta-analyses.</div></div>
+  </div>
+</div>
+
+<div class="branch b6">
+  <div class="branch-header" onclick="toggleBranch(this.parentElement)"><span class="branch-icon"></span>Practical Implementation<span class="arrow">▶</span></div>
+  <div class="leaves">
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">The 30-Plant Challenge<span>+</span></div><div class="leaf-body">Research from the American Gut Project found that people eating 30 or more different plant species per week had dramatically more diverse gut microbiomes. This doesn't mean 30 vegetables — herbs, spices, nuts, seeds, and legumes all count. It is a manageable and highly effective weekly target.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Gradual Fibre Increase<span>+</span></div><div class="leaf-body">Rapidly increasing fibre can cause bloating and discomfort as the microbiome adjusts. Adding 5g of fibre per week over four to six weeks allows bacteria to adapt and digestive enzymes to upregulate, making the transition sustainable without significant side effects.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">The 80/20 Principle<span>+</span></div><div class="leaf-body">Dr. Wibberley emphasises that perfection is not required. If 80% of dietary choices are whole, plant-rich foods, the protective effects are substantial. Rigid all-or-nothing thinking often leads to abandonment. Building flexible, habitual change is more protective than short-term perfection followed by relapse.</div></div>
+    <div class="leaf"><div class="leaf-header" onclick="toggleLeaf(event,this.parentElement)">Screening Alongside Diet<span>+</span></div><div class="leaf-body">Diet is a powerful tool but not a substitute for screening. Colonoscopy and stool-based tests detect pre-cancerous polyps before symptoms arise. The combination of dietary optimisation and age-appropriate screening provides the strongest risk reduction strategy available to individuals.</div></div>
+  </div>
+</div>
+
+</div>
+
+<div id="summary" class="panel">
+  <div class="summary-section">
+    <h3>The Science of the 14-Day Diet Swap</h3>
+    <p>Dr. Alex Wibberley presents compelling research showing that the risk environment inside the colon can shift measurably in just two weeks when diet changes fundamentally. Landmark studies comparing populations with vastly different colorectal cancer rates — particularly between African Americans and rural South Africans — revealed that the disparity was almost entirely driven by diet rather than genetics. When participants literally swapped diets for 14 days, their cancer risk biomarkers followed suit with striking speed, demonstrating that the colon environment is far more malleable than previously appreciated.</p>
+  </div>
+  <div class="summary-section">
+    <h3>What Changes in the Body</h3>
+    <p>The primary mechanisms involve the gut microbiome and its metabolic outputs. When dietary fibre increases, bacteria that ferment fibre into butyrate proliferate rapidly. Butyrate fuels colonocytes, reduces inflammation, and suppresses the gene expression pathways that favour tumour growth. Simultaneously, secondary bile acids — produced in larger quantities on high-fat, high-meat diets — decrease. Inflammatory markers including C-reactive protein and interleukin-6 also fall, reducing systemic pressure on immune surveillance mechanisms that ordinarily catch and destroy pre-cancerous cells.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Foods That Protect and Foods That Harm</h3>
+    <p>The protective dietary pattern is rich in legumes, cruciferous vegetables, whole grains, and polyphenol-containing foods. These provide diverse fibre types that feed a broad range of beneficial bacteria and contain direct anti-carcinogenic phytochemicals such as sulforaphane and quercetin. On the harmful side, processed meats (a WHO Group 1 carcinogen), red meat in excess, ultra-processed foods, and alcohol all independently increase risk through distinct but complementary mechanisms including direct DNA damage, disruption of the mucosal barrier, and promotion of inflammatory bacterial species.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Practical Advice from Dr. Wibberley</h3>
+    <p>Dr. Wibberley stresses that sustainable change outperforms perfect short-term effort. The 30-plant-per-week framework — counting all plant species including herbs and spices — provides a positive target rather than a list of prohibitions. Fibre should be increased gradually to avoid discomfort. He also emphasises that diet is a powerful prevention strategy that works alongside, not instead of, appropriate medical screening. The critical message is that the biological changes are both real and fast — motivation enough to start even modest dietary improvements immediately.</p>
+  </div>
+</div>
+
 <div id="takeaways" class="panel">
-  <div class="takeaways">
-    <div class="card"><div class="card-num">01</div><p>Aim for 30 different plant foods per week. Herbs, spices, nuts, and seeds all count. Plant variety feeds different bacterial strains and builds a more cancer-protective microbiome.</p></div>
-    <div class="card"><div class="card-num">02</div><p>Target 30g of dietary fibre daily. The average person eats 15g. Adding one serving of lentils or chickpeas per day moves the needle quickly and dramatically.</p></div>
-    <div class="card"><div class="card-num">03</div><p>Eat resistant starch regularly: cooled cooked potatoes or rice, green bananas, oats, and legumes. These powerfully stimulate butyrate-producing bacteria that protect the colon lining.</p></div>
-    <div class="card"><div class="card-num">04</div><p>Add one fermented food daily — yoghurt, kefir, kimchi, sauerkraut, or miso. Fermented foods increase microbiome diversity fast, complementing the benefits of dietary fibre.</p></div>
-    <div class="card"><div class="card-num">05</div><p>Reduce ultra-processed food intake as your first priority. UPFs are the single biggest driver of the Western microbiome disruption that increases colorectal cancer risk.</p></div>
-    <div class="card"><div class="card-num">06</div><p>Limit red meat to no more than 3 portions per week and minimise processed meats. These are classified carcinogens that damage the colon lining through multiple mechanisms.</p></div>
-    <div class="card"><div class="card-num">07</div><p>Increase fibre gradually over 2–4 weeks and drink 2–3 litres of water daily. Rapid increases without hydration cause discomfort that derails the change before benefits arrive.</p></div>
-    <div class="card"><div class="card-num">08</div><p>Make simple swaps before major overhauls: wholegrain bread instead of white, brown rice instead of white, one extra vegetable portion at dinner. These alone meaningfully shift the microbiome.</p></div>
-    <div class="card"><div class="card-num">09</div><p>Allow 12+ hours overnight without eating regularly. This gives gut bacteria time to complete fermentation cycles and the gut lining time for repair and renewal.</p></div>
-    <div class="card"><div class="card-num">10</div><p>Remember: 14 days of dietary change produces measurable changes in cancer risk biomarkers. Every meal is a near-term opportunity to shift the gut towards a protective state — not a distant gamble.</p></div>
-  </div>
+  <div class="takeaway-card"><span class="takeaway-num">1</span><span class="takeaway-text">Add one serving of legumes (lentils, chickpeas, or beans) to your diet daily this week — they are the single highest-impact food swap for colon cancer prevention, boosting butyrate production and displacing processed carbohydrates.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">2</span><span class="takeaway-text">Replace white rice, white bread, or pasta at one meal per day with a whole grain alternative (oats, brown rice, quinoa) to deliver resistant starch directly to your colon microbiome.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">3</span><span class="takeaway-text">Count your plant species this week — aim for 30 different plants including vegetables, fruits, nuts, seeds, legumes, and herbs. Use a notes page to track variety, not just volume.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">4</span><span class="takeaway-text">Eliminate processed meats (bacon, sausages, deli meats) entirely for 14 days as a trial — these are WHO Group 1 carcinogens and their removal is one of the clearest evidence-based interventions available.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">5</span><span class="takeaway-text">Add a cruciferous vegetable (broccoli, cauliflower, kale, or Brussels sprouts) to at least three meals per week to benefit from sulforaphane's documented tumour-suppressing and detoxification-activating effects.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">6</span><span class="takeaway-text">If increasing fibre causes bloating, increase your daily intake by only 5g per week over four to six weeks — this allows gut bacteria to adapt without discomfort and makes the change sustainable long-term.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">7</span><span class="takeaway-text">Drink green tea or include a handful of mixed berries daily as a low-effort polyphenol source — both directly modulate gut bacteria composition and reduce inflammatory signalling associated with cancer promotion.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">8</span><span class="takeaway-text">Limit red meat to under 500g per week cooked — you do not need to eliminate it entirely, but consistent excess is associated with meaningfully elevated colorectal cancer risk via haem iron and N-nitroso compound formation.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">9</span><span class="takeaway-text">Apply the 80/20 rule: aim to make protective food choices 80% of the time rather than pursuing perfection. Research shows this threshold still delivers substantial microbiome and cancer-risk benefits while remaining achievable long-term.</span></div>
+  <div class="takeaway-card"><span class="takeaway-num">10</span><span class="takeaway-text">Book a conversation with your GP about colon cancer screening eligibility — dietary improvement and screening are complementary strategies, and catching polyps early via colonoscopy or stool tests remains the most powerful intervention of all.</span></div>
 </div>
+
 <script>
 function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
 function toggleBranch(el){el.classList.toggle('open')}
