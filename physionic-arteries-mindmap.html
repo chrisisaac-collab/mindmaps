@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physionic — Your Arteries Are Diseased: How to Restore Them | Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf8f3;
+    --bg2:#ffffff;
+    --card:#ffffff;
+    --card-hover:#f5f0e6;
+    --border:#e6ddcb;
+    --text:#211d16;
+    --text-dim:#6b6153;
+    --accent:#b3372c;
+    --c1:#b3372c; /* endothelial cells - deep red (artery) */
+    --c2:#c17817; /* quiescence vs stress - amber */
+    --c3:#3f7a5c; /* CPT1 - green */
+    --c4:#5b6fae; /* citrate/antioxidants - blue */
+    --c5:#8a4b8c; /* clinical risk - plum */
+    --c6:#2f8f7a; /* acetate/fiber solution - teal */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:0 0 60px;
+  }
+  header{
+    text-align:center;
+    padding:56px 20px 32px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .kicker{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-size:clamp(28px,4.5vw,46px);
+    font-weight:700;
+    line-height:1.15;
+    margin-bottom:14px;
+    color:#241a14;
+  }
+  .meta{
+    color:var(--text-dim);
+    font-size:14px;
+    line-height:1.7;
+  }
+  .meta b{color:var(--text);font-weight:600;}
+  .tabs{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:36px auto 0;
+    max-width:600px;
+    padding:0 20px;
+    flex-wrap:wrap;
+  }
+  .tab{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    padding:11px 22px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .2s ease;
+    font-family:'Inter',sans-serif;
+    box-shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+  .tab:hover{color:var(--text);border-color:var(--accent);}
+  .tab.active{
+    background:linear-gradient(120deg,var(--c1),var(--c2));
+    color:#fff;
+    border-color:transparent;
+  }
+  .panel{display:none;max-width:1000px;margin:40px auto 0;padding:0 20px;}
+  .panel.active{display:block;animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  /* MIND MAP */
+  .branch{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--branch-color);
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,.03);
+  }
+  .branch-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 24px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .branch-head:hover{background:var(--card-hover);}
+  .branch-title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    font-weight:600;
+  }
+  .dot{
+    width:11px;height:11px;border-radius:50%;
+    background:var(--branch-color);
+    flex-shrink:0;
+  }
+  .chevron{
+    color:var(--text-dim);
+    font-size:14px;
+    transition:transform .3s ease;
+  }
+  .branch.open .chevron{transform:rotate(180deg);color:var(--branch-color);}
+  .leaves{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+  .branch.open .leaves{max-height:2000px;}
+  .leaf{
+    margin:0 24px 16px;
+    padding:14px 18px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .leaf:last-child{margin-bottom:22px;}
+  .leaf-title{
+    font-size:14.5px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+  }
+  .leaf-plus{color:var(--branch-color);font-size:16px;transition:transform .25s ease;flex-shrink:0;}
+  .leaf.open .leaf-plus{transform:rotate(45deg);}
+  .leaf-detail{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--text-dim);
+  }
+  .leaf.open .leaf-detail{max-height:400px;margin-top:10px;}
+
+  /* SUMMARY */
+  .summary-section{
+    margin-bottom:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid var(--border);
+  }
+  .summary-section:last-child{border-bottom:none;}
+  .summary-title{
+    font-family:'Fraunces',serif;
+    font-size:21px;
+    font-weight:600;
+    margin-bottom:12px;
+  }
+  .summary-section p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.85;
+  }
+
+  /* TAKEAWAYS */
+  .takeaways-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 1px 3px rgba(0,0,0,.03);
+  }
+  .card-num{
+    font-family:'Fraunces',serif;
+    font-size:28px;
+    font-weight:700;
+    color:var(--accent);
+    opacity:.45;
+    margin-bottom:8px;
+  }
+  .card p{
+    font-size:14px;
+    line-height:1.65;
+    color:var(--text-dim);
+  }
+  .card p b{color:var(--text);font-weight:600;}
+
+  footer{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12px;
+    margin-top:60px;
+  }
+  footer a{color:var(--accent);text-decoration:none;}
+
+  @media(max-width:600px){
+    .branch-title{font-size:16px;}
+    header{padding:40px 16px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Physionic (Nicolas Verhoeven)</div>
+  <h1>Your Arteries Are Diseased — This Is How You Restore Them</h1>
+  <div class="meta">
+    Channel: <b>Physionic</b> — independent science communication on cell biology, metabolism &amp; longevity<br>
+    Focus: endothelial cell metabolism, arterial health &amp; cardiovascular disease prevention
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+
+  <div class="branch" style="--branch-color:var(--c1)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>Endothelial Cells: Living Gatekeepers</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Not Just Pipes <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">The artery wall is lined by endothelial cells, a living layer that actively controls vessel dilation and constriction and regulates blood pressure through the release of signaling molecules — arteries are not passive plumbing.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Barrier Function <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Tightly packed, healthy endothelial cells form a barrier that keeps immune cells from invading the subendothelial space, preventing the pro-inflammatory cascade that seeds plaque formation.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">What Damages Them <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Aging, smoking, poor diet, and lack of exercise all place stress on endothelial cells, triggering a shift out of their protective resting state and raising the risk of stroke, plaque buildup, and mortality.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Proliferation as a Warning Sign <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">When stressed, endothelial cells begin multiplying (proliferating), breaking the tight barrier they normally form and opening the door to inflammation and disease.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c2)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>Quiescence vs. Stress: Two Metabolic States</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Quiescent State <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Healthy, non-proliferating endothelial cells are described as "quiescent" — calm and stable, relying on fat for fuel. This is the metabolic signature of a healthy artery wall.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Metabolic Switch <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">The video's central finding: as cells shift from quiescent to proliferative (stressed), their metabolism flips from burning fat via fatty acid oxidation to burning glucose via glycolysis.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">A Direct, Measurable Relationship <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Researchers tracked cells over six days and found a direct relationship: as proliferation trended down, fatty acid oxidation trended up, and vice versa — establishing fuel choice as a live marker of arterial cell health.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Why the Switch Matters <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">This isn't academic trivia — the fuel a cell chooses shapes everything downstream, from antioxidant capacity to clotting risk, making it the hinge point of the entire episode.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c3)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>CPT1: The Fat-Metabolism Switch</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Meet CPT1 <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">CPT1 sits on the outer mitochondrial membrane and is the gatekeeper protein that allows fat molecules to enter the mitochondria to be burned for energy.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Inverse Relationship <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">As CPT1 levels rise, indicating more fat metabolism, levels of PFKFB3 — an enzyme that drives glycolysis — fall, giving researchers a clean molecular signature of the quiescent, fat-burning state.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Knocking It Down <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">When researchers experimentally knocked down CPT1, blocking fat from entering the mitochondria, the protective effects of quiescence disappeared — directly implicating CPT1 as the mechanism at work.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">A Target for Intervention <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Because CPT1 function can, in principle, be improved, it becomes a plausible lever for protecting arterial health — though Physionic reserves the specifics of "how to improve CPT1" for the extended, subscriber-only version of the video.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c4)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>From Citrate to Antioxidants</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Fat Feeds the TCA Cycle Differently <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Using labeled fat molecules, researchers showed quiescent, fat-burning cells generate more citrate in the TCA (Krebs) cycle than proliferative, glucose-burning cells.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Citrate's Hidden Job <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Citrate is eventually converted to isocitrate, which is used to generate NADPH — a molecule essential for recharging the body's own antioxidant systems.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Glutathione, the Master Antioxidant <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">NADPH is used by the enzyme glutathione reductase to recharge glutathione, the potent antioxidant that neutralizes damaging reactive oxygen species (ROS) generated by cellular stress.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Proof via Gene Expression <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Isocitrate dehydrogenase, an NADPH-producing enzyme, was about 40% higher in quiescent cells than proliferative ones — and knocking down CPT1 eliminated this antioxidant advantage, tying fat metabolism directly to the cell's ability to fight oxidative damage.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c5)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>From Cell Biology to Clinical Risk</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">PAI-1 and Clotting <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Blocking CPT1 and stressing cells with a bacterial toxin (LPS) supercharged expression of PAI-1, a protein that inhibits clot breakdown — meaning greater clot risk when fat metabolism is disrupted.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Inflammation Markers Rise Too <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Similar knockdown experiments showed increased markers of immune cell recruitment, linking disrupted fat metabolism to a more inflammatory arterial environment.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">From Petri Dish to Real Risk <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Together, the clotting and inflammation data connect a single cellular metabolic switch to the two hallmark processes — clot formation and chronic inflammation — that drive atherosclerosis and cardiovascular events.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Human-Relevant Data <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Physionic notes that while some data comes from animal models, many of the core experiments use human cells, and separate long-term human data support the downstream dietary interventions discussed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c6)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>The Solution: Acetate, Fiber &amp; Fermented Foods</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Acetate Bypasses CPT1 <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Acetate, a short-chain fatty acid, can diffuse directly across the mitochondrial membrane without needing CPT1, restoring the antioxidant and anti-inflammatory benefits of fat metabolism even when CPT1 is blocked.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Where Acetate Comes From <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Some acetate is produced by metabolizing alcohol in the liver, but Physionic is explicit that drinking is not a viable strategy; the major source is fermentation by gut microbiome bacteria.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Feed Your Microbiome <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Vinegar-based and fermented foods (pickled vegetables, fermented tea) along with dietary fiber sources (legumes, artichokes, leeks, whole grains) are converted by gut bacteria into acetate, which is then absorbed.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Full Loop <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Fiber and fermented foods feed gut bacteria, which produce acetate, absorbed by colonocytes into the bloodstream, then taken up by the mitochondria of endothelial cells lining your arteries — directly linking diet to arterial cell metabolism.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">What's Reserved for Insiders <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Physionic teases additional mechanisms — cellular compensation, Notch signaling, and specific ways to directly improve CPT1 function — as content exclusive to the paid Physionic Insiders community.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="panel">
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c1)">Endothelial Cells: Living Gatekeepers</div>
+    <p>Physionic opens by reframing what an artery actually is: not a passive pipe, but a structure lined by endothelial cells that actively control vessel dilation and constriction, regulate blood pressure through signaling molecules, and form a tight physical barrier against invading immune cells. When that barrier is healthy and intact, it prevents the pro-inflammatory environment that ultimately seeds plaque formation. But aging, smoking, poor diet, and inactivity all place stress on these cells, and one of the earliest signs of that stress is proliferation — the cells begin multiplying and breaking the tight junctions that normally keep them protective. That single shift, from a calm, stable barrier to a stressed, multiplying layer, is the starting point for increased risk of stroke, arterial plaque, and overall mortality.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c2)">Quiescence vs. Stress: Two Metabolic States</div>
+    <p>The video's core experimental finding is that endothelial cell health tracks a specific metabolic signature. Healthy, non-proliferating cells are described as "quiescent," and in this resting state they rely primarily on fat for fuel via fatty acid oxidation. When cells become stressed and start proliferating, their metabolism flips toward glycolysis — burning glucose instead. Researchers tracked this transition over six days and found a direct, measurable relationship: as proliferation trended downward, fatty acid oxidation trended upward, and vice versa. This matters because the fuel a cell chooses isn't incidental — it shapes the cell's antioxidant capacity, its inflammatory behavior, and its contribution to clotting risk, making the fat-versus-glucose switch the hinge point around which the rest of the episode is built.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c3)">CPT1: The Fat-Metabolism Switch</div>
+    <p>The molecular mechanism behind this switch centers on a protein called CPT1, which sits on the outer mitochondrial membrane and acts as the gatekeeper allowing fat molecules to enter the mitochondria for energy production. As CPT1 levels rise, indicating greater fat metabolism, levels of PFKFB3 — an enzyme that drives glycolysis — fall, giving researchers a clean molecular signature of the protective, quiescent state. To prove causation rather than mere correlation, researchers experimentally knocked down CPT1, blocking fat from entering the mitochondria altogether. The protective effects of quiescence disappeared, directly implicating CPT1 as the mechanism responsible. Physionic notes that because CPT1 function can, in principle, be improved, it represents a plausible target for intervention — though the specific methods for boosting CPT1 directly are reserved for the paid, extended version of the video.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c4)">From Citrate to Antioxidants</div>
+    <p>Digging deeper into why fat metabolism protects cells, Physionic walks through how fat and glucose feed the TCA (Krebs) cycle differently. Using labeled fat molecules, researchers showed that quiescent, fat-burning cells generate more citrate than proliferative, glucose-burning cells. That citrate is eventually converted to isocitrate, which is used to generate NADPH, a molecule essential for recharging the body's internal antioxidant systems. Specifically, NADPH is used by glutathione reductase to recharge glutathione, the potent antioxidant that neutralizes reactive oxygen species generated by cellular stress. The gene expression data backs this up directly: isocitrate dehydrogenase, an NADPH-producing enzyme, was roughly 40% higher in quiescent cells than in proliferative ones, and knocking down CPT1 eliminated this antioxidant advantage entirely — tying fat metabolism mechanistically to the cell's capacity to fend off oxidative damage.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c5)">From Cell Biology to Clinical Risk</div>
+    <p>Physionic then connects this cell biology to outcomes that matter clinically. When researchers blocked CPT1 and stressed cells with a bacterial toxin (LPS), expression of PAI-1 — a protein that inhibits the breakdown of blood clots — spiked sharply, indicating greater clotting risk when fat metabolism is disrupted. Parallel experiments showed increased markers of immune cell recruitment under the same conditions, linking disrupted fat metabolism to a more inflammatory arterial environment as well. Together, these findings connect a single cellular metabolic switch to the two hallmark processes that drive atherosclerosis and cardiovascular events: clot formation and chronic inflammation. Physionic is careful to note the evidentiary basis here — some data comes from animal models, but many of the core experiments use human cells, and separate long-term human data support the practical interventions discussed later in the video.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c6)">The Solution: Acetate, Fiber &amp; Fermented Foods</div>
+    <p>The practical payoff of the episode is acetate, a short-chain fatty acid that can diffuse directly across the mitochondrial membrane without needing CPT1 at all. In experiments, adding acetate restored the antioxidant and anti-inflammatory benefits of fat metabolism even when CPT1 was knocked down, reducing both reactive oxygen species and immune cell markers. Some acetate is produced when the liver metabolizes alcohol, but Physionic is explicit that drinking is not a viable strategy for arterial health. The major usable source is fermentation by gut microbiome bacteria: vinegar-based and fermented foods like pickled vegetables and fermented tea, along with dietary fiber sources such as legumes, artichokes, leeks, and whole grains, are converted by gut bacteria into acetate, which is absorbed by colonocytes into the bloodstream and ultimately taken up by the mitochondria of endothelial cells lining the arteries. This closes the loop from diet to gut microbiome to arterial cell metabolism, though Physionic reserves deeper mechanisms — cellular compensation, Notch signaling, and specific CPT1-boosting strategies — for its paid Insiders community.</p>
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="takeaways-grid">
+    <div class="card"><div class="card-num">01</div><p><b>Think of your arteries as a living organ.</b> Endothelial cells actively regulate blood pressure and inflammation — arterial health depends on which fuel source, fat or glucose, these cells favor.</p></div>
+    <div class="card"><div class="card-num">02</div><p><b>The core lever is fat vs. glucose metabolism.</b> Cells that burn fat stay calm and protective (quiescent); cells forced onto glucose metabolism become inflamed and start proliferating.</p></div>
+    <div class="card"><div class="card-num">03</div><p><b>Eat fermented and vinegar-based foods regularly.</b> Pickled vegetables and fermented tea supply acetate-generating fuel for your gut bacteria, which in turn feeds your endothelial cells directly.</p></div>
+    <div class="card"><div class="card-num">04</div><p><b>Prioritize resistant and dietary fiber.</b> Legumes, artichokes, leeks, and whole grains are the raw material gut bacteria ferment into acetate — a fiber-poor diet limits this pathway entirely.</p></div>
+    <div class="card"><div class="card-num">05</div><p><b>Don't use alcohol as an acetate source.</b> Alcohol metabolism does produce acetate, but the overall harms of drinking far outweigh any small artery-related benefit — this is explicitly not a recommended strategy.</p></div>
+    <div class="card"><div class="card-num">06</div><p><b>Address the upstream stressors first.</b> Smoking, poor diet, inactivity, and aging all push endothelial cells out of their protective quiescent state — reducing these is foundational, not optional.</p></div>
+    <div class="card"><div class="card-num">07</div><p><b>Treat clotting and inflammation as linked, not separate.</b> Both PAI-1-driven clot risk and inflammatory markers trace back to the same fat-versus-glucose metabolic switch, so fixing the upstream cause addresses both downstream effects.</p></div>
+    <div class="card"><div class="card-num">08</div><p><b>Support your built-in antioxidant system.</b> NADPH and glutathione are the body's own recharge mechanism for neutralizing oxidative stress — fat metabolism feeds this system directly, rather than relying solely on antioxidant supplements.</p></div>
+    <div class="card"><div class="card-num">09</div><p><b>Treat gut health as cardiovascular health.</b> Since most usable acetate comes from microbiome fermentation, a fiber-poor diet may be quietly undermining your arteries' metabolic protection.</p></div>
+    <div class="card"><div class="card-num">10</div><p><b>Stay skeptical of oversimplified "unclog your arteries" claims.</b> This is mechanism-level cell biology — the practical takeaway (more fiber, more fermented foods) is simple, but the deeper protocols around CPT1 and cell signaling require more nuance than one video can cover.</p></div>
+  </div>
+</div>
+
+<footer>
+  Source: <a href="https://youtu.be/AieUwqvRsIM" target="_blank">Physionic — Your Arteries are Diseased: THIS is how you Restore them!</a>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
