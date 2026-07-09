@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Increase Creatine Uptake by 30% — Thomas DeLauer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh}
+header{padding:24px 32px;border-bottom:1px solid #e2e8f0;background:#fff}
+header h1{font-size:1.2rem;font-weight:600;color:#0f172a}
+header p{font-size:0.8rem;color:#94a3b8;margin-top:4px}
+.tabs{display:flex;gap:4px;padding:16px 32px;background:#fff;border-bottom:1px solid #e2e8f0;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:6px;border:1px solid #e2e8f0;background:transparent;color:#64748b;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all .2s}
+.tab.active{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+.panel{display:none;padding:32px}
+.panel.active{display:block}
+
+/* Mind Map */
+.map-container{max-width:900px;margin:0 auto}
+.center-node{background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;border-radius:12px;padding:16px 24px;text-align:center;font-weight:700;font-size:1.1rem;margin-bottom:32px;box-shadow:0 4px 24px rgba(14,165,233,.2)}
+.branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.branch{background:#fff;border-radius:10px;border:1px solid #e2e8f0;overflow:hidden;cursor:pointer;transition:border-color .2s;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.branch:hover{border-color:#0ea5e9}
+.branch-header{display:flex;align-items:center;gap:10px;padding:14px 16px;font-weight:600;font-size:0.9rem;color:#0f172a}
+.branch-icon{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.branch-leaves{display:none;border-top:1px solid #f1f5f9}
+.branch.open .branch-leaves{display:block}
+.leaf{padding:12px 16px;border-bottom:1px solid #f8fafc;cursor:pointer}
+.leaf:last-child{border-bottom:none}
+.leaf-title{font-size:0.82rem;font-weight:600;color:#334155;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.leaf-title::before{content:'›';color:#94a3b8;font-size:1rem}
+.leaf-body{display:none;font-size:0.8rem;color:#64748b;line-height:1.6;margin-top:6px;padding-left:14px}
+.leaf.open .leaf-body{display:block}
+.leaf.open .leaf-title::before{content:'›';transform:rotate(90deg);display:inline-block}
+
+/* Summary */
+.summary-content{max-width:720px;margin:0 auto}
+.summary-content h2{font-size:1rem;font-weight:700;color:#0f172a;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #e2e8f0}
+.summary-content h2:first-child{margin-top:0}
+.summary-content p{font-size:0.88rem;line-height:1.75;color:#475569;margin-bottom:12px}
+
+/* Takeaways */
+.takeaways-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:900px;margin:0 auto}
+.card{background:#fff;border-radius:10px;padding:16px;border-left:3px solid #0ea5e9;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.card-num{font-size:0.72rem;font-weight:700;color:#0ea5e9;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.card p{font-size:0.83rem;color:#475569;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+<h1>Increase Creatine Uptake by 30%</h1>
+<p>Thomas DeLauer · Nutrition & Performance · youtu.be/W4K8OT0nmfI</p>
+</header>
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+</div>
+
+<div id="map" class="panel active">
+<div class="map-container">
+<div class="center-node">Increase Creatine Uptake by 30% — Thomas DeLauer</div>
+<div class="branches">
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#0ea5e9"></span>Insulin as the Master Key</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">SLC6A8 Transporter Activation</div><div class="leaf-body">Creatine enters muscle cells primarily through the SLC6A8 (CRT1) sodium-dependent transporter. Insulin signaling directly upregulates the activity and membrane expression of this transporter, creating a biochemical window of dramatically enhanced uptake immediately after carbohydrate ingestion.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">The 30% Uptake Window</div><div class="leaf-body">Studies comparing creatine taken with simple carbohydrates versus water alone show 30–60% greater retention in muscle tissue. The effect is driven by the insulin spike that follows carbohydrate digestion — the higher and faster the insulin response, the more creatine gets transported into cells before circulating levels clear.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Optimal Carb Amount</div><div class="leaf-body">Research points to 30–50g of fast-digesting carbohydrates as the sweet spot. Dextrose (pure glucose) produces the sharpest insulin spike. Alternatives include white rice, banana, fruit juice, or sports drinks. More carbohydrates beyond this threshold don't appear to linearly increase uptake further.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Protein + Carb Synergy</div><div class="leaf-body">Combining protein with carbohydrates produces a greater insulin response than carbohydrates alone due to the insulinogenic effect of amino acids (particularly leucine). DeLauer recommends taking creatine with a post-workout shake containing both fast carbs and a complete protein source for maximal transport.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#10b981"></span>Sodium & Cell Swelling</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Sodium-Dependent Transport</div><div class="leaf-body">The CRT1 creatine transporter is sodium-dependent — it co-transports sodium ions alongside creatine molecules. Adequate sodium levels in the extracellular fluid are therefore necessary for efficient creatine uptake. Low sodium intake may limit transport rate even when creatine and insulin are both present.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Cell Volumization Feedback</div><div class="leaf-body">As creatine enters muscle cells, it draws water in via osmosis (cell volumization). This swelling itself acts as an anabolic signal — cells detect the hydration increase and upregulate protein synthesis pathways and reduce protein breakdown. The uptake and the benefit are mutually reinforcing.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Electrolyte Balance</div><div class="leaf-body">DeLauer suggests ensuring adequate electrolyte intake — particularly sodium and potassium — when supplementing creatine. Coconut water, a lightly salted post-workout meal, or an electrolyte supplement alongside creatine can support the sodium gradient that powers the CRT1 transporter.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#f59e0b"></span>Beta-Alanine Synergy</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Buffering Fatigue Together</div><div class="leaf-body">Beta-alanine raises intramuscular carnosine levels, which buffer the acidity (H+ ions) generated during high-intensity exercise. Creatine replenishes phosphocreatine for explosive energy. Together they address different rate-limiting factors of performance — combining them produces additive benefits neither achieves alone.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Shared Timing Window</div><div class="leaf-body">Both creatine and beta-alanine are best taken with carbohydrates and around training. Taking them together in a post-workout carb-protein meal is efficient and may allow synergistic improvements in sustained high-intensity work output — the type most responsive to both compounds.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Dosing Considerations</div><div class="leaf-body">Effective beta-alanine dosing is 3.2–6.4g daily, often split to reduce the tingling (paresthesia) side effect. Unlike creatine, there is no established loading protocol — accumulation is gradual. DeLauer notes the combination is particularly effective for athletes doing repeated bouts of 60–240 second high-intensity work.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#8b5cf6"></span>Exercise-Induced Uptake</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Post-Exercise Sensitivity</div><div class="leaf-body">Resistance exercise increases muscle glucose and creatine transporter density and sensitivity for 1–2 hours post-workout. Muscle cell membranes are more permeable, glycogen resynthesis is occurring, and insulin sensitivity is elevated — making the immediate post-workout window the most effective time to ingest creatine.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Phosphocreatine Depletion Signal</div><div class="leaf-body">During intense exercise, muscle phosphocreatine stores are substantially depleted. This depletion itself signals upregulated creatine transporter expression — the muscle is biochemically primed to restock. Supplementing immediately after training capitalizes on this active transport upregulation.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Practical Post-Workout Stack</div><div class="leaf-body">DeLauer's recommended stack: 5g creatine monohydrate + 30–50g fast carbs + 20–30g protein within 30 minutes post-training. This hits insulin, amino acid, and sodium transport mechanisms simultaneously at the moment of peak muscle cell receptivity.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#ec4899"></span>What Blocks Uptake</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Caffeine Interference</div><div class="leaf-body">High caffeine intake may antagonize some of creatine's intracellular effects. While current evidence is mixed, DeLauer recommends separating a caffeine-heavy pre-workout from your creatine dose by at least 30–60 minutes, and avoiding mixing creatine directly into high-stimulant pre-workout blends.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Already-Saturated Stores</div><div class="leaf-body">Once muscles are fully saturated, additional creatine simply cannot enter cells regardless of insulin levels or timing strategy. This is why a proper loading phase is valuable — reaching saturation quickly, then shifting to a maintenance dose to keep stores full without wasteful overconsumption.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Gut Absorption Limits</div><div class="leaf-body">Large single doses overwhelm gut absorption capacity. GI distress — bloating, cramping, loose stools — is a sign that creatine is fermenting in the gut rather than absorbing into the bloodstream. Splitting doses (3–5g maximum per sitting) in warm water eliminates this issue entirely.</div></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="summary" class="panel">
+<div class="summary-content">
+<h2>The 30% Uptake Principle</h2>
+<p>Thomas DeLauer opens this video with a bold but research-backed claim: most people are absorbing significantly less creatine than they could be, not because of poor product quality, but because of what they take it with. The 30% figure comes from controlled studies comparing creatine retention in muscle tissue when taken with versus without carbohydrates. The mechanism is insulin — the hormone that acts as a master key for creatine's primary cellular transporter, SLC6A8 (CRT1).</p>
+
+<h2>The Insulin-Creatine Transport Mechanism</h2>
+<p>The CRT1 transporter is sodium-dependent and insulin-responsive. When blood insulin rises following carbohydrate ingestion, CRT1 expression and activity at the cell membrane increases dramatically. The result is a window of elevated creatine influx into muscle cells that doesn't exist when the same dose is taken with plain water. DeLauer explains that 30–50g of fast-digesting carbohydrates — dextrose, fruit juice, white rice — is sufficient to trigger a meaningful insulin response. Adding protein creates a further synergistic effect since amino acids, especially leucine, independently stimulate insulin secretion through the mTOR pathway.</p>
+
+<h2>Sodium, Electrolytes, and Cell Swelling</h2>
+<p>A less discussed but mechanistically important factor is sodium. The CRT1 transporter is sodium co-dependent — sodium ions are transported alongside creatine molecules, meaning low sodium status actively limits transport rate. DeLauer points out that athletes who sweat heavily and eat low-sodium diets may be inadvertently throttling their creatine uptake regardless of dosing strategy. Adequate electrolyte intake — sodium, potassium, and magnesium — supports the electrochemical gradient that powers the transporter. Once creatine enters the cell, osmotic water follows, causing the characteristic muscle fullness of creatine loading. This cell swelling itself acts as an anabolic signal.</p>
+
+<h2>The Post-Workout Window and Beta-Alanine Stack</h2>
+<p>Exercise substantially increases creatine transporter sensitivity and cell membrane permeability. Phosphocreatine depletion during training triggers upregulated CRT1 expression as the muscle prepares to restock. DeLauer argues that the 30–60 minute post-workout window is therefore the single highest-leverage moment for creatine ingestion — combining the exercise-induced receptor upregulation with an insulin-stimulating carb-protein meal creates conditions for maximum uptake. He also covers the practical synergy with beta-alanine, which addresses a different rate limiter (muscular acidosis during sustained effort), making the combination more effective than either supplement alone for high-intensity athletes.</p>
+
+<h2>What Prevents Optimal Uptake</h2>
+<p>DeLauer closes by cataloguing the main uptake blockers: taking creatine on an empty stomach, using caffeine-heavy pre-workouts in the same dose window, taking large single doses that overwhelm gut absorption, and attempting to supplement into already-saturated muscle stores. The practical prescription is simple — load properly to reach saturation, then maintain with 5g post-workout paired with carbohydrates and protein, ensure adequate hydration and electrolyte intake, and avoid the common mistake of mixing creatine into high-caffeine pre-workouts.</p>
+</div>
+</div>
+
+<div id="takeaways" class="panel">
+<div class="takeaways-grid">
+<div class="card"><div class="card-num">Takeaway 01</div><p>Always take creatine with 30–50g of fast-digesting carbohydrates to activate insulin-driven CRT1 transporter expression and increase uptake by up to 30%.</p></div>
+<div class="card"><div class="card-num">Takeaway 02</div><p>Add 20–30g of protein to your creatine dose — the leucine content amplifies the insulin response beyond what carbohydrates produce alone.</p></div>
+<div class="card"><div class="card-num">Takeaway 03</div><p>Take creatine within 30 minutes post-workout when phosphocreatine depletion peaks and CRT1 transporter expression is at its highest.</p></div>
+<div class="card"><div class="card-num">Takeaway 04</div><p>Maintain adequate sodium intake — the CRT1 transporter is sodium co-dependent and low sodium limits transport rate regardless of insulin levels.</p></div>
+<div class="card"><div class="card-num">Takeaway 05</div><p>Use electrolytes (sodium, potassium, magnesium) alongside creatine supplementation — especially if you sweat heavily or eat low-sodium.</p></div>
+<div class="card"><div class="card-num">Takeaway 06</div><p>Stack creatine with beta-alanine (3.2–6.4g/day) if you do repeated high-intensity efforts lasting 60–240 seconds — they address different fatigue mechanisms.</p></div>
+<div class="card"><div class="card-num">Takeaway 07</div><p>Never exceed 5g of creatine in a single dose — more overwhelms gut absorption capacity and causes GI distress without additional benefit.</p></div>
+<div class="card"><div class="card-num">Takeaway 08</div><p>Separate creatine from your caffeine intake by at least 30–60 minutes to avoid potential antagonism of creatine's intracellular effects.</p></div>
+<div class="card"><div class="card-num">Takeaway 09</div><p>Complete a loading phase before trying to optimize uptake timing — no strategy overcomes unsaturated stores, and loading gets you to full saturation in a week.</p></div>
+<div class="card"><div class="card-num">Takeaway 10</div><p>Practical post-workout stack: 5g creatine + 40g fast carbs + 25g protein in warm water — this combination hits every known transport-enhancement mechanism at once.</p></div>
+</div>
+</div>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>
