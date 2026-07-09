@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You're Taking Your Creatine Wrong — Thomas DeLauer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+header{padding:24px 32px;border-bottom:1px solid #1e293b;background:#0f172a}
+header h1{font-size:1.2rem;font-weight:600;color:#f1f5f9}
+header p{font-size:0.8rem;color:#64748b;margin-top:4px}
+.tabs{display:flex;gap:4px;padding:16px 32px;background:#0f172a;border-bottom:1px solid #1e293b;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:6px;border:1px solid #1e293b;background:transparent;color:#94a3b8;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all .2s}
+.tab.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+.panel{display:none;padding:32px}
+.panel.active{display:block}
+
+/* Mind Map */
+.map-container{max-width:900px;margin:0 auto}
+.center-node{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-radius:12px;padding:16px 24px;text-align:center;font-weight:700;font-size:1.1rem;margin-bottom:32px;box-shadow:0 4px 24px rgba(59,130,246,.3)}
+.branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.branch{background:#1e293b;border-radius:10px;border:1px solid #334155;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.branch:hover{border-color:#3b82f6}
+.branch-header{display:flex;align-items:center;gap:10px;padding:14px 16px;font-weight:600;font-size:0.9rem}
+.branch-icon{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.branch-leaves{display:none;border-top:1px solid #334155}
+.branch.open .branch-leaves{display:block}
+.leaf{padding:12px 16px;border-bottom:1px solid #1e293b;cursor:pointer}
+.leaf:last-child{border-bottom:none}
+.leaf-title{font-size:0.82rem;font-weight:600;color:#cbd5e1;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.leaf-title::before{content:'›';color:#64748b;font-size:1rem}
+.leaf-body{display:none;font-size:0.8rem;color:#94a3b8;line-height:1.6;margin-top:6px;padding-left:14px}
+.leaf.open .leaf-body{display:block}
+.leaf.open .leaf-title::before{content:'›';transform:rotate(90deg);display:inline-block}
+
+/* Summary */
+.summary-content{max-width:720px;margin:0 auto}
+.summary-content h2{font-size:1rem;font-weight:700;color:#f1f5f9;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #1e293b}
+.summary-content h2:first-child{margin-top:0}
+.summary-content p{font-size:0.88rem;line-height:1.75;color:#94a3b8;margin-bottom:12px}
+
+/* Takeaways */
+.takeaways-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:900px;margin:0 auto}
+.card{background:#1e293b;border-radius:10px;padding:16px;border-left:3px solid #3b82f6}
+.card-num{font-size:0.72rem;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.card p{font-size:0.83rem;color:#94a3b8;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+<h1>You're Taking Your Creatine Wrong</h1>
+<p>Thomas DeLauer · Nutrition & Performance · youtu.be/V8-Iz9ofDRY</p>
+</header>
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+</div>
+
+<div id="map" class="panel active">
+<div class="map-container">
+<div class="center-node">You're Taking Your Creatine Wrong — Thomas DeLauer</div>
+<div class="branches">
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#3b82f6"></span>Timing Mistakes</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Pre-Workout Myth</div><div class="leaf-body">Most people take creatine only pre-workout believing it gives an immediate energy boost. Creatine doesn't work acutely — it must saturate muscle cells over days. Consistent daily dosing matters far more than precise timing around training.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Post-Workout Window</div><div class="leaf-body">Research suggests post-workout may be slightly superior due to increased insulin sensitivity and muscle cell permeability after exercise. This window allows creatine to be taken up more efficiently alongside a carb-protein meal.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Fasted Dosing Error</div><div class="leaf-body">Taking creatine on an empty stomach without any carbohydrates reduces insulin-mediated uptake into muscle cells. Insulin acts as a transport enhancer — pairing creatine with even a small amount of carbohydrates meaningfully improves cellular delivery.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Consistency Over Precision</div><div class="leaf-body">The single biggest timing mistake is inconsistency. Skipping days drops intramuscular stores. Pick a consistent daily time — even off-training days — and stick to it. Saturation is the goal, not peak levels at any single moment.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#10b981"></span>Loading Phase Errors</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Skipping the Load</div><div class="leaf-body">Skipping a loading phase means it takes 3–4 weeks of 3–5g daily to reach full muscle saturation. A loading protocol (20g/day split 4×5g for 5–7 days) saturates stores in one week — faster performance benefits and less wasted time.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Mega-Loading Mistake</div><div class="leaf-body">The other extreme is taking excessive doses (10g+ at once) thinking more is better. Large single doses simply get excreted via the kidneys. The body can only absorb ~3–5g at once effectively. Split large daily doses into multiple servings.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Maintenance Miscalculation</div><div class="leaf-body">After loading, many drop to too low a maintenance dose. For larger athletes or those with higher muscle mass, 5g/day may still be suboptimal. Body weight matters — some individuals need 0.1g per kg of lean body mass to maintain saturation.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Cycling Off Unnecessarily</div><div class="leaf-body">Cycling off creatine is an outdated practice with no scientific basis. Your body doesn't downregulate creatine transporters meaningfully with supplementation. Stopping only requires a rebuild period. Continuous use is both safe and more effective.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#f59e0b"></span>Hydration & Form</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Under-Hydration</div><div class="leaf-body">Creatine pulls water into muscle cells (cell volumization). Without increased fluid intake, this can leave you dehydrated elsewhere, causing cramping and fatigue. Increase daily water by at least 500ml when starting or loading creatine.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Choosing the Wrong Form</div><div class="leaf-body">Creatine HCl and Kre-Alkalyn are marketed as superior but research consistently shows creatine monohydrate to be the gold standard. It has the most human research, the highest bioavailability when dissolved fully in water, and the lowest cost per effective dose.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Undissolved Powder</div><div class="leaf-body">Creatine monohydrate doesn't dissolve easily in cold water. Undissolved particles pass through the gut less effectively. Use warm water and stir thoroughly, or mix with a warm beverage. This simple step meaningfully improves actual absorption.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Mixing with Caffeine</div><div class="leaf-body">Older studies suggested caffeine may interfere with creatine's ergogenic effects, though evidence is mixed. As a precaution, avoid mixing creatine directly in high-caffeine pre-workouts — take them at different times or use caffeine-free hydration with your creatine dose.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#8b5cf6"></span>Diet Pairing Errors</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">No Carbohydrate Co-Ingestion</div><div class="leaf-body">Insulin is a key driver of creatine transport into muscle cells via GLUT transporters. Consuming creatine with 30–50g of fast-digesting carbohydrates (dextrose, white rice, fruit) can increase muscular uptake by up to 60% compared to creatine alone.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Keto / Low-Carb Conflict</div><div class="leaf-body">Low-carb dieters miss the insulin-creatine synergy entirely. Pairing creatine with leucine or a protein-rich meal can partially compensate via protein-stimulated insulin release, though not as powerfully as carbohydrate co-ingestion.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">High-Fiber Interference</div><div class="leaf-body">Taking creatine with very high-fiber foods slows gastric emptying and may reduce the speed of uptake. For optimal delivery, take creatine with low-fiber, easily digestible carbohydrates rather than with high-fiber whole foods.</div></div>
+</div>
+</div>
+
+<div class="branch" onclick="toggleBranch(this)">
+<div class="branch-header"><span class="branch-icon" style="background:#ec4899"></span>Brain & Beyond</div>
+<div class="branch-leaves">
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Ignoring Cognitive Benefits</div><div class="leaf-body">Most people think of creatine as purely a muscle supplement. Research shows creatine supports brain phosphocreatine stores, improving working memory, mental fatigue resistance, and cognitive performance — especially under sleep deprivation or stress.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Wrong Dose for Brain</div><div class="leaf-body">Cognitive benefits may require slightly higher doses than muscle performance (some studies use 10–20g/day for acute brain effects). DeLauer notes that for cognitive support, consistency and potentially higher maintenance dosing matters more than it does for athletic gains.</div></div>
+<div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-title">Overlooking Vegetarians</div><div class="leaf-body">Vegetarians and vegans have significantly lower baseline muscle creatine stores since dietary creatine comes primarily from meat and fish. They respond more dramatically to supplementation — both in performance and cognitive measures — making creatine especially important for this group.</div></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="summary" class="panel">
+<div class="summary-content">
+<h2>Why Most People Get Creatine Wrong</h2>
+<p>Thomas DeLauer opens by addressing one of the most persistent myths in fitness nutrition: that creatine works like a pre-workout stimulant that needs to be taken right before training for maximum effect. In reality, creatine's mechanism is entirely different — it saturates intramuscular phosphocreatine stores over multiple days, and the acute timing of any single dose matters far less than consistent daily intake. The common practice of only dosing on training days and skipping rest days actively undermines the purpose of supplementation.</p>
+
+<h2>Loading Protocols and Saturation</h2>
+<p>DeLauer explains the logic behind loading phases: the goal is to reach full muscle saturation as quickly as possible. A standard loading protocol of 20g per day (split across four 5g doses) for 5–7 days achieves in one week what would take nearly a month with low-dose maintenance-only approaches. However, he cautions against excessive single doses — the body can only absorb around 3–5g at a time effectively, and anything beyond that is largely excreted by the kidneys. After loading, a maintenance dose adjusted to body mass (roughly 0.1g per kilogram of lean mass) sustains full stores indefinitely with no need to cycle off.</p>
+
+<h2>The Role of Insulin and Carbohydrate Pairing</h2>
+<p>One of the most impactful and under-appreciated aspects of creatine supplementation is its interaction with insulin. Insulin activates creatine transporters (primarily SLC6A8) on muscle cell membranes, dramatically increasing how much creatine enters cells versus remains in circulation. Taking creatine alongside 30–50g of fast-digesting carbohydrates triggers an insulin spike that can increase cellular uptake by up to 60% compared to taking creatine with water alone. For keto or low-carb followers, leucine-rich protein is a partial substitute since protein itself stimulates modest insulin secretion.</p>
+
+<h2>Hydration, Form, and Dissolution</h2>
+<p>Cell volumization — the pulling of water into muscle cells — is one of creatine's key mechanisms for enhancing strength and cell signaling. This makes proper hydration non-negotiable. DeLauer recommends increasing daily water intake by at least 500ml when starting or during a loading phase. On form selection, he is direct: creatine monohydrate backed by decades of human research outperforms every marketed alternative at a fraction of the cost. The one practical step most people miss is ensuring the powder is fully dissolved, ideally in warm water, as undissolved creatine particles absorb less efficiently through the gut wall.</p>
+
+<h2>Cognitive and Broader Health Benefits</h2>
+<p>DeLauer emphasizes that most people leave significant benefit on the table by thinking of creatine as purely a muscle supplement. The brain is highly energy-demanding and maintains its own phosphocreatine pool, which creatine supplementation can augment. Studies show improvements in working memory, reaction time, and resistance to cognitive fatigue — effects that are particularly pronounced in sleep-deprived states and among vegetarians who begin with depleted baseline stores. The case for daily creatine, DeLauer argues, is as much about cognitive longevity as it is about athletic performance.</p>
+</div>
+</div>
+
+<div id="takeaways" class="panel">
+<div class="takeaways-grid">
+<div class="card"><div class="card-num">Takeaway 01</div><p>Take creatine every single day — including rest days. Consistency of saturation beats perfect workout-day timing every time.</p></div>
+<div class="card"><div class="card-num">Takeaway 02</div><p>Use a loading phase (4×5g daily for 5–7 days) if you want full performance benefits within a week rather than 3–4 weeks.</p></div>
+<div class="card"><div class="card-num">Takeaway 03</div><p>Never take more than 5g in a single dose during maintenance — the excess is excreted. Split larger doses throughout the day.</p></div>
+<div class="card"><div class="card-num">Takeaway 04</div><p>Always pair your creatine dose with 30–50g of fast carbohydrates (fruit juice, white rice, dextrose) to maximize insulin-driven uptake into muscle.</p></div>
+<div class="card"><div class="card-num">Takeaway 05</div><p>Dissolve creatine monohydrate in warm water before drinking — undissolved granules absorb less effectively through the intestinal wall.</p></div>
+<div class="card"><div class="card-num">Takeaway 06</div><p>Increase your daily water intake by at least 500ml when supplementing — creatine pulls water into cells and can dehydrate you without it.</p></div>
+<div class="card"><div class="card-num">Takeaway 07</div><p>Choose creatine monohydrate over expensive alternatives — it has the most research, highest proven bioavailability, and lowest cost per dose.</p></div>
+<div class="card"><div class="card-num">Takeaway 08</div><p>If you eat low-carb, pair creatine with a leucine-rich protein source to partially compensate for the lack of carb-driven insulin response.</p></div>
+<div class="card"><div class="card-num">Takeaway 09</div><p>Take creatine for brain health, not just muscle — daily supplementation supports memory, cognitive endurance, and mental performance under fatigue.</p></div>
+<div class="card"><div class="card-num">Takeaway 10</div><p>If you're vegetarian or vegan, prioritize creatine supplementation — your baseline stores are significantly lower and your response will be more dramatic than meat-eaters.</p></div>
+</div>
+</div>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>
