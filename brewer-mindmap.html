@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Thomas Brewer — How I Cleaned 20 Years of Arterial Plaque | Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14;
+    --bg2:#111722;
+    --card:#151c29;
+    --card-hover:#1b2433;
+    --border:#263244;
+    --text:#e7edf5;
+    --text-dim:#8fa0b8;
+    --accent:#e8544a;
+    --c1:#e8544a; /* wake-up call - red */
+    --c2:#4fa3d1; /* testing - blue */
+    --c3:#e0a83b; /* carbs - amber */
+    --c4:#4bb87c; /* exercise - green */
+    --c5:#a680d9; /* sleep/stress/purpose - lavender */
+    --c6:#3fb8b0; /* supplements/meds/results - teal */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:radial-gradient(ellipse at top, #131a26 0%, var(--bg) 55%);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:0 0 60px;
+  }
+  header{
+    text-align:center;
+    padding:56px 20px 32px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .kicker{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-size:clamp(28px,4.5vw,46px);
+    font-weight:700;
+    line-height:1.15;
+    margin-bottom:14px;
+    background:linear-gradient(120deg,#fff, #e8544a 55%, #4fa3d1);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .meta{
+    color:var(--text-dim);
+    font-size:14px;
+    line-height:1.7;
+  }
+  .meta b{color:var(--text);font-weight:600;}
+  .tabs{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:36px auto 0;
+    max-width:600px;
+    padding:0 20px;
+    flex-wrap:wrap;
+  }
+  .tab{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    padding:11px 22px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .2s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .tab:hover{color:var(--text);border-color:var(--accent);}
+  .tab.active{
+    background:linear-gradient(120deg,var(--c1),var(--c2));
+    color:#08101c;
+    border-color:transparent;
+  }
+  .panel{display:none;max-width:1000px;margin:40px auto 0;padding:0 20px;}
+  .panel.active{display:block;animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  /* MIND MAP */
+  .branch{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--branch-color);
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+    transition:border-color .2s ease;
+  }
+  .branch-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 24px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .branch-head:hover{background:var(--card-hover);}
+  .branch-title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-family:'Fraunces',serif;
+    font-size:19px;
+    font-weight:600;
+  }
+  .dot{
+    width:11px;height:11px;border-radius:50%;
+    background:var(--branch-color);
+    flex-shrink:0;
+    box-shadow:0 0 12px var(--branch-color);
+  }
+  .chevron{
+    color:var(--text-dim);
+    font-size:14px;
+    transition:transform .3s ease;
+  }
+  .branch.open .chevron{transform:rotate(180deg);color:var(--branch-color);}
+  .leaves{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+  .branch.open .leaves{max-height:2000px;}
+  .leaf{
+    margin:0 24px 16px;
+    padding:14px 18px;
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .leaf:last-child{margin-bottom:22px;}
+  .leaf-title{
+    font-size:14.5px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+  }
+  .leaf-plus{color:var(--branch-color);font-size:16px;transition:transform .25s ease;flex-shrink:0;}
+  .leaf.open .leaf-plus{transform:rotate(45deg);}
+  .leaf-detail{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--text-dim);
+  }
+  .leaf.open .leaf-detail{max-height:400px;margin-top:10px;}
+
+  /* SUMMARY */
+  .summary-section{
+    margin-bottom:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid var(--border);
+  }
+  .summary-section:last-child{border-bottom:none;}
+  .summary-title{
+    font-family:'Fraunces',serif;
+    font-size:21px;
+    font-weight:600;
+    margin-bottom:12px;
+  }
+  .summary-section p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.85;
+  }
+
+  /* TAKEAWAYS */
+  .takeaways-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+  }
+  .card-num{
+    font-family:'Fraunces',serif;
+    font-size:28px;
+    font-weight:700;
+    color:var(--accent);
+    opacity:.5;
+    margin-bottom:8px;
+  }
+  .card p{
+    font-size:14px;
+    line-height:1.65;
+    color:var(--text-dim);
+  }
+  .card p b{color:var(--text);font-weight:600;}
+
+  footer{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12px;
+    margin-top:60px;
+  }
+  footer a{color:var(--accent);text-decoration:none;}
+
+  @media(max-width:600px){
+    .branch-title{font-size:16px;}
+    header{padding:40px 16px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Dr. Thomas Fordham Brewer, MD MPH</div>
+  <h1>How I Cleaned 20 Years of Arterial Plaque</h1>
+  <div class="meta">
+    Channel: <b>Dr. Thomas Fordham Brewer</b> — former director, Preventive Medicine Program, Johns Hopkins<br>
+    A physician's personal reversal of arterial plaque through metabolic testing, diet, exercise, sleep &amp; targeted medicine
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+
+  <div class="branch" style="--branch-color:var(--c1)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>The Wake-Up Call</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Doing "Everything Right" <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">At 57, Dr. Brewer ran marathons, ate a low-fat diet, and had directed the preventive medicine program at Johns Hopkins — by every conventional measure, he expected clean arteries.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The CIMT Scan <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">A colleague introduced him to CIMT (carotid intima-media thickness), a five-minute, radiation-free neck ultrasound. The scan revealed two discrete plaques and an arterial age of 73 — sixteen years older than his actual age.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Real Culprit Wasn't Cholesterol <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Research after the diagnosis pointed him toward metabolic disease — pre-diabetes and diabetes — as a bigger driver of arterial plaque than cholesterol, a connection long known but underappreciated.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Oral Glucose Tolerance Test <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Drinking a measured glucose dose and tracking blood sugar over two to three hours, his level peaked above 160 mg/dL — confirming enough pre-diabetes to be actively building cardiovascular plaque.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The "Wrong Version of Right" <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">His low-fat diet was loaded with glycemic carbs like bread and grain products, spiking his blood sugar multiple times a day without his knowledge.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c2)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>Step 1: Test, Don't Guess</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">CIMT as a Starting Point <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Brewer now recommends CIMT as an accessible first test, since it can reveal soft, unstable plaque — the kind that causes heart attacks — years before any symptoms appear.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Inflammation Markers <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Blood tests like C-reactive protein and Lp-PLA2 reveal whether existing plaque is stable or "hot" and at risk of triggering a clot.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Visceral Fat, Not Just Weight <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Visceral fat, the fat wrapped around abdominal organs, drives insulin resistance directly; a DEXA body composition scan measures it precisely, unlike weight or BMI.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">You Can't Fix What You Don't Measure <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Brewer's throughline: the tests most doctors routinely run aren't the ones that predict silent cardiovascular risk — patients need to actively seek out CIMT, inflammation markers, and visceral fat testing.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c3)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>Step 2: Cut the Right Carbs</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">From "Eat Healthy" to "Watch Blood Sugar" <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Once Brewer understood the root cause was glycemic, the operative question shifted from general healthy eating to tracking what his blood sugar did after every meal.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The 140 mg/dL Threshold <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Blood sugar spiking above 140 mg/dL after a meal is where inflammation begins in the artery wall; doing this two to four times a day, day after day, steadily damages the arterial lining.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Not All Carbs Are Equal <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Fiber-based, non-starchy vegetables like Brussels sprouts don't spike blood sugar; the real culprits are glycemic grain products — bread, rice, pasta, and even oatmeal despite its "heart healthy" reputation.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">What He Ate Instead <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Eggs fried in butter, bacon, avocado, salmon, non-starchy vegetables, and big olive-oil salads — foods that kept his blood sugar flat for hours and kept him satisfied.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Fasting and Timing <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Narrowing the eating window (from 16 hours down to 12 or 8) lowers insulin more effectively than almost anything else; a post-spike walk or a few calf raises can also pull sugar out of the blood and into muscle safely.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c4)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>Step 3: Exercise &amp; Intensity</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Fitness Isn't the Same as Metabolic Health <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Despite years of marathons and basketball, Brewer was still building plaque — proving that aerobic fitness alone doesn't reliably fix insulin resistance, the real root of the problem.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Legs Are Your Biggest Glucose Sink <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Leg muscles are the body's largest muscle group and, when active, pull glucose directly out of the bloodstream — but long-distance runners often have thin, less metabolically active legs.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">REHIT: Five Minutes That Matter <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Reduced-exertion high-intensity interval training — just two or three 20-second all-out efforts per session — delivers a measurable metabolic impact without draining the rest of the day's energy.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Resistance "Snacks" <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Short bursts of leg-focused resistance work — wall sits, lunges, calf raises totaling about five minutes, done once or twice daily — add up to more metabolic benefit than most supplements or medications.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Real Goal Is Metabolic Function <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Brewer is explicit that the target isn't fitness for its own sake — it's insulin sensitivity, and short intense leg work does more for arteries than hours of slow cardio.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c5)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>Step 4: Roadblocks — Sleep, Stress &amp; Purpose</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">One Bad Night Matters <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Poor sleep raises cortisol, which spikes blood sugar and drives the same inflammation that builds plaque; research shows a single night of poor sleep increases insulin resistance for 48 hours.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Undiagnosed Sleep Apnea <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">A high, narrow dental arch pushed Brewer's tongue back into his airway while sleeping, waking him dozens of times a night unknowingly; Invisalign to widen his arch plus side-sleeping training improved his apnea, blood pressure, and labs.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Slow Breathing as a Cortisol Switch <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Slowing breathing to 7–10 breaths per minute — roughly half the normal rate, inhaling 4–5 seconds and exhaling 6–8 — activates the vagus nerve and measurably lowers blood pressure.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Chronic Stress Is a Metabolic Problem <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Relationship stress and lack of purpose activate the same inflammatory pathways as bad food; if the nervous system never rests, Brewer argues, "your arteries never fully heal."</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Purpose Keeps You Going <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Fear got him started on the plan, but purpose — staying capable for the people he loves and helping others avoid his own wake-up call — is what sustained the changes long-term.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:var(--c6)">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-title"><span class="dot"></span>Steps 5 &amp; 6: Supplements, Medication &amp; Results</div>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">From Skeptic to Strategic Supplementer <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Once a self-described supplement skeptic, Brewer added vitamin D3 (5,000 IU) paired with K2 (400 mcg) for artery wall health and insulin resistance, plus magnesium, omega-3s, aged garlic extract, and nattokinase for plaque stability.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Niacin's Unique Profile <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">Niacin is the only supplement he cites that simultaneously raises HDL, lowers LDL and triglycerides, and lowers Lp(a) — markers he treats as important bioindicators rather than definitive villains.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Statins for Inflammation, Not LDL <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">He added a low-dose statin — rosuvastatin or pravastatin, a few times a week, not daily — specifically to reduce vascular inflammation, a very different strategy from high daily doses aimed purely at lowering LDL.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Blood Pressure, Aspirin &amp; Blood Thinners <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">ACE inhibitors and ARBs reduce vascular inflammation beyond blood pressure control; low-dose aspirin and, after developing atrial fibrillation, Eloquis were added once he was in "secondary prevention" with confirmed plaque.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The Results <span class="leaf-plus">+</span></div>
+        <div class="leaf-detail">A CT angiogram years later showed essentially no unstable soft plaque, 31% of his remaining plaque fully calcified and stable, under 10% arterial narrowing in most vessels, and a CIMT arterial age of 58 at his actual age of 67 — despite a diabetes diagnosis and a cardiovascular genetic risk variant (9p21).</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="panel">
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c1)">The Wake-Up Call</div>
+    <p>Dr. Thomas Fordham Brewer opens with a personal reckoning. At 57, he was running marathons on weekends, eating what he believed was a heart-healthy low-fat diet, and had directed the preventive medicine program at Johns Hopkins, teaching other doctors the very principles he practiced. By every conventional measure, he expected clean arteries. Instead, a colleague introduced him to CIMT, a five-minute, radiation-free ultrasound of the carotid arteries in the neck, and the scan revealed two discrete plaques along with an arterial age of 73 — sixteen years older than his actual age of 57. After the shock wore off, his research pointed to a bigger culprit than cholesterol: metabolic disease, specifically pre-diabetes and diabetes. An oral glucose tolerance test confirmed it — his blood sugar peaked above 160 mg/dL, proof that his supposedly protective low-fat diet was, in fact, loaded with glycemic carbohydrates like bread and grain products that were spiking his blood sugar multiple times a day without his knowledge.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c2)">Step 1: Test, Don't Guess</div>
+    <p>Brewer's plan begins with measurement, because the tests most doctors routinely run rarely capture what's actually killing and disabling people. He recommends CIMT as an accessible starting point, since it can reveal soft, unstable plaque — the kind most likely to trigger a heart attack — years before any symptoms appear. Alongside it, inflammation markers like C-reactive protein and Lp-PLA2 reveal whether existing plaque is stable or dangerously "hot." He also emphasizes visceral fat, the fat wrapped around abdominal organs that directly drives insulin resistance, best measured with a DEXA body composition scan rather than weight or BMI. His underlying message is blunt: you cannot fix what you don't measure, and the markers that matter most are almost never the ones already on a standard checkup.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c3)">Step 2: Cut the Right Carbs</div>
+    <p>Once Brewer understood his root problem was glycemic rather than about fat intake, his entire framing of diet changed — from "eat healthy" to "watch what my blood sugar does after I eat." He identifies 140 mg/dL as the critical post-meal threshold: blood sugar spiking above that level is where inflammation begins in the artery wall, and doing so two to four times a day, repeatedly, steadily damages the arterial lining. Crucially, not all carbs are equal — fiber-based, non-starchy vegetables like Brussels sprouts don't cause spikes, while glycemic grain products like bread, rice, pasta, and even oatmeal do, despite oatmeal's reputation as heart-healthy. He replaced these with eggs fried in butter, bacon, avocado, salmon, non-starchy vegetables, and olive-oil-dressed salads — foods that kept his blood sugar flat for hours. He also narrowed his eating window from 16 hours down to 12 or 8, since fasting lowers insulin more effectively than nearly anything else, and recommends a short walk or a few calf raises after any accidental spike to pull glucose safely into muscle tissue.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c4)">Step 3: Exercise &amp; Intensity</div>
+    <p>Brewer's own history undercuts a common assumption: despite decades of marathons and regular basketball, he still built significant arterial plaque, proving that aerobic fitness alone doesn't reliably fix insulin resistance, the true root of the problem. His corrective insight centers on the legs — the body's largest muscle group, which pulls glucose directly out of the bloodstream when active, yet is often thin and metabolically underused in long-distance runners. He introduced REHIT, reduced-exertion high-intensity interval training, using just two or three 20-second all-out efforts per session, delivering meaningful metabolic impact in about five minutes. He paired this with brief daily "resistance snacks" — wall sits, lunges, and calf raises totaling roughly five minutes, done once or twice a day — which he argues have more cumulative metabolic benefit than most supplements or medications. His explicit target throughout is not fitness for its own sake, but metabolic function: short, intense leg-focused work does more for arterial health than hours of slow cardio.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c5)">Step 4: Roadblocks — Sleep, Stress &amp; Purpose</div>
+    <p>Diet and exercise drove most of Brewer's reversal, but he identifies a set of quieter factors that were undermining his progress. Poor sleep raises cortisol, which spikes blood sugar and feeds the same inflammatory pathway that builds plaque — research he cites shows a single night of poor sleep raises insulin resistance for 48 hours. He also discovered mild, undiagnosed sleep apnea, caused by a high, narrow dental arch pushing his tongue into his airway, waking him dozens of times a night without his awareness; Invisalign to widen his arch, combined with training himself to sleep on his side, measurably improved his apnea, blood pressure, and lab results. He layers in slow breathing — 7 to 10 breaths per minute, roughly half the normal rate, with a 4-to-5-second inhale and a 6-to-8-second exhale — as a direct way to activate the vagus nerve and lower blood pressure. Finally, he treats chronic stress, relationship strain, and lack of purpose as equally metabolic: they activate the same inflammatory pathways as poor diet. For Brewer personally, purpose — staying capable for the people he loves and helping others avoid his own wake-up call — is what sustained the changes once fear alone had done its job of getting him started.</p>
+  </div>
+  <div class="summary-section">
+    <div class="summary-title" style="color:var(--c6)">Steps 5 &amp; 6: Supplements, Medication &amp; Results</div>
+    <p>Once a self-described skeptic who considered most supplements "expensive urine," finding plaque in his own arteries pushed Brewer to re-examine the evidence. He now takes vitamin D3 (5,000 IU) paired with a full dose of K2 (400 mcg, not the lower amount found in most combination pills) for artery wall health and insulin resistance, along with two forms of magnesium, omega-3 fatty acids, aged garlic extract, and nattokinase for plaque stability. He singles out niacin as unusual for simultaneously raising HDL while lowering LDL, triglycerides, and Lp(a). On medication, Brewer reversed a career-long anti-medication stance: he added a low-dose statin — taken only a few times a week rather than daily — specifically to lower vascular inflammation rather than LDL, alongside an ACE inhibitor and later an ARB for blood pressure and its own anti-inflammatory effect, low-dose aspirin once his plaque was confirmed, and eventually Eloquis after developing atrial fibrillation. The results, tracked through annual CIMT scans and eventually a detailed CT angiogram, showed essentially no unstable soft plaque remaining, with 31% of his total plaque fully calcified and stable, arterial narrowing under 10% in most vessels, and a CIMT arterial age of 58 at his actual age of 67 — despite carrying a diabetes diagnosis and a cardiovascular genetic risk variant.</p>
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="takeaways-grid">
+    <div class="card"><div class="card-num">01</div><p><b>Ask about a CIMT scan.</b> It's a five-minute, radiation-free ultrasound that can reveal soft, unstable plaque years before symptoms — and most standard checkups never look for it.</p></div>
+    <div class="card"><div class="card-num">02</div><p><b>Consider an oral glucose tolerance test.</b> A single fasting glucose or A1C can miss hidden pre-diabetes; tracking blood sugar over two to three hours after a glucose load can reveal what a standard test won't.</p></div>
+    <div class="card"><div class="card-num">03</div><p><b>Treat 140 mg/dL as your post-meal line in the sand.</b> Swap glycemic grain-based carbs — bread, rice, pasta, oatmeal — for fiber-based non-starchy vegetables and protein-forward meals.</p></div>
+    <div class="card"><div class="card-num">04</div><p><b>Add short, intense leg work, not just steady cardio.</b> Two or three 20-second all-out efforts (REHIT) or a few minutes of daily resistance snacks meaningfully improve insulin sensitivity.</p></div>
+    <div class="card"><div class="card-num">05</div><p><b>Walk off a blood sugar spike.</b> A short walk or a set of calf raises after a high-carb meal pulls glucose out of the bloodstream and into muscle, blunting arterial damage.</p></div>
+    <div class="card"><div class="card-num">06</div><p><b>Fix sleep before reaching for supplements.</b> Screen for sleep apnea if you wake unrested — even one bad night raises insulin resistance for the next 48 hours.</p></div>
+    <div class="card"><div class="card-num">07</div><p><b>Practice slow breathing daily.</b> Aim for 7–10 breaths per minute (4–5 second inhale, 6–8 second exhale) to activate the vagus nerve and lower blood pressure and cortisol.</p></div>
+    <div class="card"><div class="card-num">08</div><p><b>Target specific supplement gaps, not a shotgun approach.</b> D3 paired with adequate K2, magnesium, and omega-3s have the most direct evidence for supporting arterial health.</p></div>
+    <div class="card"><div class="card-num">09</div><p><b>Reframe statins and BP medications as anti-inflammatory tools.</b> If you already have confirmed plaque, discuss low-dose, non-daily statin strategies aimed at inflammation with your doctor, not just LDL targets.</p></div>
+    <div class="card"><div class="card-num">10</div><p><b>Don't skip the "soft" factors.</b> Purpose, relationship stress, and chronic fight-or-flight activation run through the same inflammatory pathway as diet and exercise — and matter just as much for long-term arterial healing.</p></div>
+  </div>
+</div>
+
+<footer>
+  Source: <a href="https://youtu.be/osgdXBcVMqQ" target="_blank">Dr. Thomas Fordham Brewer — How I Cleaned 20 Years of Arterial Plaque</a>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
