@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Taking 40 Grams to Cut Visceral Fat and Promote Liver Health — Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ee;
+    --card: #ffffff;
+    --border: #e2ddd0;
+    --text: #2b2822;
+    --text-dim: #75705f;
+    --accent1: #1f7a5c;
+    --accent2: #b5651d;
+    --accent3: #2e5f8a;
+    --accent4: #a1373f;
+    --accent5: #6c5b9e;
+    --accent6: #35807f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    padding: 24px 16px 60px;
+    min-height: 100vh;
+  }
+  h1, h2, h3, .tab, .branch-title, .card-title {
+    font-family: 'Fraunces', serif;
+  }
+  .header {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    text-align: center;
+  }
+  .header .kicker {
+    color: var(--accent1);
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .header h1 {
+    font-size: 26px;
+    margin: 8px 0 6px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  .header .meta {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .tabs {
+    max-width: 900px;
+    margin: 24px auto 20px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); border-color: var(--accent1); }
+  .tab.active {
+    background: var(--accent1);
+    color: #ffffff;
+    border-color: var(--accent1);
+  }
+  .panel { display: none; max-width: 900px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* Mind map branches */
+  .branch {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--branch-color, var(--accent1));
+    border-radius: 12px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(43,40,34,0.04);
+  }
+  .branch-header {
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .branch-title {
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .branch-icon {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--branch-color, var(--accent1));
+    flex-shrink: 0;
+  }
+  .chevron {
+    color: var(--text-dim);
+    transition: transform 0.25s;
+    font-size: 14px;
+  }
+  .branch.open .chevron { transform: rotate(90deg); }
+  .leaves {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .branch.open .leaves { max-height: 2000px; }
+  .leaf {
+    margin: 0 14px 12px;
+    background: #fbfaf6;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    cursor: pointer;
+  }
+  .leaf-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .leaf-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.65;
+  }
+  .leaf.open .leaf-detail { max-height: 400px; margin-top: 8px; }
+  .leaf .chevron { font-size: 12px; }
+
+  /* Summary */
+  .summary-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .summary-section h3 {
+    color: var(--accent1);
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .summary-section p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  /* Takeaways */
+  .takeaways-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .takeaway-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+  }
+  .takeaway-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    background: var(--accent1);
+    color: #ffffff;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .takeaway-card h4 {
+    font-size: 14.5px;
+    margin-bottom: 6px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+  }
+  .takeaway-card p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  @media (max-width: 640px) {
+    .takeaways-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 21px; }
+  }
+  .disclosure {
+    max-width: 900px;
+    margin: 24px auto 0;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">Physionic — Dr. Nicolas Verhoeven, PhD</div>
+  <h1>I'm Taking 40 Grams to Cut Visceral Fat and Promote Liver Health</h1>
+  <div class="meta">Published February 9, 2026 &nbsp;·&nbsp; Resistant Starch / Gut Microbiome / Liver Health</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+
+  <div class="branch" style="--branch-color:#1f7a5c" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>Why Visceral Fat Matters</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">What visceral fat actually is <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Visceral fat is the deep internal fat that surrounds and infiltrates organs like the liver and intestines — not the soft, pinchable fat under the skin. Verhoeven stresses it's strongly linked to metabolic disease risk and premature death, which sets the stakes for the rest of the video.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">An add-on, not an overhaul <span class="chevron">▶</span></div>
+        <div class="leaf-detail">A key detail Verhoeven repeats is that the visceral fat reductions occurred even when participants kept their usual diet and simply added resistant starch as a supplement. That framing is what makes the intervention appealing — it doesn't require a full dietary overhaul to show an effect.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Where the research trail started <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Verhoeven says his first encounter with this data came through a video by Dr. Gil Carvalho, which sent him digging into the primary literature himself. He ended up pulling six relevant studies (numbered 606–611 in his reference system) spanning Cell Metabolism, Nature Metabolism, and other journals.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Two fat depots, one intervention <span class="chevron">▶</span></div>
+        <div class="leaf-detail">What makes resistant starch notable in his framing is that it improves both visceral fat and intrahepatic (liver) fat at once, rather than targeting a single depot the way many interventions do — hence the video covering both outcomes rather than just one.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#b5651d" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>The Visceral Fat Evidence</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The headline number: 300% / 20% <span class="chevron">▶</span></div>
+        <div class="leaf-detail">In the placebo-controlled trial by Ni et al. (Cell Metab, 2023), the resistant starch group showed over 300% more relative visceral fat elimination than placebo, and about 20% more absolute visceral fat lost over a four-month period.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">MRI confirmation <span class="chevron">▶</span></div>
+        <div class="leaf-detail">A separate study (Li et al., Nat Metab, 2024) used direct MRI imaging of body fat, with more red on the scan indicating more visceral fat. Side-by-side before-and-after images showed a visible reduction in red in the resistant starch group, reinforcing the quantitative results with imaging.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Consistency across six trials <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Verhoeven cites six separate trials in total (published in Cell Metabolism, Nature Metabolism, Scientific Reports, American Journal of Clinical Nutrition, and Diabetic Medicine) that all point toward improved visceral fat, liver fat, or insulin sensitivity with resistant starch supplementation.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">No calorie restriction needed <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Because participants weren't asked to cut calories or otherwise change their diet, the visceral fat reduction can be more confidently attributed to the resistant starch itself, rather than confounded by broader dietary changes.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#2e5f8a" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>Liver Fat &amp; Liver Health</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Intrahepatic triglyceride content (IHTC) <span class="chevron">▶</span></div>
+        <div class="leaf-detail">The Li et al. study measured fat stored directly inside liver cells (IHTC) rather than around the organ. The resistant starch group eliminated roughly six times more liver fat than the placebo group — a much larger effect than the visceral fat result.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Inflammation and damage markers moved too <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Improvements weren't limited to imaging-based fat content — blood markers of liver inflammation and liver damage also improved alongside the drop in intrahepatic fat, suggesting a functional benefit rather than just a cosmetic change on a scan.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Why liver fat specifically matters <span class="chevron">▶</span></div>
+        <div class="leaf-detail">When liver cells accumulate too many fat droplets, they malfunction, and because the liver is made of these cells, that dysfunction shows up as inflammation and vulnerability to long-term damage — the underlying process behind conditions like NAFLD.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">"My liver is healing" <span class="chevron">▶</span></div>
+        <div class="leaf-detail">The video's own chapter title reflects Verhoeven's personal narrative — moving from concern about his liver fat to describing what he frames as measurable improvement associated with the intervention, which is part of why he says he's building resistant starch into his own routine.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#a1373f" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>The Microbiome Mechanism</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Not absorbed, but fermented <span class="chevron">▶</span></div>
+        <div class="leaf-detail">By definition, resistant starch resists digestion in the small intestine and doesn't break down into glucose or pass into the blood. It travels largely intact to the large intestine, where gut bacteria ferment it — which is how a non-absorbed carbohydrate can still change systemic liver and fat outcomes.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The mouse stool-transplant proof <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Researchers transplanted stool microbiomes from resistant-starch-eating humans and placebo-group humans into separate groups of mice. The mice that received the resistant-starch-derived microbiome alone ended up with healthier livers — direct evidence that the microbiome, not the starch itself, is the active mediator.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">A harmful bacterium uncovered <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Comparing microbiomes with and without resistant starch exposure identified a specific bacterium that flourishes when resistant starch is missing from the diet. Exposing mice to live versus dead versions of this bacterium confirmed it actively harms liver health when present.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Feeding the wrong bug by default <span class="chevron">▶</span></div>
+        <div class="leaf-detail">A typical low-resistant-starch diet — one without much green banana, cooled potato, lentils, or chickpeas — may be inadvertently giving this harmful bacterium a comfortable home, tying everyday food choices directly to the underlying mechanism.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#6c5b9e" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>High Responders vs. Low Responders</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The 70% split <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Roughly 70% of people appear to be "hyper-responders" who see outsized benefit from resistant starch — the video's chapter "70% of People are even Luckier" refers directly to this split, drawn from stratified data in the Li et al. study.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Same dose, different outcomes <span class="chevron">▶</span></div>
+        <div class="leaf-detail">On the liver-fat graphs, two clusters of participants emerge — one with a large drop in intrahepatic fat, one with only a small improvement — despite everyone receiving the identical resistant starch dose. The differentiator wasn't adherence; it was baseline microbiome composition.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Microbial competition as the driver <span class="chevron">▶</span></div>
+        <div class="leaf-detail">The leading explanation is that in "low responder" guts, certain microbes crowd out or outcompete the beneficial species needed to fully ferment resistant starch, effectively limiting how much benefit the supplement can deliver.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Low responders aren't zero responders <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Being a low responder doesn't mean resistant starch does nothing — it means the effect size is smaller, and it may grow over time as continued intake gradually shifts the microbiome toward a more favorable balance.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#35807f" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>Practical Dosing &amp; Sourcing</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The 40-gram target <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Across the cited studies, roughly 40 grams of resistant starch per day is the consistent dose associated with these results. It's a substantial amount, and lower doses haven't yet been proven in trials to deliver a comparably large effect.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Ramp up slowly <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Jumping straight from zero to 40 grams can cause significant gas and bloating since resistant starch is fermentable. Verhoeven's suggested approach is starting around 5 grams per day and increasing by about 5 grams each week until reaching the target dose.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Best sources <span class="chevron">▶</span></div>
+        <div class="leaf-detail">High-amylose maize starch, green banana powder, and potato starch are the most common supplemental sources used in the cited trials. Cooking and then cooling starchy foods like potatoes, rice, or pasta also naturally raises their resistant starch content.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Handling quirks <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Resistant starch powder doesn't dissolve well, and heating it too much converts it back into regular digestible starch — destroying the very structure that makes it "resistant." Verhoeven notes he's planning to mix it cold into a shake or smoothie rather than cooking with it.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="panel">
+  <div class="summary-section">
+    <h3>Why Visceral Fat Matters</h3>
+    <p>Dr. Nicolas Verhoeven opens by distinguishing visceral fat — the deep fat surrounding organs like the liver and intestines — from ordinary subcutaneous fat, noting its strong link to metabolic disease and premature death risk. He traces his interest in resistant starch back to a video by Dr. Gil Carvalho, which sent him digging through six primary studies himself. What stands out to him is that the visceral fat benefits showed up even when participants kept their normal diet and simply added resistant starch as a supplement, and that the same intervention appeared to improve both visceral fat and liver fat simultaneously — an unusual combination for a single dietary addition.</p>
+  </div>
+  <div class="summary-section">
+    <h3>The Visceral Fat Evidence</h3>
+    <p>The core data point comes from a placebo-controlled trial (Ni et al., Cell Metabolism, 2023), where the resistant starch group showed over 300% more relative visceral fat elimination than placebo, translating to about 20% more absolute visceral fat lost over four months. A second study using MRI imaging (Li et al., Nature Metabolism, 2024) visually confirmed this, showing a clear reduction in visceral fat signal on before-and-after scans. Verhoeven emphasizes that six separate trials, across several major journals, point in the same direction, and that these effects occurred without participants being asked to restrict calories or otherwise change their diet.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Liver Fat and Liver Health</h3>
+    <p>Beyond visceral fat, the video spends significant time on intrahepatic fat — fat stored inside liver cells rather than around the organ. In the Li et al. study, the resistant starch group eliminated roughly six times more liver fat than placebo, an even larger effect than the visceral fat findings. These improvements were accompanied by better blood markers of liver inflammation and damage, suggesting a functional benefit rather than a purely cosmetic change on imaging. Verhoeven frames this as personally significant, describing a shift from concern about his own liver fat to what he characterizes as measurable healing.</p>
+  </div>
+  <div class="summary-section">
+    <h3>The Microbiome Mechanism</h3>
+    <p>Since resistant starch isn't absorbed in the small intestine, the video explains how it can still drive these effects: it travels to the large intestine, where gut bacteria ferment it. Researchers demonstrated the microbiome's central role directly by transplanting stool from resistant-starch-eating humans, versus placebo-group humans, into separate groups of mice — the resistant-starch-derived microbiome alone produced healthier livers in the recipient mice. Comparing microbiomes with and without resistant starch exposure also identified a specific bacterium that thrives in its absence and was shown, through live-versus-dead exposure experiments in mice, to actively harm liver health.</p>
+  </div>
+  <div class="summary-section">
+    <h3>High Responders and Low Responders</h3>
+    <p>Not everyone benefits equally: roughly 70% of people appear to be "hyper-responders" who see outsized improvement from resistant starch, while others on the identical dose show only modest change. Verhoeven attributes this split to baseline microbiome composition rather than adherence — in lower-responding individuals, certain microbes appear to crowd out the beneficial species needed to fully ferment and benefit from resistant starch. Importantly, being a low responder doesn't mean zero benefit; it likely means a smaller effect that could grow as the microbiome shifts with continued intake.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Practical Dosing and Sourcing</h3>
+    <p>The consistent dose across the cited trials is around 40 grams of resistant starch per day, though Verhoeven acknowledges that lower doses might still offer meaningful, if unproven, benefit. Because jumping straight to that amount can cause significant gastrointestinal discomfort, he recommends ramping up gradually — starting around 5 grams per day and increasing weekly. The main supplemental sources are high-amylose maize starch, green banana powder, and potato starch, though the same effect can be approximated by cooking and then cooling starchy foods like potatoes, rice, or pasta. One practical caveat: resistant starch doesn't dissolve well and loses its "resistant" structure if heated too much, so Verhoeven plans to mix it cold into a shake or smoothie rather than cooking with it.</p>
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="takeaways-grid">
+    <div class="takeaway-card">
+      <div class="takeaway-num">1</div>
+      <h4>Ramp up, don't jump to 40g</h4>
+      <p>Start around 5 grams of resistant starch per day and increase by roughly 5 grams each week until you reach 40 grams — this mirrors the trial protocols and limits gas and bloating.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">2</div>
+      <h4>Buy what the trials actually used</h4>
+      <p>Look for high-amylose maize starch, green banana powder, or potato starch specifically — these are the resistant starch sources used in the cited studies, not generic "resistant starch" claims on unrelated products.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">3</div>
+      <h4>Keep it cold</h4>
+      <p>Mix resistant starch powder into a cold shake or smoothie rather than hot food or drinks — heating it converts it back into regular digestible starch and eliminates the benefit.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">4</div>
+      <h4>Don't judge results too early</h4>
+      <p>About 30% of people are "low responders" due to microbiome composition, not lack of effort. Give it several weeks to months, in line with the four-month trial windows, before concluding it isn't working for you.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">5</div>
+      <h4>Use cooked-and-cooled starches as a food-based boost</h4>
+      <p>Cooking then chilling potatoes, rice, or pasta naturally raises their resistant starch content — a practical, food-first complement to supplementing directly.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">6</div>
+      <h4>Flag this for your doctor if you have fatty liver risk factors</h4>
+      <p>Given the liver-specific data (roughly 6x more intrahepatic fat reduction than placebo in one trial), this is worth raising with a physician if NAFLD or elevated liver enzymes are already a concern.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">7</div>
+      <h4>Expect some GI adjustment</h4>
+      <p>Gas and bloating during the ramp-up period are a normal sign of fermentation by gut bacteria, not necessarily a reason to stop — they typically ease as your microbiome adjusts.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">8</div>
+      <h4>You don't have to overhaul your diet first</h4>
+      <p>The visceral fat benefits in these trials appeared with participants' usual diet unchanged — resistant starch can be added as a standalone step rather than requiring a broader diet overhaul.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">9</div>
+      <h4>Treat 40g as a research target, not a hard rule</h4>
+      <p>It's the best-supported dose from available trials, but lower amounts may still offer partial benefit — there isn't yet clear dose-response data below 40g.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">10</div>
+      <h4>Think of it as microbiome support, not a direct nutrient</h4>
+      <p>Since the entire mechanism runs through gut bacteria fermentation rather than direct absorption, resistant starch works best as part of a broader pattern of fiber diversity and gut health — not as an isolated fix.</p>
+    </div>
+  </div>
+</div>
+
+<div class="disclosure">This mind map summarizes publicly available video and article content from Physionic (Dr. Nicolas Verhoeven) and the referenced peer-reviewed studies. It is not medical advice — consult a physician before making dietary changes, particularly if you have existing liver or metabolic conditions.</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
