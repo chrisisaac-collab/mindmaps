@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2oz of This Replaces Your Entire Supplement Cabinet — Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-alt: #151b23;
+    --card: #1a2129;
+    --border: #2a333d;
+    --text: #e6edf3;
+    --text-dim: #9ba7b4;
+    --accent1: #3ddc97;
+    --accent2: #4ea1ff;
+    --accent3: #f5a623;
+    --accent4: #ff6b81;
+    --accent5: #b48eff;
+    --accent6: #5ce1e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    padding: 24px 16px 60px;
+    min-height: 100vh;
+  }
+  h1, h2, h3, .tab, .branch-title, .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .header {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    text-align: center;
+  }
+  .header .kicker {
+    color: var(--accent1);
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .header h1 {
+    font-size: 26px;
+    margin: 8px 0 6px;
+    line-height: 1.3;
+  }
+  .header .meta {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .tabs {
+    max-width: 900px;
+    margin: 24px auto 20px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); border-color: var(--accent1); }
+  .tab.active {
+    background: var(--accent1);
+    color: #0d1117;
+    border-color: var(--accent1);
+  }
+  .panel { display: none; max-width: 900px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* Mind map branches */
+  .branch {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--branch-color, var(--accent1));
+    border-radius: 12px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .branch-header {
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .branch-title {
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .branch-icon {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--branch-color, var(--accent1));
+    flex-shrink: 0;
+  }
+  .chevron {
+    color: var(--text-dim);
+    transition: transform 0.25s;
+    font-size: 14px;
+  }
+  .branch.open .chevron { transform: rotate(90deg); }
+  .leaves {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .branch.open .leaves { max-height: 2000px; }
+  .leaf {
+    margin: 0 14px 12px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    cursor: pointer;
+  }
+  .leaf-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .leaf-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .leaf.open .leaf-detail { max-height: 400px; margin-top: 8px; }
+  .leaf .chevron { font-size: 12px; }
+
+  /* Summary */
+  .summary-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .summary-section h3 {
+    color: var(--accent1);
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .summary-section p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  /* Takeaways */
+  .takeaways-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .takeaway-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+  }
+  .takeaway-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    background: var(--accent1);
+    color: #0d1117;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .takeaway-card h4 {
+    font-size: 14.5px;
+    margin-bottom: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .takeaway-card p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  @media (max-width: 640px) {
+    .takeaways-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 21px; }
+  }
+  .disclosure {
+    max-width: 900px;
+    margin: 24px auto 0;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">Thomas DeLauer</div>
+  <h1>2oz of This Replaces Your Entire Supplement Cabinet</h1>
+  <div class="meta">Published July 9, 2026 &nbsp;·&nbsp; NAD+ / Liposomal Delivery / Longevity Science</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+
+  <div class="branch" style="--branch-color:#3ddc97" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>Why NAD+ Declines With Age</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The 50% age-related drop <span class="chevron">▶</span></div>
+        <div class="leaf-detail">NAD+ levels fall by roughly half between age 20 and 60. DeLauer uses this decline as the central justification for the video: if a molecule this important is disappearing on a predictable curve, replenishing it becomes a maintenance issue rather than an optional upgrade.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">CD38 and PARP consumption <span class="chevron">▶</span></div>
+        <div class="leaf-detail">NAD+ isn't just under-produced with age — it's actively consumed faster by enzymes like CD38 and the PARP family. This dual pressure (less made, more used) is why simply "eating better" rarely restores youthful NAD+ levels on its own.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Downstream consequences <span class="chevron">▶</span></div>
+        <div class="leaf-detail">A shrinking NAD+ pool doesn't stay isolated — it ripples into mitochondrial energy output, DNA repair capacity, and metabolic regulation simultaneously. DeLauer frames this as why NAD+ support can feel like it touches "everything" rather than one narrow symptom.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Why precursors alone can fall short <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Popular precursors like NR and NMN do raise circulating NAD+, but they're subject to rapid consumption by CD38/PARPs and the body's own homeostatic feedback loops that cap how high levels climb. This is the setup DeLauer uses to argue for delivering NAD+ itself, rather than relying on the body to convert a precursor.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#4ea1ff" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>How Liposomal Delivery Works</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The bioavailability gap <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Standard oral NAD+ or precursor capsules are estimated to reach only about 10–20% effective absorption, largely destroyed in the gut before they're useful. Liposomal formulations are marketed as pushing that figure toward 60%, which is the core selling point DeLauer builds the episode around.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Phospholipid protection <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Liposomes are tiny spheres built from a phosphatidylcholine bilayer — the same material that makes up human cell membranes. Wrapping NAD+ inside this shell shields it from stomach acid and digestive enzymes so more of the molecule survives intact until it reaches circulation.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Direct delivery vs. precursor conversion <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Rather than supplying a precursor and hoping the body's enzymatic machinery converts it efficiently, liposomal NAD+ delivers the finished molecule directly. DeLauer positions this as removing a conversion bottleneck that limits how much precursor-based supplementation actually raises NAD+.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Why the liquid format matters <span class="chevron">▶</span></div>
+        <div class="leaf-detail">A liquid liposomal suspension increases surface area contact in the mouth and gut compared to a capsule, and some absorption is believed to occur through lymphatic uptake that partially bypasses first-pass liver metabolism. This is presented as another reason the liquid delivery outperforms pills.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#f5a623" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>Mitochondria &amp; Cellular Energy</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">NAD+ as an electron carrier <span class="chevron">▶</span></div>
+        <div class="leaf-detail">NAD+ shuttles electrons through the mitochondrial electron transport chain, a core step in producing ATP — the body's basic energy currency. Without an adequate NAD+ pool, this chain runs less efficiently, which DeLauer ties directly to the fatigue many people notice as they age.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Fighting age-related fatigue <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Restoring NAD+ availability is framed as supporting mitochondrial respiration broadly, rather than acting as a stimulant. The pitch is that it addresses a root cause of low cellular energy output instead of masking tiredness the way caffeine does.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Positioned upstream of other energy supplements <span class="chevron">▶</span></div>
+        <div class="leaf-detail">DeLauer contrasts NAD+ with supplements like CoQ10 or creatine, arguing those support specific downstream energy processes while NAD+ acts further upstream as a rate-limiting cofactor for hundreds of enzymatic reactions, including energy metabolism.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">A complement to, not a replacement for, diet <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Even while pitching the product, the mitochondrial argument rests on NAD+ being a cofactor the body already uses constantly — meaning sleep, training load, and whole-food nutrition still set the ceiling on how much a supplement alone can move the needle.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#ff6b81" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>DNA Repair &amp; PARP Enzymes</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">PARP1's outsized NAD+ appetite <span class="chevron">▶</span></div>
+        <div class="leaf-detail">When DNA is damaged, the enzyme PARP1 activates and can consume up to 80% of the nuclear NAD+ pool to fuel repair. That single number illustrates how much cellular "budget" genomic maintenance can claim when NAD+ is scarce.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The repair-depletion cycle <span class="chevron">▶</span></div>
+        <div class="leaf-detail">DNA damage triggers PARP activation, which consumes NAD+; but NAD+ depletion has been shown to reduce DNA repair rates by up to 40%, creating a feedback loop where the very process meant to fix damage is starved of its fuel. DeLauer uses this to argue that low NAD+ compounds genomic aging rather than just slowing it.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Genomic stability as an aging lever <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Accumulated, unrepaired DNA damage is one of the recognized hallmarks of cellular aging. Framing NAD+ support around PARP function ties the supplement to a mechanism deeper than "energy" — genomic maintenance itself.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Balancing repair demand with sirtuin demand <span class="chevron">▶</span></div>
+        <div class="leaf-detail">PARPs and sirtuins draw from the same NAD+ pool, so periods of high DNA-damage load (intense UV exposure, heavy training, illness) can starve sirtuin activity of substrate. This sets up the next branch's argument for keeping NAD+ levels high enough to fund both processes at once.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#b48eff" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>Sirtuins &amp; Longevity Pathways</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Sirtuins need NAD+ as substrate <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Sirtuins such as SIRT1 are NAD+-dependent deacetylases — they cannot function without NAD+ as a direct co-substrate. Practically, this means no sirtuin activator (including resveratrol) can do anything in a cell whose NAD+ pool is already depleted.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Resveratrol synergy <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Resveratrol works as an allosteric activator of SIRT1, increasing the enzyme's catalytic efficiency for whatever NAD+ concentration is available — it amplifies the effect of existing NAD+ rather than replacing the need for it. DeLauer uses this to make the case that NAD+ and sirtuin activators are complementary, not redundant, supplements.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Cell viability and senescence <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Sirtuin activity is linked to reduced markers of cellular senescence and improved cell viability under stress. This is part of the broader "healthy aging" framing rather than a claim about lifespan extension in humans, where evidence remains preliminary.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The "master switch" framing <span class="chevron">▶</span></div>
+        <div class="leaf-detail">Sirtuins are often described as a master regulatory switch connecting metabolism, inflammation, and aging pathways. It's a useful mental model, but worth treating as a simplification — human longevity trials on sirtuin pathways are still limited compared to the mechanistic cell and animal data this framing leans on.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch" style="--branch-color:#5ce1e6" onclick="toggleBranch(this)">
+    <div class="branch-header">
+      <div class="branch-title"><span class="branch-icon"></span>Practical Dosing &amp; Stacking</div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">The daily serving <span class="chevron">▶</span></div>
+        <div class="leaf-detail">The featured product (Rho Nutrition's Liposomal NAD+) is dosed at roughly 4ml per day — just under a teaspoon — delivering about 100mg of NAD+ per serving from a bottle sized for about 30 servings.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Format and tolerability <span class="chevron">▶</span></div>
+        <div class="leaf-detail">It's a vegan, sugar-free, keto-friendly liquid with a light lemon flavor, designed to avoid the GI discomfort some people report with high-dose NR or NMN capsules. Liquid liposomal formats are generally easier to titrate than fixed-dose pills.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">What it's pitched to replace <span class="chevron">▶</span></div>
+        <div class="leaf-detail">DeLauer's core pitch is consolidation: instead of a cabinet of separate energy, longevity, and antioxidant pills, one liposomal liquid covers several of those bases at once. That's a convenience argument as much as a biochemical one, and worth weighing against simply taking the individual, cheaper components separately.</div>
+      </div>
+      <div class="leaf" onclick="toggleLeaf(event, this)">
+        <div class="leaf-title">Sponsor context <span class="chevron">▶</span></div>
+        <div class="leaf-detail">This segment is a paid partnership with Rho Nutrition, promoted with the discount code DELAUER20. The underlying NAD+/liposomal science is real and published, but the specific product claims and "replaces your whole cabinet" framing come from a sponsored placement, not an independent review.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="panel">
+  <div class="summary-section">
+    <h3>Why NAD+ Declines With Age</h3>
+    <p>The episode opens from a simple but stark data point: NAD+ levels drop by roughly half between age 20 and 60. DeLauer explains that this isn't purely a production problem — enzymes like CD38 and the PARP family actively consume NAD+ faster as the body ages and accumulates cellular stress, so the pool shrinks from both ends at once. Because NAD+ feeds mitochondrial energy production, DNA repair, and metabolic signaling simultaneously, its decline is presented as a plausible common thread behind several unrelated symptoms of aging rather than a single, narrow deficiency.</p>
+  </div>
+  <div class="summary-section">
+    <h3>How Liposomal Delivery Works</h3>
+    <p>The central hook of the video is bioavailability: standard oral NAD+ and precursor supplements are estimated to reach only 10–20% effective absorption, while liposomal delivery is marketed as reaching closer to 60%. Liposomes achieve this by encasing NAD+ in a phosphatidylcholine bilayer — essentially the same material human cell membranes are built from — which protects the molecule from stomach acid and digestive enzymes long enough to reach circulation intact. DeLauer contrasts this direct-delivery approach with precursor supplements like NR or NMN, which require the body to enzymatically convert them into NAD+, a step he argues introduces inefficiency and caps how much benefit precursors alone can provide.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Mitochondria and Cellular Energy</h3>
+    <p>NAD+'s role as an electron carrier in the mitochondrial electron transport chain is the mechanistic backbone for the energy claims in the video. DeLauer frames restored NAD+ availability as supporting ATP production broadly, positioning it as acting further upstream than more familiar energy supplements like CoQ10 or creatine, which support specific downstream processes rather than the cofactor pool itself. The argument is that addressing fatigue at the mitochondrial-cofactor level is more foundational than stimulant-based approaches, though the video is clear this works alongside — not instead of — sleep, training, and diet.</p>
+  </div>
+  <div class="summary-section">
+    <h3>DNA Repair and PARP Enzymes</h3>
+    <p>A significant portion of the mechanistic case rests on DNA repair. PARP1, the enzyme activated by DNA damage, can consume up to 80% of the nuclear NAD+ pool to fuel repair, and NAD+ depletion has been linked to roughly a 40% reduction in repair rates — creating a feedback loop where low NAD+ both causes and worsens genomic instability. DeLauer uses this to elevate the conversation beyond "energy supplement" into genomic maintenance, and notes that PARPs and sirtuins compete for the same limited NAD+ pool, which becomes the bridge into the video's longevity-pathway discussion.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Sirtuins and Longevity Pathways</h3>
+    <p>Sirtuins, especially SIRT1, require NAD+ as a direct co-substrate — without it, sirtuin activators like resveratrol have no mechanism to work through. DeLauer explains that resveratrol functions as an allosteric activator, boosting SIRT1's catalytic efficiency for whatever NAD+ is available, rather than substituting for NAD+ itself. This is used to argue that NAD+ restoration and sirtuin activators are complementary strategies, and sirtuins are described as a "master switch" connecting metabolism, inflammation, and cellular aging — a useful simplification, though human trial evidence for sirtuin-pathway longevity benefits remains far more limited than the cell and animal data it's based on.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Practical Dosing and Stacking</h3>
+    <p>The featured product, Rho Nutrition's Liposomal NAD+, is dosed at about 4ml daily (roughly 100mg of NAD+), in a vegan, sugar-free, lemon-flavored liquid sized for about 30 servings per bottle. The core consumer pitch is consolidation — replacing a cabinet of separate energy, antioxidant, and longevity pills with one liquid — which is as much a convenience argument as a biochemical one. It's worth noting this segment is a paid partnership promoted with the discount code DELAUER20; the underlying NAD+ and liposomal-delivery science is grounded in published research, but the specific "replaces your entire cabinet" framing is sponsored marketing language layered on top of it.</p>
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="takeaways-grid">
+    <div class="takeaway-card">
+      <div class="takeaway-num">1</div>
+      <h4>Don't wait for symptoms</h4>
+      <p>NAD+ declines roughly 50% between age 20 and 60 on a fairly predictable curve — if you're considering support, earlier maintenance is the framing DeLauer uses, not waiting until fatigue or recovery issues show up.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">2</div>
+      <h4>Compare absorption, not just dose</h4>
+      <p>When shopping for NAD+ or precursor products, check for bioavailability data. Standard capsules land around 10–20% absorption; liposomal liquids are marketed toward 60% — that gap matters more than milligrams on the label.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">3</div>
+      <h4>Reassess NR/NMN if you've seen no effect</h4>
+      <p>Precursors require enzymatic conversion and face rapid CD38/PARP consumption plus homeostatic feedback. If you've taken NR or NMN without noticeable results, this conversion bottleneck is a plausible reason, not necessarily a sign NAD+ support doesn't work for you.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">4</div>
+      <h4>Pair with a sirtuin activator deliberately</h4>
+      <p>If longevity signaling is the goal, resveratrol (or similar) only works when NAD+ is available as substrate. Taking a sirtuin activator alone, without addressing NAD+ levels, has little to act on.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">5</div>
+      <h4>Watch for high DNA-repair-demand periods</h4>
+      <p>Heavy sun exposure, intense training blocks, or illness spike PARP activity, which competes with sirtuins for the same NAD+ pool. Build in recovery periods rather than assuming supplementation alone offsets sustained high-damage stress.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">6</div>
+      <h4>Take liquid liposomal NAD+ on an empty stomach</h4>
+      <p>Liposomal delivery is generally recommended away from heavy meals to reduce competition for absorption pathways — a practical detail worth applying if you try a liquid liposomal format.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">7</div>
+      <h4>Weigh consolidation against cost</h4>
+      <p>A single daily 4ml serving replacing multiple pills is a convenience win, but price-per-serving on liposomal liquids is typically higher than buying individual, cheaper components separately — factor that into the "replaces your cabinet" pitch.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">8</div>
+      <h4>Discount the marketing framing, not the mechanism</h4>
+      <p>"Replaces your entire supplement cabinet" is sponsored language. The NAD+/PARP/sirtuin biochemistry behind it is real and published — evaluate the science and the sales pitch separately.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">9</div>
+      <h4>Check for third-party testing</h4>
+      <p>Before trusting a liposomal NAD+ brand's absorption or purity claims, look for independent lab verification (COAs) rather than relying on the manufacturer's marketing copy alone.</p>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">10</div>
+      <h4>Track subjective measures over 4–6 weeks</h4>
+      <p>Energy, recovery, and sleep quality are the practical signals to monitor if you trial NAD+ supplementation — human longevity outcomes take years to measure, but short-term subjective changes are the realistic feedback loop available to you.</p>
+    </div>
+  </div>
+</div>
+
+<div class="disclosure">This mind map summarizes and contextualizes publicly available information about the video and related published research on NAD+ biology. It is not medical advice, and the featured product segment is a paid sponsorship.</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
