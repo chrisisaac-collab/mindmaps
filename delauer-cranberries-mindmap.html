@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1oz Restructures Visceral Fat — Thomas DeLauer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf7f2;
+    --card:#ffffff;
+    --ink:#241a17;
+    --sub:#6b5c56;
+    --line:#ece2d8;
+    --maroon:#9c2b3c;
+    --maroon-bg:#fbe9ec;
+    --amber:#b5722a;
+    --amber-bg:#fbeee0;
+    --blue:#2f5f8a;
+    --blue-bg:#e8f0f6;
+    --green:#3f7d4f;
+    --green-bg:#e9f4ea;
+    --purple:#6c4a8e;
+    --purple-bg:#f0e8f6;
+    --teal:#2c7c74;
+    --teal-bg:#e4f3f1;
+    --shadow: 0 10px 30px rgba(36,26,23,0.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Manrope', sans-serif;
+    background:
+      radial-gradient(circle at 10% 0%, #fdf1e7 0%, transparent 45%),
+      radial-gradient(circle at 90% 10%, #f7e8ea 0%, transparent 40%),
+      var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  h1,h2,h3{font-family:'Outfit', sans-serif;}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px;}
+  header{margin-bottom:24px;}
+  .kicker{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--maroon);
+    background:var(--maroon-bg);
+    padding:5px 12px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  h1{font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.15;margin:0 0 10px;}
+  .meta{color:var(--sub);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 14px;}
+  .meta a{color:var(--maroon);text-decoration:none;font-weight:600;}
+  .tabs{
+    display:flex;gap:8px;margin:26px 0 22px;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .tab{
+    appearance:none;border:none;background:none;cursor:pointer;
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;
+    color:var(--sub);padding:10px 4px;margin-right:22px;
+    border-bottom:3px solid transparent;transition:.15s;
+  }
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--maroon);border-bottom-color:var(--maroon);}
+  .panel{display:none;animation:fade .25s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  /* MIND MAP */
+  .branches{display:flex;flex-direction:column;gap:12px;}
+  .branch{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .branch-head{
+    display:flex;align-items:center;gap:12px;
+    padding:16px 18px;cursor:pointer;user-select:none;
+  }
+  .branch-dot{width:12px;height:12px;border-radius:50%;flex:none;}
+  .branch-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:16.5px;flex:1;}
+  .branch-count{font-size:12px;color:var(--sub);font-weight:600;}
+  .chev{transition:transform .2s;color:var(--sub);}
+  .branch.open .chev{transform:rotate(90deg);}
+  .leaves{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .branch.open .leaves{max-height:1400px;}
+  .leaves-inner{padding:0 18px 16px;display:flex;flex-direction:column;gap:8px;}
+  .leaf{
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--bg);
+    padding:12px 14px;
+    cursor:pointer;
+  }
+  .leaf-title{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14.5px;}
+  .leaf-plus{color:var(--sub);font-size:18px;font-weight:400;transition:transform .2s;}
+  .leaf.open .leaf-plus{transform:rotate(45deg);}
+  .leaf-detail{max-height:0;overflow:hidden;transition:max-height .25s ease;font-size:14px;color:var(--sub);line-height:1.55;}
+  .leaf.open .leaf-detail{max-height:400px;margin-top:9px;}
+
+  /* branch colors */
+  .c-maroon .branch-dot{background:var(--maroon);} .c-maroon .branch-head{background:var(--maroon-bg);}
+  .c-amber .branch-dot{background:var(--amber);} .c-amber .branch-head{background:var(--amber-bg);}
+  .c-blue .branch-dot{background:var(--blue);} .c-blue .branch-head{background:var(--blue-bg);}
+  .c-green .branch-dot{background:var(--green);} .c-green .branch-head{background:var(--green-bg);}
+  .c-purple .branch-dot{background:var(--purple);} .c-purple .branch-head{background:var(--purple-bg);}
+  .c-teal .branch-dot{background:var(--teal);} .c-teal .branch-head{background:var(--teal-bg);}
+
+  /* SUMMARY */
+  .summary-section{margin-bottom:26px;}
+  .summary-section h3{font-size:17px;margin:0 0 8px;color:var(--maroon);}
+  .summary-section p{margin:0 0 10px;line-height:1.7;font-size:15px;color:#3a2e2a;}
+
+  /* TAKEAWAYS */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px;box-shadow:var(--shadow);
+  }
+  .card-num{
+    width:28px;height:28px;border-radius:50%;background:var(--maroon);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;margin-bottom:10px;
+  }
+  .card p{margin:0;font-size:14px;line-height:1.55;color:#3a2e2a;}
+
+  footer{margin-top:40px;text-align:center;color:var(--sub);font-size:12.5px;}
+  @media(max-width:600px){
+    .tab{margin-right:14px;font-size:14px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker">Metabolism · Nutrition</span>
+    <h1>1oz Restructures Visceral Fat (so it Burns Faster)</h1>
+    <div class="meta">
+      <span>Thomas DeLauer</span>
+      <span>·</span>
+      <span>July 3, 2026</span>
+      <span>·</span>
+      <span>8:46</span>
+      <span>·</span>
+      <a href="https://youtu.be/pv1jVwXcPGk" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('map', this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+  </div>
+
+  <!-- MIND MAP -->
+  <div id="map" class="panel active">
+    <div class="branches">
+
+      <div class="branch c-maroon">
+        <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+          <span class="branch-dot"></span>
+          <span class="branch-title">The 1oz Discovery</span>
+          <span class="branch-count">4</span>
+          <span class="chev">›</span>
+        </div>
+        <div class="leaves"><div class="leaves-inner">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Why he gives the answer first<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer opens by naming the fix immediately instead of building up to it, a departure from his usual pacing. The video's own comments section lit up specifically because of this — viewers noted it removed the anxiety of being "strung along" and, ironically, made them more likely to watch the explanation that followed.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">What "1oz" refers to<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The ounce in the title points to a small daily serving of cranberries (or a concentrated cranberry extract equivalent) as the lever being pulled. It's framed as a low-effort, low-volume addition rather than a diet overhaul — the appeal is that so little food does something measurable to fat tissue.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Pterostilbene as the active compound<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The compound singled out is pterostilbene, a stilbenoid concentrated in cranberries (also found in blueberries, which several commenters pointed out contain more of it per gram). It's related to resveratrol but with better bioavailability, which is part of why it's positioned as the more actionable choice.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Why cranberries specifically<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Cranberries carry a dense polyphenol profile — tannins and anthocyanins alongside pterostilbene — that gives them outsized research attention for liver and metabolic outcomes relative to their calorie content. That combination, not any single nutrient, is what DeLauer leans on to justify the pick over other berries.</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="branch c-amber">
+        <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+          <span class="branch-dot"></span>
+          <span class="branch-title">The Mechanism</span>
+          <span class="branch-count">4</span>
+          <span class="chev">›</span>
+        </div>
+        <div class="leaves"><div class="leaves-inner">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">PPAR-α activation<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Pterostilbene is described as a PPAR-α activator. PPAR-α is a nuclear receptor that, once switched on, turns up genes involved in breaking down fat for fuel — it's the same receptor family targeted by some fibrate medications used to lower triglycerides.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Fatty acid β-oxidation<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Downstream of PPAR-α activation, cells increase β-oxidation — the process of shuttling fatty acids into mitochondria and burning them. This is the literal mechanism behind the video's "burns faster" claim rather than a vague metabolism-boost framing.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Liver fat and visceral fat link<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Because the liver is where a large share of PPAR-α activity plays out, reduced hepatic triglyceride content is the most direct measurable effect, and it correlates closely with visceral fat behavior since both respond to the same insulin and lipid-storage signals.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">The insulin sensitivity angle<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Better fat oxidation and lower circulating triglycerides feed back into insulin sensitivity — cells that aren't swimming in excess lipid respond to insulin more efficiently, which is presented as the secondary reason visceral fat becomes easier to mobilize.</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="branch c-blue">
+        <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+          <span class="branch-dot"></span>
+          <span class="branch-title">The Clinical Evidence</span>
+          <span class="branch-count">4</span>
+          <span class="chev">›</span>
+        </div>
+        <div class="leaves"><div class="leaves-inner">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">The study DeLauer cites<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The video links a 2021 randomized, triple-blind, placebo-controlled trial (BMC Complementary Medicine and Therapies) that tested cranberry supplementation in 94 adults with non-alcoholic fatty liver disease (NAFLD) over six months.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">The dose used in the trial<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Participants took a single 144mg cranberry capsule daily — equivalent to about 13g of dried cranberry fruit — alongside a modest calorie deficit and vitamin E, versus a matched placebo group on the same diet.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">What actually improved<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The cranberry group saw significantly greater drops in total cholesterol, triglycerides, fasting insulin, and HOMA-IR (a marker of insulin resistance) than placebo, and significantly more of them moved down a full grade of liver steatosis on ultrasound.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">What didn't move<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Liver enzymes (ALT, AST, ALP) improved in both groups but not significantly more in the cranberry group once adjusted for baseline — an honest limitation worth keeping in mind, since not every marker in the trial responded to the supplement.</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="branch c-green">
+        <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+          <span class="branch-dot"></span>
+          <span class="branch-title">Timing It Right</span>
+          <span class="branch-count">4</span>
+          <span class="chev">›</span>
+        </div>
+        <div class="leaves"><div class="leaves-inner">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Cranberries with the evening meal<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">A dedicated chapter covers pairing the cranberry dose with dinner rather than eating it in isolation or first thing in the morning. In the cited trial, capsules were taken after lunch — DeLauer's evening framing is his own extrapolation for people eating their largest meal later.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Why evening timing matters<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The logic is that pairing a polyphenol-rich food with the meal most likely to spike triglycerides and insulin gives the PPAR-α/β-oxidation effect something to act on in real time, rather than taking it on an empty stomach with nothing to metabolize.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Black coffee pairing<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">A separate short chapter addresses black coffee as a complementary lever — caffeine's own effect on lipolysis and fat oxidation is positioned as additive to, not a replacement for, the cranberry mechanism.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Absorption considerations<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Polyphenols like pterostilbene are fat- and food-matrix dependent for absorption, which is the practical reason for taking cranberries alongside a meal that contains some fat rather than as an isolated snack.</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="branch c-purple">
+        <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+          <span class="branch-dot"></span>
+          <span class="branch-title">Extract &amp; Dosing Options</span>
+          <span class="branch-count">4</span>
+          <span class="chev">›</span>
+        </div>
+        <div class="leaves"><div class="leaves-inner">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Whole cranberries vs. extract<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer walks through both routes: whole or dried cranberries (unsweetened, since most commercial dried cranberries are sugar-loaded) versus a standardized cranberry extract capsule for a more concentrated, consistent dose.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Cranberry extract strength<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Published human trials in this space span roughly 144mg to 1,500mg of cranberry extract per day, depending on the outcome studied — the video uses the lower, better-tolerated end of that range (matching the NAFLD trial dose) as the practical starting point.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Sugar-free considerations<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Because raw cranberries are intensely tart, most people rely on sweetened dried versions or juice — both of which can undercut the metabolic benefit with added sugar. The chapter flags choosing unsweetened, water- or allulose-based versions instead.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">A realistic daily amount<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Translated to whole food, the trial's 144mg capsule is roughly equivalent to a small handful (about 1oz) of dried unsweetened cranberries — the number the video's title is built around.</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="branch c-teal">
+        <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+          <span class="branch-dot"></span>
+          <span class="branch-title">The Full Playbook</span>
+          <span class="branch-count">4</span>
+          <span class="chev">›</span>
+        </div>
+        <div class="leaves"><div class="leaves-inner">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Daily cranberry habit<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The closing chapter consolidates the video into a repeatable routine: roughly 1oz of unsweetened cranberries or an equivalent low-dose extract, taken with the evening meal, done consistently rather than occasionally.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Norwegian 4x4 protocol<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer folds in the Norwegian 4x4 interval method — four rounds of four minutes at roughly 85-95% of max heart rate, separated by three minutes of active recovery — a well-studied VO2 max and visceral fat protocol, positioned here as the exercise half of the equation.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Electrolyte support during training<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The video's sponsor segment for LMNT Electrolytes is placed early (around the 1-minute mark) and ties back into the playbook — sodium and electrolyte replacement is framed as supporting the harder training sessions like the 4x4 protocol, particularly for anyone also in a calorie deficit.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event,this.parentElement)">Stacking it all together<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The final framing is additive, not either/or: cranberries for the PPAR-α/fat-oxidation pathway, timed with the evening meal; black coffee as a mild complementary lever; and Norwegian 4x4 training two to three times a week as the mechanical driver of visceral fat loss on top of the nutritional piece.</div>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FULL SUMMARY -->
+  <div id="summary" class="panel">
+    <div class="summary-section">
+      <h3>The 1oz Discovery</h3>
+      <p>Thomas DeLauer opens this video by breaking his usual format: instead of building toward a reveal, he states the fix in the first moments — a small daily amount of cranberries, built around the compound pterostilbene. The video's comment section notes this explicitly and approvingly; several longtime viewers say leading with the answer made them more likely to stick around for the explanation rather than less. The "1oz" in the title refers to roughly a small handful of unsweetened dried cranberries, positioned as a low-effort addition rather than a dietary overhaul.</p>
+    </div>
+    <div class="summary-section">
+      <h3>The Mechanism</h3>
+      <p>The case rests on pterostilbene's ability to activate PPAR-α, a nuclear receptor that switches on genes governing fatty acid β-oxidation — the process cells use to burn fat for fuel. Because a large share of this activity happens in the liver, the most measurable downstream effect is reduced hepatic triglyceride content, which tracks closely with visceral fat behavior since both respond to overlapping insulin and lipid-storage signals. Better fat oxidation and lower circulating triglycerides in turn support improved insulin sensitivity, which is the secondary mechanism DeLauer points to for why visceral fat becomes easier to mobilize.</p>
+    </div>
+    <div class="summary-section">
+      <h3>The Clinical Evidence</h3>
+      <p>DeLauer backs the claim with a 2021 triple-blind, randomized, placebo-controlled trial published in BMC Complementary Medicine and Therapies, which followed 94 adults with non-alcoholic fatty liver disease for six months. The intervention group took a single 144mg cranberry capsule daily (about 13g of dried cranberry) on top of a modest calorie deficit and vitamin E, compared with a matched placebo group. Results showed significantly greater reductions in total cholesterol, triglycerides, fasting insulin, and insulin resistance (HOMA-IR) in the cranberry group, along with significantly more patients moving down a full grade of liver steatosis on ultrasound. Liver enzymes improved in both groups without a significant between-group difference — a limitation worth noting rather than glossing over.</p>
+    </div>
+    <div class="summary-section">
+      <h3>Timing and Stacking</h3>
+      <p>Two short chapters address how to actually use this information: pairing the cranberry dose with the evening meal rather than eating it in isolation, and stacking it with black coffee. The reasoning given is that pairing a polyphenol-rich food with the meal most likely to spike triglycerides and insulin gives the fat-oxidation mechanism something to act on immediately, and that polyphenol absorption benefits from being taken alongside food rather than on an empty stomach. Black coffee is framed as a complementary, not essential, addition — caffeine's own effect on lipolysis working alongside rather than replacing the cranberry mechanism.</p>
+    </div>
+    <div class="summary-section">
+      <h3>Extract and Dosing Choices</h3>
+      <p>DeLauer walks through the practical options: unsweetened whole or dried cranberries versus a standardized cranberry extract capsule for a more consistent dose. He flags that most commercial dried cranberries are heavily sweetened, which can undercut the benefit, and steers toward unsweetened or allulose-sweetened versions instead. Published human trials in this area range from about 144mg to 1,500mg of extract per day depending on the outcome studied, and the video anchors its recommendation to the lower, better-tolerated dose used in the NAFLD trial — translated to roughly 1oz of whole dried fruit.</p>
+    </div>
+    <div class="summary-section">
+      <h3>The Full Playbook</h3>
+      <p>The closing chapter ties the pieces into a routine: a consistent 1oz cranberry habit with the evening meal, paired with the Norwegian 4x4 interval protocol — four rounds of four minutes at 85-95% of max heart rate with three minutes of active recovery between rounds — as the exercise driver of visceral fat loss. The video's sponsor segment for LMNT Electrolytes, placed early in the video, is folded back into this plan as support for harder training sessions and anyone also running a calorie deficit. The overall framing is additive: nutrition, a mild caffeine lever, and structured high-intensity intervals working together rather than any single piece doing all the work.</p>
+    </div>
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div id="takeaways" class="panel">
+    <div class="cards">
+      <div class="card"><div class="card-num">1</div><p>Add roughly 1oz (a small handful) of <strong>unsweetened</strong> dried cranberries to your day — check labels, since most commercial dried cranberries are heavily sugared.</p></div>
+      <div class="card"><div class="card-num">2</div><p>Take your cranberry dose <strong>with your evening meal</strong> rather than on an empty stomach, since polyphenol absorption and the metabolic effect both benefit from being paired with food.</p></div>
+      <div class="card"><div class="card-num">3</div><p>If whole fruit isn't practical, look for a <strong>standardized cranberry extract</strong> in the 144mg-per-day range as a starting dose — that's the amount used in the clinical trial behind this video.</p></div>
+      <div class="card"><div class="card-num">4</div><p>Don't expect overnight liver-enzyme changes — the cited trial showed clear improvements in cholesterol, triglycerides, and insulin resistance, but liver enzymes moved similarly in both the cranberry and placebo groups.</p></div>
+      <div class="card"><div class="card-num">5</div><p>Pair a cup of <strong>black coffee</strong> earlier in the day as a mild, complementary lever on fat oxidation — treat it as additive, not a substitute for the cranberry habit.</p></div>
+      <div class="card"><div class="card-num">6</div><p>Build in the <strong>Norwegian 4x4 protocol</strong> two to three times a week: four rounds of 4 minutes at 85-95% max heart rate, with 3 minutes of easy active recovery between rounds.</p></div>
+      <div class="card"><div class="card-num">7</div><p>If you're training hard on a calorie deficit, prioritize <strong>electrolyte replacement</strong> (sodium especially) around your workouts, not just plain water.</p></div>
+      <div class="card"><div class="card-num">8</div><p>Give the habit real time — the underlying trial ran for <strong>six months</strong> before showing significant differences in liver steatosis grade, so this is a slow-and-steady lever, not a quick fix.</p></div>
+      <div class="card"><div class="card-num">9</div><p>Treat cranberries as one input among several — the trial's cranberry group was also on a modest calorie deficit and taking vitamin E, so the effect was layered on top of other basics, not a replacement for them.</p></div>
+      <div class="card"><div class="card-num">10</div><p>If choosing juice over whole fruit, check that it's <strong>low-sugar/unsweetened</strong> — sweetened cranberry juice can add enough sugar to work against the insulin-sensitivity benefit being targeted.</p></div>
+    </div>
+  </div>
+
+  <footer>Generated mind map · Source: <a href="https://youtu.be/pv1jVwXcPGk" target="_blank" rel="noopener" style="color:var(--maroon);">youtu.be/pv1jVwXcPGk</a></footer>
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>
