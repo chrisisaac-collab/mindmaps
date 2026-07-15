@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. William Li — Boost Nitric Oxide to End Inflammation & Reverse Aging | Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c1418;
+    --bg2:#101c22;
+    --card:#132229;
+    --card-hover:#182a32;
+    --border:#22383f;
+    --text:#eaf2f2;
+    --text-dim:#8fa8ac;
+    --accent:#e8544a;
+    --c1:#e8544a; /* vascular science - crimson/artery */
+    --c2:#5b8fd6; /* blueberries - blue */
+    --c3:#b5772e; /* dark chocolate - cacao brown */
+    --c4:#c23b4f; /* beets - deep red */
+    --c5:#7fae5c; /* barley - olive green */
+    --c6:#d9a441; /* apples & coffee - gold */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:0 0 70px;
+  }
+  header{
+    text-align:center;
+    padding:56px 20px 32px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .kicker{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Sora',sans-serif;
+    font-size:clamp(26px,4.2vw,42px);
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:16px;
+    color:#ffffff;
+  }
+  .meta{
+    color:var(--text-dim);
+    font-size:14px;
+    line-height:1.8;
+  }
+  .meta b{color:var(--text);font-weight:600;}
+  .tabs{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:36px auto 0;
+    max-width:600px;
+    padding:0 20px;
+    flex-wrap:wrap;
+  }
+  .tab{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    padding:11px 22px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .2s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .tab:hover{background:var(--card-hover);color:var(--text);}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .panel{display:none;max-width:920px;margin:0 auto;padding:40px 20px 0;}
+  .panel.active{display:block;}
+
+  /* MIND MAP */
+  .branch{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .branch-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:18px 22px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .branch-dot{
+    width:12px;height:12px;border-radius:50%;flex-shrink:0;
+  }
+  .branch-title{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    flex:1;
+    color:#fff;
+  }
+  .branch-time{
+    font-size:12px;
+    color:var(--text-dim);
+    font-weight:600;
+  }
+  .branch-arrow{
+    color:var(--text-dim);
+    transition:transform .25s ease;
+    font-size:14px;
+  }
+  .branch.open .branch-arrow{transform:rotate(90deg);}
+  .branch-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    padding:0 22px;
+  }
+  .branch.open .branch-body{
+    max-height:1200px;
+    padding:0 22px 18px;
+  }
+  .leaf{
+    border-top:1px solid var(--border);
+    padding:14px 0 14px 26px;
+    cursor:pointer;
+    position:relative;
+  }
+  .leaf:before{
+    content:'';
+    position:absolute;
+    left:6px; top:22px;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--leaf-color, var(--accent));
+  }
+  .leaf-title{
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--text);
+  }
+  .leaf-detail{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    font-size:13.5px;
+    color:var(--text-dim);
+    line-height:1.6;
+  }
+  .leaf.open .leaf-detail{
+    max-height:300px;
+    margin-top:8px;
+  }
+
+  /* SUMMARY */
+  .summary-section{margin-bottom:30px;}
+  .summary-section h3{
+    font-family:'Sora',sans-serif;
+    font-size:18px;
+    margin-bottom:10px;
+    color:#fff;
+  }
+  .summary-section p{
+    color:var(--text-dim);
+    line-height:1.75;
+    font-size:15px;
+  }
+
+  /* TAKEAWAYS */
+  .takeaways{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+  }
+  .card-num{
+    font-family:'Sora',sans-serif;
+    font-size:22px;
+    font-weight:800;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .card p{
+    font-size:14px;
+    color:var(--text-dim);
+    line-height:1.6;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12px;
+    margin-top:50px;
+  }
+  footer a{color:var(--accent);}
+
+  @media(max-width:600px){
+    .branch-title{font-size:15px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Mind Map · Food as Medicine</div>
+  <h1>We Finally Know How to Boost Nitric Oxide to End Inflammation & Reverse Aging</h1>
+  <div class="meta">
+    <b>Dr. William Li</b> · Dr. William Li (YouTube)<br>
+    Published July 11, 2026 · 17:38<br>
+    <a href="https://www.youtube.com/watch?v=0b3T6-Dn08I" style="color:var(--text-dim)">Watch the original video ↗</a>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap',this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+
+  <div class="branch">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-dot" style="background:var(--c1)"></div>
+      <div class="branch-title">The Vascular Aging Story</div>
+      <div class="branch-time">0:00–4:24</div>
+      <div class="branch-arrow">▶</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" style="--leaf-color:var(--c1)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Aging doesn't start with wrinkles</div>
+        <div class="leaf-detail">Li opens by reframing where aging actually begins: not in visible skin changes but inside the blood vessels, years before any outward sign appears. He treats the vascular system as the earliest and most consequential site of age-related decline.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c1)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Nitric oxide production declines with age</div>
+        <div class="leaf-detail">The endothelium — the thin lining inside every blood vessel — loses its capacity to produce nitric oxide as we get older. Less nitric oxide means vessels lose flexibility and struggle to relax and dilate properly.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c1)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The hidden cause of fatigue and brain fog</div>
+        <div class="leaf-detail">Li connects declining nitric oxide directly to everyday symptoms people rarely trace back to circulation: persistent fatigue, brain fog, and slower physical recovery, all downstream of reduced blood flow and oxygen delivery.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c1)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Vascular resilience touches every organ</div>
+        <div class="leaf-detail">Because every organ depends on blood supply, the health of the vascular system has outsized influence on brain health, heart health, muscle performance, and metabolism — not just cardiovascular risk narrowly defined.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c1)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Chronic inflammation accelerates the damage</div>
+        <div class="leaf-detail">Ongoing low-grade inflammation compounds vascular aging over time, degrading vessel walls faster than aging alone would. This sets up the rest of the video: specific foods that counteract both the inflammation and the nitric oxide decline.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-dot" style="background:var(--c2)"></div>
+      <div class="branch-title">Blueberries — Anthocyanin Power</div>
+      <div class="branch-time">4:25–6:04</div>
+      <div class="branch-arrow">▶</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" style="--leaf-color:var(--c2)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Anthocyanins trigger endothelial nitric oxide</div>
+        <div class="leaf-detail">The deep blue-purple pigments in blueberries, anthocyanins, directly signal the endothelial lining to increase nitric oxide output, improving how readily vessels relax and blood moves through them.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c2)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">One cup daily is the effective dose</div>
+        <div class="leaf-detail">Li specifies roughly one cup of blueberries a day, and notes fresh or frozen both work — freezing doesn't meaningfully degrade the anthocyanin content, making this an easy year-round habit.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c2)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Dual action: antioxidant and anti-inflammatory</div>
+        <div class="leaf-detail">Beyond stimulating nitric oxide, the same compounds act as antioxidants that reduce the oxidative stress contributing to vascular wall damage, giving blueberries a two-pronged protective effect.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c2)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Where it fits in your day</div>
+        <div class="leaf-detail">Framed as a simple daily habit rather than a supplement — added to breakfast, a smoothie, or eaten on its own — reinforcing Li's broader "food as medicine" approach over pills or powders.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-dot" style="background:var(--c3)"></div>
+      <div class="branch-title">Dark Chocolate — Stem Cell Repair</div>
+      <div class="branch-time">6:05–8:34</div>
+      <div class="branch-arrow">▶</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" style="--leaf-color:var(--c3)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Proanthocyanidins mobilize stem cells</div>
+        <div class="leaf-detail">Cacao's proanthocyanidins do something distinct from blueberries: they stimulate stem cells originating in bone marrow to travel to and help repair damaged sections of blood vessel wall.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c3)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Look for 70%+ cacao</div>
+        <div class="leaf-detail">The protective compounds scale with cacao content, so Li points specifically to bars at 70% cacao or higher — lower-percentage chocolate is diluted with sugar and fat and delivers far less of the active flavanol content.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c3)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">2–3 squares a day</div>
+        <div class="leaf-detail">The recommended amount is modest and deliberately sustainable: two to three small squares daily, positioned as a treat that does double duty rather than a large daily serving.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c3)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Coffee as a complementary pairing</div>
+        <div class="leaf-detail">Coffee is raised alongside dark chocolate as a complementary nitric-oxide-supporting drink — the two are discussed together rather than coffee getting its own standalone segment.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-dot" style="background:var(--c4)"></div>
+      <div class="branch-title">Beets & Beet Juice — The Nitrate Pipeline</div>
+      <div class="branch-time">8:35–11:08</div>
+      <div class="branch-arrow">▶</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" style="--leaf-color:var(--c4)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Beets are a direct source of dietary nitrates</div>
+        <div class="leaf-detail">Unlike blueberries or chocolate, which stimulate the body's own nitric oxide machinery, beets supply the raw material — dietary nitrate — that gets converted into nitric oxide further down the pathway.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c4)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Your oral microbiome does the conversion</div>
+        <div class="leaf-detail">Bacteria living on the surface of the tongue convert dietary nitrate into nitrite, which the body then turns into nitric oxide — meaning this pathway depends on a healthy population of oral bacteria.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c4)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">One cup is the effective dose</div>
+        <div class="leaf-detail">Roasted beets or beet juice, at roughly one cup, is the amount Li points to for a meaningful nitrate load — consistent with the dosing pattern used across the other foods in the video.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c4)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Antibacterial mouthwash can undercut this</div>
+        <div class="leaf-detail">Because the conversion depends on tongue bacteria, harsh antibacterial mouthwash can wipe out the very organisms needed to turn beet nitrate into nitric oxide — a practical caution Li flags directly.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-dot" style="background:var(--c5)"></div>
+      <div class="branch-title">Barley — Fiber, Cholesterol & Gut Microbiome</div>
+      <div class="branch-time">11:09–13:51</div>
+      <div class="branch-arrow">▶</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" style="--leaf-color:var(--c5)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Beta-glucan is the active fiber</div>
+        <div class="leaf-detail">Barley's protective effect centers on beta-glucan, a soluble fiber that behaves differently from the antioxidant-driven mechanisms in blueberries or apples — this branch works through the gut rather than directly on vessel walls.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c5)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Lowers LDL cholesterol</div>
+        <div class="leaf-detail">Beta-glucan binds cholesterol in the digestive tract and helps reduce circulating LDL, directly addressing one of the classic drivers of vascular damage alongside the nitric oxide story.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c5)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Feeds the gut microbiome</div>
+        <div class="leaf-detail">As gut bacteria ferment beta-glucan, they produce short-chain fatty acids — byproducts that have a systemic anti-inflammatory effect reaching well beyond the digestive tract.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c5)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">The gut-vascular inflammation link</div>
+        <div class="leaf-detail">This segment makes explicit a connection Li returns to throughout the video: gut health and systemic inflammation are tied to cardiovascular health, not separate systems.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c5)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Easy to add to meals</div>
+        <div class="leaf-detail">Barley is framed as a practical swap — added to soups and grain bowls — rather than a new supplement, in keeping with the video's everyday-food approach.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch">
+    <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+      <div class="branch-dot" style="background:var(--c6)"></div>
+      <div class="branch-title">Apples & Coffee — Skin Compounds and Angiogenesis</div>
+      <div class="branch-time">13:52–17:18</div>
+      <div class="branch-arrow">▶</div>
+    </div>
+    <div class="branch-body">
+      <div class="leaf" style="--leaf-color:var(--c6)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Ursolic acid lives in the skin</div>
+        <div class="leaf-detail">Ursolic acid, concentrated specifically in apple skin rather than the flesh, is one of two compounds Li highlights — its benefit is lost if the apple is peeled.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c6)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Quercetin reduces oxidative stress</div>
+        <div class="leaf-detail">Quercetin, found through the flesh, works alongside ursolic acid to lower oxidative stress — one of the underlying drivers of vascular aging established earlier in the video.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c6)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Both stimulate angiogenesis</div>
+        <div class="leaf-detail">Beyond protecting existing vessels, these compounds stimulate angiogenesis — the growth of new blood vessels — giving apples a regenerative role distinct from the other five foods.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c6)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Choose organic to eat the skin safely</div>
+        <div class="leaf-detail">Since the active compound is in the skin, Li recommends organic apples specifically so the skin can be eaten without concern about pesticide residue.</div>
+      </div>
+      <div class="leaf" style="--leaf-color:var(--c6)" onclick="toggleLeaf(event,this)">
+        <div class="leaf-title">Closing takeaway: internal defenses, not a single fix</div>
+        <div class="leaf-detail">Li closes by tying all six foods back to one idea: no single food reverses aging on its own, but consistently activating the body's internal health defenses through everyday choices improves circulation and supports longevity from the inside out.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FULL SUMMARY -->
+<div id="summary" class="panel">
+  <div class="summary-section">
+    <h3>The Vascular Aging Story</h3>
+    <p>Dr. William Li opens by challenging the common assumption that aging is first visible in the skin. He argues the more consequential changes happen years earlier, inside the blood vessels, where nitric oxide production from the endothelial lining gradually declines with age. Reduced nitric oxide leaves vessels less able to relax and dilate, which Li links to everyday symptoms rarely traced back to circulation: fatigue, brain fog, and slower physical recovery. Because every organ depends on blood supply, this vascular resilience has outsized influence on brain, heart, muscle, and metabolic health, and chronic low-grade inflammation compounds the damage over time. This framing sets up the rest of the video as a tour of specific foods that intervene on these mechanisms.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Blueberries — Anthocyanin Power</h3>
+    <p>Blueberries owe their effect to anthocyanins, the pigments responsible for their deep color, which signal the endothelial lining to increase nitric oxide output. Li recommends roughly one cup daily, noting that fresh and frozen berries work equally well since freezing doesn't meaningfully reduce anthocyanin content. The same compounds also act as antioxidants, giving blueberries a combined effect of stimulating nitric oxide while reducing the oxidative stress that damages vessel walls over time.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Dark Chocolate — Stem Cell Repair</h3>
+    <p>Cacao's proanthocyanidins work through a different mechanism than the antioxidant pathway: they stimulate stem cells originating in bone marrow to travel to and help repair damaged sections of vessel wall. Li is specific about needing 70% cacao or higher, since lower-percentage chocolate dilutes the active flavanol content with sugar and fat, and recommends a modest two to three squares daily. Coffee is discussed in the same segment as a complementary nitric-oxide-supporting drink rather than as its own topic.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Beets & Beet Juice — The Nitrate Pipeline</h3>
+    <p>Beets work differently again: rather than stimulating the body's own nitric oxide machinery, they supply dietary nitrate directly, which bacteria on the tongue convert into nitrite and, eventually, nitric oxide. Li points to about one cup of roasted beets or beet juice as an effective dose, and flags a practical caution: because the conversion depends on a healthy population of oral bacteria, harsh antibacterial mouthwash can undercut the entire pathway.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Barley — Fiber, Cholesterol & Gut Microbiome</h3>
+    <p>Barley's contribution runs through the gut rather than acting directly on blood vessels. Its beta-glucan fiber binds cholesterol in digestion, helping to lower circulating LDL, while gut bacteria ferment the same fiber into short-chain fatty acids with a systemic anti-inflammatory effect. Li ties this back to a theme running through the video: gut health, inflammation, and cardiovascular health are connected systems rather than separate concerns, and barley is easy to work into soups and grain bowls without any special preparation.</p>
+  </div>
+  <div class="summary-section">
+    <h3>Apples & Coffee — Skin Compounds and Angiogenesis</h3>
+    <p>Apples close out the food list with two compounds working together: ursolic acid, concentrated in the skin, and quercetin, found through the flesh, both of which reduce oxidative stress and stimulate angiogenesis, the growth of new blood vessels. Because the key compound lives in the skin, Li recommends organic apples so the skin can be eaten without pesticide concerns. He closes the video by tying all six foods back to a single idea: no single food reverses aging or prevents disease on its own, but consistently activating the body's internal health defenses through everyday food choices supports circulation and longevity from the inside out.</p>
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="takeaways">
+    <div class="card"><div class="card-num">01</div><p>Eat about one cup of blueberries daily, fresh or frozen, to trigger anthocyanin-driven nitric oxide production in the endothelium.</p></div>
+    <div class="card"><div class="card-num">02</div><p>Have 2–3 squares of 70%+ cacao dark chocolate daily to activate stem-cell mediated repair of damaged vessel walls.</p></div>
+    <div class="card"><div class="card-num">03</div><p>Add one cup of roasted beets or a serving of beet juice to your routine as a direct source of vessel-relaxing dietary nitrates.</p></div>
+    <div class="card"><div class="card-num">04</div><p>Go easy on harsh antibacterial mouthwash — the bacteria on your tongue are what convert beet nitrate into nitric oxide.</p></div>
+    <div class="card"><div class="card-num">05</div><p>Work cooked barley into soups or grain bowls for beta-glucan fiber that lowers LDL and feeds beneficial gut bacteria.</p></div>
+    <div class="card"><div class="card-num">06</div><p>Eat apples with the skin on, organic when possible, to get ursolic acid alongside the quercetin already in the flesh.</p></div>
+    <div class="card"><div class="card-num">07</div><p>Pair a square of dark chocolate with a cup of coffee — Li flags the combination as complementary for nitric oxide support.</p></div>
+    <div class="card"><div class="card-num">08</div><p>Treat circulation, not wrinkles, as your leading indicator of aging: watch your energy, recovery speed, and mental clarity.</p></div>
+    <div class="card"><div class="card-num">09</div><p>Stay physically active — movement itself boosts circulation and nitric oxide output alongside any dietary changes.</p></div>
+    <div class="card"><div class="card-num">10</div><p>Rotate through all six foods across the week rather than leaning on one, since each works through a distinct pathway: antioxidant, stem cell, nitrate, fiber, or angiogenesis.</p></div>
+  </div>
+</div>
+
+<footer>
+  Generated mind map · Source: <a href="https://www.youtube.com/watch?v=0b3T6-Dn08I" target="_blank">YouTube — Dr. William Li</a>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
