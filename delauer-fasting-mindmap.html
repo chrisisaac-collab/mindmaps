@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomas DeLauer — Perfect Fasting Length: Muscle, Fat Loss & Brain | Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0faf4;
+    --card: #ffffff;
+    --border: #d1e9db;
+    --text: #1a2e22;
+    --dim: #5a7a65;
+    --c1: #1a9654;
+    --c2: #2563eb;
+    --c3: #d97706;
+    --c4: #7c3aed;
+    --c5: #dc2626;
+    --c6: #0891b2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #064e2b 0%, #0f5132 40%, #166534 100%);
+    color: white;
+    padding: 36px 24px 28px;
+    text-align: center;
+  }
+  .header .kicker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #86efac;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(20px, 4vw, 34px);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  .header .guest {
+    font-size: 14px;
+    color: #86efac;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .header .meta {
+    font-size: 12px;
+    color: #6ee7b7;
+    opacity: 0.8;
+  }
+
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .tab {
+    flex: 1;
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dim);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--c1); border-bottom-color: var(--c1); font-weight: 700; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* MIND MAP */
+  .mm-wrap { padding: 24px 16px; max-width: 960px; margin: 0 auto; }
+  .mm-hint { text-align: center; font-size: 13px; color: var(--dim); margin-bottom: 20px; }
+  .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+
+  .branch {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--bc);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .branch:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+  .bhead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    user-select: none;
+  }
+  .bicon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--bi);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .btitle { flex: 1; font-weight: 700; font-size: 14px; color: var(--text); line-height: 1.3; }
+  .bchev { color: #a0aec0; font-size: 16px; transition: transform 0.3s; }
+  .branch.open .bchev { transform: rotate(180deg); }
+
+  .leaves { display: none; padding: 0 16px 14px; }
+  .branch.open .leaves { display: block; }
+
+  .leaf { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+  .leaf-title {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #374151;
+    user-select: none;
+    background: #f9fafb;
+  }
+  .leaf-title:hover { background: #f3f4f6; }
+  .larr { font-size: 11px; color: #9ca3af; transition: transform 0.2s; }
+  .leaf.open .larr { transform: rotate(90deg); }
+  .ldetail {
+    display: none;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: #6b7280;
+    border-top: 1px solid var(--border);
+    background: #fff;
+  }
+  .leaf.open .ldetail { display: block; }
+
+  /* SUMMARY */
+  .sum-wrap { max-width: 740px; margin: 0 auto; padding: 32px 24px; }
+  .sum-sec { margin-bottom: 34px; padding-bottom: 34px; border-bottom: 1px solid var(--border); }
+  .sum-sec:last-child { border-bottom: none; }
+  .sum-h { font-family: 'DM Serif Display', serif; font-size: 21px; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .sum-sec p { font-size: 14.5px; line-height: 1.85; color: #4b5563; margin-bottom: 10px; }
+
+  /* TAKEAWAYS */
+  .ta-wrap { max-width: 740px; margin: 0 auto; padding: 32px 24px; }
+  .ta-hint { text-align: center; font-size: 13px; color: var(--dim); margin-bottom: 22px; }
+  .ta-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .ta-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #064e2b, #166534);
+    color: white; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ta-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .ta-body p { font-size: 13px; line-height: 1.7; color: #6b7280; }
+
+  .foot { text-align: center; padding: 24px; font-size: 12px; color: #9ca3af; }
+  .foot a { color: var(--c1); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .header { padding: 28px 16px 20px; }
+    .sum-wrap, .ta-wrap { padding: 24px 16px; }
+    .branch-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">Thomas DeLauer · YouTube · 2026</div>
+  <h1>Study Discovers Perfect Fasting Length for Muscle, Fat Loss &amp; Brain Benefits</h1>
+  <div class="guest">Thomas DeLauer — Science-Backed Nutrition &amp; Performance</div>
+  <div class="meta">4M+ YouTube subscribers · Author, Intermittent Fasting Made Easy</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</div>
+  <div class="tab" onclick="switchTab('summary', this)">📖 Full Summary</div>
+  <div class="tab" onclick="switchTab('takeaways', this)">⚡ Takeaways</div>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+  <div class="mm-wrap">
+    <p class="mm-hint">Tap any branch to expand · Tap a leaf for detail</p>
+    <div class="branch-grid">
+
+      <!-- Branch 1: The Study -->
+      <div class="branch" style="--bc:var(--c1); --bi:#dcfce7;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🔬</div>
+          <div class="btitle">What the Study Actually Found</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">A multi-outcome analysis of fasting windows <span class="larr">▶</span></div>
+            <div class="ldetail">The study DeLauer references assessed fasting periods across a spectrum — from short overnight fasts (12 hours) through extended fasts (24–72+ hours) — measuring simultaneous effects on skeletal muscle structure, fat oxidation, and markers of brain health. Most prior research had optimised for only one outcome at a time; this research attempted to find the duration at which all three benefit curves peak simultaneously.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">MRI and MRS — measuring muscle in real time <span class="larr">▶</span></div>
+            <div class="ldetail">The research used 31P and 1H magnetic resonance spectroscopy alongside MRI to assess skeletal muscle energy metabolism and structural changes during fasting — non-invasive techniques that can track ATP turnover, phosphocreatine stores, lipid infiltration, and glycogen depletion in living tissue without biopsies. This provides a more accurate window into what actually happens inside muscle during a fast than indirect blood markers alone.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The convergence point — where all three peak <span class="larr">▶</span></div>
+            <div class="ldetail">The research identified a window — approximately 16 to 18 hours for most metabolically healthy individuals — where fat oxidation is running at a high rate, ketone production is sufficient to fuel the brain and produce cognitive benefits, autophagy has been meaningfully initiated, and muscle protein breakdown has not yet crossed into a net-catabolic state. Beyond this window, the trade-offs begin to accumulate. Before it, some benefits (particularly brain and autophagy) haven't fully activated.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Individual variation matters <span class="larr">▶</span></div>
+            <div class="ldetail">DeLauer emphasises that the "perfect" length is not a single universal number. Metabolically healthy, lean, active individuals tend to shift into fat-burning more quickly and can tolerate longer fasts with less muscle catabolism. Individuals with insulin resistance, higher body fat, or sedentary lifestyles may reach the same metabolic states at different timings. The study's "optimal window" is a population average — your personal window may shift based on metabolic health, training status, and glycogen levels going into the fast.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why this matters beyond weight loss <span class="larr">▶</span></div>
+            <div class="ldetail">DeLauer frames this study as cutting through the noise around fasting protocols. The fasting conversation is often dominated by fat loss as the primary metric. This research provides evidence that properly timed fasts have compounding effects — on autophagy (cellular recycling), brain-derived neurotrophic factor (BDNF), mitochondrial biogenesis, and inflammation reduction — that extend well beyond body composition and represent meaningful healthspan interventions.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 2: Fasting Timeline -->
+      <div class="branch" style="--bc:var(--c2); --bi:#dbeafe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">⏱️</div>
+          <div class="btitle">What Happens at Each Fasting Stage</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">0–6 hours: fed state, digestion running <span class="larr">▶</span></div>
+            <div class="ldetail">After a meal, insulin is elevated and the body is in an anabolic, glucose-burning state. Liver glycogen stores are replenishing and blood glucose is being distributed to tissues. Fat oxidation is minimal during this window — the body has no reason to reach into fat stores when glucose is plentiful. This is why simply skipping breakfast provides limited fasting benefit if dinner was late.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">6–12 hours: glycogen depletion begins <span class="larr">▶</span></div>
+            <div class="ldetail">As blood glucose falls and insulin drops, the liver begins breaking down glycogen to maintain blood sugar. By around 10–12 hours of fasting for most people, liver glycogen is substantially depleted. The body starts increasing fat oxidation and the respiratory quotient shifts — more fat, less glucose, is being burned. This is the transition window most people pass through during a normal overnight fast.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">12–16 hours: the metabolic switch <span class="larr">▶</span></div>
+            <div class="ldetail">This is what DeLauer calls the "metabolic switch" — the transition from primarily glucose to primarily fat as fuel. Ketone production begins to climb meaningfully. Growth hormone pulses start increasing (GH rises significantly to protect lean mass during fasting). Norepinephrine rises, mobilising fat from adipose tissue. The brain begins receiving a growing proportion of its fuel from beta-hydroxybutyrate (BHB) rather than glucose.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">16–24 hours: peak benefit window <span class="larr">▶</span></div>
+            <div class="ldetail">Fat oxidation is running at a high rate. Ketones are elevated enough to measurably fuel the brain and suppress appetite. Autophagy — the cellular recycling process that clears damaged proteins and organelles — has been meaningfully upregulated. Growth hormone is elevated, providing a muscle-protective signal. BDNF (brain-derived neurotrophic factor) levels are rising. For most people, this is where the maximum benefit-to-cost ratio sits: significant metabolic improvements with manageable muscle-preservation risk.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">24–72+ hours: extended fasting trade-offs <span class="larr">▶</span></div>
+            <div class="ldetail">Beyond 24 hours, autophagy continues to deepen and cortisol begins rising more significantly to mobilise fuel. The body starts breaking down muscle protein at a faster rate for gluconeogenesis — producing glucose from amino acids. Growth hormone remains elevated but cannot fully offset catabolic pressure. These longer fasts have therapeutic uses (particularly for autophagy, immune reset, and potentially cancer prevention) but carry meaningful muscle-loss risk for active individuals without careful protein refeeding strategies.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 3: The Sweet Spot -->
+      <div class="branch" style="--bc:var(--c3); --bi:#fef3c7;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🎯</div>
+          <div class="btitle">The 16–18 Hour Sweet Spot</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why 16–18 hours hits all three targets <span class="larr">▶</span></div>
+            <div class="ldetail">At 16–18 hours, fat oxidation is running at near-peak rates, ketone production is sufficient to deliver meaningful brain benefits (BHB at ~0.5–1.5 mmol/L for most people), autophagy is meaningfully active, and GH is elevated enough to maintain a muscle-protective environment. The body has not yet entered the more aggressively catabolic territory of multi-day fasting. This window captures most of the benefit curve before the cost curve rises steeply.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Fat loss mechanism — why it works beyond calories <span class="larr">▶</span></div>
+            <div class="ldetail">DeLauer emphasises that the fat loss effect of properly timed fasting goes beyond simple caloric restriction. The combination of low insulin, elevated glucagon, high catecholamines, and activated hormone-sensitive lipase creates a hormonal environment specifically suited to mobilising stored fat — particularly visceral adipose tissue, which is more sensitive to adrenergic stimulation than subcutaneous fat. This is why fasting can preferentially reduce visceral fat even when total caloric deficit is equivalent to non-fasting approaches.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Autophagy — not just a weight-loss bonus <span class="larr">▶</span></div>
+            <div class="ldetail">Autophagy is the process by which cells identify, tag, and recycle damaged proteins, dysfunctional organelles, and misfolded structures. DeLauer frames it as the body's internal quality-control and deep-cleaning system. Properly functioning autophagy reduces the buildup of cellular debris linked to neurodegeneration, cancer risk, and accelerated aging. At 16–18 hours, autophagy is meaningfully active — particularly in the liver and neurons — making this window genuinely beneficial beyond aesthetics.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Growth hormone — fasting's muscle insurance policy <span class="larr">▶</span></div>
+            <div class="ldetail">GH rises substantially during fasting — by as much as 2–5x over baseline in some studies — and serves as the body's primary muscle-preservation signal during caloric restriction. GH promotes fat mobilisation while opposing muscle protein breakdown, effectively telling the body to spare lean tissue and burn stored fat instead. This GH surge is one of the key reasons a 16–18 hour fast preserves muscle much more effectively than a 16-hour caloric deficit spread across the whole day.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Sustainability — the protocol you can actually maintain <span class="larr">▶</span></div>
+            <div class="ldetail">A 16–18 hour fast is typically achieved by eating within an 6–8 hour window during the day — for example, noon to 7pm. For most people, this means skipping breakfast, which is a manageable daily adjustment rather than a dramatic lifestyle disruption. DeLauer's argument is that the best fasting protocol is one that generates meaningful benefits while being sustainable enough to maintain consistently, since the compounding benefits of regular fasting far outweigh the marginal gains of occasional extreme fasts.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 4: Muscle Preservation -->
+      <div class="branch" style="--bc:var(--c4); --bi:#ede9fe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">💪</div>
+          <div class="btitle">Muscle Preservation During Fasting</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The gluconeogenesis concern — when does it matter? <span class="larr">▶</span></div>
+            <div class="ldetail">Gluconeogenesis — the synthesis of glucose from non-carbohydrate sources including amino acids — does occur during fasting. However, within a 16–18 hour fast, the primary substrates for gluconeogenesis are lactate, glycerol (from fat breakdown), and alanine from muscle. DeLauer explains that the GH surge and ketone availability at this duration substantially reduce the demand for muscle-derived amino acids as fuel, keeping net muscle catabolism minimal for most healthy individuals.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Resistance training supercharges muscle retention <span class="larr">▶</span></div>
+            <div class="ldetail">Training within the feeding window sends a powerful anabolic signal that primes muscle for preservation even during the subsequent fast. Resistance training increases insulin sensitivity in muscle tissue specifically, meaning that when you do eat, nutrients are preferentially directed toward muscle. DeLauer recommends timing resistance training to fall within or just before the eating window — not in the deep fasting period — to maximise the mTOR activation that follows feeding.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Protein quality and timing at breaking the fast <span class="larr">▶</span></div>
+            <div class="ldetail">How you break the fast matters as much as the fast itself for muscle preservation. DeLauer emphasises leucine-rich protein sources at the first meal — whey, eggs, or high-quality animal protein — because leucine is the primary amino acid trigger for mTOR activation and muscle protein synthesis. A meal providing 30–50g of quality protein with sufficient leucine (at least 2.5–3g) provides a robust anabolic signal that can compensate for the mildly catabolic fasting period and produce a net-positive muscle protein balance for the day.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The mTOR–autophagy balance <span class="larr">▶</span></div>
+            <div class="ldetail">mTOR (mechanistic target of rapamycin) and autophagy are inversely related: when mTOR is high (fed, anabolic state), autophagy is suppressed; when mTOR is low (fasted state), autophagy activates. DeLauer argues this is actually a feature, not a bug: the fasting window activates autophagy and cellular cleaning, while the eating window activates mTOR, protein synthesis, and muscle building. Cycling between these states — rather than keeping one perpetually active — appears to be the biological design for optimal body composition and longevity.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">What breaks autophagy vs what breaks the fast <span class="larr">▶</span></div>
+            <div class="ldetail">DeLauer addresses the common confusion around what breaks a fast versus what breaks autophagy. Black coffee, plain tea, and electrolytes with no caloric content do not meaningfully spike insulin and do not break the fasted state for most metabolic purposes, including fat oxidation. Autophagy, however, is more sensitive: even small amounts of protein or branched-chain amino acids can begin to suppress it. For pure autophagy maximisation, the fast needs to be truly calorie-free; for fat loss and general health benefits, the rules are somewhat more permissive.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 5: Brain Benefits -->
+      <div class="branch" style="--bc:var(--c5); --bi:#fee2e2;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🧠</div>
+          <div class="btitle">Brain Benefits — Why Fasting Makes You Sharper</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">BDNF — the brain's own growth factor <span class="larr">▶</span></div>
+            <div class="ldetail">Brain-derived neurotrophic factor (BDNF) is a protein that supports the growth, maintenance, and connectivity of neurons. It is closely associated with learning, memory, mood regulation, and protection against neurodegeneration. Fasting has been shown to increase BDNF levels in animal models and shows promising signals in human studies — with the effect appearing to kick in most strongly in the 14–20 hour fasting range. Higher BDNF is associated with better cognitive performance, lower depression risk, and slower neurological aging.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Ketones as premium brain fuel <span class="larr">▶</span></div>
+            <div class="ldetail">Beta-hydroxybutyrate (BHB) and acetoacetate, the primary ketone bodies produced during fasting, cross the blood-brain barrier and provide the brain with an efficient, clean-burning fuel source. Unlike glucose metabolism, ketone oxidation produces fewer reactive oxygen species, meaning less oxidative stress on neurons. DeLauer describes ketones as "neuroprotective" — they have been studied for their potential therapeutic role in conditions from Alzheimer's disease to traumatic brain injury, and their acute effects on mental clarity and focus are consistently reported by those who fast regularly.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Reduced neuroinflammation <span class="larr">▶</span></div>
+            <div class="ldetail">Chronic neuroinflammation is a feature of virtually every major neurodegenerative disease. Fasting-induced ketosis reduces the production of pro-inflammatory cytokines and inhibits the NLRP3 inflammasome — a key driver of neuroinflammation. BHB specifically has been shown to act as an endogenous inhibitor of the NLRP3 inflammasome, providing an anti-inflammatory effect that operates independently of caloric restriction itself. This is one reason why both fasting and ketogenic diets have been studied for conditions like Alzheimer's, epilepsy, and multiple sclerosis.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Mental clarity in the fasted state — why it happens <span class="larr">▶</span></div>
+            <div class="ldetail">The subjective experience of heightened mental clarity during fasting is well-documented anecdotally and has plausible physiological explanations. Elevated norepinephrine sharpens attention and alertness. Stable blood sugar (rather than the spikes and crashes of frequent feeding) prevents the cognitive dips associated with post-meal insulin responses. Ketones provide a steady, efficient fuel stream to the brain. And the suppression of mTOR during fasting shifts cellular resources toward repair and maintenance — including neuronal housekeeping — rather than growth, which may contribute to the clarity many people report.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Autophagy in neurons — a specific brain benefit <span class="larr">▶</span></div>
+            <div class="ldetail">Neurons are particularly long-lived cells that accumulate damaged proteins and dysfunctional organelles over time. Unlike most cells, neurons cannot simply divide and replace damaged ones — they depend heavily on autophagy for maintenance. DeLauer frames neuronal autophagy during fasting as one of the most underappreciated brain health interventions available: clearing the debris that, when allowed to accumulate, contributes to the plaques and tangles associated with Alzheimer's and other neurodegenerative conditions. Regular fasting keeps this housekeeping process running efficiently.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 6: Practical Implementation -->
+      <div class="branch" style="--bc:var(--c6); --bi:#cffafe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🛠️</div>
+          <div class="btitle">Practical Implementation</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The 16:8 starting point — keep it simple <span class="larr">▶</span></div>
+            <div class="ldetail">For most people, a 16-hour fast with an 8-hour eating window is the most practical entry point. In concrete terms: stop eating by 8pm, skip breakfast, and eat your first meal at noon. You sleep through 8 of those fasting hours, making the actual waking fast only about 4 hours. DeLauer emphasises that consistency matters more than precision — a 15-hour fast done reliably every day produces better compounding results than a 24-hour fast done occasionally.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Electrolytes — the overlooked fasting essential <span class="larr">▶</span></div>
+            <div class="ldetail">As insulin drops during fasting, the kidneys excrete sodium and other electrolytes at a higher rate — a process that accelerates the further into the fast you go. Headaches, fatigue, brain fog, and muscle cramps during fasting are almost always electrolyte depletion, not "detox" or hunger. DeLauer recommends sodium (from a quality source like Himalayan salt or electrolyte supplements), magnesium, and potassium to be maintained throughout the fasting window. This alone resolves most of the side effects people attribute to fasting difficulty.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Coffee — accelerates the fast's benefits <span class="larr">▶</span></div>
+            <div class="ldetail">Black coffee during the fasting window is not just permissible — it may actively enhance the fast's benefits. Caffeine increases fat oxidation by stimulating norepinephrine and upregulating hormone-sensitive lipase. Chlorogenic acids in coffee improve insulin sensitivity. And there is evidence that caffeine may have a mild autophagy-inducing effect on its own. DeLauer's position: black coffee in the fasting window accelerates the metabolic shift and can make the fast easier to maintain without compromising its core benefits.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">How to break the fast for maximum benefit <span class="larr">▶</span></div>
+            <div class="ldetail">Breaking the fast well matters enormously for body composition. DeLauer's protocol: begin with a small amount of protein and fat (not a large carbohydrate load) to gently signal the body out of the fasted state without an insulin spike. After 15–20 minutes, follow with a proper protein-rich meal. Avoid ultra-processed foods as the first meal, since the gut is more permeable during fasting and the first nutrients absorbed have outsized effects on metabolic signalling for the remainder of the day.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Who should approach fasting carefully <span class="larr">▶</span></div>
+            <div class="ldetail">DeLauer consistently flags that fasting is not universally appropriate. Those with a history of disordered eating, pregnant or breastfeeding women, individuals with type 1 diabetes or on blood-glucose-lowering medications, those who are underweight, and people under significant physiological stress (illness, major surgery recovery) should approach fasting with medical guidance. The benefits are real and significant — but they don't override individual physiology or medical circumstances, and the research context is important to understand.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="panel">
+  <div class="sum-wrap">
+
+    <div class="sum-sec">
+      <div class="sum-h">🔬 What the Research Says</div>
+      <p>Thomas DeLauer breaks down a study examining fasting windows across a wide duration spectrum — from standard overnight fasts through extended multi-day fasts — measuring simultaneous effects on skeletal muscle structure, fat oxidation rates, and markers of brain health. What makes this research distinctive is its attempt to find the duration at which benefits across all three domains peak concurrently, rather than optimising for any single outcome. Using techniques including magnetic resonance spectroscopy and MRI to assess muscle energy metabolism in living tissue, the study provides a more direct window into what actually happens inside the body during different fasting lengths than previous research had achieved.</p>
+      <p>The core finding DeLauer emphasises: there is a convergence zone — approximately 16 to 18 hours for most metabolically healthy individuals — where fat oxidation is running at a high rate, ketone production is sufficient to meaningfully fuel and protect the brain, autophagy has been initiated, and muscle protein breakdown has not yet escalated into a net-catabolic state. This window shifts based on individual metabolic health, training status, and glycogen stores going into the fast — leaner, more metabolically flexible individuals tend to enter this zone earlier.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">⏱️ The Metabolic Timeline of a Fast</div>
+      <p>DeLauer walks through what actually happens in the body hour by hour. In the first 6 hours after eating, insulin is elevated and the body is burning glucose — fat oxidation is minimal. Between 6 and 12 hours, liver glycogen depletes progressively and fat oxidation begins climbing. The "metabolic switch" — the transition from primarily glucose to primarily fat as fuel — occurs at roughly 12–16 hours for most people. Growth hormone begins pulsing higher to protect lean mass. Ketone production climbs noticeably. Norepinephrine rises, mobilising fat from adipose tissue. The brain begins receiving a growing proportion of its fuel from beta-hydroxybutyrate rather than glucose.</p>
+      <p>Between 16 and 24 hours, the body is in its peak benefit zone. Fat oxidation is high, ketones are elevated enough to measurably suppress appetite and support brain function, autophagy is meaningfully active, GH is elevated, and BDNF levels are rising. Beyond 24 hours, cortisol begins climbing more substantially, gluconeogenesis from muscle amino acids accelerates, and the catabolic pressure on lean tissue grows. Extended fasts (48–72+ hours) have specific therapeutic applications — deep autophagy, immune system reset — but carry meaningful muscle-loss risk for active individuals and require careful refeeding strategies.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">💪 Muscle: The Surprising Non-Problem</div>
+      <p>The most common objection to fasting for active people is muscle loss. DeLauer addresses this directly: within a 16–18 hour fasting window, the growth hormone surge during fasting — which can reach 2–5x baseline in some studies — serves as a powerful muscle-protective signal, directing the body to spare lean tissue and preferentially burn stored fat. The body's demand for muscle-derived amino acids as gluconeogenic substrates is substantially reduced when ketones are available as alternative fuel, and when GH is elevated.</p>
+      <p>The strategies that further protect muscle during fasting are practical: resistance training within or just before the eating window sends a strong anabolic signal; a protein-rich first meal — emphasising leucine to activate mTOR and muscle protein synthesis — compensates for any catabolic pressure from the fast; and the cyclical nature of fasting (suppressing mTOR while activating autophagy) followed by eating (activating mTOR, building muscle) appears to be the physiological design for optimal body composition. The binary framing of fasting as inherently muscle-wasting misunderstands the hormonal environment a properly timed fast creates.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">🧠 Brain: The Most Underappreciated Benefit</div>
+      <p>DeLauer dedicates significant attention to the brain benefits of fasting — arguing this is the most underappreciated dimension of the research. At 16–18 hours, ketone levels are sufficient to provide the brain with an alternative, clean-burning fuel that produces less oxidative stress than glucose metabolism. Beta-hydroxybutyrate is neuroprotective: it inhibits the NLRP3 inflammasome (a major driver of neuroinflammation), supports mitochondrial function in neurons, and appears to have direct effects on gene expression relevant to stress resistance.</p>
+      <p>BDNF — brain-derived neurotrophic factor, which supports neuronal growth, maintenance, connectivity, and mood regulation — rises meaningfully during fasting, particularly in the 14–20 hour range. Autophagy in neurons, which clears the damaged proteins and organelles associated with Alzheimer's pathology when allowed to accumulate, is active during this window. The subjective experience of mental clarity during fasting has physiological support: stable blood sugar avoids the cognitive dips of glucose spikes and crashes; norepinephrine sharpens attention; and ketones provide a consistent, efficient fuel stream without the variability of carbohydrate-dependent energy.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">🛠️ Practical Protocol — What DeLauer Recommends</div>
+      <p>For most people, DeLauer recommends a 16:8 protocol — 16 hours fasting, 8 hours eating — as the practical entry point that hits the sweet spot identified in the research. In daily terms: stop eating by 8pm, sleep, and eat your first meal at noon. Eight of the sixteen fasting hours are spent asleep, making the waking fast only four hours. The critical practical elements: maintain electrolytes throughout the fasting window (sodium, magnesium, potassium) to prevent the headaches and fatigue that almost always reflect electrolyte loss rather than genuine difficulty; black coffee is permissible and may enhance fat oxidation; and the first meal should be protein-rich and not carbohydrate-heavy.</p>
+      <p>How the fast is broken matters almost as much as the fast itself. DeLauer advises beginning with a small amount of protein and fat — not a large carbohydrate load — to gently signal the end of the fasted state without a sharp insulin spike. Following with a full protein-rich meal 15–20 minutes later allows the metabolic transition to proceed smoothly. He also flags who should approach fasting carefully: individuals with disordered eating histories, pregnant or breastfeeding women, those on blood-glucose-lowering medications, and people under significant physiological stress need medical guidance rather than a one-size-fits-all protocol.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="ta-wrap">
+    <p class="ta-hint">10 specific, actionable insights from this video</p>
+
+    <div class="ta-card">
+      <div class="ta-num">1</div>
+      <div class="ta-body">
+        <h3>Target 16–18 hours for the maximum benefit-to-cost ratio</h3>
+        <p>The research identifies this window as where fat oxidation, ketone production, autophagy, GH elevation, and BDNF rise all peak simultaneously without significant muscle catabolism. If you're only going to apply one insight from this video, make it this: aim for 16 hours consistently rather than 12 hours regularly or 24 hours occasionally.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">2</div>
+      <div class="ta-body">
+        <h3>Stop treating fasting headaches and fatigue as signs it's "working"</h3>
+        <p>Almost all fasting side effects are electrolyte depletion, not detoxification. Supplement sodium, magnesium, and potassium throughout the fasting window. Most people who "can't fast" simply haven't replaced the electrolytes that low insulin causes the kidneys to excrete.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">3</div>
+      <div class="ta-body">
+        <h3>Drink black coffee during the fast — it helps</h3>
+        <p>Caffeine increases fat oxidation, chlorogenic acids improve insulin sensitivity, and there's evidence of a mild autophagy-inducing effect. Black coffee during the fasting window actively enhances the fast's core metabolic benefits rather than undermining them.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">4</div>
+      <div class="ta-body">
+        <h3>Break the fast with protein and fat, not carbohydrates</h3>
+        <p>The first meal after a fast has outsized effects on metabolic signalling for the rest of the day. A leucine-rich protein source (30–50g of quality protein) as your first meal activates mTOR, drives muscle protein synthesis, and avoids the insulin spike that would immediately reverse the fat-burning environment you just spent 16+ hours building.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">5</div>
+      <div class="ta-body">
+        <h3>Time resistance training to land in or just before your eating window</h3>
+        <p>Training in the deep fasted state and then remaining fasted for hours afterward means missing the post-workout mTOR activation window that feeding provides. Train within 1–2 hours of your first meal to stack the anabolic signal of exercise with the anabolic signal of protein intake.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">6</div>
+      <div class="ta-body">
+        <h3>Use the mental clarity window strategically</h3>
+        <p>The fasted state (particularly 14–18 hours in) is associated with elevated norepinephrine, stable blood sugar, and ketone availability — a neurochemical environment that supports focus, working memory, and creative thinking. Schedule cognitively demanding work during this window rather than after carbohydrate-heavy meals.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">7</div>
+      <div class="ta-body">
+        <h3>Understand mTOR and autophagy as a designed cycle, not a dilemma</h3>
+        <p>You don't have to choose between muscle building (mTOR) and cellular cleaning (autophagy) — fasting cycles you through both states. The fasting window activates autophagy; the eating window activates mTOR. Running this cycle consistently is likely more beneficial for long-term body composition and health than keeping either state permanently active.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">8</div>
+      <div class="ta-body">
+        <h3>Know your personal metabolic flexibility</h3>
+        <p>The 16–18 hour optimal window is a population average. If you're lean, metabolically healthy, and regularly active, you may hit peak benefits earlier. If you have insulin resistance or higher body fat, it may take longer. Pay attention to how you feel at different fasting durations rather than following a number rigidly.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">9</div>
+      <div class="ta-body">
+        <h3>Consistency beats intensity in fasting</h3>
+        <p>A 16-hour fast done reliably every day produces better compounding metabolic results than an occasional 48-hour fast. The mechanisms that improve with fasting — insulin sensitivity, mitochondrial biogenesis, autophagy capacity, metabolic flexibility — all respond to regular repetition, not to occasional dramatic efforts.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">10</div>
+      <div class="ta-body">
+        <h3>Treat brain protection as a primary reason to fast, not a bonus</h3>
+        <p>BDNF elevation, neuronal autophagy, ketone-driven neuroprotection, and neuroinflammation reduction are not secondary effects — they may represent fasting's most significant long-term health contributions. If aesthetic goals ever lose their motivational pull, the case for protecting your brain against neurodegeneration is a more durable reason to maintain the practice.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="foot">
+  <a href="https://youtu.be/C7lVqaXDkPw" target="_blank">▶ Watch on YouTube</a> · Thomas DeLauer · 2026
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>
