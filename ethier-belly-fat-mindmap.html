@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeremy Ethier — Targeting Belly Fat: 60-Day MRI Experiment | Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fff8f5;
+    --card: #ffffff;
+    --border: #f0ddd5;
+    --text: #1c1008;
+    --dim: #7a5a4a;
+    --c1: #c2410c;
+    --c2: #2563eb;
+    --c3: #16a34a;
+    --c4: #7c3aed;
+    --c5: #d97706;
+    --c6: #0891b2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #7c2d12 0%, #c2410c 50%, #9a3412 100%);
+    color: white;
+    padding: 36px 24px 28px;
+    text-align: center;
+  }
+  .header .kicker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fed7aa;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4vw, 34px);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  .header .guest {
+    font-size: 14px;
+    color: #fed7aa;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .header .meta {
+    font-size: 12px;
+    color: #fde0c7;
+    opacity: 0.85;
+  }
+
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .tab {
+    flex: 1;
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dim);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--c1); border-bottom-color: var(--c1); font-weight: 700; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* MIND MAP */
+  .mm-wrap { padding: 24px 16px; max-width: 960px; margin: 0 auto; }
+  .mm-hint { text-align: center; font-size: 13px; color: var(--dim); margin-bottom: 20px; }
+  .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+
+  .branch {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--bc);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .branch:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+  .bhead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    user-select: none;
+  }
+  .bicon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: var(--bi);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .btitle { flex: 1; font-weight: 700; font-size: 14px; color: var(--text); line-height: 1.3; }
+  .bchev { color: #a0aec0; font-size: 16px; transition: transform 0.3s; }
+  .branch.open .bchev { transform: rotate(180deg); }
+
+  .leaves { display: none; padding: 0 16px 14px; }
+  .branch.open .leaves { display: block; }
+
+  .leaf { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+  .leaf-title {
+    padding: 10px 14px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    color: #374151;
+    user-select: none;
+    background: #fdf9f7;
+  }
+  .leaf-title:hover { background: #f5ede8; }
+  .larr { font-size: 11px; color: #9ca3af; transition: transform 0.2s; }
+  .leaf.open .larr { transform: rotate(90deg); }
+  .ldetail {
+    display: none;
+    padding: 10px 14px;
+    font-size: 13px; line-height: 1.75;
+    color: #6b7280;
+    border-top: 1px solid var(--border);
+    background: #fff;
+  }
+  .leaf.open .ldetail { display: block; }
+
+  /* SUMMARY */
+  .sum-wrap { max-width: 740px; margin: 0 auto; padding: 32px 24px; }
+  .sum-sec { margin-bottom: 34px; padding-bottom: 34px; border-bottom: 1px solid var(--border); }
+  .sum-sec:last-child { border-bottom: none; }
+  .sum-h { font-family: 'Playfair Display', serif; font-size: 21px; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .sum-sec p { font-size: 14.5px; line-height: 1.85; color: #4b5563; margin-bottom: 10px; }
+
+  /* DATA CALLOUT */
+  .data-row { display: flex; gap: 12px; margin: 14px 0; flex-wrap: wrap; }
+  .data-box {
+    flex: 1; min-width: 140px;
+    background: #fff8f5;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .data-box .dval { font-size: 24px; font-weight: 800; color: var(--c1); }
+  .data-box .dlabel { font-size: 11px; color: var(--dim); margin-top: 2px; }
+
+  /* TAKEAWAYS */
+  .ta-wrap { max-width: 740px; margin: 0 auto; padding: 32px 24px; }
+  .ta-hint { text-align: center; font-size: 13px; color: var(--dim); margin-bottom: 22px; }
+  .ta-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .ta-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #7c2d12, #c2410c);
+    color: white; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ta-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .ta-body p { font-size: 13px; line-height: 1.7; color: #6b7280; }
+
+  .verdict-box {
+    background: linear-gradient(135deg, #fff8f5, #ffe8d8);
+    border: 2px solid #f87171;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #7c2d12;
+    font-weight: 500;
+  }
+
+  .foot { text-align: center; padding: 24px; font-size: 12px; color: #9ca3af; }
+  .foot a { color: var(--c1); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .header { padding: 28px 16px 20px; }
+    .sum-wrap, .ta-wrap { padding: 24px 16px; }
+    .branch-grid { grid-template-columns: 1fr; }
+    .data-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">Jeremy Ethier · Built With Science · May 2026</div>
+  <h1>Targeting Belly Fat Is POSSIBLE?! (60-Day MRI Experiment)</h1>
+  <div class="guest">Jeremy Ethier — Built With Science</div>
+  <div class="meta">4.5M+ subscribers · 60-day experiment with two subjects · MRI-tracked results</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</div>
+  <div class="tab" onclick="switchTab('summary', this)">📖 Full Summary</div>
+  <div class="tab" onclick="switchTab('takeaways', this)">⚡ Takeaways</div>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+  <div class="mm-wrap">
+    <p class="mm-hint">Tap any branch to expand · Tap a leaf for detail</p>
+    <div class="branch-grid">
+
+      <!-- Branch 1: The Science of Spot Reduction -->
+      <div class="branch" style="--bc:var(--c1); --bi:#fee2e2;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🔬</div>
+          <div class="btitle">The Science of Spot Reduction</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The core claim — train here, lose fat here <span class="larr">▶</span></div>
+            <div class="ldetail">Spot reduction is the idea that exercising a specific body part causes preferential fat loss in that area — do crunches, lose belly fat; do arm curls, lose arm fat. For decades this was dismissed as fitness mythology. But newer research from 2023 and 2017 showed localized effects under specific conditions, creating a genuine scientific debate worth testing with rigorous measurement rather than progress photos.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The blood flow mechanism — theoretically plausible <span class="larr">▶</span></div>
+            <div class="ldetail">The biological logic is sound: when you train a muscle, blood flow increases in the surrounding tissue. Fat mobilization — the release of triglycerides from fat cells into the bloodstream for fuel — can be stimulated by increased local blood flow and the catecholamines (adrenaline-type hormones) that accumulate near active tissue. So training your abs could, in theory, create a local hormonal environment that releases more fat from the belly. The key qualifier: fat released can be redeposited if it's not burned, which is why cardio was paired with ab training in the 2023 study.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The 2023 study that made spot reduction credible again <span class="larr">▶</span></div>
+            <div class="ldetail">A 2023 randomized controlled trial compared jogging for 45 minutes against jogging for 27 minutes followed immediately by ab training. Total body fat loss was similar between groups — but the spot-reduction group reportedly lost 2.5 times more belly fat: 1,171 grams versus 470 grams over 10 weeks. A 2017 study showed similar localized effects in arm and leg fat. Both studies were well-designed enough to take seriously, but measured fat using DEXA — which may lack the regional precision to confidently detect small, localized fat changes. This experiment upgraded the measurement to MRI.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why MRI beats DEXA and progress photos <span class="larr">▶</span></div>
+            <div class="ldetail">DEXA scans are excellent for measuring total body fat but have limited resolution for detecting small fat changes in specific body regions. MRI, by contrast, can measure fat thickness across precise anatomical zones — upper, middle, and lower belly — with much greater precision. Progress photos are even worse: lighting, posing, hydration, and pump can make the same body look dramatically different on the same day. Ethier demonstrates this with Dennis, who shot two photos back-to-back under different lighting that look like weeks of difference. The only reliable measure is objective tissue imaging.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why lower belly fat is the hardest to shift <span class="larr">▶</span></div>
+            <div class="ldetail">Analysis of over 18,000 DEXA scans spanning 8 years reveals consistent fat storage and loss patterns: men accumulate belly fat disproportionately early, especially above 25-30% body fat; women shift more storage toward the belly after their reproductive years. Critically, the belly is consistently one of the slowest areas to show fat loss — arms and legs typically lean out first. The biological explanation involves alpha-2 adrenergic receptors in lower-belly fat cells, which slow fat mobilization (as opposed to beta receptors, which accelerate it). This receptor difference makes lower belly fat genuinely more resistant, not just a matter of patience.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 2: Phase 1 Protocol -->
+      <div class="branch" style="--bc:var(--c2); --bi:#dbeafe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">📋</div>
+          <div class="btitle">Phase 1: The Spot Reduction Test</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The two subjects — Dennis and Vicky <span class="larr">▶</span></div>
+            <div class="ldetail">Dennis (Ethier's Creative Director) had struggled with belly fat his whole life despite working out 4 days/week and eating relatively clean. His DEXA showed 17.5% total body fat, with belly fat specifically at 16%. Vicky was also active but wanted to shed the fat covering her abs. Her DEXA showed 31.8% total body fat — but her belly measured only 24.7%, meaning she actually stored less fat in her belly proportionally than in other areas. This made for a useful contrast: Dennis was leaner with stubborn belly fat; Vicky had more total fat but wasn't primarily a belly-fat storer.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The protocol — matching the 2023 study <span class="larr">▶</span></div>
+            <div class="ldetail">Both subjects followed a spot-reduction protocol based closely on the 2023 study: 25 minutes of moderate-intensity cardio followed immediately by direct ab training, performed every other day for 30 days. Ab exercises were weighted crunches (4 sets, targeting upper abs) and reverse crunches (4 sets, targeting lower abs). Diet was not changed — matching the original study's design to isolate the effect of the exercise protocol. The key procedural difference: Dennis continued his usual 3-day lifting routine alongside the spot reduction protocol; Vicky was not lifting weights at all. This variable ended up being pivotal.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why upper abs show before lower abs — the anatomy <span class="larr">▶</span></div>
+            <div class="ldetail">Ab visibility depends on two factors: low enough body fat and ab muscles thick enough to show through. Upper abs are typically thicker and sit over tissue with more beta receptors (easier fat mobilization), so they tend to emerge first during fat loss. Lower abs are often thinner and sit over alpha-2 receptor-dense tissue, making them both harder to see and harder to lean out. Genetics also affect the shape and degree of lower-ab separation — some people have naturally more pronounced lower-ab definition at equivalent body fat than others. This is why the experiment tracked ab thickness alongside fat thickness via MRI.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Visual results vs. MRI — the lighting trap <span class="larr">▶</span></div>
+            <div class="ldetail">Phase 1 looked promising in photos. Dennis felt his abs were becoming more visible; Vicky noticed upper-ab definition improving. But Ethier demonstrates with Dennis's own photos that taking two shots on the same day under different lighting produced results that looked like weeks of difference. Influencers exploit this constantly — changing the angle, light source, pump, and hydration can produce a dramatic "transformation" without a single pound of fat loss. This is the fundamental problem with photo-based evidence, and precisely why MRI was necessary to determine whether the spot-reduction protocol actually worked.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Total effort in Phase 1 — 375 minutes of cardio, 15 ab sessions <span class="larr">▶</span></div>
+            <div class="ldetail">Over 30 days, Dennis and Vicky completed 375 minutes of moderate-intensity cardio and 15 direct ab training sessions — a substantial investment in the spot-reduction protocol. The fact that this much targeted effort produced such modest belly-fat results (versus Phase 2's dramatic results with zero direct ab work and zero cardio) makes the comparison particularly striking. The effort-to-outcome ratio strongly favoured the simpler, less targeted Phase 2 approach.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 3: Phase 1 Results -->
+      <div class="branch" style="--bc:var(--c3); --bi:#dcfce7;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">📊</div>
+          <div class="btitle">Phase 1 MRI Results</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Dennis's numbers — minimal belly movement <span class="larr">▶</span></div>
+            <div class="ldetail">After 30 days: Dennis gained about half a pound overall while his body fat moved from 17.5% to 17% — a small body recomposition. But his MRI told a different story from what the photos suggested. His belly fat dropped by only about 0.3%. Most of his fat loss came from his arms and hips, not his belly. The spot-reduction protocol, for Dennis, failed to preferentially target belly fat at all. Diet was likely the main culprit — he was eating back most of what he burned through cardio, creating little to no overall deficit.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Vicky's numbers — scale down, composition worse <span class="larr">▶</span></div>
+            <div class="ldetail">Vicky lost 5 pounds in Phase 1 — which sounds good until the composition breakdown: 60% of that weight came from lean mass and only 40% from fat. Her body fat percentage moved from 31.8% to 31.5% — a negligible change for 5 pounds lost. Her belly MRI did show some change: upper belly -5%, middle belly -0.27%, lower belly essentially unchanged. But when compared against fat changes in her arms, shoulders, and legs, the belly reduction was proportional — not preferential. Spot reduction, for Vicky, did not show up in the MRI data as a localized effect.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The unexpected winner — ab muscle growth <span class="larr">▶</span></div>
+            <div class="ldetail">The most significant Phase 1 finding was not belly fat loss — it was ab muscle hypertrophy. Dennis's abs grew by approximately 20% on average across the measured regions. Vicky's abs grew by approximately 15% — despite losing lean mass in every other muscle group she had measured. Her abs grew because they were the only muscles being directly trained. This explains why both subjects "looked more defined" in photos even though belly fat barely changed: the muscles themselves got bigger and pushed through whatever fat remained. Direct ab training is effective for building ab muscle — just not for burning belly fat.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Where fat actually went — arms and hips, not belly <span class="larr">▶</span></div>
+            <div class="ldetail">The MRI data showed that whatever fat Dennis did lose in Phase 1 came off from his arms and hips first — not his belly. Vicky's data showed similar proportional fat reduction across all regions. This pattern aligns with the existing science on fat loss: your body mobilizes fat according to genetics, sex, hormones, and receptor distribution — not according to which muscles you're training nearby. The spot-reduction hypothesis may be partially true in controlled conditions, but it wasn't strong enough to override these systemic fat-distribution patterns in a 30-day real-world experiment.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The lean mass loss problem — Vicky's warning <span class="larr">▶</span></div>
+            <div class="ldetail">Vicky's Phase 1 outcome is a cautionary finding for anyone relying on cardio alone for fat loss. Doing cardio without resistance training while not tracking calories created conditions where her body broke down lean tissue for energy. Losing 60% of a weight-loss phase from lean mass doesn't just look bad on the scale — it reduces metabolic rate, weakens the body, and makes future fat loss harder. The absence of lifting removed the primary protective signal (muscle protein synthesis stimulation) that keeps the body from cannibalizing muscle during a caloric deficit.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 4: Phase 2 Protocol -->
+      <div class="branch" style="--bc:var(--c4); --bi:#ede9fe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">💪</div>
+          <div class="btitle">Phase 2: Diet + Strength Training</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The protocol reset — no cardio, no direct ab work <span class="larr">▶</span></div>
+            <div class="ldetail">Phase 2 threw out the spot-reduction protocol entirely. No cardio. No direct ab training. Instead, two simple rules: track daily calories (using the formula bodyweight in pounds × 12 as a starting target) and strength train consistently. Vicky started a 3-day full-body workout plan to build the habit and stimulus she'd lacked in Phase 1. Dennis moved to a structured 4-day upper/lower split to complement his existing training. The simplicity of the pivot is part of the point — no targeted techniques, no "hack," just the fundamentals executed consistently.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why cardio was removed — the compensation problem <span class="larr">▶</span></div>
+            <div class="ldetail">Research consistently shows that cardio-only fat loss interventions underperform caloric estimates because of compensation: people eat more after aerobic exercise (driven by hunger hormones) or reduce non-exercise activity later in the day (moving less, sitting more), which erases a significant fraction of the intended deficit. Dennis's own Phase 1 vlogs showed him eating back much of what he burned. Removing cardio wasn't an anti-cardio statement — cardio has genuine health benefits — but it allowed Phase 2 to isolate whether diet and lifting alone could outperform the combined spot-reduction protocol. They did, decisively.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Lean protein at every meal — the muscle-preservation anchor <span class="larr">▶</span></div>
+            <div class="ldetail">The diet structure centred on a fist-sized portion of lean protein at every meal — white fish, shrimp, chicken breast, low-fat dairy. Lean protein sources maximise the protein-per-calorie ratio, making it easier to hit protein targets without overshooting calories. Vicky learned a key lesson mid-experiment: salmon is nutritious but calorie-dense due to its fat content — a meaningful portion adds far more calories than the same weight of white fish. The practical impact: you can eat more volume, feel more full, and get more protein on the same calorie budget if you prioritise the leanest protein sources.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Real-world diet strategies that worked <span class="larr">▶</span></div>
+            <div class="ldetail">Both subjects made small, high-leverage changes rather than overhauling their lives. Dennis pre-weighed meals so he knew exactly how much caloric budget remained for the day; asked for sauces on the side at restaurants (hollandaise on eggs benedict can be hundreds of calories); swapped fatty meats for lean fish; and at social events quietly switched to tea instead of whiskey — the colour is similar and no one knew. Vicky identified liquid calories as her main leak — a 300-calorie drink consumes in minutes what would take an hour of incline walking to burn. These aren't extreme interventions; they're precision applied to the highest-calorie leverage points.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why strength training shifts fat loss vs. muscle loss <span class="larr">▶</span></div>
+            <div class="ldetail">When a calorie deficit exists without resistance training, the body draws fuel from both fat and lean mass — and the lean mass loss proportion can be alarmingly high (60% for Vicky in Phase 1). Resistance training sends a continuous signal via the mTOR pathway and muscle protein synthesis that tells the body: "keep this muscle, it's needed." Research comparing cardio-plus-diet to lifting-plus-diet finds that adding strength training tilts the weight-loss composition heavily toward fat. Body fat percentage drops more, scale weight drops less drastically, and the outcome looks and performs far better — which is exactly what Phase 2 demonstrated.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 5: Phase 2 Results -->
+      <div class="branch" style="--bc:var(--c5); --bi:#fef3c7;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">📈</div>
+          <div class="btitle">Phase 2 MRI Results</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Vicky's transformation — 30% belly fat reduction <span class="larr">▶</span></div>
+            <div class="ldetail">After 30 days of diet and lifting: Vicky's body fat dropped from 31.5% to 27.5% — a 4 full percentage-point swing versus 0.3% in Phase 1. Even more striking: she gained almost 3 pounds of lean mass while losing weight — a complete inversion of Phase 1, where she lost 3 pounds of lean mass while barely reducing body fat. Her belly-fat MRI showed a 30% average reduction across the upper, middle, and lower belly. Even her lower belly — which had not changed at all during Phase 1's spot-reduction protocol — showed a major reduction. The stubborn alpha-2-receptor-heavy tissue finally moved when a real calorie deficit was in place.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Dennis's results — 26.3% belly fat reduction, 14.4% body fat <span class="larr">▶</span></div>
+            <div class="ldetail">Dennis lost 6 pounds and dropped to 14.4% body fat in Phase 2 — versus half a pound gained and 17% body fat after Phase 1. His belly fat dropped by an average of 26.3% across the MRI zones. Compare this to Phase 1's 0.3% belly fat change despite 375 minutes of cardio and 15 ab sessions. The difference is attributable entirely to the calorie deficit he created through tracking — something he consistently failed to achieve during Phase 1 because cardio made him hungry. Once calories were controlled, the fat came off across his whole body, including the belly that had resisted change for years.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The lower belly breakthrough — why Phase 2 unlocked what Phase 1 couldn't <span class="larr">▶</span></div>
+            <div class="ldetail">Lower belly fat — with its high alpha-2 receptor density — barely moved during Phase 1 for either subject. Vicky's lower belly showed essentially zero change after 30 days of spot-reduction protocol. In Phase 2, it showed a major reduction. The reason is not that Phase 2 somehow targeted the lower belly specifically — it's that the magnitude of the calorie deficit and resulting total fat loss was large enough that even the most resistant fat stores began to deplete. This confirms the general principle: stubborn areas do change, but they require a sufficient overall fat-loss deficit sustained long enough to reach them.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The ab shrinkage tradeoff — Dennis lost 16% of ab size <span class="larr">▶</span></div>
+            <div class="ldetail">Phase 2 came with one notable cost: Dennis's abs, which had grown ~20% during Phase 1's direct ab training, shrank by about 16% when direct ab work was removed. He ended Phase 2 close to where he'd started before the experiment in terms of ab muscle thickness. The indirect stimulus from squats, deadlifts, and upper/lower lifting provided some ab maintenance but not enough for someone with his training experience to sustain the Phase 1 gains. This is not a counterargument against Phase 2 — the 26% belly fat reduction far outweighs the ab size cost — but it points to the optimal strategy.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Vicky's ab maintenance — the beginner advantage <span class="larr">▶</span></div>
+            <div class="ldetail">Unlike Dennis, Vicky's abs mostly maintained their Phase 1 size during Phase 2, even without direct ab work. The likely reason is beginner status: she had just started resistance training, so heavy compound lifts (squats, deadlifts, rows, presses) provided sufficient indirect ab stimulus to maintain her newly built ab muscle. For beginners, the nervous system and muscle adaptation signal from any novel resistance training is strong enough to stimulate maintenance or even modest growth. For experienced lifters like Dennis, this indirect stimulus is insufficient — the muscles are already adapted to those patterns and require direct, targeted stimulus to grow or maintain specialised growth.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 6: The Real Formula -->
+      <div class="branch" style="--bc:var(--c6); --bi:#cffafe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🎯</div>
+          <div class="btitle">The Real Belly Fat Formula</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">A calorie deficit is non-negotiable — the conclusion <span class="larr">▶</span></div>
+            <div class="ldetail">The experiment's clearest finding: no targeting technique — not ab training, not cardio, not spot reduction — substitutes for a calorie deficit when it comes to fat loss. Both Dennis and Vicky had been active for years without achieving their body-composition goals. The single variable that unlocked their belly-fat loss in Phase 2 was creating a sustainable calorie deficit through tracking. Spot reduction's best-case scenario in the 2023 study was a modest regional effect on top of overall fat loss — you still needed the overall deficit. Without it, targeted techniques are noise.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Strength training is the muscle-preservation multiplier <span class="larr">▶</span></div>
+            <div class="ldetail">The difference between Phase 1 and Phase 2 for Vicky illustrates the multiplier effect of lifting: same general calorie situation, completely different body-composition outcome. Phase 1: 5 lbs lost, 3 lbs from muscle. Phase 2: similar scale change, +3 lbs lean mass gained while fat dropped dramatically. Adding resistance training to a calorie deficit doesn't just protect muscle — it can actively build it simultaneously with fat loss, especially in beginners. The net effect on body fat percentage is far larger than cardio can achieve with equivalent caloric expenditure, because lifting changes both sides of the equation (fat down and muscle up).</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Ab training has a role — but only one <span class="larr">▶</span></div>
+            <div class="ldetail">Direct ab training does something valuable: it builds ab muscle. Phase 1 proved this — Dennis's abs grew 20% and Vicky's grew 15%. Larger abs push through the fat layer more visibly at the same body-fat percentage, which is why both looked more defined even without losing belly fat. The mistake is expecting ab training to also burn belly fat — it doesn't, at least not reliably enough to outperform a proper calorie deficit. Ab training belongs in a training programme for the muscle-building effect; fat loss is the job of diet and systemic energy expenditure.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The optimal combined approach — what the data supports <span class="larr">▶</span></div>
+            <div class="ldetail">The experiment points to an optimal strategy that neither phase fully deployed: calorie deficit + protein tracking + strength training (Phase 2 approach) PLUS direct ab work for muscle size (Phase 1 finding). Phase 2 produced far better belly-fat results but cost Dennis his ab gains. The ideal protocol combines Phase 2's fat-loss fundamentals with Phase 1's ab-training habit — creating a calorie deficit, strength training compound movements, and adding direct weighted ab work as a secondary priority within the training week. That's the combination this experiment actually validates.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Cardio's actual role — health tool, not fat-loss primary driver <span class="larr">▶</span></div>
+            <div class="ldetail">Removing cardio in Phase 2 was a methodological choice to isolate diet and lifting — not a blanket anti-cardio statement. Cardio has well-documented cardiovascular, metabolic, and longevity benefits. It can also contribute to fat loss when it doesn't trigger compensatory eating or NEAT reduction. The practical guidance: use cardio for health and as a supplementary deficit tool, not as the primary or sole fat-loss strategy. If you're doing cardio and not losing fat, check whether you're eating back the calories burned — that's where the calculation usually breaks down.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- branch-grid -->
+  </div><!-- mm-wrap -->
+</div><!-- mindmap panel -->
+
+<!-- FULL SUMMARY -->
+<div id="summary" class="panel">
+  <div class="sum-wrap">
+
+    <div class="sum-sec">
+      <div class="sum-h">🔬 Why This Experiment Was Worth Running</div>
+      <p>Spot reduction — the idea that you can target fat loss in specific body areas — has been dismissed as fitness mythology for decades. But in 2023, a well-designed randomized controlled trial showed the spot-reduction group lost 2.5 times more belly fat than a cardio-only group. A 2017 study showed similar regional effects in arm and leg fat. This experiment was Ethier's attempt to test those findings with a more precise measurement: MRI, which can detect fat thickness changes across specific anatomical zones that DEXA scans cannot reliably resolve.</p>
+      <p>Two subjects ran a 60-day protocol split into two 30-day phases. Phase 1 tested the spot-reduction idea directly — cardio followed immediately by ab training, no diet changes. Phase 2 tested the alternative — calorie tracking, strength training, no cardio, no direct ab work. The results were unambiguous, and the MRI data made them impossible to attribute to lighting or posing.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">📋 Phase 1: The Spot Reduction Protocol</div>
+      <p>Dennis (17.5% body fat, stubborn belly since childhood, lifts 3 days/week) and Vicky (31.8% body fat, wants to reveal ab definition) performed 25 minutes of moderate cardio followed immediately by weighted crunches and reverse crunches every other day for 30 days. Diet was deliberately uncontrolled, matching the original 2023 study design. Dennis continued his usual lifting; Vicky did not lift at all. By the end of 30 days they had completed 375 minutes of cardio and 15 ab sessions.</p>
+      <p>Visually, both looked more defined — particularly under favourable lighting. But Ethier demonstrates the lighting trap using two photos of Dennis taken on the same day that look dramatically different. The MRI data stripped away the ambiguity.</p>
+
+      <div class="data-row">
+        <div class="data-box"><div class="dval">+0.3%</div><div class="dlabel">Dennis belly fat change (Phase 1)</div></div>
+        <div class="data-box"><div class="dval">-3%</div><div class="dlabel">Vicky belly fat change (Phase 1)</div></div>
+        <div class="data-box"><div class="dval">+20%</div><div class="dlabel">Dennis ab muscle growth (Phase 1)</div></div>
+        <div class="data-box"><div class="dval">+15%</div><div class="dlabel">Vicky ab muscle growth (Phase 1)</div></div>
+      </div>
+
+      <p>Dennis gained half a pound overall. His fat loss came primarily from arms and hips, not his belly. Vicky lost 5 pounds — but 60% came from lean mass, with body fat dropping only from 31.8% to 31.5%. Her belly-fat reduction was proportional to fat loss everywhere else, with her lower belly showing no change. The spot-reduction protocol did not produce a clear targeted belly-fat effect in the MRI data.</p>
+      <p>The one genuine win: both grew their ab muscles significantly. Direct ab training builds abs — it just doesn't burn belly fat preferentially. This mattered for how they looked, but it wasn't the belly-fat result the protocol was designed to produce.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">💪 Phase 2: Diet + Strength Training</div>
+      <p>Phase 2 removed cardio and direct ab training entirely. Calories were tracked using a starting target of bodyweight (pounds) × 12. Meals were structured around a fist-sized lean protein portion at each sitting — white fish, shrimp, chicken breast preferred over fatty proteins like salmon when calories were tight. Vicky started a 3-day full-body programme; Dennis moved to a 4-day upper/lower split.</p>
+      <p>The rationale for removing cardio: research shows aerobic exercise frequently triggers compensatory eating or reduced NEAT, shrinking the expected deficit. Dennis's own Phase 1 vlogs documented him eating back most of what he burned through cardio. Tracking calories removed this blind spot. Real-world adaptations included Dennis pre-weighing meals, requesting sauces on the side at restaurants, swapping fatty meats for lean fish, and switching to tea at social events to avoid alcohol calories. Vicky addressed liquid calories as her primary leak — recognising that a 300-calorie drink consumes in minutes what takes an hour of incline walking to burn.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">📈 Phase 2 MRI Results — A Different Experiment Entirely</div>
+      <p>The Phase 2 results weren't just better than Phase 1 — they were categorically different in magnitude.</p>
+
+      <div class="data-row">
+        <div class="data-box"><div class="dval">-26.3%</div><div class="dlabel">Dennis belly fat (Phase 2)</div></div>
+        <div class="data-box"><div class="dval">-30%</div><div class="dlabel">Vicky belly fat (Phase 2)</div></div>
+        <div class="data-box"><div class="dval">+3 lbs</div><div class="dlabel">Vicky lean mass gained</div></div>
+        <div class="data-box"><div class="dval">14.4%</div><div class="dlabel">Dennis final body fat</div></div>
+      </div>
+
+      <p>Dennis lost 6 pounds, dropped from 17.5% to 14.4% body fat, and reduced belly fat by an average of 26.3% across MRI zones. Vicky dropped from 31.5% to 27.5% body fat, gained nearly 3 pounds of lean mass while losing scale weight, and reduced belly fat by 30% — including her lower belly, which hadn't moved at all during Phase 1. The lower belly breakthrough was significant: even this alpha-2-receptor-dominant tissue finally changed once a sufficient total calorie deficit was in place.</p>
+      <p>The one tradeoff: Dennis's abs shrank by about 16% without direct ab training, nearly erasing the Phase 1 gains. Vicky maintained her ab size — as a beginner, compound lifts provided enough indirect ab stimulus. The contrast between beginner and experienced lifter is instructive: for those new to lifting, full-body strength training may suffice to maintain ab muscle; for experienced trainees, direct ab work is needed to preserve ab size gains.</p>
+
+      <div class="verdict-box">
+        The experiment's conclusion: spot reduction probably doesn't work reliably enough to matter in a real-world 30-day protocol. What moves belly fat is the same thing that moves fat everywhere — a meaningful calorie deficit, sustained consistently, paired with resistance training that shifts weight loss toward fat rather than muscle.
+      </div>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">🎯 The Optimal Strategy — What the Data Actually Supports</div>
+      <p>Neither phase was optimal in isolation. Phase 1 built ab muscle but barely moved belly fat. Phase 2 dramatically reduced belly fat but cost Dennis his ab gains. The data-supported optimal protocol is a combination: Phase 2's fat-loss fundamentals (calorie deficit + protein + strength training) with Phase 1's direct ab work layered in as a secondary priority.</p>
+      <p>Practically: train 3–4 days per week with compound lifts, add 2–3 sets of direct ab work (weighted crunches, reverse crunches, cable crunches) at the end of sessions, track calories to a body-weight-times-12 starting target, hit protein with lean sources at every meal, and use cardio selectively for health rather than as the primary fat-loss driver. Stubborn belly fat will change — but only after an adequate overall deficit is maintained long enough for systemic fat loss to reach the most resistant areas.</p>
+    </div>
+
+  </div>
+</div><!-- summary panel -->
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="ta-wrap">
+    <p class="ta-hint">10 things to remember and act on from this experiment</p>
+
+    <div class="ta-card">
+      <div class="ta-num">1</div>
+      <div class="ta-body">
+        <h3>Progress photos lie — lighting can fake a transformation on the same day</h3>
+        <p>Dennis took two photos back-to-back under different lighting that looked like weeks of difference. Influencers use this constantly. The only reliable measure of fat change is objective body-composition testing (DEXA, MRI) or consistent photos under identical conditions. If you're tracking progress visually, control the variables ruthlessly.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">2</div>
+      <div class="ta-body">
+        <h3>Spot reduction doesn't reliably target belly fat — the MRI proved it</h3>
+        <p>After 375 minutes of cardio and 15 ab sessions over 30 days, Dennis's belly fat changed by 0.3% and Vicky's by 3% — proportional to fat loss everywhere else. The biological mechanism exists (blood flow + fat mobilization), but it wasn't strong enough to override systemic fat-distribution patterns in this 30-day experiment.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">3</div>
+      <div class="ta-body">
+        <h3>Ab training builds abs — it doesn't burn belly fat</h3>
+        <p>Phase 1 produced significant ab growth (Dennis +20%, Vicky +15%) and that made them look more defined. But the MRI showed the fat layer on top barely moved. Direct ab training is worth doing for the muscle-building effect — just don't expect it to spot-reduce the belly.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">4</div>
+      <div class="ta-body">
+        <h3>Cardio without lifting can cause more muscle loss than fat loss</h3>
+        <p>Vicky lost 5 pounds in Phase 1 — but 3 of those pounds were lean mass. A 60% lean mass / 40% fat split is a terrible body-composition outcome. Without resistance training to signal muscle preservation, a calorie deficit from cardio will draw heavily on lean tissue. If you're doing only cardio, you're likely losing the wrong kind of weight.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">5</div>
+      <div class="ta-body">
+        <h3>Cardio compensation is real — many people eat back everything they burn</h3>
+        <p>Dennis's Phase 1 vlogs showed him eating back most of what he burned through cardio. Research confirms this is common: aerobic exercise can increase hunger hormones and reduce NEAT (non-exercise movement). Cardio's fat-loss contribution is often far smaller than the calories burned suggest. Tracking food cuts through this blind spot immediately.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">6</div>
+      <div class="ta-body">
+        <h3>Start with bodyweight × 12 for your daily calorie target</h3>
+        <p>Jeremy Ethier's Phase 2 starting target was bodyweight in pounds multiplied by 12. This provides a modest deficit for most people without being aggressively restrictive. Adjust based on results after 2–3 weeks — if losing more than 1–1.5% bodyweight per week, you may be losing too much lean mass and should eat slightly more.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">7</div>
+      <div class="ta-body">
+        <h3>Liquid calories are a silent budget wrecker — drink smarter</h3>
+        <p>Vicky's main dietary leak was drinks — a 300-calorie beverage consumes in two minutes what would take an hour of incline walking to burn. Alcohol, lattes, juices, and smoothies are easily the highest-ROI places to cut calories because they require zero willpower around food. Audit your drink calories before cutting any solid food.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">8</div>
+      <div class="ta-body">
+        <h3>Lean protein sources beat fatty protein for calorie efficiency</h3>
+        <p>White fish and shrimp give you the same protein-building amino acids as salmon at a fraction of the calories. Salmon is nutritious, but its fat content makes it calorie-dense. When in a deficit, leaner proteins let you eat more volume, feel more full, and protect muscle better on the same calorie budget. Save salmon for maintenance phases.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">9</div>
+      <div class="ta-body">
+        <h3>Lower belly fat is stubborn — but it does change with a big enough deficit</h3>
+        <p>Vicky's lower belly showed zero change in Phase 1 and a major reduction in Phase 2. The alpha-2 receptor density in lower-belly fat makes it more resistant to mobilization — but it's not immune. The threshold is a sufficiently large, sustained calorie deficit over enough time. Don't abandon fat loss because your lower belly is slow; it's the last to go, not the never-go.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">10</div>
+      <div class="ta-body">
+        <h3>The optimal protocol: diet + lifting + direct ab work combined</h3>
+        <p>Neither phase alone was optimal. Phase 2 (diet + lifting) produced dramatically better fat loss but cost Dennis his ab gains. Phase 1 built abs but barely touched belly fat. The data-supported ideal: follow Phase 2's fundamentals (calorie deficit, protein, strength training) and add 2–3 sets of direct weighted ab work per session. You'll get the belly-fat loss and the muscle definition simultaneously.</p>
+      </div>
+    </div>
+
+  </div>
+</div><!-- takeaways panel -->
+
+<div class="foot">
+  <a href="https://www.youtube.com/watch?v=M1Im9q19CrE" target="_blank">▶ Watch on YouTube</a>
+  &nbsp;·&nbsp; Jeremy Ethier — Built With Science &nbsp;·&nbsp; May 23, 2026
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>
