@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeremy Ethier & Dr. Keith Baar — Rebuild Your Tendons in 30 Days | Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f2ff;
+    --card: #ffffff;
+    --border: #d1d5f0;
+    --text: #1a1f3a;
+    --dim: #5a6280;
+    --c1: #dc2626;
+    --c2: #2563eb;
+    --c3: #1a9654;
+    --c4: #7c3aed;
+    --c5: #d97706;
+    --c6: #0891b2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #0f1d4a 0%, #1e2f72 45%, #162b6e 100%);
+    color: white;
+    padding: 36px 24px 28px;
+    text-align: center;
+  }
+  .header .kicker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(20px, 4vw, 34px);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  .header .guest {
+    font-size: 14px;
+    color: #93c5fd;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .header .meta {
+    font-size: 12px;
+    color: #bfdbfe;
+    opacity: 0.8;
+  }
+
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .tab {
+    flex: 1;
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dim);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: #1e2f72; border-bottom-color: #1e2f72; font-weight: 700; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* MIND MAP */
+  .mm-wrap { padding: 24px 16px; max-width: 960px; margin: 0 auto; }
+  .mm-hint { text-align: center; font-size: 13px; color: var(--dim); margin-bottom: 20px; }
+  .branch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+
+  .branch {
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--bc);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .branch:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.09); }
+  .bhead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    user-select: none;
+  }
+  .bicon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--bi);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .btitle { flex: 1; font-weight: 700; font-size: 14px; color: var(--text); line-height: 1.3; }
+  .bchev { color: #a0aec0; font-size: 16px; transition: transform 0.3s; }
+  .branch.open .bchev { transform: rotate(180deg); }
+
+  .leaves { display: none; padding: 0 16px 14px; }
+  .branch.open .leaves { display: block; }
+
+  .leaf { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+  .leaf-title {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #374151;
+    user-select: none;
+    background: #f9fafb;
+  }
+  .leaf-title:hover { background: #f3f4f6; }
+  .larr { font-size: 11px; color: #9ca3af; transition: transform 0.2s; }
+  .leaf.open .larr { transform: rotate(90deg); }
+  .ldetail {
+    display: none;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: #6b7280;
+    border-top: 1px solid var(--border);
+    background: #fff;
+  }
+  .leaf.open .ldetail { display: block; }
+
+  /* SUMMARY */
+  .sum-wrap { max-width: 740px; margin: 0 auto; padding: 32px 24px; }
+  .sum-sec { margin-bottom: 34px; padding-bottom: 34px; border-bottom: 1px solid var(--border); }
+  .sum-sec:last-child { border-bottom: none; }
+  .sum-h { font-family: 'DM Serif Display', serif; font-size: 21px; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .sum-sec p { font-size: 14.5px; line-height: 1.85; color: #4b5563; margin-bottom: 10px; }
+
+  /* TAKEAWAYS */
+  .ta-wrap { max-width: 740px; margin: 0 auto; padding: 32px 24px; }
+  .ta-hint { text-align: center; font-size: 13px; color: var(--dim); margin-bottom: 22px; }
+  .ta-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .ta-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #0f1d4a, #1e2f72);
+    color: white; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ta-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .ta-body p { font-size: 13px; line-height: 1.7; color: #6b7280; }
+
+  .foot { text-align: center; padding: 24px; font-size: 12px; color: #9ca3af; }
+  .foot a { color: #1e2f72; text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .header { padding: 28px 16px 20px; }
+    .sum-wrap, .ta-wrap { padding: 24px 16px; }
+    .branch-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">Jeremy Ethier · Built With Science · June 2026</div>
+  <h1>It's Weird, But It Re-Builds Your Tendons In 30 Days</h1>
+  <div class="guest">ft. Dr. Keith Baar (UC Davis) &amp; Coach Q Wiley</div>
+  <div class="meta">Dr. Baar — Molecular Exercise Physiologist &amp; World-Leading Tendon Researcher</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</div>
+  <div class="tab" onclick="switchTab('summary', this)">📖 Full Summary</div>
+  <div class="tab" onclick="switchTab('takeaways', this)">⚡ Takeaways</div>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+  <div class="mm-wrap">
+    <p class="mm-hint">Tap any branch to expand · Tap a leaf for detail</p>
+    <div class="branch-grid">
+
+      <!-- Branch 1: Why Tendons Don't Heal -->
+      <div class="branch" style="--bc:var(--c1); --bi:#fee2e2;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">⚠️</div>
+          <div class="btitle">Why Tendons Don't Heal</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Poor blood supply — the root problem <span class="larr">▶</span></div>
+            <div class="ldetail">Unlike muscles, tendons have a very poor blood supply. This means they receive fewer nutrients, fewer oxygen molecules, and fewer of the cells that drive repair. Where a muscle tear might resolve in weeks, a tendon injury left untreated can linger for months or years — not because the body can't repair it, but because the signals and raw materials needed for repair arrive so slowly. The collagen turnover rate in tendons is measured in years, not days.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Muscles outpace tendons — the imbalance trap <span class="larr">▶</span></div>
+            <div class="ldetail">Muscle tissue responds to training stimuli within days. Tendons adapt over months. This creates a dangerous lag: athletes and gym-goers frequently build muscular strength far beyond what their tendons can safely transmit. A muscle can generate 200% of the force its attached tendon was conditioned to handle. The tendon then becomes the weakest link — not structurally, but in terms of adaptation speed — and eventually fails under loads the muscle treats as routine.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Stress shielding — how injured tendons protect themselves into weakness <span class="larr">▶</span></div>
+            <div class="ldetail">When a tendon is damaged, the stronger, healthy regions stiffen and take on disproportionately more load — shielding the injured area from mechanical stress. This feels like protection, but it's a trap. The damaged region, denied mechanical stimulus, never receives the signal to remodel and rebuild. It stays weak while the surrounding tissue compensates. This is why tendon injuries become "chronic" — the body is protecting the injury in a way that prevents it from ever healing.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Rest and immobilisation make it worse <span class="larr">▶</span></div>
+            <div class="ldetail">"You go to the doctor with a sprained ankle and they put you in a boot," says Dr. Baar. "That boot is designed to take stress off the tissue. But what's going to cause that tissue to scar? Taking off the tension." Immobilisation triggers disorganised scar tissue formation — collagen fibres that lay down randomly rather than in the aligned, parallel arrangement needed for tensile strength. The resulting scar is stiffer, weaker, and more prone to re-injury than the original tendon would have been with controlled loading.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Tendons respond to a short window — then go deaf <span class="larr">▶</span></div>
+            <div class="ldetail">One of Dr. Baar's key lab discoveries: tendons stop responding to mechanical loading after approximately 10 minutes of continuous activity. Beyond that threshold, the stimulus becomes mechanical wear — not adaptation signal. This is radically different from muscle, which can respond to extended training sessions. Tendons need short, sharp stimuli followed by rest. This insight underpins the entire isometric protocol — brief, purposeful loading, then walk away.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 2: The Isometric Revolution -->
+      <div class="branch" style="--bc:var(--c2); --bi:#dbeafe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🦾</div>
+          <div class="btitle">The Isometric Revolution</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why isometrics unlock injured tendon tissue <span class="larr">▶</span></div>
+            <div class="ldetail">In a dynamic exercise, the strong regions of a tendon absorb nearly all the load — the injured tissue never gets stimulated. Isometric holds are different. Because there is no movement, force builds slowly across the entire tendon length, including the weaker, damaged portions. After 20–30 seconds, the strong regions begin to "fatigue" (stress relax), and load finally redistributes into the shielded, injured zone. This is the only reliable way to get a mechanical stimulus into tissue that would otherwise never receive one.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The velocity and jerk principle <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar frames tendon loading around two key physics concepts: velocity (rate of deformation) and jerk (rate of change of acceleration). Tendons are most vulnerable to rapid changes in speed — the snap of a jump landing, the sudden deceleration of a throw. Dynamic exercises carry jerk; isometrics have zero velocity and therefore zero jerk. This makes isometrics uniquely safe for injured tendons — the mechanical stimulus arrives without the spike that causes tissue damage.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Isometrics vs. eccentrics — why eccentrics were overhyped <span class="larr">▶</span></div>
+            <div class="ldetail">Eccentric training (lengthening under load) has been the standard physiotherapy prescription for tendinopathy for decades. Dr. Baar argues the benefit was real but misattributed. Eccentrics work when they're performed slowly — because slow velocity means low jerk and more even load distribution. Isometrics are simply eccentrics taken to their logical extreme: zero velocity, zero jerk, maximum load distribution. The eccentric component itself was never the active ingredient.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Overcoming vs. yielding isometrics <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar distinguishes two isometric types. Overcoming isometrics involve pressing or pulling against an immovable object (e.g., a tennis racket wedged under a countertop) — the limb never moves. These are preferred for injured tendons because there is no risk of accidental jerk and load control is precise. Yielding isometrics involve holding a weight in place (e.g., a wall sit) — useful for progressive loading but carry a small risk of tremor-induced jerk. For rehab, start with overcoming.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why it works in 30 days — Dr. Baar's own words <span class="larr">▶</span></div>
+            <div class="ldetail">"By two weeks, almost everybody is like, 'Oh yeah, I can do pretty much everything again.'" The initial relief comes not from new collagen (which takes months to synthesise) but from tendon rehydration and improved neuromuscular control. The collagen remodelling — actual structural strengthening — occurs over 4–8 weeks of consistent loading. The 30-day window captures the transition from pain relief to early structural change, which is why the subjective improvement is dramatic even before the tissue is fully rebuilt.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 3: The 30-Day Protocol -->
+      <div class="branch" style="--bc:var(--c3); --bi:#dcfce7;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">📋</div>
+          <div class="btitle">The 30-Day Protocol</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The core parameters — exact numbers <span class="larr">▶</span></div>
+            <div class="ldetail">The protocol is precise: 30-second holds (30 seconds achieves ~85% of tendon stress relaxation, beyond which there are diminishing returns), 2-minute rest between sets, 4 sets per session, 1–2 sessions per day. Load should be low-to-moderate — around 50% of maximal effort for overcoming isometrics. Sensation target: "a burning tension" in the target area. Red flag: sharp, stabbing, point-specific pain means stop immediately.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The 6–8 hour refractory period — why more isn't more <span class="larr">▶</span></div>
+            <div class="ldetail">After a loading session, tendons enter a refractory period — the mechano-sensing machinery is temporarily desensitised. Loading again within this window produces wear, not adaptation. Dr. Baar's lab research suggests a minimum 6-hour gap between sessions. This parallels bone's response to impact loading. Practically: morning and late afternoon sessions work well. Two sessions per day maximum. The constraint is not willpower but biology — more sessions genuinely produce less benefit.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Early loading beats delayed loading — the 25% faster recovery finding <span class="larr">▶</span></div>
+            <div class="ldetail">In a study by renowned sports medicine researcher Michael Kjaer, athletes who began light loading 2 days after injury recovered 25% faster than those who waited 9 days. The biological reason: early mechanical stimulus prevents disorganised scar formation and maintains collagen fibre alignment during the critical early repair window. Dr. Baar recommends starting the isometric protocol as soon as the injury occurs — not waiting for pain to subside — as long as the loading stays below the pain threshold.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Progression — from chronic to dynamic <span class="larr">▶</span></div>
+            <div class="ldetail">The progression across 4–8 weeks follows a clear arc. Weeks 1–2: focus purely on pain reduction, keep effort low (50%), twice daily. Weeks 2–4: increase perceived effort gradually toward 60–70%, still pain-free. Weeks 4–8: transition to slow eccentrics, then slow dynamic loading. Only introduce speed and dynamic movement once isometric holds are consistently pain-free and strong. Rushing this progression is the most common reason tendon injuries recur.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The pain guide — burning is fine, ice pick means stop <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar's clinical pain guidance is memorable and practical: the acceptable sensation is "a warm, burning, muscular feeling" — this indicates the tissue is receiving load across its full length. Unacceptable is "an ice pick" — sharp, stabbing, localised pain that signals you've exceeded the tissue's current capacity. A 2/10 pain threshold is often cited. The burning sensation can and often will increase during the hold; what matters is whether it dissipates within 24 hours (acceptable) or persists longer (back off).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 4: Injury-Specific Protocols -->
+      <div class="branch" style="--bc:var(--c4); --bi:#ede9fe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🎯</div>
+          <div class="btitle">Injury-Specific Protocols</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Tennis elbow (lateral epicondylitis) <span class="larr">▶</span></div>
+            <div class="ldetail">Use a tennis racket, golf club, or any stick. Wedge it under a countertop with the palm facing down. Press upward (wrist extension) for 30 seconds. Then rotate — supinate the forearm, pressing the back of the hand outward. Work through multiple joint angles: elbow bent at 90°, arm fully extended, arm raised overhead. The reason for multiple angles is that different positions engage slightly different portions of the extensor muscle-tendon complex, ensuring the entire structure receives stimulus.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Golfer's elbow (medial epicondylitis) <span class="larr">▶</span></div>
+            <div class="ldetail">Mirror of tennis elbow: palm faces up, perform wrist flexion isometrics against a fixed surface. Add pronation — rotating the forearm so the palm turns down — pressing against resistance. The medial side of the elbow is often more sensitive than the lateral, so start conservatively (30% effort) and increase gradually. Avoid gripping heavy weights during the recovery period; grip force transmits directly to the medial epicondyle and bypasses the isometric protocol's controlled-load benefit.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Achilles tendon <span class="larr">▶</span></div>
+            <div class="ldetail">Two distinct muscles attach via the Achilles: the gastrocnemius (knee straight) and the soleus (knee bent). Seated calf raise isometrics (knee at 90°) target the soleus; standing calf raise isometrics target the gastrocnemius. For post-surgical cases, Dr. Baar recommends starting in plantarflexion (toes pointed) to avoid stretching fresh sutures, performing gentle holds even within the boot. "Early loading after Achilles surgery changed outcomes dramatically — surgeons who started it saw 30% faster return to sport."</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Knee / patellar tendinopathy (jumper's knee) <span class="larr">▶</span></div>
+            <div class="ldetail">Wall sits are the go-to tool: back flat against the wall, thighs parallel to the floor, hold for 30 seconds. The 90° knee angle creates direct, controlled load through the patellar tendon without any jerk. Split squats (static lunge hold) are the progression. Coach Q Wiley adds: ensure the front knee tracks over the toes — letting the knee drift inward reduces patellar loading and misses the target. For severe cases, begin at 120° knee bend (less tension) and progress toward 90° over weeks.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Rotator cuff (shoulder) <span class="larr">▶</span></div>
+            <div class="ldetail">The rotator cuff is four tendons, each requiring separate targeting. External rotation: elbow bent at 90°, press the back of the hand outward against a doorframe. Internal rotation: press the palm inward against the doorframe. Abduction: press the arm outward from the side against a wall. Hold each for 30 seconds, rest 2 minutes, 4 reps. Dr. Baar notes shoulder tendons are commonly damaged through repetitive overhead work — office workers with forward-head posture are at high risk and rarely know it.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 5: Nutrition for Tendon Repair -->
+      <div class="branch" style="--bc:var(--c5); --bi:#fef3c7;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🧬</div>
+          <div class="btitle">Nutrition for Tendon Repair</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">The collagen + vitamin C stack — exact dosing <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar's recommendation is specific: 15 grams of hydrolyzed collagen peptides combined with 200–250 mg of vitamin C, taken 30–60 minutes before each isometric session. This timing exploits the mechanics of tendon loading — the exercise creates compression-decompression cycles that "pump" nutrient-rich fluid into the tendon matrix. By elevating blood levels of collagen amino acids and vitamin C immediately before this pumping occurs, you maximise delivery to the tissue that needs it.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Why it doubles collagen synthesis markers <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar's lab published data showing this pre-exercise collagen + vitamin C intervention can double markers of collagen synthesis in the blood. Vitamin C is an essential co-factor for prolyl hydroxylase and lysyl hydroxylase — the enzymes that hydroxylate proline and lysine residues in collagen chains, a step required to form the triple helix structure. Without adequate vitamin C, collagen chains form but cannot fold correctly. The combination provides both the substrate (amino acids) and the enzymatic machinery.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Choose skin-source collagen, not bone broth <span class="larr">▶</span></div>
+            <div class="ldetail">Not all collagen supplements are equal. Dr. Baar specifically recommends collagen from skin sources — bovine hide or fish skin — over bone-derived collagen or bone broth. Bone can accumulate heavy metals (particularly lead, cadmium, and arsenic) from the animal's lifetime exposure, and these concentrate during the extraction process. Skin-source hydrolyzed collagen peptides avoid this risk. The collagen type (Type I, II, III) is irrelevant — it's fully hydrolyzed into individual amino acids before absorption anyway.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">What doesn't work — PRP, stem cells, BPC-157 <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar is publicly skeptical of the orthobiologic industry for lower-body tendon injuries. PRP (platelet-rich plasma) and stem cell injections are rapidly displaced by joint movement after injection — the therapeutic agents flow away from the target site within hours. BPC-157, the peptide supplement popular in biohacking communities, "has no direct effect on tendon cells" in Dr. Baar's lab research. These interventions contribute at most a few percent of the healing signal. Mechanical load contributes 95%+. "You can't inject your way out of a loading problem."</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Drugs that damage tendons — know your risks <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar flags two drug classes with well-documented tendon toxicity. Fluoroquinolone antibiotics (Ciprofloxacin, Levofloxacin) directly interfere with tendon matrix proteins — tendon rupture is a known side effect on the drug label. Angiotensin receptor blockers (ARBs, the "-sartan" drugs used for blood pressure) increase tendon rupture risk by 7.6-fold in large epidemiological studies, likely by reducing collagen cross-linking via angiotensin signalling. If you're on either drug class and experiencing tendon pain, discuss alternatives with your doctor.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 6: What to Ditch -->
+      <div class="branch" style="--bc:var(--c6); --bi:#cffafe;" onclick="toggleBranch(this)">
+        <div class="bhead">
+          <div class="bicon">🚫</div>
+          <div class="btitle">What to Ditch Immediately</div>
+          <div class="bchev">▼</div>
+        </div>
+        <div class="leaves">
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">RICE is wrong for tendons <span class="larr">▶</span></div>
+            <div class="ldetail">Rest, Ice, Compression, Elevation — the standard first-aid protocol for soft tissue injuries — is actively counterproductive for tendons. Rest promotes scar formation (see Branch 1). Ice constricts blood flow and blunts the inflammatory response that initiates repair signalling. Even the inflammation-as-villain narrative is increasingly questioned: controlled early inflammation is now understood to be the trigger for proper tissue remodelling. NSAIDs (ibuprofen, naproxen) taken regularly during the early injury phase can meaningfully slow tendon healing by suppressing the prostaglandins that initiate collagen synthesis.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Ice baths — timing matters, not abolition <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar doesn't condemn cold water immersion entirely — he recommends strategic timing. An ice bath immediately post-strength training blunts the anabolic signalling cascade (mTOR pathway) needed for muscle adaptation. For tendons specifically, cold immediately after isometric loading suppresses the very inflammatory signals that initiate collagen remodelling. His recommendation: if you use ice baths, separate them from your training by at least 6 hours. Morning ice bath, afternoon isometrics — the two interventions won't interfere.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Boots, braces, and stress-shielding devices <span class="larr">▶</span></div>
+            <div class="ldetail">The medical instinct to immobilise an injury is deeply ingrained but frequently wrong for tendon pathologies. Stress-shielding devices — rigid boots, stiff braces, slings — create the exact conditions that perpetuate stress shielding inside the tendon. Dr. Baar has advocated for changing standard Achilles surgery suture protocols: conventional non-resorbable sutures are so strong they stress-shield the healing tendon indefinitely. Resorbable sutures combined with early active loading produce dramatically better long-term outcomes in his clinical observations.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">High-jerk activities during recovery <span class="larr">▶</span></div>
+            <div class="ldetail">Any activity involving rapid acceleration changes — sprinting, jumping, throwing, fast gym lifts — carries significant jerk and should be avoided during active tendon recovery. The risk isn't the load magnitude; it's the rate of load application. A 50kg deadlift performed explosively can generate more damaging tendon jerk than an 80kg deadlift performed with controlled, slow tempo. Coach Q Wiley emphasises this with patients: speed kills tendons, not weight. The rehabilitation hierarchy is always slow isometrics → slow eccentrics → slow dynamic → fast dynamic → sport-specific speed.</div>
+          </div>
+          <div class="leaf">
+            <div class="leaf-title" onclick="toggleLeaf(event, this.parentElement)">Hormonal considerations — estrogen, testosterone, and ACL risk <span class="larr">▶</span></div>
+            <div class="ldetail">Dr. Baar's research reveals a biological mechanism behind the higher ACL injury rates in women. Estrogen inhibits lysyl oxidase — the enzyme that cross-links collagen fibres, giving tendons their tensile stiffness. At ovulation (peak estrogen), tendons are measurably less stiff and more vulnerable to rupture. This explains the well-documented mid-cycle ACL injury spike in female athletes. Testosterone has the opposite effect — increasing lysyl oxidase activity, making tendons stiffer and stronger but potentially more brittle under sudden overload. Training load should ideally be modulated around hormonal cycles.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- branch-grid -->
+  </div><!-- mm-wrap -->
+</div><!-- mindmap panel -->
+
+<!-- FULL SUMMARY -->
+<div id="summary" class="panel">
+  <div class="sum-wrap">
+
+    <div class="sum-sec">
+      <div class="sum-h">⚠️ The Tendon Problem No One Tells You About</div>
+      <p>Tendons are the connective tissue linking muscle to bone. Unlike muscle, they have a poor blood supply and an adaptation timeline measured in months rather than days. When you train hard and your muscles grow stronger, your tendons fall further behind — creating an invisible mismatch between the force your muscles can generate and the force your tendons can safely transmit. This lag is the underlying cause of most overuse injuries in active people.</p>
+      <p>The standard medical response — rest, boot, ice — makes the biological problem worse. Immobilisation triggers disorganised scar tissue formation. Tendons need mechanical stimulus to lay down collagen in the aligned, parallel arrangement that gives them tensile strength. Denied this stimulus, they scar. Scar tissue is weaker, stiffer at the wrong frequencies, and prone to re-injury. Dr. Baar's central message: the instinct to protect an injury by removing load is exactly backwards for tendons.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">🦾 Why Isometrics Are the Solution</div>
+      <p>Dr. Keith Baar is one of the world's leading researchers on connective tissue adaptation at UC Davis. His lab work on engineered ligaments led to a surprising discovery: tendons stop responding to mechanical loading after roughly 10 minutes. Beyond that, the stimulus becomes wear. This means tendon training must be short, purposeful, and infrequent — followed by 6–8 hours of rest before the next session.</p>
+      <p>The key insight about isometrics is biomechanical. In dynamic exercises — running, lifting, throwing — the stronger, healthy regions of a tendon absorb nearly all the load. The injured, shielded tissue never receives a stimulus to rebuild. In a 30-second isometric hold, force builds slowly and the strong regions undergo "stress relaxation" — they fatigue and redistribute load into the weaker areas. This is the only reliable way to get a healing signal into tissue that the body would otherwise protect into permanent weakness.</p>
+      <p>The velocity argument matters too. Tendons are damaged by jerk — rapid changes in acceleration. Isometrics have zero velocity and therefore zero jerk. Dynamic eccentrics (the traditional physiotherapy prescription) worked because therapists prescribed them slowly — the eccentric component was never the active ingredient, just the mechanism for slow loading.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">📋 The Protocol in Detail</div>
+      <p>The core parameters: 30-second holds (the point at which ~85% of tendon stress relaxation has occurred), 2-minute rest intervals, 4 sets per session, 1–2 sessions per day separated by at least 6 hours. The sensation target is a "warm, burning tension" in the injured area — not sharp, stabbing, point-specific pain, which signals overload. Start at 50% of maximal effort; you don't need to crush the isometric to get the benefit.</p>
+      <p>Early loading is strongly supported by the evidence. In Michael Kjaer's research, athletes who loaded 2 days post-injury recovered 25% faster than those who waited 9 days. The biological window for preventing disorganised scar formation is narrow. Starting the isometric protocol immediately after injury — within the pain tolerance window — captures this window.</p>
+      <p>The progression across 4–8 weeks is: pain reduction phase (weeks 1–2) → load increase phase (weeks 2–4) → slow eccentric introduction (weeks 4–6) → slow dynamic loading (weeks 6–8) → sport-specific movement. The most common mistake is rushing this sequence. Premature return to speed is how chronic tendinopathy develops.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">🧬 Nutritional Support — Collagen and Vitamin C</div>
+      <p>Isometrics provide the mechanical signal; the body also needs raw materials to build new collagen. Dr. Baar recommends 15 grams of hydrolysed collagen peptides combined with 200–250 mg of vitamin C, taken 30–60 minutes before each isometric session. This timing exploits exercise physiology: the compression-decompression cycles of tendon loading pump nutrient-rich fluid into the otherwise poorly-vascularised matrix. Elevated blood levels of collagen amino acids at the moment of this pumping maximise delivery.</p>
+      <p>The vitamin C requirement is biochemically precise: without adequate ascorbic acid, prolyl hydroxylase and lysyl hydroxylase cannot form the hydroxylated residues needed to stabilise the collagen triple helix. Collagen forms but doesn't fold correctly. Dr. Baar's lab data shows this pre-exercise protocol can double collagen synthesis markers in blood. Choose skin-source collagen (bovine hide or fish skin) rather than bone-derived products — bone concentrates environmental heavy metals during extraction.</p>
+    </div>
+
+    <div class="sum-sec">
+      <div class="sum-h">🚫 What Doesn't Work and What's Actively Harmful</div>
+      <p>PRP injections, stem cell treatments, and BPC-157 are broadly ineffective for lower-body tendon injuries. PRP and stem cells disperse rapidly from the injection site with joint movement. BPC-157 has shown no direct effect on tendon cells in Baar's laboratory. These interventions address at most a few percent of the healing stimulus — the overwhelming majority comes from mechanical load.</p>
+      <p>Two drug classes carry documented tendon rupture risk. Fluoroquinolone antibiotics (Cipro, Levaquin) interfere directly with tendon matrix proteins — black-box warnings exist for a reason. Angiotensin receptor blockers (the "-sartan" antihypertensives) increase rupture risk 7.6-fold in epidemiological studies. For those on either class experiencing tendon symptoms, the conversation with their prescribing doctor is worth having.</p>
+      <p>Finally: the hormonal biology is real. Estrogen inhibits the lysyl oxidase enzyme that cross-links collagen, reducing tendon stiffness at peak estrogen phases. Female athletes face a genuinely elevated ACL rupture risk at mid-cycle. Training load planning that accounts for hormonal fluctuation represents the next frontier in injury prevention.</p>
+    </div>
+
+  </div>
+</div><!-- summary panel -->
+
+<!-- TAKEAWAYS -->
+<div id="takeaways" class="panel">
+  <div class="ta-wrap">
+    <p class="ta-hint">10 things to remember and act on from this episode</p>
+
+    <div class="ta-card">
+      <div class="ta-num">1</div>
+      <div class="ta-body">
+        <h3>Rest is not neutral — it creates scar tissue</h3>
+        <p>Immobilising a tendon injury causes collagen fibres to lay down in disorganised patterns. The resulting scar is weaker and more brittle than the original tissue would have been with controlled early loading. Start gentle isometrics as soon as you can tolerate them.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">2</div>
+      <div class="ta-body">
+        <h3>Target 30-second holds — not traditional reps</h3>
+        <p>Thirty seconds is the specific duration at which a tendon undergoes ~85% stress relaxation, redistributing load into the damaged, shielded tissue. Shorter holds don't reach the injured zone. Longer holds offer diminishing returns. Four sets of 30 seconds with 2-minute rests is the core unit of tendon rehab.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">3</div>
+      <div class="ta-body">
+        <h3>Burning tension is the target, ice pick pain means stop</h3>
+        <p>Dr. Baar's clinical heuristic: a warm, burning, muscular sensation means load is reaching the injured tissue — continue. Sharp, stabbing, localised pain means you've exceeded the tissue's capacity — back off. You can work through burning; you should not work through ice picks.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">4</div>
+      <div class="ta-body">
+        <h3>Respect the 6–8 hour refractory period</h3>
+        <p>After a loading session, tendons become temporarily desensitised to mechanical stimulus. A second session within 6 hours produces wear, not adaptation. Maximum two sessions per day, minimum 6 hours apart. More sessions is categorically not better — it's a different kind of damage.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">5</div>
+      <div class="ta-body">
+        <h3>Take collagen + vitamin C 30–60 minutes before your session</h3>
+        <p>15 grams of hydrolysed collagen peptides and 200–250 mg of vitamin C, taken before isometrics, can double collagen synthesis markers. The timing exploits exercise-driven fluid pumping into the tendon matrix. This is not a replacement for loading — it's the raw material loading requires.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">6</div>
+      <div class="ta-body">
+        <h3>Choose skin-source collagen — skip the bone broth</h3>
+        <p>Bone accumulates heavy metals from the animal's environment. Hydrolysed collagen from bovine hide or fish skin avoids this risk. The collagen type (I, II, III) is irrelevant — it's fully broken down into amino acids before absorption. The source, not the type, determines safety.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">7</div>
+      <div class="ta-body">
+        <h3>Load early — waiting costs you 25% recovery time</h3>
+        <p>Kjaer's research showed athletes who started loading 2 days post-injury recovered 25% faster than those who waited 9 days. The early injury window is when collagen alignment is still plastic. Miss it and you're remodelling scar tissue instead of preventing it. Early load is safe if it's below the pain threshold.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">8</div>
+      <div class="ta-body">
+        <h3>PRP, stem cells, and BPC-157 are largely a distraction</h3>
+        <p>Mechanical load drives 95%+ of tendon adaptation. Orthobiologics contribute at most a few percent — and in lower-body injuries, PRP and stem cells disperse rapidly from the injection site. Save the money; invest it in consistent isometric loading and quality collagen supplementation.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">9</div>
+      <div class="ta-body">
+        <h3>Watch your medications — Cipro and sartans damage tendons</h3>
+        <p>Fluoroquinolone antibiotics (Cipro, Levaquin) and ARB blood pressure drugs (the -sartan class) carry documented tendon rupture risk. Sartans increase rupture risk 7.6-fold. If you're on either class and experiencing tendon pain, have a conversation with your doctor about alternatives — this is not a minor consideration.</p>
+      </div>
+    </div>
+
+    <div class="ta-card">
+      <div class="ta-num">10</div>
+      <div class="ta-body">
+        <h3>Speed kills tendons — sequence matters in rehab</h3>
+        <p>Tendons are damaged by jerk (rapid acceleration change), not load magnitude. A 50 kg explosive deadlift causes more tendon damage than an 80 kg slow one. The rehabilitation sequence is non-negotiable: isometrics → slow eccentrics → slow dynamic → fast dynamic → sport-specific speed. Every step skipped is a re-injury in waiting.</p>
+      </div>
+    </div>
+
+  </div>
+</div><!-- takeaways panel -->
+
+<div class="foot">
+  <a href="https://www.youtube.com/watch?v=GSwL3Lgw6zI" target="_blank">▶ Watch on YouTube</a>
+  &nbsp;·&nbsp; Jeremy Ethier — Built With Science &nbsp;·&nbsp; ft. Dr. Keith Baar &amp; Coach Q Wiley &nbsp;·&nbsp; June 2026
+</div>
+
+<script>
+  function switchTab(id, el) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+
+  function toggleBranch(el) {
+    el.classList.toggle('open');
+  }
+
+  function toggleLeaf(e, el) {
+    e.stopPropagation();
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
