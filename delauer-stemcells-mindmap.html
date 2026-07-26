@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REGROW Stem Cells & Burn Stubborn Fat — Thomas DeLauer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e0d;
+    --bg2:#121512;
+    --card:#161b18;
+    --card-hover:#1c221e;
+    --border:#262e28;
+    --text:#eef1ee;
+    --text-dim:#9aa79f;
+    --accent-orange:#ff7a3d;
+    --accent-red:#ff4d5e;
+    --accent-blue:#4dc3ff;
+    --accent-green:#5be08a;
+    --accent-yellow:#ffcf4d;
+    --accent-purple:#b28dff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:radial-gradient(circle at 20% 0%, #14201a 0%, var(--bg) 45%);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    padding:24px 16px 60px;
+  }
+  .wrap{max-width:960px; margin:0 auto;}
+  header{text-align:center; margin-bottom:28px;}
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--accent-orange); margin-bottom:10px; font-weight:600;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(24px, 4.5vw, 38px);
+    font-weight:700;
+    line-height:1.15;
+    background:linear-gradient(90deg, #fff, #c9d6cd);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-bottom:10px;
+  }
+  .meta{color:var(--text-dim); font-size:14px;}
+  .meta a{color:var(--accent-blue); text-decoration:none;}
+
+  .tabs{
+    display:flex; gap:8px; justify-content:center; margin:26px 0 22px;
+    flex-wrap:wrap;
+  }
+  .tab{
+    font-family:'Space Grotesk', sans-serif;
+    background:var(--card); border:1px solid var(--border);
+    color:var(--text-dim); padding:10px 20px; border-radius:100px;
+    font-size:14px; font-weight:600; cursor:pointer; transition:all .2s ease;
+  }
+  .tab:hover{color:var(--text); border-color:var(--accent-orange);}
+  .tab.active{
+    background:linear-gradient(90deg, var(--accent-orange), var(--accent-red));
+    color:#160b06; border-color:transparent;
+  }
+
+  .panel{display:none; animation:fade .35s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  /* MIND MAP */
+  .branch{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    margin-bottom:14px; overflow:hidden; border-left:4px solid var(--branch-color, var(--accent-orange));
+  }
+  .branch-head{
+    padding:16px 18px; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    gap:12px; transition:background .2s ease;
+  }
+  .branch-head:hover{background:var(--card-hover);}
+  .branch-title{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .branch-num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:8px; font-size:12px; font-weight:700;
+    background:var(--branch-color, var(--accent-orange)); color:#12140f; flex-shrink:0;
+  }
+  .chevron{color:var(--text-dim); transition:transform .25s ease; font-size:13px;}
+  .branch.open .chevron{transform:rotate(90deg);}
+  .branch-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .branch.open .branch-body{max-height:2000px;}
+  .leaves{padding:0 18px 16px; display:flex; flex-direction:column; gap:8px;}
+  .leaf{
+    background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+    cursor:pointer;
+  }
+  .leaf-title{
+    font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:space-between; gap:8px;
+  }
+  .leaf-plus{color:var(--branch-color, var(--accent-orange)); font-size:16px; transition:transform .2s ease;}
+  .leaf.open .leaf-plus{transform:rotate(45deg);}
+  .leaf-detail{max-height:0; overflow:hidden; transition:max-height .3s ease; font-size:13.5px; color:var(--text-dim); line-height:1.55;}
+  .leaf.open .leaf-detail{max-height:400px; padding-top:9px;}
+
+  /* SUMMARY */
+  .summary-section{margin-bottom:26px;}
+  .summary-section h3{
+    font-family:'Space Grotesk', sans-serif; font-size:17px; margin-bottom:10px;
+    color:var(--accent-orange);
+  }
+  .summary-section p{color:#c9d3cd; line-height:1.75; font-size:15px;}
+
+  /* TAKEAWAYS */
+  .takeaways{display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px;}
+  .tcard{
+    background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px;
+    position:relative; overflow:hidden;
+  }
+  .tcard::before{
+    content:attr(data-n); position:absolute; top:-6px; right:6px; font-family:'Space Grotesk', sans-serif;
+    font-size:56px; font-weight:700; color:rgba(255,122,61,0.08);
+  }
+  .tcard p{font-size:14px; line-height:1.6; color:#dbe3de; position:relative; z-index:1;}
+  .tnum{
+    display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px;
+    border-radius:50%; background:linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+    color:#160b06; font-weight:700; font-size:13px; margin-bottom:10px;
+  }
+
+  footer{text-align:center; margin-top:40px; color:var(--text-dim); font-size:12px;}
+  footer a{color:var(--accent-blue);}
+
+  @media(max-width:600px){
+    .branch-title{font-size:14.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Thomas DeLauer</div>
+    <h1>Most People Never Do This! REGROW Stem Cells &amp; Burn Stubborn Fat In 24 Hours</h1>
+    <div class="meta">Thomas DeLauer &middot; <a href="https://youtu.be/gRlqJyqa0PM" target="_blank" rel="noopener">Watch on YouTube</a></div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+  </div>
+
+  <!-- MIND MAP -->
+  <div id="mindmap" class="panel active">
+
+    <div class="branch" style="--branch-color:#ff4d5e" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-num">1</span> The Core Switch: Sugar &rarr; Fat</div>
+        <span class="chevron">&#9656;</span>
+      </div>
+      <div class="branch-body">
+        <div class="leaves">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">One Switch, Two Outcomes<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer frames the entire video around a single metabolic flip: when cells stop burning glucose and start burning fatty acids, two things happen on the same pathway at once — stem cells become more regenerative, and the body burns fat to make it happen. It isn't two separate systems; it's one switch producing two payoffs.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Grid Power vs. Generator<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Running on sugar is like a house on grid power — easy, lazy, the body coasts. Forcing the body onto fat is like switching to its own generator: different "repair crews" clock in, and the fuel being burned is the very fat you've been trying to lose.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Why It's Kept Hidden<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer argues an entire industry — stem cell clinics, peptide sellers, IV drips, longevity memberships costing hundreds of thousands a year — profits from making this switch sound complicated and expensive, when the actual levers are free and ordinary.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">How Fast It Flips<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">In animal studies, this switch begins flipping within hours, not weeks, and not through a cabinet full of supplements. The research suggests the body starts behaving like a younger version of itself: burning fat better and repairing cells better.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Ranking the Five Levers<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer ranks five habits from weakest to strongest evidence and impact: sauna (5), resistant starch (4), cold exposure (3), high-intensity intervals (2), and fasting (1) — the free habit he says triggers the strongest response of all.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:#ffcf4d" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-num">2</span> Lever #5: Sauna &amp; Heat Exposure</div>
+        <span class="chevron">&#9656;</span>
+      </div>
+      <div class="branch-body">
+        <div class="leaves">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The Lipolytic Hormone Pulse<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Heat stress drives a release of noradrenaline and a pulse of growth hormone, both lipolytic — they signal fat cells to release stored fatty acids into the blood. DeLauer compares it to doing low-grade cardio while just sitting still.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Heat Shock Proteins &amp; Progenitor Cells<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">The regeneration data here is early and largely petri-dish work, but it shows heat shock proteins nudging progenitor cells. DeLauer is upfront that this isn't yet human-confirmed, but the heat-triggered regenerative pathway is real in lab models.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">"Revving in Neutral" — The Catch<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Sauna mobilizes fat out of storage, but mobilizing isn't the same as burning. If those freed fatty acids aren't used, they go right back into storage — so sauna alone, without something burning the fuel, doesn't reliably strip fat.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Muscle Preservation, Not Standalone Fat Loss<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Where sauna does show real benefit is in preserving muscle and supporting growth hormone, plus strong Finnish/Nordic evidence for cardiovascular and recovery benefits. DeLauer calls it a "multiplier" that amplifies habits already working, not a centerpiece.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Protocol<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">175&ndash;200&deg;F for 15&ndash;20 minutes. If time allows, do it as intervals: 15 minutes hot, step out a couple minutes, repeat. The heating-and-cooling cycle is what drives the heat-shock-protein adaptation. Stay hydrated.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:#5be08a" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-num">3</span> Lever #4: Resistant Starch &amp; Gut Stem Cells</div>
+        <span class="chevron">&#9656;</span>
+      </div>
+      <div class="branch-body">
+        <div class="leaves">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">What Resistant Starch Actually Is<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Unlike most starches, resistant starch passes through the small intestine undigested and travels intact to the colon, where it feeds gut bacteria — functioning more like fiber than a typical carbohydrate.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Nature Metabolism: 2.8 kg in 8 Weeks<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer cites a Nature Metabolism study where 8 weeks of resistant starch helped people with excess weight lose an average of 2.8 kg (about 6 lbs) and improved insulin resistance — some of the strongest human fat-loss data in the whole video.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">British Journal of Nutrition: 60% More Gut Stem Cells<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">A human study found resistant starch increased proliferation of cells in the gut crypts — where intestinal stem cells live — by about 60% in adults over 50, a rare case of human (not just petri-dish) stem cell evidence.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Cook, Cool, (Reheat)<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">A hot, fresh potato has little resistant starch — it forms when starches are cooked and then cooled, ideally for 12 hours. Reheating gently only costs about 15&ndash;20% of the benefit, so warmed leftovers still work well.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Best Sources &amp; Pairing<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Cooked-and-cooled potatoes, rice, beans, green bananas, and oats all work — introduce them slowly to avoid bloating. DeLauer pairs this habit with a targeted probiotic (his sponsor, Seed) designed to survive stomach acid and colonize the colon.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:#4dc3ff" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-num">4</span> Lever #3: Cold Exposure &amp; Brown Fat</div>
+        <span class="chevron">&#9656;</span>
+      </div>
+      <div class="branch-body">
+        <div class="leaves">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">White Fat vs. Brown Fat<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">White fat stores energy; brown fat burns it for heat. DeLauer's focus isn't the well-worn "cold plunge" story but what cold specifically does to convert fat-precursor cells toward the brown, calorie-burning type.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Cold Pushes Precursor Cells Toward Brown Fat<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Petri-dish work suggests cold pushes fat precursor (stem) cells to differentiate into brown, calorie-burning fat rather than storage-type white fat — effectively building a bigger internal "wood stove" over time.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The Journal of Clinical Endocrinology Finding<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">People with active brown fat burned about 15% more calories after short-term cold exposure than people without it — real evidence, though DeLauer notes rodent studies also showed animals eating more afterward, offsetting fat loss.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The Hunger Catch<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Cold exposure can temporarily spike metabolic rate 90&ndash;350%, which is exactly why people feel ravenous after a cold pool or plunge. The risk is overeating right afterward and erasing the deficit the cold created.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Protocol<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">50&ndash;59&deg;F for just a couple of minutes is enough — colder isn't better. Critically, let the body warm up naturally afterward instead of immediately eating breakfast; that natural rewarming is what helps convert white fat to brown fat.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:#b28dff" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-num">5</span> Lever #2: High-Intensity Intervals</div>
+        <span class="chevron">&#9656;</span>
+      </div>
+      <div class="branch-body">
+        <div class="leaves">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Mobilized, Not Created<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Going truly hard mobilizes hematopoietic stem cells that already live in bone marrow out into the bloodstream — it's not growing new stem cells from scratch, but releasing existing reserves, which DeLauer likens to flushing a back-room stockpile onto the main floor.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Intensity-Dependent CD34 Release<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Researchers found the mobilization effect is intensity dependent: a short, vigorous bout pushed more CD34+ stem cells into circulation than a longer, easier session — favoring hard, brief efforts over long moderate ones.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Catecholamine Surge &amp; Afterburn<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Hard bursts trigger a catecholamine surge that drives lipolysis. Matched-workout studies show intervals produce more afterburn and fat oxidation in the hours afterward than steady-state cardio.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Recovery Is the Real Bottleneck<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Going all-out daily or every other day spikes cortisol, tanks recovery, and blunts the very benefits being chased. Mobilized stem cells still need protein and rest to be "actualized" — the interval is the stimulus, recovery is where the adaptation happens.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Protocol<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Two sessions per week: either a Norwegian 4x4 (4 minutes all-out, 3 minutes easy, repeated 4 times) or eight 30-second all-out sprints on a bike, rower, or uphill run. Doing intervals at the end of a fasted window compounds the fat-burning effect.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:#ff7a3d" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-num">6</span> Lever #1: Fasting — The Strongest Response</div>
+        <span class="chevron">&#9656;</span>
+      </div>
+      <div class="branch-body">
+        <div class="leaves">
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">24-Hour Fast Doubles Intestinal Stem Cell Regeneration<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">A study published in Cell Stem Cell found a 24-hour fast doubled the regenerative capacity of intestinal stem cells — the cells that rebuild gut lining — in both young and old mice. DeLauer is candid that this is rodent data, but calls doubling "doubling."</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The Same Switch, Hit Hardest<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Researchers pinpointed the mechanism: when the body stops eating, cells switch from burning carbohydrate to burning fatty acids, and that same fat-burning switch is what tells stem cells to regenerate. They reproduced the effect with a molecule that flips the switch without fasting.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">The Refeeding Window Matters More<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">A 2024 MIT follow-up found the regeneration surge is actually strongest during refeeding right after a fast — but that same rebound can also spike mTOR in less desirable ways, so how you break a fast (clean protein, avoiding highly insulinogenic foods) matters as much as the fast itself.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Kitchen Analogy: Closing to Clean<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">DeLauer compares constant eating to a kitchen that never closes — cooks working nonstop, nothing ever cleaned. Fasting closes the kitchen so the "cleanup crew" (cellular repair and regeneration processes) can finally come in and rebuild.</div>
+          </div>
+          <div class="leaf" onclick="toggleLeaf(event, this)">
+            <div class="leaf-title">Protocol<span class="leaf-plus">+</span></div>
+            <div class="leaf-detail">Beginners: start with a 16-hour overnight fasting window. Build gradually toward a full 24-hour fast, aiming for twice a week once adapted — not daily. The metabolic sugar-to-fat flip is already underway within the first 24 hours.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SUMMARY -->
+  <div id="summary" class="panel">
+    <div class="summary-section">
+      <h3>The Core Switch</h3>
+      <p>DeLauer opens with a central claim: a single metabolic switch controls both cellular repair and fat metabolism at once, and for most people it's flipped off. That switch is the shift from burning glucose to burning fatty acids. When cells make that shift, two things happen on the same pathway simultaneously — stem cells become more regenerative, and the body burns fat to power the process. He frames the wellness and longevity industry (stem cell clinics, peptides, IV drips, expensive longevity memberships) as having a financial incentive to make this sound complicated, when the actual levers — how you eat, how warm you keep yourself, how hard you push physically, and what you feed your gut bacteria — are ordinary and free. Animal studies suggest the switch can begin flipping within hours rather than weeks.</p>
+    </div>
+    <div class="summary-section">
+      <h3>Sauna and Heat Exposure</h3>
+      <p>Ranked fifth and weakest of the five habits, sauna use triggers a release of noradrenaline and growth hormone that signals fat cells to release stored fatty acids — comparable to low-grade cardio while sitting still. Early, largely petri-dish research suggests heat shock proteins may also nudge progenitor cells toward regeneration, though DeLauer is careful to flag this evidence as preliminary. The key caveat is that sauna mobilizes fat without necessarily burning it; freed fatty acids can simply return to storage unless something else in the routine actually uses them as fuel. Where sauna shows the strongest evidence is in muscle preservation, growth hormone support, and cardiovascular/recovery benefits backed by Finnish and Nordic research. He recommends 175&ndash;200&deg;F for 15&ndash;20 minutes, ideally as heat-and-cool intervals, positioning sauna as a multiplier layered onto habits that are already working rather than a standalone fat-loss tool.</p>
+    </div>
+    <div class="summary-section">
+      <h3>Resistant Starch and Gut Stem Cells</h3>
+      <p>Fourth on the list, resistant starch is starch that survives digestion in the small intestine and reaches the colon intact, feeding gut bacteria. DeLauer cites a Nature Metabolism study in which 8 weeks of resistant starch intake led to an average 2.8 kg fat loss and improved insulin resistance in people carrying excess weight — among the strongest human data referenced in the video. A separate study in the British Journal of Nutrition found resistant starch increased proliferation of intestinal stem cells in the gut crypts by roughly 60% in adults over 50, one of the few human (rather than lab-dish) findings on stem cells in the episode. The practical method is to cook starchy foods like potatoes, rice, or beans, then cool them in the fridge for several hours (ideally 12) before eating, since resistant starch forms during cooling and only modestly degrades on reheating. He pairs the habit with a colon-targeted probiotic.</p>
+    </div>
+    <div class="summary-section">
+      <h3>Cold Exposure and Brown Fat</h3>
+      <p>Ranked third, cold exposure's newer angle isn't the familiar "cold plunge boosts willpower" story but its effect on brown fat — the metabolically active tissue that burns energy for heat, as opposed to white fat, which stores it. Research cited in the Journal of Clinical Endocrinology & Metabolism found people with active brown fat burned about 15% more calories after short-term cold exposure, and lab-dish work suggests cold nudges fat precursor cells to differentiate into brown fat rather than white fat over time. The major catch is a sharp, temporary spike in metabolic rate (cited as 90&ndash;350% in some studies) that drives significant post-exposure hunger, making overeating easy. DeLauer's protocol is modest cold — 50 to 59&deg;F for just a couple of minutes — followed by letting the body rewarm naturally rather than immediately eating, which he says is the step most people skip.</p>
+    </div>
+    <div class="summary-section">
+      <h3>High-Intensity Intervals</h3>
+      <p>Second on the list, hard interval training mobilizes hematopoietic stem cells already stored in bone marrow into the bloodstream — not creating new stem cells, but releasing existing reserves, an effect shown to be intensity-dependent, with shorter and harder efforts mobilizing more CD34+ cells than longer, easier sessions. On the fat-loss side, intervals trigger a catecholamine surge that drives lipolysis and produces more afterburn and fat oxidation in the hours after training than steady-state cardio. DeLauer cautions that more is not better: daily or near-daily all-out efforts spike cortisol and blunt recovery, undermining the benefits. His recommended protocol is two sessions per week — either a Norwegian 4x4 (four rounds of four minutes hard, three minutes easy) or eight 30-second all-out sprints — with the effect compounding when performed at the end of a fasted window.</p>
+    </div>
+    <div class="summary-section">
+      <h3>Fasting: The Strongest Lever</h3>
+      <p>Fasting tops DeLauer's ranking as the habit that flips the sugar-to-fat switch hardest. He cites a study published in Cell Stem Cell showing a 24-hour fast doubled the regenerative capacity of intestinal stem cells in both young and old mice, with researchers tracing the mechanism to the same carbohydrate-to-fatty-acid metabolic shift discussed throughout the video — they even replicated the regenerative effect using a molecule that triggers the switch without fasting at all. A 2024 MIT follow-up added an important nuance: the regeneration surge is actually strongest during the refeeding window immediately after a fast, meaning how a fast is broken (clean protein, avoiding highly insulinogenic foods) matters nearly as much as the fast itself, since the same rebound can spike mTOR in less favorable ways. DeLauer's suggested progression is a 16-hour overnight fast for beginners, building gradually to a full 24-hour fast performed around twice a week rather than daily.</p>
+    </div>
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div id="takeaways" class="panel">
+    <div class="takeaways">
+      <div class="tcard" data-n="1"><span class="tnum">1</span><p>Think of these five habits as one lever, not five separate hacks — every one of them works by driving the same sugar-to-fat metabolic switch.</p></div>
+      <div class="tcard" data-n="2"><span class="tnum">2</span><p>If you're new to fasting, start with a 16-hour overnight window; build gradually toward a full 24-hour fast about twice a week rather than daily.</p></div>
+      <div class="tcard" data-n="3"><span class="tnum">3</span><p>Don't chase a fast with a big insulin-spiking meal — the regeneration surge peaks during refeeding, so break your fast with clean protein, not sugar.</p></div>
+      <div class="tcard" data-n="4"><span class="tnum">4</span><p>Do two high-intensity interval sessions a week: a Norwegian 4x4 (4 min hard / 3 min easy x4) or eight 30-second all-out sprints.</p></div>
+      <div class="tcard" data-n="5"><span class="tnum">5</span><p>Stack your interval session onto the tail end of a fasted window — the fat-burning effects of each compound the other.</p></div>
+      <div class="tcard" data-n="6"><span class="tnum">6</span><p>Finish showers with 2&ndash;3 minutes of cold water at 50&ndash;59&deg;F, then let your body rewarm on its own instead of dressing warm or eating right away.</p></div>
+      <div class="tcard" data-n="7"><span class="tnum">7</span><p>Cook potatoes, rice, or beans and refrigerate them for at least a few hours (ideally 12) before eating to convert the starch into gut-feeding resistant starch.</p></div>
+      <div class="tcard" data-n="8"><span class="tnum">8</span><p>Use sauna as a recovery multiplier, not a fat-loss centerpiece — 175&ndash;200&deg;F for 15&ndash;20 minutes, ideally in heat/cool intervals after training.</p></div>
+      <div class="tcard" data-n="9"><span class="tnum">9</span><p>Cap hard interval training at two sessions per week — pushing all-out daily spikes cortisol and blunts the very stem cell and fat-loss benefits you're after.</p></div>
+      <div class="tcard" data-n="10"><span class="tnum">10</span><p>Layer the habits in over 30 days instead of all at once: fasting first, then intervals, then cold exposure, then resistant starch, then sauna as the finishing touch.</p></div>
+    </div>
+  </div>
+
+  <footer>
+    Mind map generated from the episode transcript &middot; <a href="https://youtu.be/gRlqJyqa0PM" target="_blank" rel="noopener">Watch the original video</a>
+  </footer>
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>
