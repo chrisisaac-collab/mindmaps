@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Sugar Spikes Drop 52% If You Do THIS After Eating — Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f8fa;
+    --panel:#ffffff;
+    --ink:#16211b;
+    --sub:#5a6a63;
+    --line:#e3e8e4;
+    --accent1:#2f6fed; /* window - blue */
+    --accent1-bg:#eaf1ff;
+    --accent2:#e2572b; /* mistakes - orange/red */
+    --accent2-bg:#fdece5;
+    --accent3:#1f9d63; /* switches - green */
+    --accent3-bg:#e6f7ee;
+    --accent4:#8449d6; /* protein - purple */
+    --accent4-bg:#f2ebfc;
+    --accent5:#c9971c; /* traps - amber */
+    --accent5-bg:#fbf1de;
+    --accent6:#0e9aa3; /* challenge - teal */
+    --accent6-bg:#e4f6f7;
+    --shadow: 0 1px 2px rgba(20,30,25,0.04), 0 8px 24px rgba(20,30,25,0.06);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    padding:32px 24px 12px;
+    max-width:980px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-size:12.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--sub);
+    font-weight:600;
+  }
+  h1{
+    font-family:'Sora',sans-serif;
+    font-size:clamp(22px,3.6vw,32px);
+    font-weight:800;
+    margin:8px 0 6px;
+    line-height:1.15;
+  }
+  .meta{
+    color:var(--sub);
+    font-size:14px;
+    margin-bottom:4px;
+  }
+  .tabs{
+    display:flex;
+    gap:6px;
+    max-width:980px;
+    margin:18px auto 0;
+    padding:0 24px;
+  }
+  .tab{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--sub);
+    background:transparent;
+    border:none;
+    padding:11px 16px;
+    border-radius:10px 10px 0 0;
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    transition:.15s;
+  }
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--ink);border-bottom:3px solid var(--accent1);}
+  main{
+    max-width:980px;
+    margin:0 auto;
+    padding:20px 24px 80px;
+  }
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  /* Mind map branches */
+  .branch{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .branch-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px 18px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .dot{
+    width:12px;height:12px;border-radius:50%;flex:none;
+  }
+  .branch-title{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:16.5px;
+    flex:1;
+  }
+  .branch-count{
+    font-size:12px;
+    color:var(--sub);
+    font-weight:600;
+  }
+  .chev{
+    transition:transform .2s;
+    color:var(--sub);
+    font-size:13px;
+  }
+  .branch.open .chev{transform:rotate(90deg);}
+  .leaves{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    padding:0 18px;
+  }
+  .branch.open .leaves{
+    max-height:2000px;
+    padding-bottom:14px;
+  }
+  .leaf{
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:8px;
+    cursor:pointer;
+    border:1px solid var(--line);
+  }
+  .leaf-title{
+    font-weight:600;
+    font-size:14.5px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+  }
+  .leaf-detail{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .2s ease;
+    font-size:13.8px;
+    color:var(--sub);
+    line-height:1.55;
+  }
+  .leaf.open .leaf-detail{max-height:400px;margin-top:8px;}
+  .leaf .plus{font-size:16px;color:var(--sub);}
+  .leaf.open .plus{transform:rotate(45deg);}
+  .plus{transition:transform .15s;display:inline-block;}
+
+  /* per-branch coloring */
+  .b1 .dot{background:var(--accent1);} .b1 .leaf{background:var(--accent1-bg);}
+  .b2 .dot{background:var(--accent2);} .b2 .leaf{background:var(--accent2-bg);}
+  .b3 .dot{background:var(--accent3);} .b3 .leaf{background:var(--accent3-bg);}
+  .b4 .dot{background:var(--accent4);} .b4 .leaf{background:var(--accent4-bg);}
+  .b5 .dot{background:var(--accent5);} .b5 .leaf{background:var(--accent5-bg);}
+  .b6 .dot{background:var(--accent6);} .b6 .leaf{background:var(--accent6-bg);}
+
+  /* Summary */
+  .sum-section{margin-bottom:26px;}
+  .sum-section h3{
+    font-family:'Sora',sans-serif;
+    font-size:17px;
+    margin:0 0 8px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sum-section p{
+    font-size:15px;
+    line-height:1.7;
+    color:#2a352e;
+    margin:0;
+  }
+
+  /* Takeaways */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 16px 18px;
+    box-shadow:var(--shadow);
+  }
+  .card-num{
+    font-family:'Sora',sans-serif;
+    font-weight:800;
+    font-size:13px;
+    color:#fff;
+    background:var(--accent3);
+    width:26px;height:26px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;
+  }
+  .card p{
+    font-size:14px;
+    line-height:1.55;
+    margin:0;
+    color:#2a352e;
+  }
+  footer{
+    text-align:center;
+    color:var(--sub);
+    font-size:12.5px;
+    padding:20px 0 40px;
+  }
+  @media (max-width:520px){
+    .tab{font-size:12.5px;padding:9px 11px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Ben Azadi &middot; The Ben Azadi Show / Keto Kamp</div>
+  <h1>Blood Sugar Spikes Drop 52% If You Do THIS After Eating</h1>
+  <div class="meta">Published July 2026 &middot; <a href="https://youtu.be/r7h5wHa8JZY" target="_blank" style="color:var(--accent1);">Watch on YouTube</a></div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap',this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+</div>
+
+<main>
+
+  <!-- MIND MAP -->
+  <section id="mindmap" class="panel active">
+
+    <div class="branch b1" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">The 30-Minute Metabolic Window</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">What the window actually is <span class="plus">+</span></div>
+          <div class="leaf-detail">After your last bite, glucose enters the bloodstream and the pancreas releases insulin to manage it. In the roughly 30 minutes that follow, the body decides whether to burn that fuel, store it as fat, or overshoot with insulin — the version that leaves you crashing an hour or two later.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Same meal, three different outcomes <span class="plus">+</span></div>
+          <div class="leaf-detail">Azadi's central claim is that an identical meal can produce different metabolic outcomes depending on what happens in the window afterward — not on what was eaten.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">You're holding the wheel <span class="plus">+</span></div>
+          <div class="leaf-detail">The window is framed as a daily, repeatable point of leverage — something under direct personal control at every single meal, independent of any long-term diet overhaul.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Why it goes unnoticed <span class="plus">+</span></div>
+          <div class="leaf-detail">Nothing dramatic happens in the moment, so most people never clock that the window exists. The consequences — fat storage, afternoon crashes — show up later and get blamed on other things.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b2" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">Three Metabolic Mistakes</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Mistake 1: Sitting down <span class="plus">+</span></div>
+          <div class="leaf-detail">The instant you sit after eating, your leg muscles — the body's largest glucose burners — go idle right as glucose is flooding in, so the body defaults to storing the excess as fat.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Mistake 2: The second spike <span class="plus">+</span></div>
+          <div class="leaf-detail">Reaching for dessert, a sugary iced coffee, or even "healthy" fruit juice right after a meal stacks a second glucose spike on top of the first, forcing the pancreas to scramble to keep up.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Mistake 3: The scroll <span class="plus">+</span></div>
+          <div class="leaf-detail">Thirty minutes disappear into a phone and the window closes unnoticed — the glucose gets stored before anyone realizes the opportunity to act on it existed.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Why they compound <span class="plus">+</span></div>
+          <div class="leaf-detail">Sit, spike, and scroll are presented as a combined pattern rather than isolated habits. Each one independently closes the metabolic window, and together they all but guarantee it gets missed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b3" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">Three Post-Meal Switches</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Switch 1: The 10-minute walk <span class="plus">+</span></div>
+          <div class="leaf-detail">Walking after eating turns leg muscles into glucose sponges, pulling sugar out of the bloodstream to fuel movement. A 2022 Sports Medicine review pooling seven studies found post-meal walking beat both sitting and standing for blood sugar control, cutting glucose by roughly 17%, with benefits appearing after as little as two to five minutes.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Switch 2: The soleus raise <span class="plus">+</span></div>
+          <div class="leaf-detail">The soleus, a small muscle tucked behind the shin, can be activated while seated by lifting the heels with toes kept on the floor. A University of Houston study (iScience, 2022) found this movement cut post-meal blood sugar spikes by 52% and lowered insulin needs by about 60% — a bigger effect, per the lead researcher, than exercise, weight loss, or fasting protocols they'd studied.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Switch 3: Squats or stair climbs <span class="plus">+</span></div>
+          <div class="leaf-detail">Engaging the thighs and glutes, the body's largest muscles, opens up the biggest glucose storage sites available. Ten slow, controlled squats or a couple of trips up a flight of stairs is offered as the higher-intensity option when a walk or soleus raise isn't practical.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Pick one, not all three <span class="plus">+</span></div>
+          <div class="leaf-detail">These are framed as situational tools, not a checklist: soleus raises at a desk after lunch, a walk around the block after dinner — whichever switch fits the moment and will actually get done consistently.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b4" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">The Protein Factor</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The quiet trap: skipping protein <span class="plus">+</span></div>
+          <div class="leaf-detail">A carb-heavy, protein-light meal fills you up briefly, then blood sugar dips and the brain demands quick energy. This is framed as the real driver of 3pm pantry raids and pre-bed snacking — a protein gap, not a willpower failure.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Muscle as a glucose sponge <span class="plus">+</span></div>
+          <div class="leaf-detail">More muscle mass means more places to route glucose after a meal, and protein is what feeds and maintains that muscle — tying the protein point directly back to how the switches work.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The roughly 1g-per-pound target <span class="plus">+</span></div>
+          <div class="leaf-detail">The rule of thumb given is about one gram of protein per pound of ideal (not current) body weight per day, sourced first from whole foods: eggs with the yolk, organic poultry, grass-fed beef, and small fatty fish like salmon or sardines.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Filling the gap <span class="plus">+</span></div>
+          <div class="leaf-detail">On days whole-food protein targets are hard to hit, a protein shake is positioned as a convenience backup, not a replacement. Note: this segment of the video also functions as a sponsored product mention.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b5" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">Metabolic Traps to Avoid</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Dessert immediately after <span class="plus">+</span></div>
+          <div class="leaf-detail">Stacks a second glucose spike directly on top of the meal's first spike, doubling the load the pancreas has to manage at once.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Sugary coffee post-meal <span class="plus">+</span></div>
+          <div class="leaf-detail">Same stacking problem as dessert — a second sugar wave arrives before the body has cleared the first.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Lying down <span class="plus">+</span></div>
+          <div class="leaf-detail">Going horizontal removes muscles from the equation entirely, leaving nothing actively available to help clear glucose from the blood.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Doom-scrolling <span class="plus">+</span></div>
+          <div class="leaf-detail">The window closes silently while attention is elsewhere. By the time you look up, the glucose has already been routed to storage.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b6" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">The 7-Day Metabolic Window Challenge</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Days 1–2: Stop sitting, then add a walk <span class="plus">+</span></div>
+          <div class="leaf-detail">Day one changes nothing about food — the only rule is not sitting down after eating. Day two adds a 10-minute walk after the day's biggest meal, usually dinner.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Days 3–4: Swap the scroll, add the raise <span class="plus">+</span></div>
+          <div class="leaf-detail">Day three replaces the post-meal phone scroll with any movement, even chores. Day four adds seated soleus raises after lunch, right at a desk.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Days 5–6: Stairs, then stack everything <span class="plus">+</span></div>
+          <div class="leaf-detail">Day five swaps in stairs after dinner. Day six combines a favorite switch after every meal of the day, testing the cumulative effect.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Day 7: Reflect <span class="plus">+</span></div>
+          <div class="leaf-detail">The challenge closes with a check-in on mood, energy, cravings, focus, waistline, and sleep, comparing how you feel to a week earlier — designed to make the effect felt, not just understood.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FULL SUMMARY -->
+  <section id="summary" class="panel">
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent1);display:inline-block;"></span>The 30-Minute Metabolic Window</h3>
+      <p>Azadi opens by reframing blood sugar management around timing rather than food choice. In the roughly 30 minutes after the last bite of a meal, glucose rises in the bloodstream and the pancreas releases insulin in response. What happens in that window, he argues, determines whether the fuel gets burned for energy, stored as fat, or overshot by insulin in a way that produces an energy crash an hour or two later. The video's hook is that the exact same meal can lead to three different outcomes purely based on what a person does immediately afterward, which he frames as a point of daily, repeatable control that most people never notice they have.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent2);display:inline-block;"></span>Three Metabolic Mistakes</h3>
+      <p>Three common post-meal habits are singled out as quietly sabotaging this window. Sitting down immediately idles the leg muscles right as glucose floods in, removing the body's largest glucose-clearing tissue from the equation. Adding a second course of sugar — dessert, a sweetened coffee, or fruit juice — stacks a second glucose spike on top of the first, overwhelming the pancreas. And reaching for a phone for the next half hour lets the window close without anyone noticing, so the glucose gets routed to storage before any corrective action is taken. Azadi presents these three as compounding rather than independent, meaning a person doing all three is almost guaranteed to miss the window entirely.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent3);display:inline-block;"></span>Three Post-Meal Switches</h3>
+      <p>In place of the three mistakes, three low-effort movements are offered, deliberately described as "switches" rather than exercise. The first is a 10-minute walk, which the video ties to a 2022 Sports Medicine review of seven studies showing that post-meal walking beat both sitting and standing for blood sugar control, lowering glucose by around 17%, with measurable benefit from walks as short as two to five minutes. The second, presented as the most striking, is the seated soleus raise: lifting the heels while keeping the toes on the floor activates the soleus calf muscle, which a University of Houston study published in iScience in 2022 found reduced post-meal blood sugar spikes by 52% and cut insulin requirements by about 60%. The third switch, squats or stair climbs, recruits the thighs and glutes — the body's largest muscles — as a higher-intensity option when the other two aren't convenient. Azadi's guidance is to pick whichever switch fits the moment rather than attempt all three every time.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent4);display:inline-block;"></span>The Protein Factor</h3>
+      <p>A separate but connected thread addresses why people still struggle with cravings even after adopting the switches above: insufficient protein. A meal light on protein and heavy on carbohydrates provides only brief satiety before blood sugar dips and the brain signals for quick energy, which Azadi identifies as the real cause of afternoon and nighttime snacking rather than a lack of willpower. Because muscle acts as a glucose sponge, and protein is what builds and maintains that muscle, the two threads reinforce each other. The target given is approximately one gram of protein per pound of ideal (not current) body weight, prioritizing whole-food sources such as eggs, poultry, grass-fed beef, and fatty fish, with a protein shake offered as a convenience option for days those targets are hard to hit — a segment that also serves as a sponsored product mention within the video.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent5);display:inline-block;"></span>Metabolic Traps to Avoid</h3>
+      <p>The video consolidates its warnings into five named traps: dessert right after a meal, sugary coffee right after a meal, lying down, doom-scrolling, and skipping protein. The first four all share a common thread with the earlier mistakes — they either add a second glucose load or remove the body's ability to clear the first one — while the protein trap is treated separately as the explanation for why cravings persist even when the post-meal movement habits are followed correctly.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent6);display:inline-block;"></span>The 7-Day Metabolic Window Challenge</h3>
+      <p>To make the concept practical, Azadi lays out a seven-day progression that adds one small change per day without altering diet: not sitting after meals, then a post-dinner walk, then replacing the phone scroll with movement, then seated soleus raises after lunch, then stairs after dinner, then stacking every switch on day six, and finally a reflection day comparing mood, energy, cravings, focus, waistline, and sleep to how things felt a week prior. The structure is designed to let the effect be felt experientially rather than simply understood as information.</p>
+    </div>
+  </section>
+
+  <!-- TAKEAWAYS -->
+  <section id="takeaways" class="panel">
+    <div class="cards">
+      <div class="card"><div class="card-num">1</div><p>Treat the first 30 minutes after eating as a metabolic decision point, not a chance to relax — what you do here matters as much as what you ate.</p></div>
+      <div class="card"><div class="card-num">2</div><p>Take a 10-minute walk after your largest meal of the day. Even two to five minutes of walking measurably helps, per the 2022 Sports Medicine review of seven studies.</p></div>
+      <div class="card"><div class="card-num">3</div><p>Learn the seated soleus raise — heels up, toes down — and use it at your desk after lunch. It's the highest-leverage, lowest-effort switch discussed, tied to a 52% cut in blood sugar spikes.</p></div>
+      <div class="card"><div class="card-num">4</div><p>Do 10 slow squats or climb a flight of stairs after a meal when a walk isn't practical — it recruits your biggest glucose-clearing muscles.</p></div>
+      <div class="card"><div class="card-num">5</div><p>Skip dessert and sugary coffee directly after eating to avoid stacking a second glucose spike on top of the first.</p></div>
+      <div class="card"><div class="card-num">6</div><p>Replace the post-meal phone scroll with any small movement, even household chores, to keep the window from closing unnoticed.</p></div>
+      <div class="card"><div class="card-num">7</div><p>Avoid lying down right after eating — staying upright and moving keeps your muscles available to help clear blood sugar.</p></div>
+      <div class="card"><div class="card-num">8</div><p>Aim for roughly 1 gram of protein per pound of your ideal body weight daily, prioritizing eggs, poultry, grass-fed beef, and fatty fish.</p></div>
+      <div class="card"><div class="card-num">9</div><p>If 3pm cravings or nighttime pantry raids are a recurring pattern, treat it as a signal of a protein gap before blaming willpower.</p></div>
+      <div class="card"><div class="card-num">10</div><p>Run the 7-day challenge: change nothing about your food, just change what you do in the 30 minutes after each meal, then compare how you feel to a week before.</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Mind map generated from the YouTube video by Ben Azadi &middot; source: youtu.be/r7h5wHa8JZY</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
