@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop Walking Everyday — Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1115;
+    --bg-panel:#161922;
+    --bg-card:#1c2029;
+    --border:#2a2f3a;
+    --text:#e9e8e3;
+    --text-dim:#9ba1ae;
+    --gold:#f2a93b;
+    --c1:#f2a93b; /* cortisol window - gold */
+    --c2:#5b9bd9; /* protein intercept - blue */
+    --c3:#5cbf8a; /* eating after walk - green */
+    --c4:#b48ee0; /* coffee - purple */
+    --c5:#e07a5f; /* VFA method - coral */
+    --c6:#4fc4bd; /* making it stick - teal */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope',sans-serif;
+    line-height:1.6;
+    padding:24px 16px 64px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+  header{margin-bottom:28px;}
+  .eyebrow{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,4vw,38px);
+    line-height:1.18;
+    margin-bottom:14px;
+  }
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px 18px;
+    font-size:13.5px;color:var(--text-dim);
+  }
+  .meta span strong{color:var(--text);font-weight:600;}
+  .tabs{
+    display:flex;gap:8px;margin:28px 0 20px;
+    border-bottom:1px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .tab{
+    background:none;border:none;color:var(--text-dim);
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:14.5px;
+    padding:10px 4px;margin-right:22px;cursor:pointer;
+    border-bottom:2.5px solid transparent;transition:all .15s ease;
+  }
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  /* MIND MAP */
+  .branch{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-left:4px solid var(--branch-color, var(--gold));
+    border-radius:12px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .branch-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 18px;cursor:pointer;user-select:none;
+  }
+  .branch-head:hover{background:rgba(255,255,255,0.02);}
+  .branch-title{
+    font-family:'Fraunces',serif;font-weight:600;font-size:17px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--branch-color);flex-shrink:0;}
+  .chev{
+    color:var(--text-dim);font-size:13px;transition:transform .2s ease;
+  }
+  .branch.open .chev{transform:rotate(90deg);}
+  .leaves{
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    padding:0 18px;
+  }
+  .branch.open .leaves{max-height:2400px;padding-bottom:14px;}
+  .leaf{
+    border-top:1px solid var(--border);
+    padding:12px 0;cursor:pointer;
+  }
+  .leaf-title{
+    font-weight:700;font-size:14.5px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .leaf-title::before{
+    content:'+';color:var(--branch-color);font-weight:800;font-size:15px;
+    width:14px;flex-shrink:0;transition:transform .2s ease;
+  }
+  .leaf.open .leaf-title::before{content:'–';}
+  .leaf-detail{
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    font-size:14px;color:var(--text-dim);padding-left:22px;
+  }
+  .leaf.open .leaf-detail{max-height:400px;margin-top:8px;}
+
+  /* SUMMARY */
+  .summary-section{margin-bottom:26px;}
+  .summary-section h3{
+    font-family:'Fraunces',serif;font-size:18px;font-weight:600;
+    margin-bottom:8px;color:var(--sec-color, var(--gold));
+  }
+  .summary-section p{font-size:15px;color:#d4d3ce;}
+
+  /* TAKEAWAYS */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+  .card{
+    background:var(--bg-card);border:1px solid var(--border);
+    border-radius:12px;padding:16px 16px 18px;
+  }
+  .card-num{
+    font-family:'Fraunces',serif;font-weight:700;font-size:22px;
+    color:var(--gold);margin-bottom:6px;display:block;
+  }
+  .card p{font-size:14px;color:#d4d3ce;}
+
+  footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--text-dim);}
+  footer a{color:var(--gold);}
+
+  @media(max-width:520px){
+    .tab{margin-right:14px;font-size:13.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Wellness &amp; Fitness · YouTube</div>
+    <h1>Stop Walking Everyday (THIS Morning Routine FORCES Your Body to Burn Visceral Fat All Day)</h1>
+    <div class="meta">
+      <span><strong>Channel:</strong> Ben Retirement Wellness</span>
+      <span><strong>Published:</strong> ~July 2026</span>
+      <span><strong>Views:</strong> 115K</span>
+      <span><a href="https://www.youtube.com/watch?v=m9_EQAUFchU" style="color:var(--gold);" target="_blank">Watch on YouTube ↗</a></span>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+  </nav>
+
+  <!-- MIND MAP -->
+  <section id="mindmap" class="panel active">
+
+    <div class="branch" style="--branch-color:var(--c1)">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-title"><span class="dot"></span>The Cortisol Awakening Window</div>
+        <span class="chev">▶</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The Cortisol Awakening Response</div>
+          <div class="leaf-detail">Not the "stress cortisol" people fear — it's described as a metabolic ignition signal that mobilizes free fatty acids from fat tissue and preps your organs for the day. When it fires cleanly, the video calls it one of the most powerful natural fat-releasing signals the body produces.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">A 47-to-60-Minute Signal</div>
+          <div class="leaf-detail">The cortisol spike that greets you each morning is said to last roughly 47 to 60 minutes before tapering off. What you do inside that window — or fail to do — determines how much of the signal actually gets used for fat mobilization.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Visceral Fat's Extra-Sensitive Receptors</div>
+          <div class="leaf-detail">The video cites University of Michigan research (published in Diabetes, 2011) finding visceral fat carries a higher density of cortisol and beta-adrenergic receptors than fat under the skin — making it unusually responsive to morning hormonal signals specifically, not to exercise volume in general.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Why the Window Narrows After 50</div>
+          <div class="leaf-detail">Cortisol receptor sensitivity in fat tissue is said to shift with age, making the morning peak shorter and less sharp. This is framed as the reason generic walking advice stops working as well later in life — the margin for error shrinks.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--c2)">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-title"><span class="dot"></span>Intercept #1: Protein Too Soon</div>
+        <span class="chev">▶</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The Insulin / mTOR Switch</div>
+          <div class="leaf-detail">A protein shake inside the first 30 minutes of waking is said to trigger insulin release and activate mTOR — a signal that shifts cells from breaking down fat into building tissue. That "construction" signal competes directly with cortisol's fat-release signal.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">In Most People, Insulin Wins</div>
+          <div class="leaf-detail">When the two signals fire together, the video claims insulin dominates in most people over 50 — effectively closing the fat-release window before it has had a chance to work.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Not Whether, But When</div>
+          <div class="leaf-detail">The claim isn't that protein shakes are bad — it's that one in the first 30 minutes cancels the exact signal the rest of the routine depends on. Pushing it later, the video argues, removes the conflict entirely.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--c3)">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-title"><span class="dot"></span>Intercept #2: Eating Right After a Fasted Walk</div>
+        <span class="chev">▶</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The KU Leuven Study</div>
+          <div class="leaf-detail">A 2010 Journal of Physiology study from Peter Hespel's group compared fat oxidation in people exercising fasted versus fed. The fasted group burned significantly more fat during exercise — a result the video describes as replicated multiple times since.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The Part Most People Miss</div>
+          <div class="leaf-detail">Fasted exercisers who ate within 15 minutes of finishing saw their post-exercise insulin response collapse the fat-burning signal exercise had just built, erasing much of the benefit according to the video's reading of the data.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Waiting Roughly Doubles the Payoff</div>
+          <div class="leaf-detail">Subjects who waited 45–60 minutes after fasted exercise before eating kept free fatty acids elevated, with fat oxidation said to continue at close to double the resting rate for three to four hours afterward.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The Walk Isn't the Problem</div>
+          <div class="leaf-detail">Core claim of this section: walking doesn't fail to burn fat — eating immediately afterward is what shuts the process down before it can compound.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--c4)">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-title"><span class="dot"></span>Intercept #3: Coffee With Anything Added</div>
+        <span class="chev">▶</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Cephalic Phase Insulin Response</div>
+          <div class="leaf-detail">Tasting something sweet — even a zero-calorie sweetener — can trigger an anticipatory insulin release before glucose ever reaches the bloodstream, simply because taste signals reach the brain and prime the pancreas.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The 2020 Nutrients Meta-Analysis</div>
+          <div class="leaf-detail">The video references a meta-analysis in Nutrients examining insulin responses to common coffee additives, finding cephalic-phase insulin responses in a meaningful share of subjects — even from "harmless" additions like plant milk.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Black Coffee Gets a Pass</div>
+          <div class="leaf-detail">Black coffee is singled out as compatible with the fasting window: caffeine activates the sympathetic nervous system, raises norepinephrine, and is said to support hormone-sensitive lipase — the enzyme that breaks apart stored fat.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Small Insulin Tick, Big Consequence</div>
+          <div class="leaf-detail">For people over 50 with any degree of insulin resistance, even a minor bump from a splash of milk or sweetener is framed as enough to interrupt visceral fat mobilization already underway.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--c5)">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-title"><span class="dot"></span>The VFA Method: Three Sequenced Components</div>
+        <span class="chev">▶</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Component 1 — Visceral Priming Window (0–45 min)</div>
+          <div class="leaf-detail">Nothing that triggers insulin or mTOR: no food, shakes, or flavored drinks — black coffee and water are fine. The one prescribed action is 10 minutes of outdoor light within the first 20 minutes of waking, to anchor circadian rhythm via the eyes' link to the body's master clock.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Component 2 — Fasted Movement Strike (45–80 min)</div>
+          <div class="leaf-detail">A 25-to-35-minute walk starting at exactly the 45-minute mark, at a conversational pace (roughly 100–115 bpm for most people over 50). A 2016 Journal of Nutrition and Metabolism study is cited suggesting 35 minutes crosses a threshold where fat-oxidation elevation is still measurable two to three hours later.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Component 3 — Anabolic Delay Window (45–90 min post-walk)</div>
+          <div class="leaf-detail">A deliberate gap before the first bite of food, letting free fatty acids keep circulating as fuel while HGH stays elevated. Eating before this window closes is framed as the single biggest way to cut the whole cascade short.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Breaking the Fast</div>
+          <div class="leaf-detail">Once the delay window ends, the first meal should carry at least 35g of complete protein and under 20g of carbohydrate, timed to land during the day's highest insulin sensitivity for muscle protein synthesis rather than glycogen refill.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--c6)">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-title"><span class="dot"></span>Making It Stick</div>
+        <span class="chev">▶</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Consistency Over Intensity</div>
+          <div class="leaf-detail">The method is framed as working through hormonal entrainment: waking at the same time daily lets the body "preload" the right hormonal environment before each window even begins.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The "Social Jet Lag" Data</div>
+          <div class="leaf-detail">The video references chronobiologist Till Roenneberg's work, published in Current Biology, showing more than 60 minutes of weekday/weekend timing variation is linked to measurably higher rates of metabolic dysfunction.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The Night Before Counts</div>
+          <div class="leaf-detail">A last meal with more than 60g of refined carbs (bread, pasta, alcohol) is said to keep insulin elevated overnight, so it hasn't fully returned to baseline by the time the morning cortisol window opens.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Reframing the Effort</div>
+          <div class="leaf-detail">The closing argument: this isn't a harder protocol than what most people already do — it's the same behaviors rearranged into the sequence the video claims your biology actually requires.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary" class="panel">
+    <div class="summary-section" style="--sec-color:var(--c1)">
+      <h3>The Cortisol Awakening Window</h3>
+      <p>The video's central premise is that the first 47 to 60 minutes after waking produce a natural cortisol spike it calls the cortisol awakening response — not the harmful "stress cortisol" people associate with the word, but a metabolic ignition signal that mobilizes free fatty acids and preps the body for the day. It leans on University of Michigan research published in Diabetes (2011) to argue that visceral fat carries a denser concentration of cortisol and beta-adrenergic receptors than fat elsewhere on the body, making it unusually responsive to this specific morning signal. The video also claims this window narrows with age, as cortisol receptor sensitivity shifts after 50 — which it uses to explain why standard walking advice can stop producing results later in life.</p>
+    </div>
+    <div class="summary-section" style="--sec-color:var(--c2)">
+      <h3>Intercept #1: The Morning Protein Shake</h3>
+      <p>The first habit the video flags as a problem is drinking a protein shake within 30 minutes of waking. It argues that protein this early triggers insulin release and activates mTOR, a cellular signal that shifts the body from breaking down fat into building tissue — directly competing with the fat-releasing cortisol signal. When the two collide, the video claims insulin usually wins in people over 50, closing the fat-mobilization window before it's had a chance to do its work. The point isn't that protein is harmful, but that its timing in this specific window undercuts everything else the routine is trying to accomplish.</p>
+    </div>
+    <div class="summary-section" style="--sec-color:var(--c3)">
+      <h3>Intercept #2: Walking Too Early — or Eating Too Soon After</h3>
+      <p>Citing a 2010 Journal of Physiology study from Peter Hespel's group at KU Leuven, the video notes that fasted exercisers burned significantly more fat during their workouts than those who'd eaten beforehand — a finding it says has been replicated since. The less-discussed detail it highlights: fasted exercisers who ate within 15 minutes of finishing saw their post-exercise insulin response collapse the fat-burning signal the workout had just generated. Those who waited 45 to 60 minutes before eating, by contrast, kept fat oxidation running at close to double the resting rate for three to four hours afterward. The takeaway offered is that the walk itself isn't the issue — eating too soon after it is.</p>
+    </div>
+    <div class="summary-section" style="--sec-color:var(--c4)">
+      <h3>Intercept #3: Coffee With Anything Added</h3>
+      <p>The third flagged habit is adding anything to morning coffee — even low-calorie plant milks or artificial sweeteners. The video cites a 2020 Nutrients meta-analysis on insulin responses to coffee additives, which found that even small additions can trigger a cephalic phase insulin response: an anticipatory insulin release cued by taste rather than by glucose actually entering the bloodstream. Black coffee, by contrast, is presented as compatible with the fasting window, since caffeine's activation of the sympathetic nervous system and norepinephrine is linked to hormone-sensitive lipase activity — the enzyme responsible for breaking apart stored fat. For anyone with existing insulin resistance, the video argues, even a minor insulin tick from a splash of milk can be enough to interrupt visceral fat release already in progress.</p>
+    </div>
+    <div class="summary-section" style="--sec-color:var(--c5)">
+      <h3>The VFA Method: Three Sequenced Components</h3>
+      <p>The video packages its recommendations into what it calls the "Visceral First Approach," built around three timed components in the first 90 minutes after waking. The Visceral Priming Window (minutes 0–45) permits only black coffee or water, paired with 10 minutes of outdoor light exposure within the first 20 minutes to anchor circadian rhythm. The Fasted Movement Strike (minutes 45–80) calls for a 25-to-35-minute conversational-pace walk starting at exactly the 45-minute mark, timed to coincide with peak cortisol and norepinephrine sensitization. The Anabolic Delay Window (45–90 minutes post-walk) then asks for patience before the first meal, so free fatty acids keep circulating as fuel. When the fast finally breaks, the video recommends at least 35g of protein and under 20g of carbohydrate, arguing this meal lands during the day's highest insulin sensitivity and is best used for muscle protein synthesis rather than glycogen refilling.</p>
+    </div>
+    <div class="summary-section" style="--sec-color:var(--c6)">
+      <h3>Making It Stick</h3>
+      <p>The video closes by framing consistency, not intensity, as the real lever. It cites chronobiologist Till Roenneberg's "social jet lag" research, published in Current Biology, which found that more than 60 minutes of timing variation between weekdays and weekends is associated with measurably higher rates of metabolic dysfunction — its recommended threshold is five mornings a week on protocol with no more than 30 minutes of wake-time variation on the rest. It also extends the routine backward to the night before, arguing that a last meal with more than 60g of refined carbohydrate keeps insulin elevated overnight and blunts the next morning's cortisol window. The video's closing argument is that none of this requires more effort than most people are already putting in — just a different order.</p>
+    </div>
+  </section>
+
+  <!-- TAKEAWAYS -->
+  <section id="takeaways" class="panel">
+    <div class="cards">
+      <div class="card"><span class="card-num">01</span><p>For the first 45 minutes after waking, have nothing but black coffee or plain water — hold off on the protein shake until later.</p></div>
+      <div class="card"><span class="card-num">02</span><p>Get 10 minutes of outdoor light within the first 20 minutes of waking to anchor your circadian rhythm before you do anything else.</p></div>
+      <div class="card"><span class="card-num">03</span><p>Start your walk at the 45-minute mark — not the moment you wake up, and not after eating.</p></div>
+      <div class="card"><span class="card-num">04</span><p>Walk fasted for 25–35 minutes at a conversational pace — roughly 100–115 bpm for most people over 50.</p></div>
+      <div class="card"><span class="card-num">05</span><p>Hold off eating for 45–60 minutes after finishing your walk (90 minutes max) to let fat mobilization keep running.</p></div>
+      <div class="card"><span class="card-num">06</span><p>Break your fast with at least 35g of protein and under 20g of carbs to prioritize muscle repair over glycogen refilling.</p></div>
+      <div class="card"><span class="card-num">07</span><p>Keep coffee black — skip plant milk, sweeteners, and creamers if you want to protect the morning insulin-sensitive window.</p></div>
+      <div class="card"><span class="card-num">08</span><p>Wake at the same time 5+ mornings a week, with no more than 30 minutes of variation, to keep hormonal timing consistent.</p></div>
+      <div class="card"><span class="card-num">09</span><p>Finish your last meal at least 3 hours before bed, built around protein and vegetables, to keep overnight insulin low.</p></div>
+      <div class="card"><span class="card-num">10</span><p>Avoid more than 60g of refined carbs (bread, pasta, alcohol) at dinner — it delays the insulin drop the next morning's window depends on.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    Generated from <a href="https://www.youtube.com/watch?v=m9_EQAUFchU" target="_blank">the source video</a>. Claims about specific studies, percentages, and hormone timing are presented as stated in the video/source material and have not been independently fact-checked — treat as a content summary, not medical advice.
+  </footer>
+
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>
