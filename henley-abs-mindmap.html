@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everything I Wish I Knew Before Getting Visible Abs — Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12151a;
+    --panel: #1a1e26;
+    --card: #1e232c;
+    --border: #2a303c;
+    --text: #e8eaed;
+    --text-dim: #9aa3af;
+    --teal: #2dd4bf;
+    --orange: #fb923c;
+    --amber: #fbbf24;
+    --purple: #a78bfa;
+    --pink: #f472b6;
+    --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    padding: 32px 24px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #171b22 0%, var(--bg) 100%);
+  }
+  header .eyebrow {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700;
+    max-width: 800px;
+    margin: 0 auto 10px;
+  }
+  header .meta {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  header .meta a { color: var(--teal); text-decoration: none; }
+  header .meta a:hover { text-decoration: underline; }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px 16px 0;
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .tab:hover { color: var(--text); border-color: var(--teal); }
+  .tab.active {
+    background: var(--teal);
+    color: #0a0c0f;
+    border-color: var(--teal);
+  }
+
+  main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
+  .panel { display: none; animation: fadeIn 0.25s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ---- Mind Map ---- */
+  .branch {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--branch-color, var(--teal));
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .branch-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+  }
+  .branch-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--branch-color, var(--teal));
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .branch-title .num {
+    font-size: 12px;
+    background: var(--branch-color, var(--teal));
+    color: #0a0c0f;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+  .chevron { color: var(--text-dim); transition: transform 0.25s ease; font-size: 14px; }
+  .branch.open .chevron { transform: rotate(180deg); }
+  .leaves {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    padding: 0 20px;
+  }
+  .branch.open .leaves { max-height: 1400px; padding: 0 20px 18px; }
+  .leaf {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .leaf-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .leaf-title .plus { color: var(--text-dim); font-size: 16px; transition: transform 0.2s ease; }
+  .leaf.open .leaf-title .plus { transform: rotate(45deg); }
+  .leaf-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    font-size: 13.5px;
+    color: var(--text-dim);
+  }
+  .leaf.open .leaf-detail { max-height: 300px; margin-top: 10px; }
+
+  /* ---- Summary ---- */
+  .summary-section { margin-bottom: 28px; }
+  .summary-section h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--teal);
+  }
+  .summary-section p { color: #cdd2d9; font-size: 15px; }
+
+  /* ---- Takeaways ---- */
+  .takeaways { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .takeaway-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .takeaway-card .tk-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--orange);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .takeaway-card p { font-size: 14px; color: #cdd2d9; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-dim);
+    font-size: 12.5px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Henley Fitness · YouTube</div>
+  <h1>Everything I Wish I Knew Before Getting Visible Abs</h1>
+  <div class="meta">Rachel, Henley Fitness &nbsp;·&nbsp; <a href="https://youtu.be/W_qpQGiKONI" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+</div>
+
+<main>
+
+  <!-- MIND MAP -->
+  <div id="mindmap" class="panel active">
+
+    <div class="branch" style="--branch-color: var(--teal)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="num">1</span>The Abs Myth: Fat vs. Muscle</div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">You already have abs<span class="plus">+</span></div>
+          <div class="leaf-detail">Everyone has abdominal muscles sitting under the surface. What varies is how much body fat covers them, not whether they exist. Visibility, not existence, is the real variable.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Why fat sits on the midsection<span class="plus">+</span></div>
+          <div class="leaf-detail">Bodies tend to store extra fat around the abdomen because it's positioned to protect internal organs — a survival trait. Some people are genetically predisposed to hold less there, but most of us store fat over the abs before almost anywhere else.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Spot reduction is a lie<span class="plus">+</span></div>
+          <div class="leaf-detail">Doing endless targeted ab exercises does not pull fat specifically from that area. Fat loss happens across the whole body simultaneously as you sustain a deficit — not region by region based on where you train.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Two levers, not one<span class="plus">+</span></div>
+          <div class="leaf-detail">Visible abs require both dropping overall body fat low enough to reveal the muscle, and building the ab muscle itself so it's more prominent once the fat comes down.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The mountain-range analogy<span class="plus">+</span></div>
+          <div class="leaf-detail">Think of abs as mountains and body fat as an ocean covering them. Bigger mountains (more ab muscle) poke through a shallower ocean (a moderate fat level) sooner than smaller ones would.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color: var(--orange)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="num">2</span>Training Your Abs: Three Patterns</div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Why compounds alone aren't enough<span class="plus">+</span></div>
+          <div class="leaf-detail">Squats and deadlifts do engage the core, but the same logic that says biceps need direct arm work applies to abs — targeted training drives more growth than incidental engagement from other lifts.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Lower abs progression<span class="plus">+</span></div>
+          <div class="leaf-detail">Start with reverse crunches, progress to supported leg raises (focusing on bracing and spinal curl rather than swinging from the hip flexors), then advance to decline hammer raises for a brutal, high-tension finisher.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Upper abs progression<span class="plus">+</span></div>
+          <div class="leaf-detail">Standard crunches are the entry point, cable crunches (including a standing variation for gyms without a good setup) build on that, and V-ups round out the upper-ab work with full-range contraction.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Obliques<span class="plus">+</span></div>
+          <div class="leaf-detail">Cross-body cable twists and side bends off a 45-degree hip extension target the obliques while also building rotational and lateral spinal strength and control — useful well beyond aesthetics.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Volume guidance<span class="plus">+</span></div>
+          <div class="leaf-detail">Train each movement pattern roughly once a week, aiming for around 6–10 direct ab sets total on top of normal compound training — enough to drive growth without crowding out the rest of a program.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color: var(--amber)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="num">3</span>Nutrition: The Deficit Framework</div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">It's mostly the kitchen<span class="plus">+</span></div>
+          <div class="leaf-detail">Training builds the muscle, but visibility comes from being in a sustained calorie deficit long enough to strip the stubborn fat that tends to sit over the abs last.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Target rate of loss<span class="plus">+</span></div>
+          <div class="leaf-detail">Aim to lose around 0.5–1% of bodyweight per week. For a 70kg person, that's roughly 0.35–0.7kg weekly — achieved through an average daily deficit of a few hundred calories.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Metabolic adaptation<span class="plus">+</span></div>
+          <div class="leaf-detail">As body mass drops, calorie needs drop too — and on top of that, the body downregulates energy use further (less fidgeting, less spontaneous movement) the leaner and more deficit-adapted someone becomes.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Protein and hunger management<span class="plus">+</span></div>
+          <div class="leaf-detail">Target roughly 1.6–1.8g of protein per kg of bodyweight to protect muscle in a deficit, and lean on high-volume, low-calorie foods like leafy greens and watery fruit to manage hunger.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Adjusting through plateaus<span class="plus">+</span></div>
+          <div class="leaf-detail">If scale weight, measurements, and progress photos haven't moved in 2–3 weeks, it signals a plateau — the fix is either tightening consistency or nudging steps up or calories down.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color: var(--purple)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="num">4</span>The Hidden Costs</div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Fatigue and hunger compound<span class="plus">+</span></div>
+          <div class="leaf-detail">The leaner the target, the harder training and daily activity feel — described from personal experience as being so depleted that even basic movement became a struggle.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Recovery becomes non-negotiable<span class="plus">+</span></div>
+          <div class="leaf-detail">With fewer calories available for recovery, sleep quality matters more, alcohol should be minimized, and rest days may need to increase from one to two or three per week as leanness increases.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Social and psychological flexibility shrinks<span class="plus">+</span></div>
+          <div class="leaf-detail">Dieting to ab-level leanness leaves little room for spontaneous social eating — nights out built around food become largely off the table for the duration of the push.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">This is a genuine challenge, not a hack<span class="plus">+</span></div>
+          <div class="leaf-detail">Achieving visible abs for the first time is framed honestly as difficult — not a 30-day shortcut, but a demanding stretch of consistent deficit, training, and recovery management.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color: var(--pink)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="num">5</span>The Pyramid of Delusion</div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">99% vs. the 1%<span class="plus">+</span></div>
+          <div class="leaf-detail">Nearly every semi-nude body seen in media, social platforms, or at the beach splits into two groups — the vast majority, and a tiny sliver with genuinely elite, hard-to-replicate body composition.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Genetics sets the baseline<span class="plus">+</span></div>
+          <div class="leaf-detail">Genetics strongly influences how easily muscle is built, how much appetite regulates itself, how naturally fidgety or sedentary someone is (affecting daily calorie burn), and where fat is stored first.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Devotion as a full-time job<span class="plus">+</span></div>
+          <div class="leaf-detail">For many people in that top 1%, staying lean is literally their income source — a level of singular focus that isn't realistic or necessarily desirable to sustain alongside a normal life and career.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The "fibbers"<span class="plus">+</span></div>
+          <div class="leaf-detail">Some of what looks achievable is not: recycled old photos reshared as current, undisclosed substance use, and photos taken specifically under flattering lighting, oiled skin, and a tan to accentuate muscle definition.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">The reality-check test<span class="plus">+</span></div>
+          <div class="leaf-detail">Visit any beach and count how many people actually display that top-1% level of leanness — it's a useful, immediate corrective to the distorted sample seen on social media.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color: var(--green)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="num">6</span>Body Image &amp; The Real Payoff</div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Harder than expected<span class="plus">+</span></div>
+          <div class="leaf-detail">Reaching visible abs personally took pushing fat loss further, and involved more fatigue and hunger, than had been anticipated going in — including moments of genuinely miserable food choices at social events.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Body image plateaus, then can decline<span class="plus">+</span></div>
+          <div class="leaf-detail">Early fat loss often improves how people feel in their bodies, but pushed far enough, that improvement plateaus and can reverse — especially when paired with constant self-checking and pinching at remaining fat.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Getting there didn't deliver the promised feeling<span class="plus">+</span></div>
+          <div class="leaf-detail">Reaching visible abs did not produce the expected boost in body confidence — if anything, the experience of constant monitoring and restriction left body image worse, not better.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">What actually helped<span class="plus">+</span></div>
+          <div class="leaf-detail">Feeling genuinely better in her body came later, from getting stronger, getting fitter, building more muscle, and eating more food — the opposite direction from the extreme leanness pursuit.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-title">Check your "why" first<span class="plus">+</span></div>
+          <div class="leaf-detail">Before chasing abs, get clear on whether it's self-driven or comparison-driven. A coach can help hold the line if the pursuit starts tipping into disordered territory, and having a plan to return to maintenance afterward is essential for long-term health.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SUMMARY -->
+  <div id="summary" class="panel">
+
+    <div class="summary-section">
+      <h3>The Abs Myth: Fat vs. Muscle</h3>
+      <p>Everyone has abdominal muscles already — what determines visibility is the layer of body fat sitting on top of them, which the body tends to store around the midsection to protect internal organs. Targeted ab exercises don't pull fat specifically from that area; fat loss happens across the whole body as a deficit is sustained. Getting visible abs therefore comes down to two combined levers: reducing overall body fat low enough to reveal the muscle, and building the ab muscle itself so it's thicker and more prominent once the fat does come down. A bigger "mountain" pokes through a shallower "ocean" sooner.</p>
+    </div>
+
+    <div class="summary-section">
+      <h3>Training Your Abs</h3>
+      <p>Compound lifts like squats and deadlifts engage the core, but the same logic that applies to any other muscle group applies here — direct, targeted training drives more growth than incidental engagement. The recommended approach covers three movement patterns: lower abs (reverse crunch, progressing to supported leg raises and then decline hammer raises), upper abs (crunches, cable crunches or a standing cable crunch variation, and V-ups), and obliques (cross-body cable twists and side bends off a 45-degree hip extension). The guidance is to hit each pattern about once a week for roughly 6–10 total direct sets, layered on top of normal compound training rather than replacing it.</p>
+    </div>
+
+    <div class="summary-section">
+      <h3>Nutrition: The Deficit Framework</h3>
+      <p>The nutrition side is described as doing most of the work — sustained calorie deficit is what actually strips the stubborn fat over the abs. A target rate of roughly 0.5–1% of bodyweight lost per week is recommended, achieved through a moderate daily deficit. As weight drops, calorie needs drop too, compounded by metabolic adaptation, where the body further reduces energy expenditure (including subtle drops in daily fidgeting and movement) the longer and deeper the deficit runs. To manage this, the framework calls for protein around 1.6–1.8g per kg of bodyweight, high-volume low-calorie foods to control hunger, and regular check-ins — if weight, measurements, and photos stall for 2–3 weeks, either tighten consistency or adjust steps and calories.</p>
+    </div>
+
+    <div class="summary-section">
+      <h3>The Hidden Costs</h3>
+      <p>Pursuing visible abs is framed honestly as genuinely difficult, not a 30-day shortcut. Fatigue and hunger intensify as leanness increases, described from firsthand experience as reaching a point of significant depletion. Recovery becomes more important as calories drop — prioritizing sleep, cutting back alcohol, and potentially increasing rest days from one to two or three per week. Socially, the deficit required leaves little flexibility for spontaneous eating occasions, since achieving that level of leanness generally rules out regular indulgent meals.</p>
+    </div>
+
+    <div class="summary-section">
+      <h3>The Pyramid of Delusion</h3>
+      <p>Most bodies seen in media, on social platforms, or in person fall into a "99%" category, while a much smaller "1%" holds a genuinely elite level of leanness. That top tier is shaped by three factors: genetics (which influences muscle-building potential, appetite regulation, natural activity levels, and fat distribution), devotion (for many, staying lean is effectively their job, allowing a level of focus that isn't realistic for most people's lives), and a subset of "fibbers" who recycle old photos, use undisclosed substances, or rely on flattering lighting, oil, and tan to exaggerate definition. A simple reality check — counting how many people at an actual beach display that level of leanness — is offered as a corrective to the distorted picture social media creates.</p>
+    </div>
+
+    <div class="summary-section">
+      <h3>Body Image and the Real Payoff</h3>
+      <p>Reflecting on her own experience getting visibly lean, the process was harder and more physically and mentally taxing than expected. Body image often improves in the early stages of fat loss, but that improvement can plateau and reverse the further leanness is pushed, especially alongside constant self-monitoring. Reaching visible abs did not deliver the expected boost in confidence — what genuinely improved body image afterward was reversing course: getting stronger, getting fitter, building more muscle, and eating more food. The closing advice is to get honest about the motivation behind chasing abs before starting, involve a coach if there's a risk of taking it too far, and have a clear plan for returning to maintenance once a fat-loss phase ends.</p>
+    </div>
+
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div id="takeaways" class="panel">
+    <div class="takeaways">
+
+      <div class="takeaway-card">
+        <span class="tk-num">01</span>
+        <p>Drop the idea of spot reduction. Targeted ab exercises build the muscle underneath — they don't burn fat specifically from that area. Fat loss happens across the whole body as you sustain a deficit.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">02</span>
+        <p>Build a weekly ab routine covering all three patterns: lower (reverse crunch → supported leg raise → decline hammer raise), upper (crunch → cable/standing cable crunch → V-up), and obliques (cable twist, side bends).</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">03</span>
+        <p>Target roughly 6–10 direct ab sets per week, layered on top of your compound lifts — not instead of them.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">04</span>
+        <p>Set your calorie deficit to lose about 0.5–1% of bodyweight per week. Faster isn't free — it costs more muscle, more fatigue, and more hunger.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">05</span>
+        <p>Eat roughly 1.6–1.8g of protein per kg of bodyweight daily while in a deficit to protect the muscle you're trying to reveal.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">06</span>
+        <p>Fill your plate with high-volume, low-calorie foods — leafy greens, watery fruit — to manage hunger without blowing your calorie target.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">07</span>
+        <p>If your weight, measurements, and progress photos haven't budged in 2–3 weeks, that's a plateau — tighten consistency first, then nudge steps up or calories down.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">08</span>
+        <p>Protect recovery as you lean out: prioritize sleep, cut back alcohol, and be willing to add a second or third rest day per week.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">09</span>
+        <p>Don't benchmark yourself against the top 1% on social media — that level of leanness usually stacks elite genetics, full-time devotion, and often undisclosed help or flattering conditions.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="tk-num">10</span>
+        <p>Before you chase visible abs, get honest about why. If it's about comparison rather than how you actually feel, address that first — and have a maintenance plan ready for when the deficit ends.</p>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Generated mind map · Source: <a href="https://youtu.be/W_qpQGiKONI" style="color:var(--teal)">youtu.be/W_qpQGiKONI</a>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
