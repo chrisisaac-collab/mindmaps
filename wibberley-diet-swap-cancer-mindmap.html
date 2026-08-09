@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Diet Swap That Reversed Cancer Risk in 14 Days — Dr Alex Wibberley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1512;
+  --surface:#16201c;
+  --surface2:#1d2a25;
+  --border:#2a3a33;
+  --text:#e8ede9;
+  --muted:#8fa39a;
+  --fibre:#6bbf8a;
+  --fibre-bg:rgba(107,191,138,.12);
+  --micro:#d9a441;
+  --micro-bg:rgba(217,164,65,.12);
+  --study:#5fa8d3;
+  --study-bg:rgba(95,168,211,.12);
+  --risk:#e07a5f;
+  --risk-bg:rgba(224,122,95,.12);
+  --caution:#b98cc9;
+  --caution-bg:rgba(185,140,201,.12);
+  --action:#7fc4c9;
+  --action-bg:rgba(127,196,201,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;padding-bottom:4rem}
+header{padding:2.5rem 1.5rem 1.5rem;max-width:1000px;margin:0 auto}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+h1{font-family:'Fraunces',serif;font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:600;line-height:1.15;letter-spacing:-.01em;margin-bottom:.7rem}
+.byline{font-size:.92rem;color:var(--muted)}
+.byline strong{color:var(--fibre);font-weight:600}
+.banner{max-width:1000px;margin:1.25rem auto 0;padding:.9rem 1.1rem;background:var(--micro-bg);border:1px solid rgba(217,164,65,.35);border-left:3px solid var(--micro);border-radius:.5rem;font-size:.82rem;color:#e8d9b8}
+.banner strong{color:var(--micro);display:block;margin-bottom:.2rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+.tabs{position:sticky;top:0;z-index:20;background:rgba(14,21,18,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);margin-top:1.5rem}
+.tabs-inner{max-width:1000px;margin:0 auto;display:flex;gap:.3rem;padding:0 1.5rem;overflow-x:auto}
+.tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;padding:.9rem .8rem;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--fibre);border-bottom-color:var(--fibre)}
+main{max-width:1000px;margin:0 auto;padding:1.75rem 1.5rem}
+.panel{display:none}
+.panel.active{display:block}
+.hint{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:1.25rem}
+.branch{background:var(--surface);border:1px solid var(--border);border-radius:.7rem;margin-bottom:.7rem;overflow:hidden}
+.branch-head{display:flex;align-items:center;gap:.85rem;padding:1rem 1.15rem;cursor:pointer;user-select:none;transition:background .15s}
+.branch-head:hover{background:var(--surface2)}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.branch-title{font-weight:600;font-size:1rem;flex:1}
+.branch-n{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted)}
+.chev{color:var(--muted);font-size:.8rem;transition:transform .2s}
+.branch.open .chev{transform:rotate(90deg)}
+.leaves{display:none;padding:0 1.15rem 1rem}
+.branch.open .leaves{display:block}
+.leaf{border-top:1px solid var(--border);padding:.8rem 0 0;margin-top:.55rem}
+.leaf-head{display:flex;align-items:flex-start;gap:.6rem;cursor:pointer;font-size:.9rem;font-weight:500;color:var(--text)}
+.leaf-head:hover{color:var(--fibre)}
+.leaf-mark{color:var(--muted);font-size:.75rem;line-height:1.7;flex-shrink:0}
+.leaf-detail{display:none;font-size:.86rem;color:var(--muted);padding:.55rem 0 .2rem 1.2rem;line-height:1.65}
+.leaf.open .leaf-detail{display:block}
+.leaf.open .leaf-head{color:var(--fibre)}
+.b1 .dot{background:var(--study)} .b1.open{border-color:var(--study)}
+.b2 .dot{background:var(--risk)} .b2.open{border-color:var(--risk)}
+.b3 .dot{background:var(--micro)} .b3.open{border-color:var(--micro)}
+.b4 .dot{background:var(--fibre)} .b4.open{border-color:var(--fibre)}
+.b5 .dot{background:var(--caution)} .b5.open{border-color:var(--caution)}
+.b6 .dot{background:var(--action)} .b6.open{border-color:var(--action)}
+.b1.open .leaf-head:hover,.b1 .leaf.open .leaf-head{color:var(--study)}
+.b2.open .leaf-head:hover,.b2 .leaf.open .leaf-head{color:var(--risk)}
+.b3.open .leaf-head:hover,.b3 .leaf.open .leaf-head{color:var(--micro)}
+.b5.open .leaf-head:hover,.b5 .leaf.open .leaf-head{color:var(--caution)}
+.b6.open .leaf-head:hover,.b6 .leaf.open .leaf-head{color:var(--action)}
+h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;margin:2rem 0 .7rem;letter-spacing:-.01em}
+h2:first-child{margin-top:0}
+.panel p{margin-bottom:1rem;color:#c9d5cf;font-size:.95rem}
+.pull{border-left:3px solid var(--fibre);padding:.2rem 0 .2rem 1rem;margin:1.4rem 0;font-family:'Fraunces',serif;font-size:1.05rem;font-style:italic;color:var(--text)}
+.take{display:flex;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:.7rem;padding:1.1rem 1.2rem;margin-bottom:.65rem}
+.take-n{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:500;color:var(--fibre);flex-shrink:0;width:2rem}
+.take-body h3{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
+.take-body p{font-size:.86rem;color:var(--muted);margin:0}
+footer{max-width:1000px;margin:2.5rem auto 0;padding:1.5rem;border-top:1px solid var(--border);font-size:.76rem;color:var(--muted)}
+footer a{color:var(--study)}
+@media (max-width:600px){header{padding:1.75rem 1.25rem 1rem}main,.tabs-inner{padding-left:1.25rem;padding-right:1.25rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Doctor Alex · 11 June 2026</div>
+  <h1>The Diet Swap That Reversed Cancer Risk in 14 Days</h1>
+  <div class="byline"><strong>Dr Alex Wibberley</strong> · bowel cancer risk, fibre and the gut microbiome</div>
+</header>
+
+<div class="banner">
+  <strong>Reconstructed summary</strong>
+  YouTube blocked automated access to this video, so this map was built from the episode's own description and from the peer-reviewed study it is based on — O'Keefe et al., <em>Fat, fibre and cancer risk in African Americans and rural Africans</em>, Nature Communications, 2015. The science below is accurate to that paper. Dr Wibberley's specific wording, emphasis and any clinical anecdotes are not captured. Treat this as a companion to the episode, not a transcript of it. Nothing here is medical advice.
+</div>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ─────────── MIND MAP ─────────── -->
+<div class="panel active" id="map">
+  <div class="hint">Tap a branch to expand · tap a leaf for detail</div>
+
+  <div class="branch b1" onclick="toggleBranch(this)">
+    <div class="branch-head"><span class="dot"></span><span class="branch-title">The Study Behind the Headline</span><span class="branch-n">5</span><span class="chev">›</span></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Two groups, two diets, two weeks</div>
+        <div class="leaf-detail">Twenty African American volunteers and twenty participants from rural South Africa swapped their habitual diets under tightly controlled conditions for fourteen days. The Americans moved to a high-fibre, low-fat, low-protein traditional African diet; the South Africans moved to a typical western diet high in protein and fat and low in fibre. Controlled feeding matters here — the researchers supplied the food rather than relying on self-report, which removes the biggest source of noise in nutrition research.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Colonoscopy before and after</div>
+        <div class="leaf-detail">Every volunteer had a colonoscopy at the start and end of the fortnight. That is unusually invasive for a dietary study and it is what gives the findings their weight: the team sampled the colon lining directly rather than inferring what was happening from blood or stool alone. They also took bacterial samples from inside the colon itself.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>The starting point was already stark</div>
+        <div class="leaf-detail">Before anyone changed anything, almost half of the American participants had polyps — abnormal growths in the bowel lining that are often harmless but can progress to cancer. None of the rural African participants had them. That baseline gap is the phenomenon the study set out to explain.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Why colon cancer specifically</div>
+        <div class="leaf-detail">Colon cancer is the fourth commonest cause of cancer death worldwide, accounting for more than 600,000 deaths a year. Rates are far higher in the western world than in Africa or the Far East, and within the United States African Americans carry the heaviest burden. The diet swap was designed to test whether that geographic pattern tracks food rather than genetics.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Who ran it</div>
+        <div class="leaf-detail">An international team from the University of Pittsburgh and Imperial College London, directed by Professor Stephen O'Keefe with Professor Jeremy Nicholson leading the Imperial side. Published in Nature Communications in April 2015 and funded by the US National Institutes of Health and the NIHR Imperial Biomedical Research Centre.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b2" onclick="toggleBranch(this)">
+    <div class="branch-head"><span class="dot"></span><span class="branch-title">What Changed in Fourteen Days</span><span class="branch-n">4</span><span class="chev">›</span></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>The American group improved</div>
+        <div class="leaf-detail">After two weeks on the African diet, the American participants showed significantly less inflammation in the colon and measurably reduced biomarkers of cancer risk. The direction and the speed were both notable — this was a fortnight, not a year.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>The African group deteriorated</div>
+        <div class="leaf-detail">The reverse held, and held sharply. In the rural South African participants, measurements indicating cancer risk increased dramatically after just two weeks on a western diet. The symmetry is the study's most striking feature: the effect ran both ways, on the same clock.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Speed was the surprise, not direction</div>
+        <div class="leaf-detail">Nicholson made the point plainly: that fibre lowers colon cancer risk was not new. What surprised the team was how quickly and dramatically the risk markers switched in both groups following a change in diet. The mechanism turns out to be far more responsive than a decades-long disease timeline would suggest.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>"Never too late" — with a caveat</div>
+        <div class="leaf-detail">O'Keefe's reading was that a shift from a westernised diet to a traditional high-fibre, low-fat pattern reduced biomarkers of cancer risk within two weeks, indicating it is likely never too late to change your diet to change your risk. That is a statement about risk markers in the colon lining, not about reversing established disease.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b3" onclick="toggleBranch(this)">
+    <div class="branch-head"><span class="dot"></span><span class="branch-title">The Gut Microbiome Mechanism</span><span class="branch-n">4</span><span class="chev">›</span></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Bacteria changed their metabolism, fast</div>
+        <div class="leaf-detail">The researchers concluded that a major reason for the change in cancer risk was the way gut bacteria altered their metabolism to adapt to the new diet. The shift was not primarily about which species were present in what numbers — it was about what the resident population started doing with the food arriving.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Butyrate is the key output</div>
+        <div class="leaf-detail">In the American group, the African diet led to increased production of butyrate, a short-chain fatty acid produced when gut bacteria ferment fibre. Butyrate has important anti-cancer effects and is the primary fuel source for the cells lining the colon. More fermentable fibre arriving means more butyrate produced locally, right where it is needed.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>The microbiome mediates the link</div>
+        <div class="leaf-detail">James Kinross, a colorectal surgeon on the Imperial team, framed the finding as evidence that gut bacteria are critically important for mediating the link between diet and colon cancer risk. Diet does not act on the colon directly so much as it feeds an intermediary that then acts on the colon.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Why this opens therapeutic doors</div>
+        <div class="leaf-detail">If bacteria are the mediator, they are also a target. Kinross noted the implication directly — that therapies aimed at gut bacteria could become a route to preventing and treating cancer. That is the research frontier the study points toward rather than something available at a pharmacy today.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b4" onclick="toggleBranch(this)">
+    <div class="branch-head"><span class="dot"></span><span class="branch-title">Fibre Is the Active Ingredient</span><span class="branch-n">4</span><span class="chev">›</span></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>What the two diets actually looked like</div>
+        <div class="leaf-detail">The traditional African pattern is built on staples like samp and beans — maize, legumes, vegetables — high in fibre and low in fat and animal protein. The western pattern inverts that: high in protein and fat, low in fibre. The contrast is less about any single villain food than about what fills the plate by volume.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Fermentable fibre, not just roughage</div>
+        <div class="leaf-detail">The fibre that drives butyrate production is the fermentable kind that bacteria can actually eat — the resistant starch and soluble fibre in beans, lentils, oats, cooled potatoes and rice, barley and whole grains. Insoluble roughage helps transit time but does not feed the fermentation engine in the same way.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Most western diets fall well short</div>
+        <div class="leaf-detail">UK guidance sets thirty grams of fibre a day for adults and typical intake sits closer to twenty. Legumes are the single highest-leverage correction: a cup of cooked beans or lentils delivers roughly fifteen grams, which closes most of the gap in one move.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Displacement does double work</div>
+        <div class="leaf-detail">Adding fibre-rich food tends to displace fat and processed meat from the same plate, so a single swap moves both variables the study was manipulating. This is why "swap" is the operative word in the episode's title rather than "supplement" — the participants changed what they ate, not what they added on top.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b5" onclick="toggleBranch(this)">
+    <div class="branch-head"><span class="dot"></span><span class="branch-title">What This Does Not Prove</span><span class="branch-n">4</span><span class="chev">›</span></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Biomarkers are not outcomes</div>
+        <div class="leaf-detail">Nicholson was explicit that the measurements cannot definitively tell us the diet change would have led to more cancer in the African group or less in the American group — though other studies give good evidence that the changes observed are signs of cancer risk. Markers moved. Nobody's cancer was cured or caused inside a fortnight.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>"Reversed" is doing heavy lifting</div>
+        <div class="leaf-detail">The episode title says cancer risk was reversed in fourteen days. What reversed were inflammatory and proliferative markers in the colon lining. That is a meaningful and encouraging signal, but the gap between a biomarker shift and a change in who goes on to develop bowel cancer is real and unquantified by this study.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Forty people, two weeks</div>
+        <div class="leaf-detail">A sample of forty across two groups, run for a fortnight, tells you about mechanism and speed rather than about population-level risk over decades. Its strength is the controlled feeding and the direct colonoscopic sampling, not its size or duration.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Diet does not replace screening</div>
+        <div class="leaf-detail">Bowel cancer is highly treatable when caught early and can grow substantially before producing symptoms. No dietary change substitutes for participating in screening programmes when invited, or for getting persistent changes in bowel habit, blood in the stool, unexplained weight loss or ongoing abdominal pain looked at by a doctor.</div></div>
+    </div>
+  </div>
+
+  <div class="branch b6" onclick="toggleBranch(this)">
+    <div class="branch-head"><span class="dot"></span><span class="branch-title">Putting It Into Practice</span><span class="branch-n">4</span><span class="chev">›</span></div>
+    <div class="leaves">
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Start with legumes</div>
+        <div class="leaf-detail">Beans, lentils and chickpeas are the closest thing to the study's intervention that fits a normal week. Tinned is fine and costs little. Working a cup into one meal a day is a bigger lever than any supplement and lands the fermentable fibre that drives butyrate production.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Ramp gradually</div>
+        <div class="leaf-detail">Going from twenty grams of fibre to forty overnight reliably produces bloating and gas, which is the most common reason people abandon the change. Add roughly five grams a week and give the microbial population time to shift its composition, and drink enough water alongside it.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Use resistant starch</div>
+        <div class="leaf-detail">Cooking and then cooling potatoes, rice or pasta converts some of the starch into resistant starch, which behaves like fermentable fibre. Reheating retains much of the effect. It is a free upgrade to food you were already eating.</div></div>
+      <div class="leaf" onclick="toggleLeaf(event,this)"><div class="leaf-head"><span class="leaf-mark">◆</span>Cut the other side of the equation</div>
+        <div class="leaf-detail">The western arm of the swap was high in fat and animal protein, and processed meat in particular carries an independent association with colorectal cancer. Reducing processed meat while raising fibre reproduces both halves of what the American group did, rather than only the pleasant half.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────── FULL SUMMARY ─────────── -->
+<div class="panel" id="summary">
+  <h2>The claim and where it comes from</h2>
+  <p>The episode's premise is that fourteen days of dietary change can measurably shift the biological signals associated with bowel cancer. That claim is not rhetorical — it rests on a specific, well-known piece of research published in Nature Communications in 2015 by Stephen O'Keefe's group at the University of Pittsburgh together with Jeremy Nicholson's team at Imperial College London, funded by the US National Institutes of Health.</p>
+  <p>The design was unusually direct. Twenty African American volunteers and twenty volunteers from rural South Africa exchanged diets for two weeks under controlled conditions, with the food supplied rather than self-reported. Each participant had a colonoscopy before and after, and the researchers sampled bacteria from inside the colon as well as measuring biological markers indicating cancer risk. That combination — controlled feeding plus direct sampling of the tissue in question — is what separates this from the questionnaire-based nutrition studies that dominate the field.</p>
+
+  <h2>What the researchers found</h2>
+  <p>The baseline was itself informative. Before any diet change, almost half of the American participants had polyps, the abnormal growths in the bowel lining that may be harmless but can progress to cancer. None of the rural African participants had any. This mirrors the global pattern: colon cancer is the fourth commonest cause of cancer death worldwide with over 600,000 deaths annually, rates run far higher in the western world than in Africa or the Far East, and African Americans carry the greatest burden within the United States.</p>
+  <p>After two weeks, the American group eating the African diet showed significantly reduced inflammation in the colon and lowered biomarkers of cancer risk. The African group eating the western diet went the other way, with risk measurements increasing dramatically. Both shifts happened inside a fortnight.</p>
+  <div class="pull">The finding that fibre protects against colon cancer was already established. What startled the researchers was how fast the markers moved — and that they moved in both directions.</div>
+
+  <h2>Why the microbiome is the story</h2>
+  <p>The mechanism the team identified sits with the gut bacteria. A major reason for the change in cancer risk was the way the microbiome altered its metabolism to adapt to the new diet. In the American group, the high-fibre African diet drove increased production of butyrate — a short-chain fatty acid generated when bacteria ferment fibre, which has recognised anti-cancer effects and serves as the main fuel for the cells lining the colon.</p>
+  <p>James Kinross, a colorectal surgeon on the Imperial team, put the implication plainly: gut bacteria are critically important in mediating the link between diet and colon cancer risk, which raises the prospect of therapies that target those bacteria directly as a route to prevention and treatment. Diet, on this reading, works largely by determining what the resident bacterial population is fed and therefore what it produces.</p>
+
+  <h2>The limits worth holding onto</h2>
+  <p>Nicholson was careful in a way that headlines usually are not. The measurements cannot definitively establish that the diet change would have produced more cancer in the African group or less in the American group, though evidence from other work supports treating the observed changes as signs of cancer risk. What moved were markers, over two weeks, in forty people. The distance between a biomarker shifting and a person's lifetime probability of developing bowel cancer changing is genuine, and this study does not measure it.</p>
+  <p>O'Keefe's framing captured both the promise and its boundary. Studies of Japanese migrants to Hawaii showed that a single generation of westernisation was enough to convert low colon cancer incidence into the high rates seen locally; this study suggests the underlying biomarkers respond within two weeks in either direction, which he read as evidence that it is likely never too late to change your diet to change your risk. That is an argument for optimism about prevention, not a claim that diet treats established disease.</p>
+
+  <h2>What to actually do with it</h2>
+  <p>The practical translation is less exotic than the headline suggests. The African arm of the swap was high in fibre and low in fat and animal protein, built on legumes, maize and vegetables. Most western diets fall roughly ten grams a day short of the thirty grams of fibre recommended for adults, and legumes close that gap faster than anything else — a cup of cooked beans or lentils supplies around fifteen grams. Resistant starch, formed when potatoes or rice are cooked and cooled, behaves similarly and requires no shopping at all.</p>
+  <p>Two cautions apply. Increase fibre gradually, since a sudden jump produces the bloating that makes most people quit within a week. And treat none of this as a substitute for screening: bowel cancer is highly treatable caught early, can grow considerably before causing symptoms, and warrants medical attention for persistent changes in bowel habit, blood in the stool, unexplained weight loss or ongoing abdominal pain regardless of how well anyone is eating.</p>
+</div>
+
+<!-- ─────────── TAKEAWAYS ─────────── -->
+<div class="panel" id="takeaways">
+  <div class="hint">Ten specific actions drawn from the episode and the underlying study</div>
+
+  <div class="take"><div class="take-n">01</div><div class="take-body"><h3>Put a cup of legumes into one meal a day</h3><p>Beans, lentils or chickpeas deliver roughly fifteen grams of fermentable fibre per cooked cup — the single biggest lever available and the closest everyday match to the study's intervention diet.</p></div></div>
+  <div class="take"><div class="take-n">02</div><div class="take-body"><h3>Raise fibre by about five grams a week, not all at once</h3><p>The bacterial population needs time to shift. Jumping straight to a high-fibre intake causes the bloating and gas that ends most attempts inside a fortnight.</p></div></div>
+  <div class="take"><div class="take-n">03</div><div class="take-body"><h3>Aim for thirty grams a day and actually count it once</h3><p>Most people estimate their fibre intake badly. Tracking for three days establishes where you really sit against the target, after which you can stop counting.</p></div></div>
+  <div class="take"><div class="take-n">04</div><div class="take-body"><h3>Cook and cool your starches</h3><p>Chilling cooked potatoes, rice or pasta converts some starch into resistant starch that feeds fermentation. Reheating keeps most of the benefit — a free change to food already on the menu.</p></div></div>
+  <div class="take"><div class="take-n">05</div><div class="take-body"><h3>Cut processed meat as you add fibre</h3><p>The western arm of the swap was high in fat and animal protein. Reproducing only the fibre half misses part of what shifted the American group's markers.</p></div></div>
+  <div class="take"><div class="take-n">06</div><div class="take-body"><h3>Favour fermentable fibre over bran alone</h3><p>Butyrate comes from what bacteria can ferment — oats, barley, beans, lentils, whole grains. Insoluble roughage helps transit but does not drive the same production.</p></div></div>
+  <div class="take"><div class="take-n">07</div><div class="take-body"><h3>Increase water alongside fibre</h3><p>Fibre without adequate fluid worsens constipation rather than relieving it, which is the second most common reason people abandon the change.</p></div></div>
+  <div class="take"><div class="take-n">08</div><div class="take-body"><h3>Accept screening invitations when they arrive</h3><p>Bowel cancer is highly treatable when caught early and can grow substantially before producing symptoms. Diet changes risk; screening changes detection, and they are not interchangeable.</p></div></div>
+  <div class="take"><div class="take-n">09</div><div class="take-body"><h3>Get persistent symptoms checked regardless of diet</h3><p>Change in bowel habit lasting weeks, blood in the stool, unexplained weight loss or ongoing abdominal pain warrant a GP appointment — eating well does not make these less worth investigating.</p></div></div>
+  <div class="take"><div class="take-n">10</div><div class="take-body"><h3>Start now rather than waiting for a clean slate</h3><p>The markers moved in both directions within a fortnight in people well into adulthood, which was O'Keefe's basis for saying it is likely never too late to change your diet to change your risk.</p></div></div>
+</div>
+
+</main>
+
+<footer>
+  Source study: S.J.D. O'Keefe et al., "Fat, fibre and cancer risk in African Americans and rural Africans," <em>Nature Communications</em>, 2015 · DOI 10.1038/ncomms7342<br>
+  Episode: <a href="https://youtu.be/ghdn9pBxXcM" target="_blank" rel="noopener">The Diet Swap That Reversed Cancer Risk in 14 Days</a> — Doctor Alex, 11 June 2026<br>
+  General information only, not medical advice. Discuss individual risk and screening with your doctor.
+</footer>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleBranch(el){ el.classList.toggle('open'); }
+function toggleLeaf(e, el){ e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>
