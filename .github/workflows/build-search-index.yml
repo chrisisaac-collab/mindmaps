@@ -1,0 +1,57 @@
+name: Build search index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**-mindmap.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract text from mind maps
+        run: |
+          python3 - <<'PY'
+          import json, re, pathlib
+
+          entries = []
+          for path in sorted(pathlib.Path('.').rglob('*-mindmap.html')):
+              if '.github' in path.parts:
+                  continue
+              html = path.read_text(encoding='utf-8', errors='ignore')
+
+              m = re.search(r'<title[^>]*>(.*?)</title>', html,
+                            re.I | re.S)
+              title = re.sub(r'\s+', ' ', m.group(1)).strip() if m else path.stem
+
+              body = re.sub(r'<(script|style)\b.*?</\1>', ' ', html,
+                            flags=re.I | re.S)
+              body = re.sub(r'<[^>]+>', ' ', body)
+              body = re.sub(r'&[a-z]+;|&#\d+;', ' ', body)
+              body = re.sub(r'\s+', ' ', body).strip()
+
+              entries.append({
+                  'file': str(path),
+                  'title': title,
+                  'text': body[:20000],
+              })
+
+          pathlib.Path('search-index.json').write_text(
+              json.dumps(entries, ensure_ascii=False), encoding='utf-8')
+          print(f'Indexed {len(entries)} mind maps')
+          PY
+
+      - name: Commit index
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add search-index.json
+          git diff --staged --quiet || git commit -m 'Rebuild search index'
+          git push
