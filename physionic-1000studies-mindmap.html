@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reality Check: 1,000 Health Studies (Physionic)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f5f0;
+    --bg-elev:#ffffff;
+    --bg-card:#ffffff;
+    --border:#e1ddd2;
+    --text:#221f1a;
+    --text-dim:#5c584e;
+    --text-faint:#8c8778;
+    --accent-a:#c9772f; /* metabolic/weight - amber */
+    --accent-b:#5a7d5a; /* muscle/mood - green */
+    --accent-c:#a6473c; /* cancer/liver - deep red */
+    --accent-d:#3b6ea5; /* brain/longevity foods - blue */
+    --accent-e:#7a5a9c; /* meta-verdict - purple */
+    --true:#3f7a4e;
+    --mixed:#b8862c;
+    --false:#a6473c;
+    --unverified:#7a766a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;
+    line-height:1.5;
+  }
+  h1,h2,h3,.tab,.branch-title,.leaf-title{font-family:'Space Grotesk',sans-serif;}
+
+  header{
+    padding:28px 20px 18px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg, #fffdf9, var(--bg));
+  }
+  .header-inner{max-width:1000px; margin:0 auto;}
+  .kicker{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--text-faint); font-weight:600; margin-bottom:8px;
+  }
+  h1{font-size:clamp(20px,3.4vw,30px); font-weight:700; line-height:1.25; margin-bottom:10px;}
+  .subtitle{color:var(--text-dim); font-size:14px; max-width:680px;}
+  .source-line{
+    margin-top:14px; font-size:12.5px; color:var(--text-faint);
+    display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center;
+  }
+  .source-line a{color:#3b6ea5; text-decoration:none;}
+  .source-line a:hover{text-decoration:underline;}
+
+  nav.tabs{
+    max-width:1000px; margin:18px auto 0; padding:0 20px;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .tab{
+    background:var(--bg-card); border:1px solid var(--border);
+    color:var(--text-dim); padding:9px 16px; border-radius:9px;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab:hover{color:var(--text); border-color:#c7c1b2;}
+  .tab.active{background:var(--accent-d); color:#fff; border-color:var(--accent-d);}
+
+  main{max-width:1000px; margin:0 auto; padding:22px 20px 60px;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .legend{
+    display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;
+    font-size:12px; color:var(--text-dim);
+  }
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
+
+  .branch{
+    background:var(--bg-card); border:1px solid var(--border);
+    border-left:4px solid var(--branch-color, var(--accent-a));
+    border-radius:12px; margin-bottom:14px; overflow:hidden;
+    box-shadow:0 1px 2px rgba(30,25,15,.04);
+  }
+  .branch-header{
+    padding:16px 18px; cursor:pointer; display:flex;
+    justify-content:space-between; align-items:center; gap:12px;
+  }
+  .branch-title{font-size:16px; font-weight:600;}
+  .branch-sub{font-size:12.5px; color:var(--text-dim); font-weight:400; margin-top:3px; font-family:'Inter',sans-serif;}
+  .branch-arrow{
+    flex-shrink:0; width:22px; height:22px; border-radius:50%;
+    border:1px solid var(--border); display:flex; align-items:center;
+    justify-content:center; font-size:13px; color:var(--text-dim);
+    transition:transform .2s ease;
+  }
+  .branch.open .branch-arrow{transform:rotate(45deg);}
+  .branch-leaves{
+    max-height:0; overflow:hidden; transition:max-height .3s ease;
+    padding:0 18px;
+  }
+  .branch.open .branch-leaves{max-height:4000px; padding:0 18px 16px;}
+
+  .leaf{
+    background:#fbfaf6; border:1px solid var(--border);
+    border-radius:9px; margin-top:10px; padding:12px 14px; cursor:pointer;
+  }
+  .leaf-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .leaf-title{font-size:13.5px; font-weight:600; line-height:1.4;}
+  .verdict{
+    flex-shrink:0; font-size:10.5px; font-weight:700; letter-spacing:.04em;
+    text-transform:uppercase; padding:3px 9px; border-radius:20px;
+    white-space:nowrap; font-family:'Inter',sans-serif;
+  }
+  .v-true{background:rgba(63,122,78,.12); color:var(--true); border:1px solid rgba(63,122,78,.35);}
+  .v-mixed{background:rgba(184,134,44,.12); color:var(--mixed); border:1px solid rgba(184,134,44,.35);}
+  .v-false{background:rgba(166,71,60,.12); color:var(--false); border:1px solid rgba(166,71,60,.35);}
+  .v-unverified{background:rgba(122,118,106,.12); color:var(--unverified); border:1px solid rgba(122,118,106,.35);}
+
+  .leaf-detail{
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+    font-size:13px; color:var(--text-dim); line-height:1.55;
+  }
+  .leaf.open .leaf-detail{max-height:600px; margin-top:10px;}
+  .leaf-detail a{color:#3b6ea5;}
+
+  .summary-section{margin-bottom:26px;}
+  .summary-section h2{font-size:16px; margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+  .summary-section h2 .dot{width:10px; height:10px;}
+  .summary-section p{color:var(--text-dim); font-size:14px; line-height:1.7;}
+
+  .takeaways{display:grid; grid-template-columns:1fr; gap:12px;}
+  @media(min-width:680px){.takeaways{grid-template-columns:1fr 1fr;}}
+  .take-card{
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:11px; padding:16px; display:flex; gap:12px;
+    box-shadow:0 1px 2px rgba(30,25,15,.04);
+  }
+  .take-num{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--accent-d); color:#fff; font-weight:700;
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .take-card p{font-size:13.5px; color:var(--text-dim); line-height:1.55;}
+  .take-card strong{color:var(--text);}
+
+  footer{
+    max-width:1000px; margin:0 auto; padding:0 20px 50px;
+    color:var(--text-faint); font-size:12px; line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="kicker">Reality Check &middot; Peer-Review Cross-Check</div>
+    <h1>"I Analyzed 1,000 Health Studies" — Physionic's 10 findings, checked</h1>
+    <p class="subtitle">Physionic (Dr. Nicholas Norwitz) runs through ten findings pulled from recent research: resistant starch, GLP-1 drugs, omega-3s, a new leucine brain sensor, creatine, vitamin K2, fecal transplants, coffee, cheese, and lycopene. Physionic generally cites real primary literature — this map checks how solid each specific claim actually is, and how far the evidence has really gotten.</p>
+    <div class="source-line">
+      <span>Source video:</span>
+      <a href="https://youtu.be/sx8MyamJf3g" target="_blank" rel="noopener">youtu.be/sx8MyamJf3g</a>
+      <span>&middot; Channel: Physionic</span>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- MIND MAP -->
+  <div id="mindmap" class="panel active">
+    <div class="legend">
+      <span><span class="dot" style="background:var(--true)"></span> Well supported</span>
+      <span><span class="dot" style="background:var(--mixed)"></span> Real, but early / contested</span>
+      <span><span class="dot" style="background:var(--false)"></span> Overstated vs. evidence</span>
+      <span><span class="dot" style="background:var(--unverified)"></span> Correlation, not proven cause</span>
+    </div>
+
+    <!-- BRANCH A -->
+    <div class="branch" style="--branch-color:var(--accent-a)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">1. Metabolic &amp; Weight Findings</div>
+          <div class="branch-sub">Resistant starch, GLP-1 drugs, brain protein-sensing</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Resistant starch (40g/day) visibly reduces visceral fat on MRI</div>
+            <div class="verdict v-mixed">Real, early-stage</div>
+          </div>
+          <div class="leaf-detail">Resistant starch and gut-microbiota-mediated fat loss is a genuine, active research area, including a 2018 Scientific Reports paper linking resistant starch to weight/fat changes via microbiome shifts. The specific "40g/day, visible MRI reduction" framing traces to newer, smaller trials and Norwitz's own reported self-experimentation — promising, but not yet the kind of large, repeated RCT evidence that would make 40g a settled clinical benchmark.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">GLP-1 drugs (semaglutide) may reverse osteoarthritis cartilage damage, beyond weight loss</div>
+            <div class="verdict v-true">Well supported</div>
+          </div>
+          <div class="leaf-detail">The headline trial here is real: the NEJM-published STEP-9 study found once-weekly semaglutide improved knee osteoarthritis symptoms in people with obesity. Follow-on 2025–2026 research has reported direct cartilage-protective effects that appear at least partly independent of weight loss itself — an active, credible, and genuinely exciting research frontier, though "reversal" is still an early and strong word for what's mostly reduced progression and symptom improvement.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">A brain sensor (Cav3.1) detects leucine-rich protein and drives satiety</div>
+            <div class="verdict v-true">Well supported, cutting-edge</div>
+          </div>
+          <div class="leaf-detail">This is a real and very recent discovery: a 2024–2026 Cell Metabolism paper (with Cambridge Pharmacology involvement) identified Cav3.1 as a neuronal leucine sensor in POMC neurons that mediates satiety and weight loss in response to dietary protein. It's genuine, peer-reviewed neuroscience — though as with any single fresh mechanistic finding, the human dietary implications ("focus on leucine-rich protein") are a reasonable but forward-leaning extrapolation from what's mostly been shown at the neuronal/animal level so far.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH B -->
+    <div class="branch" style="--branch-color:var(--accent-b)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">2. Muscle &amp; Mood</div>
+          <div class="branch-sub">Omega-3s and creatine-plus-microbiome</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Omega-3 (1.4–1.5g DHA/EPA) gives a small muscle-strength benefit independent of exercise</div>
+            <div class="verdict v-false">Overstated</div>
+          </div>
+          <div class="leaf-detail">Evidence here is genuinely mixed, and recent syntheses lean more skeptical than the claim suggests. A 2025 "overview of reviews" (ScienceDirect) concluded there's a lack of consistent evidence for omega-3 supplementation meaningfully improving lean mass, strength or physical function across healthy and clinical populations, even though isolated trials — often in older adults — do show benefits. Presenting this as a settled "small but real, exercise-independent" effect goes a bit further than the current body of evidence actually supports.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Creatine plus a microbiome/probiotic add-on outperforms creatine or placebo alone for depression</div>
+            <div class="verdict v-mixed">Real, early-stage</div>
+          </div>
+          <div class="leaf-detail">Creatine's antidepressant evidence has genuinely been mixed across trials, and there is a real, recent small controlled trial testing creatine combined with a microbiome-targeted intervention that reported significantly greater improvement than placebo. It's a legitimate, promising result — but from one small trial, which is exactly the kind of finding that needs independent replication before being treated as established.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH C -->
+    <div class="branch" style="--branch-color:var(--accent-c)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">3. Cancer &amp; Liver</div>
+          <div class="branch-sub">Vitamin K2 and fecal microbiota transplants</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Vitamin K2 (MK-4, 45mg) alongside conventional treatment helps fight liver cancer recurrence</div>
+            <div class="verdict v-true">Well supported</div>
+          </div>
+          <div class="leaf-detail">This is one of the better-evidenced claims in the video. Yoshida et al.'s 2011 randomized trial in <em>Hepatology</em> found MK-4 reduced hepatocellular carcinoma recurrence after curative treatment, and this has since been reinforced by multiple meta-analyses of randomized trials (BMC Gastroenterology 2012, and a further 2025 meta-analysis), making the general finding reasonably well replicated for an adjunct nutritional therapy.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Fecal microbiota transplants alongside immunotherapy dramatically improve cancer survival (80% vs ~20% at 3 years)</div>
+            <div class="verdict v-mixed">Real, but early-phase</div>
+          </div>
+          <div class="leaf-detail">FMT combined with anti-PD-1 immunotherapy in melanoma and other cancers is genuinely one of the most exciting areas in oncology microbiome research, with real published phase 1/2 trials in <em>Science</em> and <em>Nature Medicine</em> showing improved response rates and survival. The specific 80%-vs-20% figures land in the range reported by some of these trials — but phase 1/2 trials are small by design, meant to establish safety and signal before the larger phase 3 trials that would confirm the effect size holds up at scale.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH D -->
+    <div class="branch" style="--branch-color:var(--accent-d)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">4. Brain &amp; Longevity Foods</div>
+          <div class="branch-sub">Coffee, cheese, and lycopene</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Caffeinated coffee (up to ~3 cups/day) tracks with ~20% lower all-cause dementia risk; decaf shows no benefit</div>
+            <div class="verdict v-unverified">Strong association, not proven cause</div>
+          </div>
+          <div class="leaf-detail">This tracks closely with a real, large, very recent (2026) long-term cohort study — reported at roughly 40+ years of follow-up from Mass General/Harvard-linked researchers — finding caffeinated coffee and tea associated with meaningfully lower dementia risk, with no comparable benefit from decaf. It's a well-powered observational study, but it remains an association, not a randomized proof that coffee itself causes the risk reduction.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Cheese, including high-fat cheese over 50g/day, does not raise dementia risk and may modestly lower it</div>
+            <div class="verdict v-unverified">Strong association, not proven cause</div>
+          </div>
+          <div class="leaf-detail">This matches a genuine, recent (2025) 25-year cohort study published in <em>Neurology</em> linking higher-fat cheese and cream intake to lower dementia risk. Again, it's solid, well-conducted observational epidemiology — the kind of evidence that's genuinely useful for reassurance, but that can't by itself rule out that people who eat more cheese differ from those who don't in other health-relevant ways.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Higher blood lycopene correlates with less arterial plaque, though tomato products beat isolated lycopene overall</div>
+            <div class="verdict v-true">Accurately hedged</div>
+          </div>
+          <div class="leaf-detail">The evidence base here is genuinely mixed, and the video's own framing reflects that honestly rather than overselling it. Animal studies show lycopene reducing atherosclerotic plaque via AMPK/PPARα pathways, and small human RCTs show improved vascular function, but systematic reviews of isolated lycopene supplementation on cardiovascular risk factors are inconsistent — which is exactly why whole tomato products, not isolated lycopene pills, come out looking like the more reliably beneficial choice.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH E -->
+    <div class="branch" style="--branch-color:var(--accent-e)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">5. Meta-Verdict: How Reliable Is This Video?</div>
+          <div class="branch-sub">Reading the sourcing pattern across all 10 claims</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Almost every claim traces to a real, findable study</div>
+            <div class="verdict v-true">Notably better sourcing</div>
+          </div>
+          <div class="leaf-detail">Unlike a lot of health content built on invented statistics and fabricated journal names, nine of these ten claims map onto genuine, identifiable papers or trials — a materially higher bar than typical clickbait fitness content, consistent with Physionic's format of directly citing primary research.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Several headline findings rest on small or early-phase trials</div>
+            <div class="verdict v-mixed">Watch the sample sizes</div>
+          </div>
+          <div class="leaf-detail">The resistant-starch, creatine-plus-microbiome, and FMT-plus-cancer-survival claims all come from real but small, early-stage trials (phase 1/2, or single small RCTs). These are legitimate, exciting leads — the honest caveat is that "promising early trial" and "established treatment" are different confidence levels, and the video sometimes presents them at the same pitch of certainty.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Coffee and cheese findings are observational, not experimental</div>
+            <div class="verdict v-unverified">Correlation caveat applies</div>
+          </div>
+          <div class="leaf-detail">Both the coffee-dementia and cheese-dementia findings come from large, well-conducted cohort studies — genuinely useful evidence — but cohort studies show association, not proof of causation. People who drink three cups of coffee a day or eat cheese regularly may differ from those who don't in ways that aren't fully captured by statistical adjustment.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">One claim (omega-3 and muscle) is more contested than presented</div>
+            <div class="verdict v-false">The weakest link</div>
+          </div>
+          <div class="leaf-detail">Of the ten, the omega-3-and-muscle-strength claim is the one where the current synthesis literature (a 2025 overview of reviews) actually leans toward "evidence is inconsistent" rather than confirming a clear, exercise-independent strength benefit — worth treating with more skepticism than the other nine.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FULL SUMMARY -->
+  <div id="summary" class="panel">
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-a)"></span>Metabolic and weight findings</h2>
+      <p>The resistant starch claim is grounded in a genuine and active research area connecting resistant starch, gut microbiota remodeling, and reductions in visceral and liver fat, including a well-cited 2018 Scientific Reports paper — but the specific "40 grams daily, visible on MRI" framing draws on smaller, newer trials and self-experimentation rather than large, repeated randomized controlled trials, so it's best treated as a promising early finding rather than an established clinical benchmark. The GLP-1 and osteoarthritis claim is on much firmer ground: the NEJM-published STEP-9 trial genuinely found semaglutide improved knee osteoarthritis outcomes in people with obesity, and newer 2025–2026 research plausibly extends this toward direct cartilage-protective effects independent of weight loss, even if "reversal" overstates what's mostly documented as slowed progression and symptom relief. The Cav3.1 leucine-sensing claim is real and impressively current — a 2024–2026 Cell Metabolism paper genuinely identified this neuronal mechanism — though translating a fresh mechanistic discovery into dietary advice about "leucine-rich protein sources" is a reasonable but forward-leaning extrapolation.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-b)"></span>Muscle and mood</h2>
+      <p>This is where the video's evidence is weakest. The omega-3-and-muscle-strength claim glosses over real inconsistency in the literature; a 2025 overview of systematic reviews concluded there isn't strong, consistent evidence that omega-3 supplementation meaningfully improves muscle strength or lean mass across populations, even though some individual trials (particularly in older adults) do show benefit. The creatine-plus-microbiome finding for depression is a real, small controlled trial with a genuinely positive result, sitting on top of a broader creatine-depression literature that has been famously mixed — a legitimate, interesting lead, but one trial away from being a confirmed treatment approach.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-c)"></span>Cancer and liver</h2>
+      <p>Vitamin K2's role in reducing hepatocellular carcinoma recurrence is one of the better-supported claims in the whole video, resting on a real randomized trial (Yoshida et al., 2011, Hepatology) and reinforced by more than one meta-analysis of randomized trials since. The fecal microbiota transplant and cancer survival claim is genuinely exciting and real — published phase 1 and phase 2 trials in Science and Nature Medicine have shown improved immunotherapy response and survival in melanoma when combined with FMT, and reported figures in that range do appear in the literature. The caveat is that these are still early-phase trials by design, meant to establish a signal worth pursuing in larger studies, not yet confirmation at the scale the numbers might suggest.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-d)"></span>Brain and longevity foods</h2>
+      <p>The coffee and dementia claim matches a real, large, and very recent long-term cohort study (roughly 40-plus years of follow-up) linking caffeinated coffee to meaningfully lower dementia risk, with no similar benefit from decaf — solid observational science, though observational nonetheless. The cheese and dementia claim similarly matches a genuine 25-year cohort study published in Neurology finding higher-fat cheese and cream intake associated with lower dementia risk. Both are useful, reassuring findings, but neither is a randomized trial, so "tracks with" is the more accurate framing than "causes." The lycopene and arterial plaque claim is, refreshingly, the one place the video hedges appropriately on its own — animal and small human studies support a benefit, but larger reviews of isolated lycopene supplementation are inconsistent, and the honest conclusion (whole tomato products look more reliably beneficial than isolated lycopene) matches what the broader literature actually shows.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-e)"></span>The overall verdict</h2>
+      <p>Compared with typical health clickbait, this video holds up well: nine of its ten specific claims map onto real, identifiable studies rather than invented statistics or fabricated citations, consistent with Physionic's format of directly summarizing primary research literature. The main things worth keeping in mind are less about outright falsehood and more about calibration: several of the most exciting claims (resistant starch, creatine-plus-microbiome, fecal transplants and cancer survival) rest on small or early-phase trials that are genuinely promising but not yet established treatments, two of the claims (coffee and cheese) are strong observational associations rather than proven causal effects, and the omega-3-and-muscle claim leans more confident than the current synthesis literature actually supports. None of that makes the video dishonest — it makes it a reasonably accurate snapshot of where active, unsettled research currently stands, which is a different (and more useful) thing than a list of settled facts.</p>
+    </div>
+
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div id="takeaways" class="panel">
+    <div class="takeaways">
+
+      <div class="take-card">
+        <div class="take-num">1</div>
+        <p><strong>Coffee and cheese are the safest bets to act on.</strong> Both dementia-risk findings rest on large, well-conducted long-term cohort studies — reasonable to keep enjoying moderate coffee and cheese without worry, while remembering "associated with" isn't the same as "proven to prevent."</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">2</div>
+        <p><strong>Treat resistant starch, creatine-plus-microbiome, and FMT-cancer findings as "promising, not proven."</strong> All three are genuinely real research directions, but each rests on small or early-phase trials that haven't yet been replicated at scale.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">3</div>
+        <p><strong>Be more skeptical of the omega-3-and-muscle claim than the video is.</strong> The most recent overview of reviews on the topic found inconsistent evidence — a good example of where citing a real study doesn't guarantee the conclusion is settled science.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">4</div>
+        <p><strong>Vitamin K2 for liver cancer recurrence is one of the stronger claims here.</strong> It's backed by an actual randomized trial plus more than one meta-analysis — worth knowing about if liver cancer touches anyone you know, and worth discussing with an oncologist rather than self-prescribing.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">5</div>
+        <p><strong>The GLP-1/osteoarthritis and Cav3.1 findings are genuinely cutting-edge.</strong> Both trace to real, very recent, high-quality publications — a good example of legitimate emerging science, even though "reversal" language runs a bit ahead of what's actually been shown.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">6</div>
+        <p><strong>Notice the video's own hedging on lycopene — that's a good model.</strong> When it says tomato products beat isolated lycopene, that mirrors the actual mixed state of the supplement-trial literature. That kind of honest uncertainty is worth rewarding as a viewer.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">7</div>
+        <p><strong>"Study says" claims from Physionic-style channels are generally worth a second look, not a dismissal.</strong> Nine of ten claims here map onto real citable research — a meaningfully higher bar than typical wellness content, even where the framing runs slightly ahead of the evidence.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">8</div>
+        <p><strong>Sample size is the single best question to ask of any exciting new finding.</strong> "Phase 1 trial" or "one small RCT" and "large replicated study" deserve very different levels of confidence, even when both are technically real, peer-reviewed research.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">9</div>
+        <p><strong>Observational nutrition findings (coffee, cheese) are good for reassurance, not for prescribing dosage.</strong> "Up to 3 cups" or "50g of cheese" reflect the range studied in the cohorts, not a clinically established optimal dose.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">10</div>
+        <p><strong>For anything with clinical stakes — cancer, liver disease, depression treatment — these findings are conversation-starters with a qualified clinician, not standalone protocols.</strong> The underlying research is real and often exciting, but early-stage evidence isn't the same as clinical guidance.</p>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  This reality check cross-references claims made in the source video against publicly available peer-reviewed research, using researcher names, journals and trial descriptions as they could be verified via web and literature search. It distinguishes "real but early-stage" and "real but observational" findings from claims that are genuinely well-replicated, since those distinctions matter more than a simple true/false label for active areas of research. This is not medical advice — consult a qualified health professional before acting on any specific finding here.
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
