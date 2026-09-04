@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reality Check: "Stop Walking Everyday" (VFA Method)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1115;
+    --bg-elev:#171a21;
+    --bg-card:#1c2029;
+    --border:#2a2f3a;
+    --text:#e8eaf0;
+    --text-dim:#9aa1b2;
+    --text-faint:#6b7draa;
+    --accent-a:#f2a154; /* hormones - amber */
+    --accent-b:#e6614f; /* visceral fat - red/orange */
+    --accent-c:#4f9de6; /* fasted exercise/protein - blue */
+    --accent-d:#a374e6; /* circadian/light - purple */
+    --accent-e:#5fc27a; /* intensity/coffee - green */
+    --accent-f:#3fc7c1; /* ketones/verdict - teal */
+    --true:#4caf6e;
+    --mixed:#e0b23e;
+    --false:#e6614f;
+    --unverified:#8a90a3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;
+    line-height:1.5;
+  }
+  h1,h2,h3,.tab,.branch-title,.leaf-title{font-family:'Space Grotesk',sans-serif;}
+
+  header{
+    padding:28px 20px 18px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg, var(--bg-elev), var(--bg));
+  }
+  .header-inner{max-width:1000px; margin:0 auto;}
+  .kicker{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--text-dim); font-weight:600; margin-bottom:8px;
+  }
+  h1{font-size:clamp(20px,3.4vw,30px); font-weight:700; line-height:1.25; margin-bottom:10px;}
+  .subtitle{color:var(--text-dim); font-size:14px; max-width:680px;}
+  .source-line{
+    margin-top:14px; font-size:12.5px; color:var(--text-faint);
+    display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center;
+  }
+  .source-line a{color:#8fb8e6; text-decoration:none;}
+  .source-line a:hover{text-decoration:underline;}
+
+  nav.tabs{
+    max-width:1000px; margin:18px auto 0; padding:0 20px;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .tab{
+    background:var(--bg-card); border:1px solid var(--border);
+    color:var(--text-dim); padding:9px 16px; border-radius:9px;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab:hover{color:var(--text); border-color:#3a4152;}
+  .tab.active{background:var(--accent-c); color:#0b0d12; border-color:var(--accent-c);}
+
+  main{max-width:1000px; margin:0 auto; padding:22px 20px 60px;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  /* Legend */
+  .legend{
+    display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;
+    font-size:12px; color:var(--text-dim);
+  }
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
+
+  /* Mind map branches */
+  .branch{
+    background:var(--bg-card); border:1px solid var(--border);
+    border-left:4px solid var(--branch-color, var(--accent-a));
+    border-radius:12px; margin-bottom:14px; overflow:hidden;
+  }
+  .branch-header{
+    padding:16px 18px; cursor:pointer; display:flex;
+    justify-content:space-between; align-items:center; gap:12px;
+  }
+  .branch-title{font-size:16px; font-weight:600;}
+  .branch-sub{font-size:12.5px; color:var(--text-dim); font-weight:400; margin-top:3px; font-family:'Inter',sans-serif;}
+  .branch-arrow{
+    flex-shrink:0; width:22px; height:22px; border-radius:50%;
+    border:1px solid var(--border); display:flex; align-items:center;
+    justify-content:center; font-size:13px; color:var(--text-dim);
+    transition:transform .2s ease;
+  }
+  .branch.open .branch-arrow{transform:rotate(45deg);}
+  .branch-leaves{
+    max-height:0; overflow:hidden; transition:max-height .3s ease;
+    padding:0 18px;
+  }
+  .branch.open .branch-leaves{max-height:4000px; padding:0 18px 16px;}
+
+  .leaf{
+    background:var(--bg-elev); border:1px solid var(--border);
+    border-radius:9px; margin-top:10px; padding:12px 14px; cursor:pointer;
+  }
+  .leaf-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .leaf-title{font-size:13.5px; font-weight:600; line-height:1.4;}
+  .verdict{
+    flex-shrink:0; font-size:10.5px; font-weight:700; letter-spacing:.04em;
+    text-transform:uppercase; padding:3px 9px; border-radius:20px;
+    white-space:nowrap; font-family:'Inter',sans-serif;
+  }
+  .v-true{background:rgba(76,175,110,.15); color:var(--true); border:1px solid rgba(76,175,110,.35);}
+  .v-mixed{background:rgba(224,178,62,.15); color:var(--mixed); border:1px solid rgba(224,178,62,.35);}
+  .v-false{background:rgba(230,97,79,.15); color:var(--false); border:1px solid rgba(230,97,79,.35);}
+  .v-unverified{background:rgba(138,144,163,.15); color:var(--unverified); border:1px solid rgba(138,144,163,.35);}
+
+  .leaf-detail{
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+    font-size:13px; color:var(--text-dim); line-height:1.55;
+  }
+  .leaf.open .leaf-detail{max-height:600px; margin-top:10px;}
+  .leaf-detail a{color:#8fb8e6;}
+
+  /* Summary */
+  .summary-section{margin-bottom:26px;}
+  .summary-section h2{font-size:16px; margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+  .summary-section h2 .dot{width:10px; height:10px;}
+  .summary-section p{color:var(--text-dim); font-size:14px; line-height:1.7;}
+
+  /* Takeaways */
+  .takeaways{display:grid; grid-template-columns:1fr; gap:12px;}
+  @media(min-width:680px){.takeaways{grid-template-columns:1fr 1fr;}}
+  .take-card{
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:11px; padding:16px; display:flex; gap:12px;
+  }
+  .take-num{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--accent-c); color:#0b0d12; font-weight:700;
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .take-card p{font-size:13.5px; color:var(--text-dim); line-height:1.55;}
+  .take-card strong{color:var(--text);}
+
+  footer{
+    max-width:1000px; margin:0 auto; padding:0 20px 50px;
+    color:var(--text-faint); font-size:12px; line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="kicker">Reality Check &middot; Peer-Review Cross-Check</div>
+    <h1>"Stop Walking Everyday" — the VFA Method, claim by claim</h1>
+    <p class="subtitle">Ben (Retirement Wellness) presents a rigid morning sequence — light exposure, a fasted walk, then a 45–90 minute delay before eating — as the specific "unlock" for visceral fat loss over 50. This map pulls apart every factual claim and checks it against the actual physiology and trial literature.</p>
+    <div class="source-line">
+      <span>Source video:</span>
+      <a href="https://youtu.be/m9_EQAUFchU" target="_blank" rel="noopener">youtu.be/m9_EQAUFchU</a>
+      <span>&middot; Channel: Ben – Retirement Wellness</span>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- MIND MAP -->
+  <div id="mindmap" class="panel active">
+    <div class="legend">
+      <span><span class="dot" style="background:var(--true)"></span> Holds up</span>
+      <span><span class="dot" style="background:var(--mixed)"></span> Real mechanism, overstated / misapplied</span>
+      <span><span class="dot" style="background:var(--false)"></span> Contradicted by evidence</span>
+      <span><span class="dot" style="background:var(--unverified)"></span> Citation unverifiable / likely fabricated</span>
+    </div>
+
+    <!-- BRANCH A -->
+    <div class="branch" style="--branch-color:var(--accent-a)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">1. Morning Hormone Claims</div>
+          <div class="branch-sub">Cortisol, growth hormone, insulin at waking</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"Cortisol peaks within 30 minutes of waking and the signal lasts exactly 47 to 60 minutes"</div>
+            <div class="verdict v-mixed">Overstated</div>
+          </div>
+          <div class="leaf-detail">The cortisol awakening response (CAR) is real and well studied — cortisol does typically rise 30–50% in the 30–45 minutes after waking. But "exactly 47 to 60 minutes" is invented precision: the Endocrine Society's own reviews describe wide individual variation in both magnitude and duration, and the CAR is driven by the light/dark cycle and sleep-wake transition, not a fixed fat-mobilizing countdown.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Growth hormone has "a secondary morning pulse particularly significant for people over 50"</div>
+            <div class="verdict v-false">Backwards</div>
+          </div>
+          <div class="leaf-detail">This inverts the actual biology. GH is released in pulses tied mainly to slow-wave sleep, and both pulse amplitude and frequency decline steadily with age — a well-documented phenomenon called the "somatopause." If anything, the over-50 group has a weaker morning GH signal to work with, not a more significant one.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"Blood insulin is at its lowest point of the 24-hour cycle" at waking</div>
+            <div class="verdict v-true">Accurate</div>
+          </div>
+          <div class="leaf-detail">This one is genuinely correct. After an overnight fast, circulating insulin is at its daily nadir, and insulin sensitivity follows a circadian pattern that's typically highest earlier in the day. It's a real, uncontroversial piece of chrono-physiology — it just doesn't imply everything built on top of it in this video.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH B -->
+    <div class="branch" style="--branch-color:var(--accent-b)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">2. Visceral Fat Biology</div>
+          <div class="branch-sub">How visceral fat actually behaves vs. the video's claims</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"Visceral fat does not respond to movement the way subcutaneous fat does"</div>
+            <div class="verdict v-false">Contradicted</div>
+          </div>
+          <div class="leaf-detail">Systematic reviews and meta-analyses of exercise/caloric-restriction trials consistently find the opposite: visceral fat tends to shrink proportionally as much as or more than subcutaneous fat with regular exercise, precisely because visceral adipocytes are more metabolically active and more sensitive to lipolytic signals. The claim is stated backwards.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"University of Michigan (2011): visceral fat has higher density of cortisol and beta-adrenergic receptors"</div>
+            <div class="verdict v-mixed">Real mechanism, dubious citation</div>
+          </div>
+          <div class="leaf-detail">The underlying science is genuine — classic work (Björntorp and others) established that visceral/omental adipocytes carry more glucocorticoid and beta-adrenergic receptors than subcutaneous fat, making them more lipolytically responsive to cortisol and catecholamines. But no specific, checkable "University of Michigan 2011" study matching this description turns up — it reads like a real finding wrapped in a fabricated citation.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"2015 International Journal of Obesity: visceral mobilization 2–3x higher in morning fasted state"</div>
+            <div class="verdict v-unverified">Unverifiable</div>
+          </div>
+          <div class="leaf-detail">No such study surfaces in a search of the journal's archive or the broader literature. This is the pattern typical of AI-generated health scripts: a real-sounding journal name, a plausible year, and a suspiciously clean number, with nothing behind it.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"Mayo Clinic: caloric restriction increases the visceral-to-subcutaneous fat ratio"</div>
+            <div class="verdict v-false">Contradicted</div>
+          </div>
+          <div class="leaf-detail">Multiple systematic reviews (including ones comparing calorie restriction directly against exercise) find the reverse pattern is more typical: weight loss from caloric restriction usually reduces visceral fat at least as fast as, and often faster than, subcutaneous fat. This claim directly conflicts with the published evidence it's supposedly drawn from.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH C -->
+    <div class="branch" style="--branch-color:var(--accent-c)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">3. Fasted Exercise &amp; Protein Timing</div>
+          <div class="branch-sub">The "eat too soon and you undo it" logic</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Morning protein "triggers insulin and mTOR, shifting cells from fat-burning into construction mode"</div>
+            <div class="verdict v-mixed">Real pathways, wrong conclusion</div>
+          </div>
+          <div class="leaf-detail">Insulin and mTOR activation from protein are real signaling events, but this doesn't translate into "no visceral fat loss." Systematic reviews of fasted vs. fed exercise (e.g. the 2016 British Journal of Nutrition meta-analysis) find no meaningful difference in fat loss over weeks when total intake and expenditure are matched — the body doesn't switch off fat loss for the day because you ate breakfast on time.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"KU Leuven 2010 (Hespel): waiting 45–60 min after fasted exercise nearly doubled fat oxidation for 3–4 hours"</div>
+            <div class="verdict v-false">Misapplied citation</div>
+          </div>
+          <div class="leaf-detail">Van Proeyen et al. (2010, Hespel's lab at KU Leuven) is a real, well-known study — but it tested six weeks of fasted-state <em>training</em> on a high-fat diet and its effect on glucose tolerance and muscle adaptations, not a same-day "eat now vs. wait an hour" fat-oxidation window. The specific 45–60 minute / 2x / 3–4 hour figures don't appear in that research; it's a genuine citation attached to a claim it doesn't support.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"The anabolic window is wider than claimed, extending 3–5 hours" (Aragon &amp; Schoenfeld, 2013)</div>
+            <div class="verdict v-mixed">Real study, used backwards</div>
+          </div>
+          <div class="leaf-detail">Schoenfeld, Aragon &amp; Krieger's 2013 meta-analysis in the <em>Journal of the International Society of Sports Nutrition</em> is real and correctly cited on the numbers. But its actual conclusion is that protein timing matters far less than the fitness industry assumed, and that total daily protein intake is what counts — almost the opposite of using it to justify a strict 45–90 minute eating delay.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH D -->
+    <div class="branch" style="--branch-color:var(--accent-d)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">4. Light &amp; Circadian Consistency</div>
+          <div class="branch-sub">The genuinely well-supported part of the video</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"Morning light exposure is a primary synchronizer of circadian metabolic rhythm" (Panda et al.)</div>
+            <div class="verdict v-true">Well grounded</div>
+          </div>
+          <div class="leaf-detail">This is solid. Satchin Panda's circadian-biology research (Salk Institute) and decades of chronobiology work confirm that bright light shortly after waking is one of the strongest entrainment cues for the master circadian clock, with downstream effects on metabolic hormone timing. The "10 minutes, even on cloudy days" detail is a reasonable practical extrapolation of that literature, even if that exact figure isn't a single citable number.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"More than 60 minutes of weekday/weekend wake-time variation is linked to metabolic dysfunction" (Roenneberg)</div>
+            <div class="verdict v-true">Well grounded</div>
+          </div>
+          <div class="leaf-detail">Till Roenneberg's "social jetlag" research is a genuine, influential body of work showing that irregular sleep/wake timing correlates with worse metabolic markers, higher BMI and related risk factors. This is one of the more defensible claims in the video.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Circadian rhythm amplitude "decreases with age," requiring more consistent light exposure</div>
+            <div class="verdict v-mixed">Plausible, loosely applied</div>
+          </div>
+          <div class="leaf-detail">Aging is genuinely associated with flatter, less robust circadian rhythms in the research literature. Whether that specifically means over-50 adults need a stricter 30-minute light window is an extrapolation beyond what the cited-style research actually measures.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH E -->
+    <div class="branch" style="--branch-color:var(--accent-e)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">5. Exercise Intensity &amp; Coffee</div>
+          <div class="branch-sub">Walking pace, duration thresholds, and cephalic-phase insulin</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">25–35 minutes at 50–65% of max heart rate ("Fatmax" zone)</div>
+            <div class="verdict v-true">Well grounded</div>
+          </div>
+          <div class="leaf-detail">This is genuinely evidence-based. Exercise physiology's "Fatmax" research consistently shows fat oxidation as a percentage of fuel used peaks at moderate intensities, roughly in this heart-rate range for most adults — a legitimate reason to keep a walk at conversational pace rather than pushing harder.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">"35 minutes crosses a threshold in AMPK activation" that 20–30 minutes doesn't</div>
+            <div class="verdict v-unverified">Invented precision</div>
+          </div>
+          <div class="leaf-detail">AMPK activation during exercise is a real cellular pathway, but a discrete "threshold" at exactly 35 minutes isn't supported by the exercise-metabolism literature, which shows fat oxidation and AMPK signalling changing gradually with duration and intensity, not flipping a switch at a specific minute mark.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Running vs. walking produce similar fat-oxidation outcomes ("2018 PLOS comparison")</div>
+            <div class="verdict v-mixed">Directionally right, citation shaky</div>
+          </div>
+          <div class="leaf-detail">The general principle — that intensity and total energy expenditure matter more than the specific mode of cardio — is well supported broadly in exercise science. The specific "2018 PLOS" study named isn't independently verifiable, so treat the citation as decorative even though the underlying idea is reasonable.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Milk/sweeteners in coffee trigger a "cephalic phase insulin response" that black coffee avoids ("2020 Nutrients meta-analysis")</div>
+            <div class="verdict v-mixed">Real mechanism, overstated stakes</div>
+          </div>
+          <div class="leaf-detail">Cephalic-phase insulin release — a small anticipatory insulin bump from the taste/smell of food, even before nutrients are absorbed — is a real, documented phenomenon. Whether it meaningfully "breaks" the morning fat-mobilizing window for the rest of the day is a large leap the mechanism itself doesn't support; the specific 2020 Nutrients citation couldn't be independently confirmed.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH F -->
+    <div class="branch" style="--branch-color:var(--accent-f)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">6. Ketones &amp; The Big-Picture Verdict</div>
+          <div class="branch-sub">What's true, what's fabricated, and what it adds up to</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Liver ketone production rises during the morning fasted window</div>
+            <div class="verdict v-true">Accurate</div>
+          </div>
+          <div class="leaf-detail">Straightforwardly true: after an overnight fast, free fatty acids released from adipose tissue are increasingly converted to ketone bodies in the liver. This is basic, well-established fasting physiology.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Mark Mattson (NIA): ketones are "more oxygen-efficient," producing mental clarity</div>
+            <div class="verdict v-mixed">Real researcher, debated claim</div>
+          </div>
+          <div class="leaf-detail">Mattson is a genuine, prominent fasting/neuroscience researcher formerly of the National Institute on Aging, and his work on fasting and brain metabolism is real. The specific "more oxygen-efficient fuel" framing is a live area of scientific debate rather than settled fact — plausible-sounding, but stated with more certainty than the field actually has.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top">
+            <div class="leaf-title">Overall verdict on the "VFA Method" protocol</div>
+            <div class="verdict v-false">Not a validated protocol</div>
+          </div>
+          <div class="leaf-detail">The video threads several real, isolated physiological facts (cortisol awakening response, insulin's daily low point, circadian light entrainment, Fatmax intensity, social jetlag) together with fabricated-sounding statistics and misapplied real citations to build a rigid, branded "protocol" that has never itself been tested in a clinical trial. No controlled study compares this exact sequence against normal eating/exercise habits for visceral fat outcomes — it's a plausible-sounding narrative, not demonstrated science.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FULL SUMMARY -->
+  <div id="summary" class="panel">
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-a)"></span>Morning hormones</h2>
+      <p>The video opens from a real foundation: the cortisol awakening response is a genuine, well-documented rise in cortisol in the first half hour after waking, and insulin genuinely sits at its lowest point of the day around then too. Where it goes wrong is in the precision and the framing — presenting the cortisol response as lasting "exactly 47 to 60 minutes" invents a level of exactness the research doesn't offer, since individual variation in the cortisol awakening response is large and well documented in the endocrinology literature. The claim about a growth hormone pulse being "particularly significant for people over 50" is the most clearly incorrect piece here: growth hormone pulsatility actually declines with age (the "somatopause"), so if anything the over-50 audience this video targets has a weaker morning GH signal to work with, not a stronger one.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-b)"></span>Visceral fat biology</h2>
+      <p>This is where the video's core premise breaks down. It claims visceral fat "does not respond to movement the way subcutaneous fat does" and has its own separate "hormonal lock" — but systematic reviews of exercise and caloric-restriction trials generally find the opposite: visceral fat, because it's more metabolically active and carries a higher density of lipolytic receptors, often shrinks proportionally as much as or more than subcutaneous fat with regular exercise and modest calorie deficits. The video's own "Mayo Clinic" citation, claiming caloric restriction increases the visceral-to-subcutaneous ratio, runs directly counter to published reviews on the topic. A "University of Michigan 2011" study and a "2015 International Journal of Obesity" study cited for specific mobilization statistics could not be independently verified and read as fabricated citations wrapped around a real underlying mechanism (visceral fat's genuinely higher receptor density for cortisol and catecholamines).</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-c)"></span>Fasted exercise and protein timing</h2>
+      <p>The claim that eating protein within 30 minutes of waking "shifts cells from fat-burning mode into construction mode" and undoes a workout's fat-loss benefit is not supported by the controlled-trial literature. Meta-analyses comparing fasted versus fed exercise find no meaningful difference in fat loss over weeks when total calories and protein are matched — the body doesn't have an all-or-nothing daily fat-burning switch that a well-timed breakfast flips off. The video does cite two real papers — the KU Leuven fasted-training study by Hespel's group, and the Schoenfeld/Aragon/Krieger 2013 protein-timing meta-analysis — but both are misapplied. The Hespel study tested six weeks of training adaptation on a high-fat diet, not a same-day "wait an hour, double your fat burning" effect, and the Schoenfeld/Aragon paper's actual conclusion is that protein timing matters far less than assumed, which undercuts rather than supports a strict 45-to-90-minute eating delay.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-d)"></span>Light exposure and circadian consistency</h2>
+      <p>This is the strongest section of the video. Morning light exposure as a circadian synchronizer is genuinely well-supported science, closely tracking real research from circadian biologists including Satchin Panda. Similarly, the idea that irregular wake times ("social jetlag," a real term from Till Roenneberg's research) correlate with worse metabolic health is a legitimate and replicated finding. The extension to "circadian amplitude decreases with age, so over-50 adults need stricter consistency" is a reasonable-sounding but somewhat loose extrapolation of aging-chronobiology research rather than a directly tested claim.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-e)"></span>Exercise intensity, duration, and coffee</h2>
+      <p>Recommending a 25-to-35-minute walk at roughly 50–65% of max heart rate is genuinely grounded in "Fatmax" exercise physiology research, which shows fat oxidation as a share of fuel used tends to peak at moderate rather than high intensities. The specific claim that 35 minutes "crosses a threshold in AMPK activation" that 20 or 30 minutes doesn't is invented precision — AMPK signalling and fat oxidation scale gradually with exercise duration rather than flipping at a specific minute mark. The claim about milk or sweeteners in coffee triggering a "cephalic phase insulin response" rests on a real physiological phenomenon (anticipatory insulin release from taste and smell), but the leap to it meaningfully disrupting a whole morning's fat mobilization is unsupported, and the specific "2020 Nutrients meta-analysis" cited could not be verified.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-f)"></span>Ketones and the overall verdict</h2>
+      <p>The basic claim that liver ketone production rises during a fasted morning is accurate and uncontroversial physiology. The reference to Mark Mattson, a real and respected fasting/neuroscience researcher, and the idea that ketones may be a more efficient brain fuel, touches on a genuine and still-debated area of research rather than settled fact. Standing back from the individual claims, the video's overall structure is a familiar pattern in this genre of content: real, well-established physiological facts (cortisol awakening response, insulin's daily nadir, circadian light entrainment, Fatmax intensity zones, social jetlag) are stitched together with invented-sounding statistics and misapplied real citations into a branded, rigid "protocol" that has never actually been tested as a whole. No trial compares this specific sequencing method against ordinary consistent exercise and eating habits — the individual bricks are sometimes real, but the building they've been used to construct hasn't been.</p>
+    </div>
+
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div id="takeaways" class="panel">
+    <div class="takeaways">
+
+      <div class="take-card">
+        <div class="take-num">1</div>
+        <p><strong>Ignore the rigid "windows."</strong> There's no trial evidence that a precise 45–90 minute eating delay or a 47-to-60-minute cortisol countdown matters for visceral fat outcomes. Consistency over weeks and months is what the actual evidence supports.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">2</div>
+        <p><strong>Keep the morning light habit if it's easy.</strong> This is one of the video's best-supported claims — roughly 10 minutes of outdoor light soon after waking genuinely helps circadian entrainment, though the exact-minute framing shouldn't be stressed over.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">3</div>
+        <p><strong>Fasted vs. fed walking is a preference, not a fat-loss lever.</strong> Meta-analyses show no meaningful difference in net fat loss over time between the two, once total intake and activity are accounted for — pick whichever you (or clients) will actually stick to.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">4</div>
+        <p><strong>Moderate pace is a legitimate choice, for the right reason.</strong> Roughly 50–65% of max heart rate genuinely maximizes the fat-percentage of fuel burned — useful to know when coaching clients who want a "why" for keeping a walk conversational rather than pushing hard.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">5</div>
+        <p><strong>Don't fear morning protein.</strong> The "protein shuts off fat burning" framing misrepresents normal physiology. Total daily protein intake, not a 30-minute cutoff, is what the actual research on muscle and fat outcomes tracks.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">6</div>
+        <p><strong>Visceral fat is not specially resistant to exercise.</strong> If anything, published reviews suggest it responds at least as readily as subcutaneous fat to consistent movement and a modest calorie deficit — the video's central "hormonal lock" framing has it backwards.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">7</div>
+        <p><strong>Consistent wake times are worth encouraging.</strong> The "social jetlag" research linking irregular sleep/wake timing to metabolic dysfunction is genuine and replicated — a reasonable, low-risk habit to reinforce with clients or family, on its own merits.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">8</div>
+        <p><strong>Treat suspiciously precise numbers as a red flag.</strong> Phrases like "exactly 47 to 60 minutes" or "2 to 3 times higher mobilization," attached to a vaguely named journal and year, are a hallmark of AI-generated health scripts rather than genuine research summaries.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">9</div>
+        <p><strong>Check whether a cited study actually says what's claimed.</strong> Several citations here (Hespel/KU Leuven, Schoenfeld/Aragon) are real papers — but describe findings that don't match, or actively contradict, how they're used in the video.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">10</div>
+        <p><strong>The boring advice still wins.</strong> For visceral fat and metabolic health in people over 50, the strongest evidence base remains: regular moderate exercise, adequate protein spread across the day, decent consistent sleep, and a modest sustainable calorie deficit — not one hidden switch unlocked by minute-perfect sequencing.</p>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  This reality check cross-references claims made in the source video against publicly available peer-reviewed research and researcher/study names as they could be verified via web and literature search. Several citations named in the video (specific journal issues, years, and statistics) could not be independently located and are flagged as unverifiable rather than confirmed false. This is not medical advice — consult a qualified health professional for individual guidance.
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
