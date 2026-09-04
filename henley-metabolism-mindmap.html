@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I &quot;Fixed&quot; My Metabolism &mdash; Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf6f0;
+    --panel:#ffffff;
+    --ink:#241c17;
+    --sub:#7a6d62;
+    --line:#ece1d5;
+    --accent1:#c96a3f; /* metabolism basics - terracotta */
+    --accent1-bg:#fbeae1;
+    --accent2:#3d6e8f; /* adaptation - dusty blue */
+    --accent2-bg:#e7f0f5;
+    --accent3:#5c8a5a; /* starvation mode myth - sage */
+    --accent3-bg:#ecf3ea;
+    --accent4:#c2932e; /* reverse diet wrongs - gold */
+    --accent4-bg:#faf1de;
+    --accent5:#93435f; /* reverse diet right - plum */
+    --accent5-bg:#f7e8ee;
+    --shadow: 0 1px 2px rgba(36,28,23,0.05), 0 8px 24px rgba(36,28,23,0.07);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    padding:32px 24px 12px;
+    max-width:980px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-size:12.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--sub);
+    font-weight:600;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-size:clamp(24px,3.8vw,34px);
+    font-weight:700;
+    margin:8px 0 6px;
+    line-height:1.15;
+  }
+  .meta{
+    color:var(--sub);
+    font-size:14px;
+    margin-bottom:4px;
+  }
+  .meta a{ color:var(--accent1); text-decoration:none; }
+  .meta a:hover{ text-decoration:underline; }
+  .tabs{
+    display:flex;
+    gap:6px;
+    max-width:980px;
+    margin:18px auto 0;
+    padding:0 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .tab{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--sub);
+    background:transparent;
+    border:none;
+    padding:11px 16px;
+    border-radius:10px 10px 0 0;
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    transition:.15s;
+    position:relative;
+    top:1px;
+  }
+  .tab:hover{color:var(--ink);}
+  .tab.active{color:var(--ink);border-bottom:3px solid var(--accent1);}
+  main{
+    max-width:980px;
+    margin:0 auto;
+    padding:20px 24px 80px;
+  }
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  /* Mind map branches */
+  .branch{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .branch-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px 18px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .dot{
+    width:12px;height:12px;border-radius:50%;flex:none;
+  }
+  .branch-title{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:16.5px;
+    flex:1;
+  }
+  .branch-count{
+    font-size:12px;
+    color:var(--sub);
+    font-weight:600;
+  }
+  .chev{
+    transition:transform .2s;
+    color:var(--sub);
+    font-size:13px;
+  }
+  .branch.open .chev{transform:rotate(90deg);}
+  .leaves{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    padding:0 18px;
+  }
+  .branch.open .leaves{
+    max-height:2000px;
+    padding-bottom:14px;
+  }
+  .leaf{
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:8px;
+    cursor:pointer;
+    border:1px solid var(--line);
+  }
+  .leaf-title{
+    font-weight:600;
+    font-size:14.5px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+  }
+  .leaf-detail{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .2s ease;
+    font-size:13.8px;
+    color:var(--sub);
+    line-height:1.55;
+  }
+  .leaf.open .leaf-detail{max-height:400px;margin-top:8px;}
+  .leaf .plus{font-size:16px;color:var(--sub);}
+  .leaf.open .plus{transform:rotate(45deg);}
+  .plus{transition:transform .15s;display:inline-block;}
+
+  /* per-branch coloring */
+  .b1 .dot{background:var(--accent1);} .b1 .leaf{background:var(--accent1-bg);}
+  .b2 .dot{background:var(--accent2);} .b2 .leaf{background:var(--accent2-bg);}
+  .b3 .dot{background:var(--accent3);} .b3 .leaf{background:var(--accent3-bg);}
+  .b4 .dot{background:var(--accent4);} .b4 .leaf{background:var(--accent4-bg);}
+  .b5 .dot{background:var(--accent5);} .b5 .leaf{background:var(--accent5-bg);}
+
+  /* Summary */
+  .sum-section{margin-bottom:26px;}
+  .sum-section h3{
+    font-family:'Fraunces',serif;
+    font-size:17px;
+    margin:0 0 8px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sum-section p{
+    font-size:15px;
+    line-height:1.7;
+    color:#3a2f27;
+    margin:0;
+  }
+
+  /* Takeaways */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 16px 18px;
+    box-shadow:var(--shadow);
+  }
+  .card-num{
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    font-size:13px;
+    color:#fff;
+    background:var(--accent5);
+    width:26px;height:26px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;
+  }
+  .card p{
+    font-size:14px;
+    line-height:1.55;
+    margin:0;
+    color:#3a2f27;
+  }
+  footer{
+    text-align:center;
+    color:var(--sub);
+    font-size:12.5px;
+    padding:20px 0 40px;
+  }
+  @media (max-width:520px){
+    .tab{font-size:12.5px;padding:9px 11px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Rachel Henley &middot; Henley Fitness</div>
+  <h1>How I &quot;Fixed&quot; My Metabolism</h1>
+  <div class="meta">Published 28 Apr 2026 &middot; <a href="https://youtu.be/dyrDO9e53fI" target="_blank">Watch on YouTube</a></div>
+  <div class="meta">How to exit a fat-loss phase without ruining your progress.</div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap',this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways',this)">Actionable Takeaways</button>
+</div>
+
+<main>
+
+  <!-- MIND MAP -->
+  <section id="mindmap" class="panel active">
+
+    <div class="branch b1" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">Metabolism 101: The Recap</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Metabolism is your total daily burn <span class="plus">+</span></div>
+          <div class="leaf-detail">Rachel reframes "metabolism" as shorthand for total daily energy expenditure (TDEE) &mdash; everything the body burns in a day, not some mysterious internal furnace that's either "fast" or "broken."</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The four pieces that make it up <span class="plus">+</span></div>
+          <div class="leaf-detail">TDEE breaks into basal metabolic rate (the energy spent just staying alive), the thermic effect of food (digesting what you eat), exercise activity, and NEAT &mdash; non-exercise activity like fidgeting, walking, and posture. NEAT is singled out as the piece that swings the most day to day.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">It's a range, not a fixed number <span class="plus">+</span></div>
+          <div class="leaf-detail">Instead of treating TDEE as one exact figure, Rachel frames it as a moving target that shifts with body weight, activity, sleep, stress, and hormones &mdash; which is why obsessing over a single "calorie number" misses the point.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Why the recap matters <span class="plus">+</span></div>
+          <div class="leaf-detail">Everything later in the video &mdash; metabolic adaptation, starvation mode, reverse dieting &mdash; only makes sense once metabolism is understood as an adjustable output of behaviour and biology together, not a fixed trait you either got lucky with or didn't.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b2" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">How Metabolism Changes During a Diet</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Adaptive thermogenesis, defined <span class="plus">+</span></div>
+          <div class="leaf-detail">As you lose weight, TDEE drops by more than the smaller body alone accounts for &mdash; the body actively downshifts energy expenditure on top of the expected loss. This extra, adaptive drop is what researchers call adaptive thermogenesis.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">NEAT is the first thing to fall <span class="plus">+</span></div>
+          <div class="leaf-detail">In a calorie deficit the body unconsciously trims fidgeting, spontaneous movement, and general activity long before it touches anything you'd notice &mdash; a quiet way of clawing back energy that adds up over weeks.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Hormones shift the dial too <span class="plus">+</span></div>
+          <div class="leaf-detail">Leptin (which signals fullness and supports thyroid output) falls as body fat drops, thyroid hormone conversion can slow, and hunger hormones like ghrelin rise &mdash; together nudging the body toward eating more and moving less.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The size of the effect <span class="plus">+</span></div>
+          <div class="leaf-detail">This adaptive slowdown is real but proportional &mdash; typically a meaningful percentage of TDEE in a sustained deficit, not the dramatic "your metabolism is destroyed" outcome diet culture implies. It's a normal survival response, not a malfunction.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b3" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">Debunking "Starvation Mode"</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The myth people believe <span class="plus">+</span></div>
+          <div class="leaf-detail">The popular version of "starvation mode" claims that dieting, or even one low day, flips a switch that makes the body cling to fat and stop losing weight altogether &mdash; treated in the video as a scare story, not physiology.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">What actually happens instead <span class="plus">+</span></div>
+          <div class="leaf-detail">The real phenomenon is the gradual, proportional metabolic adaptation covered in the previous chapter &mdash; a slow downshift, not a hard stop. Fat loss doesn't halt outright; it just requires the deficit to be reassessed as TDEE drifts down with the smaller, adapted body.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Why plateaus get misdiagnosed <span class="plus">+</span></div>
+          <div class="leaf-detail">Most "stalls" trace back to intake creeping up, activity quietly dropping, water retention, or a deficit that was never actually being hit consistently &mdash; not a body that has decided to stop responding to calories in versus out.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Why the fear itself backfires <span class="plus">+</span></div>
+          <div class="leaf-detail">Believing in true starvation mode pushes people toward extreme under-eating (to "outrun" it) or panicked, disordered swings between very low and very high days &mdash; both of which do far more damage to metabolic health than a normal, moderate deficit ever would.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b4" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">Reverse Dieting: The Wrongs</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Mistake: raising calories too fast <span class="plus">+</span></div>
+          <div class="leaf-detail">Jumping straight from deficit-level calories back to an estimated maintenance in one move outpaces how quickly the adapted metabolism can ramp back up, so the extra food is more likely to show up as fat gain than as replenished output.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Mistake: treating it as a free-for-all <span class="plus">+</span></div>
+          <div class="leaf-detail">Some dieters hear "reverse diet" and interpret it as permission to eat whatever, whenever, assuming the body will simply absorb it because it "needs" the calories &mdash; a misunderstanding that undoes weeks of fat-loss progress fast.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Mistake: no endpoint or tracking <span class="plus">+</span></div>
+          <div class="leaf-detail">Reverse dieting without a target maintenance number or a plan for when to stop increasing tends to drift indefinitely upward, with nobody noticing until the scale has moved substantially.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Mistake: reacting to daily scale noise <span class="plus">+</span></div>
+          <div class="leaf-detail">Normal day-to-day fluctuation from water, sodium, and digestion gets mistaken for real fat regain, which pushes people to panic and slash calories again &mdash; recreating the exact yo-yo pattern reverse dieting is meant to prevent.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch b5" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <span class="dot"></span>
+        <span class="branch-title">Reverse Dieting: Do It Right</span>
+        <span class="branch-count">4</span>
+        <span class="chev">&#9656;</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Small, structured increases <span class="plus">+</span></div>
+          <div class="leaf-detail">Calories go up in modest steps &mdash; on the order of tens to a hundred or so calories at a time &mdash; spaced roughly a week or two apart, giving the metabolism room to gradually ramp its output back up rather than being overwhelmed.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Judge by the weight trend, not the day <span class="plus">+</span></div>
+          <div class="leaf-detail">Progress is tracked as a rolling average across a week or more, not a single morning's number, so normal fluctuation doesn't get mistaken for real gain and trigger an unnecessary cut back down.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Reverse diet toward a real destination <span class="plus">+</span></div>
+          <div class="leaf-detail">The increases build toward an actual, sustainable maintenance intake &mdash; the amount that keeps weight stable long-term &mdash; rather than being open-ended, so there's a clear point where the process is "done."</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Patience is the whole strategy <span class="plus">+</span></div>
+          <div class="leaf-detail">The process is framed in weeks, not days &mdash; the entire point is exiting a fat-loss phase slowly enough that the body's metabolic rate, hunger hormones, and habits all have time to catch up before intake reaches its final maintenance level.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FULL SUMMARY -->
+  <section id="summary" class="panel">
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent1);display:inline-block;"></span>Metabolism 101: The Recap</h3>
+      <p>Rachel opens by resetting what "metabolism" actually means before getting into anything about dieting. Rather than a fixed trait that's "fast," "slow," or "broken," metabolism is presented as total daily energy expenditure &mdash; the sum of basal metabolic rate, the thermic effect of food, exercise, and NEAT (non-exercise activity thermogenesis, like fidgeting and incidental movement). NEAT is flagged as the most variable of the four, and TDEE overall is framed as a shifting range rather than a single number, since it moves with body weight, activity, sleep, stress, and hormones. This groundwork is what makes the rest of the video &mdash; why dieting changes metabolism, why "starvation mode" is a myth, and how reverse dieting works &mdash; make sense as one connected system rather than disconnected fitness folklore.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent2);display:inline-block;"></span>How Metabolism Changes During a Diet</h3>
+      <p>During sustained fat loss, TDEE drops by more than a smaller body would explain on its own &mdash; a phenomenon known as adaptive thermogenesis. NEAT is typically the first thing to quietly fall, as the body trims spontaneous movement without the person noticing. Hormonally, falling leptin, slower thyroid hormone conversion, and rising ghrelin all nudge the body toward eating more and moving less at the same time. Rachel is careful to frame this as a normal, proportional survival response rather than a catastrophic malfunction &mdash; the body adapting sensibly to less incoming energy, not a metabolism that's been permanently damaged.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent3);display:inline-block;"></span>Debunking "Starvation Mode"</h3>
+      <p>The popular idea of "starvation mode" &mdash; that dieting, or even a single low-calorie day, flips a switch that stops fat loss entirely &mdash; is directly challenged. What people label starvation mode is usually the gradual, proportional metabolic adaptation covered in the previous section, not a hard stop. Most apparent plateaus trace back to intake creeping up, activity quietly dropping, water retention, or a deficit that wasn't being hit as consistently as assumed. Rachel also points out that fearing starvation mode is often counterproductive in itself: it pushes people toward extreme under-eating or panicked swings between very low and very high days, both of which do more real damage than a steady, moderate deficit ever would.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent4);display:inline-block;"></span>Reverse Dieting: The Wrongs</h3>
+      <p>Before explaining the right way to exit a diet, Rachel walks through how reverse dieting commonly goes wrong. Jumping straight from deficit calories to an estimated maintenance number in one leap outpaces how fast the adapted metabolism can actually ramp back up, so the extra food is more likely to land as fat gain. Treating a reverse diet as a free-for-all &mdash; eating anything because "the body needs it" &mdash; is another common misread. So is reverse dieting with no clear endpoint or tracking, which tends to drift calories upward indefinitely, and reacting to normal day-to-day scale noise as if it were real fat regain, which triggers unnecessary panic cuts and recreates the very yo-yo cycle reverse dieting exists to prevent.</p>
+    </div>
+    <div class="sum-section">
+      <h3><span class="dot" style="background:var(--accent5);display:inline-block;"></span>Reverse Dieting: Do It Right</h3>
+      <p>Done correctly, calories are raised in small, structured steps &mdash; tens up to around a hundred calories at a time &mdash; spaced roughly one to two weeks apart, giving the metabolism room to ramp its output back up gradually. Progress is judged by the weight trend across a week or more, not any single day's number, so ordinary fluctuation doesn't get mistaken for real gain. Crucially, the increases build toward an actual, sustainable maintenance intake rather than continuing indefinitely, giving the process a clear finish line. The through-line for the whole video is patience: exiting a fat-loss phase slowly enough that metabolic rate, hunger hormones, and habits all have time to catch up before landing at the final number &mdash; which is what lets the results actually stick.</p>
+    </div>
+  </section>
+
+  <!-- TAKEAWAYS -->
+  <section id="takeaways" class="panel">
+    <div class="cards">
+      <div class="card"><div class="card-num">1</div><p>Stop treating "metabolism" as a fixed trait &mdash; it's your total daily burn (BMR + food digestion + exercise + NEAT), and it moves with your behaviour.</p></div>
+      <div class="card"><div class="card-num">2</div><p>Expect TDEE to drop by more than your smaller body alone explains during a diet &mdash; that extra drop (adaptive thermogenesis) is normal, not a sign anything is broken.</p></div>
+      <div class="card"><div class="card-num">3</div><p>Watch your incidental activity, not just your workouts &mdash; NEAT (fidgeting, walking, general movement) is usually the first thing that quietly falls in a deficit.</p></div>
+      <div class="card"><div class="card-num">4</div><p>Don't panic at a stall before checking the basics: creeping intake, dropped activity, water retention, and inconsistent deficit are the real usual suspects, not "starvation mode."</p></div>
+      <div class="card"><div class="card-num">5</div><p>Retire the idea that one low-calorie day derails your metabolism &mdash; there is no biological switch that halts fat loss overnight.</p></div>
+      <div class="card"><div class="card-num">6</div><p>When you exit a diet, raise calories in small steps (tens up to around 100 kcal) roughly every one to two weeks &mdash; not in one big jump to your estimated maintenance.</p></div>
+      <div class="card"><div class="card-num">7</div><p>Reverse dieting is not a free pass to eat anything &mdash; it's a controlled, gradual increase with a specific calorie target in mind.</p></div>
+      <div class="card"><div class="card-num">8</div><p>Track your weight trend over 7+ days, not the daily number, so normal water and food-volume swings don't trigger a needless cut back down.</p></div>
+      <div class="card"><div class="card-num">9</div><p>Set an actual maintenance-calorie destination before you start reverse dieting so the process has a clear, defined endpoint.</p></div>
+      <div class="card"><div class="card-num">10</div><p>Give it weeks, not days &mdash; the whole strategy behind reverse dieting is patience, letting your metabolism and hunger hormones catch up before you land at maintenance.</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Mind map generated from the YouTube video by Rachel Henley (Henley Fitness) &middot; source: youtu.be/dyrDO9e53fI</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
