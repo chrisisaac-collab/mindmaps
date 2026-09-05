@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fascia as a Mediator Between Emotions, the Autonomic Nervous System &amp; Immune Regulation | Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100c1c;
+    --bg-elev:#17122a;
+    --bg-card:#1a1530;
+    --border:#33285a;
+    --text:#f2eefc;
+    --text-dim:#b7a9e0;
+    --text-faint:#8577ab;
+    --accent-a:#3fd0e0; /* sensory organ - cyan */
+    --accent-b:#f5b942; /* touch & safety - amber */
+    --accent-c:#fb7c8a; /* myofibroblasts/stiffness - rose */
+    --accent-d:#3fd8b0; /* fasciocytes/hyaluronan - teal */
+    --accent-e:#b294f2; /* immunity/microbiome - violet */
+    --accent-f:#f28f52; /* trauma & practice - orange */
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;
+    line-height:1.5;
+  }
+  h1,h2,h3,.tab,.branch-title,.leaf-title{font-family:'Fraunces',serif;}
+
+  header{
+    padding:30px 20px 20px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg, #1b1533, var(--bg));
+  }
+  .header-inner{max-width:1000px; margin:0 auto;}
+  .kicker{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--text-faint); font-weight:600; margin-bottom:10px;
+    font-family:'Inter',sans-serif;
+  }
+  h1{font-size:clamp(20px,3.4vw,30px); font-weight:700; line-height:1.3; margin-bottom:10px; color:#fdfbff;}
+  .subtitle{color:var(--text-dim); font-size:14px; max-width:700px; line-height:1.65;}
+  .source-line{
+    margin-top:16px; font-size:12.5px; color:var(--text-faint);
+    display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center;
+    font-family:'Inter',sans-serif;
+  }
+  .source-line a{color:var(--accent-a); text-decoration:none;}
+  .source-line a:hover{text-decoration:underline;}
+
+  nav.tabs{
+    max-width:1000px; margin:20px auto 0; padding:0 20px;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .tab{
+    background:var(--bg-card); border:1px solid var(--border);
+    color:var(--text-dim); padding:9px 16px; border-radius:9px;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+    transition:all .15s ease; font-family:'Inter',sans-serif;
+  }
+  .tab:hover{color:var(--text); border-color:#4a3b7a;}
+  .tab.active{background:var(--accent-a); color:#0d1220; border-color:var(--accent-a);}
+
+  main{max-width:1000px; margin:0 auto; padding:24px 20px 60px;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .mm-hint{font-size:12.5px; color:var(--text-faint); margin-bottom:18px; font-family:'Inter',sans-serif;}
+
+  .branch{
+    background:var(--bg-card); border:1px solid var(--border);
+    border-left:4px solid var(--branch-color, var(--accent-a));
+    border-radius:12px; margin-bottom:14px; overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+  .branch-header{
+    padding:16px 18px; cursor:pointer; display:flex;
+    justify-content:space-between; align-items:center; gap:12px;
+  }
+  .branch-title{font-size:16.5px; font-weight:700; color:#fdfbff;}
+  .branch-sub{font-size:12.5px; color:var(--text-dim); font-weight:400; margin-top:4px; font-family:'Inter',sans-serif;}
+  .branch-arrow{
+    flex-shrink:0; width:24px; height:24px; border-radius:50%;
+    border:1px solid var(--border); display:flex; align-items:center;
+    justify-content:center; font-size:14px; color:var(--text-dim);
+    transition:transform .2s ease;
+  }
+  .branch.open .branch-arrow{transform:rotate(45deg);}
+  .branch-leaves{
+    max-height:0; overflow:hidden; transition:max-height .3s ease;
+    padding:0 18px;
+  }
+  .branch.open .branch-leaves{max-height:6000px; padding:0 18px 16px;}
+
+  .leaf{
+    background:#150f28; border:1px solid var(--border);
+    border-radius:9px; margin-top:10px; padding:12px 14px; cursor:pointer;
+  }
+  .leaf-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .leaf-title{font-size:13.5px; font-weight:600; line-height:1.4; color:#ece6fb; font-family:'Inter',sans-serif;}
+  .leaf-arrow{flex-shrink:0; font-size:12px; color:var(--text-faint); transition:transform .2s ease;}
+  .leaf.open .leaf-arrow{transform:rotate(90deg);}
+
+  .leaf-detail{
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+    font-size:13px; color:var(--text-dim); line-height:1.6;
+  }
+  .leaf.open .leaf-detail{max-height:700px; margin-top:10px;}
+
+  .summary-section{margin-bottom:28px;}
+  .summary-section h2{font-size:17px; margin-bottom:10px; display:flex; align-items:center; gap:9px; color:#fdfbff;}
+  .summary-section h2 .dot{width:10px; height:10px; border-radius:50%; display:inline-block; flex-shrink:0;}
+  .summary-section p{color:var(--text-dim); font-size:14px; line-height:1.75; margin-bottom:10px;}
+
+  .takeaways{display:grid; grid-template-columns:1fr; gap:12px;}
+  @media(min-width:680px){.takeaways{grid-template-columns:1fr 1fr;}}
+  .take-card{
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:11px; padding:16px; display:flex; gap:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+  .take-num{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--accent-a); color:#0d1220; font-weight:700;
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+    font-family:'Inter',sans-serif;
+  }
+  .take-card p{font-size:13.5px; color:var(--text-dim); line-height:1.6; font-family:'Inter',sans-serif;}
+  .take-card strong{color:var(--text);}
+
+  footer{
+    max-width:1000px; margin:0 auto; padding:0 20px 50px;
+    color:var(--text-faint); font-size:12px; line-height:1.7;
+    font-family:'Inter',sans-serif;
+  }
+  footer a{color:var(--accent-a); text-decoration:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="kicker">Live Webinar Recording &middot; Hosted by Robert Granter &middot; 2 September 2026</div>
+    <h1>Fascia as a Mediator Between Emotions, the Autonomic Nervous System &amp; Immune Regulation</h1>
+    <p class="subtitle">Dr. Robert Schleip &mdash; senior fascia researcher at the Technical University of Munich, director of the Fascia Research Project, and co-initiator of the first Fascia Research Congress (Harvard, 2007) &mdash; walks through why fascia is the body's richest sensory organ, how touch and perceived safety drive the autonomic nervous system, how chronic stress physically stiffens connective tissue via myofibroblasts, and what that means for clinical practice.</p>
+    <div class="source-line">
+      <span>Source: password-protected Vimeo recording, supplied by Chris</span>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- MIND MAP -->
+  <div id="mindmap" class="panel active">
+    <p class="mm-hint">Tap a branch to expand it, then tap a leaf for the detail.</p>
+
+    <!-- BRANCH 1 -->
+    <div class="branch" style="--branch-color:var(--accent-a)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">1. Fascia: the body's richest sensory organ</div>
+          <div class="branch-sub">250 million receptors, proprioception vs. interoception, and the piezo breakthrough</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">250 million sensory receptors &mdash; our richest sensory organ</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">With Carla Stecco and skin-touch scientist Martin Grunwald, Schleip ran a 3D calculation across the fascial net &mdash; the loose subcutaneous connective tissue plus the endomysium and perimysium wrapping muscle fibres &mdash; and arrived at roughly 250 million sensory receptors body-wide. That makes fascia richer than vision, long assumed to be humans' primary way of orienting to the world. His conclusion: "we are primarily a fascial organism" in how we perceive and interact with our environment.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Proprioception vs. interoception &mdash; a 1:7 ratio, and different pathologies</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Most of fascia's free nerve endings split between proprioception (muscle spindles, Golgi tendon organs &mdash; knowing where you are in space) and interoception (sensing internal physiological states like temperature or hunger), at roughly a 1:7 ratio favouring interoception. Clinically this maps to different conditions: chronic low back pain, idiopathic scoliosis and whiplash are primarily proprioceptive dysfunctions, while eating disorders, anxiety, depression and PTSD are primarily interoceptive ones &mdash; so the useful clinical question is which system a given client actually needs work on.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Interoception runs on predictive coding, not real-time data</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Interoceptive signals route mainly to the insula, an area with three sub-regions and, per Lisa Feldman Barrett, only two of nine total layers actually connected to real body signals &mdash; the rest run on expectation. Schleip estimates interoceptive perception is driven less than 10% by real signal and over 90% by "predictive coding" built from past experience, smell, accent and context. Practical implication: how a client rates your touch has more to do with whether they like your voice, shirt and accent than the objective quality of your hands &mdash; which is an argument for investing in the relationship, not just the technique.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Matching the modality to the dysfunction</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">A precision-based practice like basic Iyengar yoga (cueing an extension specifically "in the upper thoracic spine, not the middle") sharpens proprioception and suits chronic low back pain. A more emotionally expressive, less verbal practice &mdash; energy-streaming or lunar yoga, chanting, embodiment-focused movement &mdash; better serves clients with PTSD, anxiety or depression, where interoception is the primary target. Schleip notes he was, by his own account, an expert in proprioception as a Rolfer but "a poor beginner" in interoception.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">The Piezo receptor and adolescent scoliosis</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">The 2021 Nobel Prize (widely expected to go to vaccine research) instead went to the discovery of Piezo channels &mdash; membrane receptors gated by mechanical stimulation rather than a chemical key. In girls with adolescent idiopathic scoliosis, Piezo receptors on muscle spindles are less strongly expressed and the muscle spindles themselves are measurably smaller than in non-scoliotic peers, pointing to a genetic, whole-body proprioceptive deficit rather than a purely local one &mdash; and arguing for proprioceptive rather than interoceptive-focused work with this group.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH 2 -->
+    <div class="branch" style="--branch-color:var(--accent-b)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">2. Touch, safety and the autonomic nervous system</div>
+          <div class="branch-sub">C-tactile fibres, deep pressure, and why perceived safety beats technique</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Tactile C-fibres and the primate case for touch</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Discovered around 20 years ago, tactile C-fibres in skin and superficial fascia mediate social touch and play a primary role in primate stress regulation. Baboons who receive roughly six hours of gentle grooming per week show better immune function, faster wound repair and better-regulated cortisol and autonomic balance &mdash; the biological argument, Schleip suggests, for why manual therapy's "cuddling" effect matters in its own right, separate from any specific technique.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">The precise physics of a "good" caress</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Gentle touch that activates this system has a narrow physical signature: stroking speed between roughly 1 and 10 centimetres per second, skin/contact temperature around 34&deg;C, and &mdash; critically &mdash; it only registers as pleasant within a secure, warm social relationship as perceived by the client, not the therapist. Outside that relational context, getting the speed and temperature right doesn't matter.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Deep, steady pressure is a separate, still-mysterious channel</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Laura Case found that slow, steady vertical compression (several kilograms, built up over ~6 seconds, like a hug rather than a stroke) lights up the same insula regions as gentle caressing touch, plus additional areas linked to "salience." Testing on Ian Waterman, who lost all myelinated proprioceptive fibres below the neck to an immune reaction, showed no insula response and no reported pleasantness under this deep pressure &mdash; so the receptor is not a free nerve ending, is likely myelinated, and remains unidentified. This is the physiological basis for weighted blankets, which help some autistic or ADHD clients relax, provided the pressure is steady rather than vibrating.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Neuroception: the client's constant "am I safe?" scan</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Stephen Porges' broader polyvagal model was recently challenged by 39 co-authors as anatomically incorrect &mdash; but Schleip stresses that what practitioners achieve using it clinically still works, even where the underlying explanation was wrong. The undisputed part is neuroception: the client's nervous system constantly scanning for safety, with real research showing perceived safety (via the nucleus of the solitary tract) lowers body-wide pro-inflammatory activity independent of whether the vagus nerve itself is directly stimulated &mdash; a warm blanket over the legs and a warm voice can do the same job.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Attention changes the outcome &mdash; for the client and the therapist</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Distracting a client's mental attention during otherwise-ideal, comfortable touch (a phone call, or a backwards-counting task) measurably blunts the benefit, even in a physically comfortable position. Sherry Tallita's research extends this to the practitioner: a therapist's own mindful attention (versus "daydreaming" while treating) changes how the client's body responds, even when the client doesn't consciously notice the difference.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH 3 -->
+    <div class="branch" style="--branch-color:var(--accent-c)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">3. Myofibroblasts, stress hormones and fascial stiffness</div>
+          <div class="branch-sub">The TGF-beta pathway linking chronic stress to a stiffer body</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Staubesand's theory: two separate tonus systems</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">A German phlebologist named Staubesand found smooth-muscle-like contractile cells alongside dense sympathetic nerve fibres in lower-leg fascia, and proposed the body has two tension-regulation systems: a fast one via skeletal muscle under somatic nervous control, and a slower, more "emotional" background-tension system via contractile cells in fascia itself, linked to the autonomic nervous system. This appealing theory sent Schleip into the lab for a decade to test it directly.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Myofibroblasts: real, but far too slow for "fascial power"</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Schleip's team found the contractile cells, but they are myofibroblasts &mdash; known since the 1960s in Dupuytren's contracture, frozen shoulder and poor wound closure &mdash; not true smooth muscle. Density is highest in human thoracolumbar fascia, higher than in the same tissue in animals studied, supporting a "frozen lumbar" hypothesis for some chronic low back pain. But maximal coordinated contraction speed is roughly one centimetre per month, ruling them out as the explanation for rapid martial-arts power generation, even though they can meaningfully worsen a stiffening condition over months.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">The adrenaline &rarr; TGF-beta &rarr; stiffness pathway</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">A direct synaptic link between the sympathetic nervous system and myofibroblasts wasn't found. Instead, other groups showed fascial fibroblasts in a dish, stimulated with adrenaline, produce more of the cytokine TGF-beta after roughly 24 hours &mdash; and elevated TGF-beta both converts normal fibroblasts into myofibroblasts and strengthens their contraction. TGF-beta was already known as a mediator between chronic stress and immune changes; this extends it to a mediator between chronic stress and fascial stiffness &mdash; an indirect but real biochemical bridge.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Depression thickens the fascial envelope, not the muscle</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Using high-resolution ultrasound on the upper trapezius, Lea Obermann found no thickness change in the muscle itself in depressed patients, but a significantly thicker fascial envelope (aponeurosis) &mdash; consistent with more collagen type I, i.e. a form of "fascial armoring." It's direct morphological evidence that an emotional pathology can produce a measurable structural change in the body-wide fascial net, separate from muscular tension.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Brändle's 48-hour delay: stress today, stuck fascia in two days</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Andreas Brändle developed an ultrasound test of thoracolumbar fascia sliding at L1 (healthy people shift more than 8mm on forward lean; low back pain patients shift less). Tracking his own sliding capacity daily for a month alongside an emotional-stress diary and heart-rate variability, he and psychoimmunology researchers found a causal pattern: acute stress made the fascia measurably "more stuck" about 48 hours later &mdash; matching the known 24-hour TGF-beta lag plus the further hours needed for myofibroblast conversion and contraction.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH 4 -->
+    <div class="branch" style="--branch-color:var(--accent-d)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">4. Fasciocytes, hyaluronan and the ground substance</div>
+          <div class="branch-sub">Why movement, not injection, is the better lever on lubrication</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Fasciocytes: Carla Stecco's newly identified cell</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Unlike the elongated, spindle-shaped fibroblasts that produce collagen fibres, fasciocytes are rounded cells clustered at the gliding boundary between loose and dense connective tissue layers. Their specialty is producing hyaluronan (the more accurate general term than "hyaluronic acid," since it exists in both acidic and non-acidic states) &mdash; work Schleip rates as Nobel-calibre.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Hyaluronan's honey-to-ketchup viscosity switch</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Hyaluronan can exist as huge, folded, sticky "super-molecule" aggregations (viscous, like cold honey) or be broken into a more liquid, slippery form &mdash; via heat, vigorous massage, or cosmetic injection. In tennis elbow, more of the viscous form means less water-binding capacity, leaving free (unbound) water that shows up as local edema &mdash; a ground-substance explanation for tissue changes that isn't about collagen at all.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Densification before fibrosis: a two-stage continuum</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Newer evidence suggests conditions like frozen shoulder can begin painlessly as a ground-substance "densification" (sticky, edematous, no inflammation markers yet) months before collagen production shifts and true fibrotic contracture sets in. Leo Pruimboom's hormesis research proposes chronic sympathetic stress creates the pro-inflammatory chemical environment that turns a viscous ground substance into that fibrotic breeding ground.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Movement beats injection for building your own lubrication</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Fascia with up to 10x more hyaluronan &mdash; like the wrist retinaculum, worn by constant tendon-gliding &mdash; sits exactly where shear mobility is highest, showing the body ramps up lubrication production in response to gliding movement rather than fixed anatomy. Rather than paying for a hyaluronan injection into the low back (as is now done clinically in Prague), Schleip's own, not-yet-clinically-tested suggestion is simple: child's pose and rolling movements on the floor a few times a week, to get the thoracolumbar fascia's two layers gliding and stimulate the body's "inner pharmacy."</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH 5 -->
+    <div class="branch" style="--branch-color:var(--accent-e)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">5. Fascia, immunity and the "fascial microbiome"</div>
+          <div class="branch-sub">How mechanical load talks directly to the immune system</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">A microbiome living in your fascial envelopes</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Bacteria and viruses live quietly in the fascial envelopes surrounding neurovascular bundles throughout the body &mdash; a "fascial microbiome" distinct from, but interacting with, the gut microbiome. Dormant infections such as Lyme disease or Epstein-Barr virus can persist here and reactivate if the immune system weakens.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Mechanical load is a direct immune lever</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Marathon runners commonly show a spike in microbiome-linked reactivations (Lyme, Epstein-Barr) in the weeks after a race, and astronauts &mdash; who lack normal gravity-associated joint loading &mdash; show the same pattern. Fibroblasts appear to be the go-between, interacting with the autonomic nervous system (via pathways like TGF-beta) on one side and the immune system on the other, in what Schleip describes as a continuous "ping-pong" rather than either system being in charge.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">"Move the soup" &mdash; Jay Shah's interstitial stasis</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Jay Shah's group argues that myofascial pain conditions &mdash; tendinopathy, chronic low back pain &mdash; commonly share a stagnation of lymph, microcirculation and ground-substance fluid, creating a pro-inflammatory "interstitial inflammatory stasis." The practical technique is angled, sponge-like compression (roughly 45 degrees, not straight down) to squeeze stagnant fluid out and draw in fresh, cytokine-free plasma.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Telocytes: implicated in disease, not yet treatable</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Telocytes are neuron-shaped but non-neuronal resident fibroblasts with a communicating role, found dysfunctional in Crohn's disease, psoriasis and systemic sclerosis; transplanting healthy telocytes into diseased tissue improves the local condition. No technique or intervention is yet known to restore dysfunctional telocytes directly &mdash; an open research frontier Schleip flags for a future update.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Three levers that reliably boost lubrication</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Three distinct approaches measurably increase fasciocyte hyaluronan output: shear-direction movement/mobility, shockwave therapy (which Schleip finds clinically effective but "not very sensuous"), and stimulating fibroblast endocannabinoid receptors (relevant to why CBD is reported to help migraine, myofascial pain and sleep) &mdash; distinct mechanisms converging on the same lubrication outcome.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BRANCH 6 -->
+    <div class="branch" style="--branch-color:var(--accent-f)" onclick="toggleBranch(this)">
+      <div class="branch-header">
+        <div>
+          <div class="branch-title">6. Trauma, stress physiology and clinical practice</div>
+          <div class="branch-sub">Pacing, timing and prevention for stress-sensitised clients</div>
+        </div>
+        <div class="branch-arrow">+</div>
+      </div>
+      <div class="branch-leaves">
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Two distinct trauma fingerprints in the tissue</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">In roughly 200 low back pain patients screened for childhood maltreatment, Jonas De Saedeleer found physical/sexual abuse correlated with a lower pressure-pain threshold (steady pressure becomes painful sooner), while repeated emotional abuse correlated with an exaggerated "wind-up" phenomenon (repetitive light tapping becomes irritating far sooner than normal). A matching rat restraint-stress study reproduced the same two-pattern split, strengthening the case that this is a real physiological effect rather than reporting bias.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Dose your rhythm to the nervous system, not the tissue</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">A client with a sensitised wind-up response may need a stroke repeated only after five minutes, not the usual five seconds, to avoid triggering irritation with identical pressure. The practical takeaway: when a client reacts more emotionally than the tissue seems to warrant, that's information about their autonomic conditioning, not a signal to push harder or change your technique.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Osteoarthritis tracks under-use, not over-use</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Comparing chimpanzees (who rarely get osteoarthritis) with sedentary humans, researcher McNeill Alexander found a near one-to-one relationship between how much of a joint's full range of motion is regularly used and its risk of arthritis. The human hip &mdash; the joint we use through the smallest fraction of its available range &mdash; carries the highest osteoarthritis risk, and damage characteristically starts at the joint's under-used borders rather than its well-loaded centre.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Circadian rhythm sets your collagen-remodelling clock</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">Smaller collagen fibres are assembled in the early morning under high cortisol; larger fibres are built in the afternoon once cortisol has dropped. Poor circadian rhythm &mdash; jet lag, elevated night-time cortisol, insufficient melatonin/warm evening light &mdash; impairs wound healing and roughly doubles how many months of fascial exercise are needed to achieve the same remodelling, making morning daylight exposure a genuine fascia-health intervention.</div>
+        </div>
+
+        <div class="leaf" onclick="toggleLeaf(event, this)">
+          <div class="leaf-top"><div class="leaf-title">Frozen shoulder: better prevented than chased</div><div class="leaf-arrow">&#9654;</div></div>
+          <div class="leaf-detail">About 80% of frozen shoulder resolves on its own, and Schleip is not aware of a manual therapy study that beats watchful waiting once it has fully locked up. His suggested window is earlier: in the months before, when the arm has stopped swinging naturally when walking, restricted-arc and Tai Chi-style "reclaiming" movement (echoing Hubert Godard's work with pre-mastectomy patients whose at-risk arm loses its felt sense of ownership and starts hanging "like an empty coat sleeve") may help prevent the fibrotic endpoint rather than treat it after the fact.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FULL SUMMARY -->
+  <div id="summary" class="panel">
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-a)"></span>Fascia is the body's richest sensory organ</h2>
+      <p>Schleip opens with a striking recalculation: combining the loose subcutaneous connective tissue with the fine connective wrapping inside muscle (endomysium and perimysium), the fascial net carries an estimated 250 million sensory receptors &mdash; more than the eyes, historically assumed to be humans' dominant sense. Most of these are free nerve endings split roughly seven-to-one between interoception (sensing internal state) and proprioception (sensing position and load), and different pathologies map cleanly onto each: low back pain, scoliosis and whiplash lean proprioceptive, while eating disorders, anxiety, depression and PTSD lean interoceptive. Interoception itself runs largely on "predictive coding" through the insula &mdash; Schleip estimates less than 10% of what a client feels during touch reflects the touch itself, with the rest built from expectation, memory, smell and voice, which is a genuine argument for investing in relationship and context alongside technique. The 2021 Nobel-winning discovery of Piezo mechanoreceptors added a molecular explanation for why some people, including girls with adolescent idiopathic scoliosis, have a genetically blunted proprioceptive sense tied to smaller, less Piezo-rich muscle spindles.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-b)"></span>Touch, safety and the autonomic nervous system</h2>
+      <p>A separate line of research covers touch itself. Gentle, C-tactile-fibre-mediated stroking (1&ndash;10cm/sec, around 34&deg;C) only registers as pleasant inside a relationship the client experiences as secure &mdash; outside that, the physical parameters don't matter. A second, distinct channel handles slow, steady deep pressure (the mechanism behind weighted blankets and compression garments); testing on a man who lost all myelinated sensory fibres below the neck showed this pressure-pleasantness response depends on a still-unidentified myelinated receptor, not free nerve endings. Underneath both is neuroception &mdash; the nervous system's constant, non-conscious safety scan. Even though Stephen Porges' broader polyvagal theory has recently been challenged by a large group of co-authors as anatomically wrong, Schleip is clear that the clinical results built on it remain real: perceived safety measurably lowers systemic inflammation, and can be delivered through a warm blanket and a warm voice as effectively as through any specific vagal technique. Distraction (a phone call, a mental subtraction task) blunts the benefit of touch even when the physical setup is ideal &mdash; and research on practitioners shows the therapist's own mindful attention changes client outcomes too.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-c)"></span>Myofibroblasts and the stress-to-stiffness pathway</h2>
+      <p>Schleip spent roughly a decade testing a German phlebologist's theory that fascia contains its own slow, "emotional" contractile system running parallel to skeletal muscle. He found the cells &mdash; myofibroblasts, already known from Dupuytren's contracture and frozen shoulder &mdash; at unusually high density in human thoracolumbar fascia, but their maximum contraction speed (about one centimetre per month) ruled out any role in rapid movement or "fascial power" theories, while still being plausible in slow-developing conditions like a stiffening low back. The mechanistic link to stress turned out to be indirect but real: adrenaline drives fascial fibroblasts to produce more of the cytokine TGF-beta within about 24 hours, and elevated TGF-beta both creates more myofibroblasts and makes them contract harder &mdash; the same cytokine already known to link chronic stress to immune dysfunction. Two human studies make this tangible: depressed patients show a measurably thicker (not more muscular) fascial envelope around the trapezius, and one meticulous self-experiment tracking fascia sliding, a stress diary and heart-rate variability for a month found that acute stress leaves the fascia measurably "stuck" about 48 hours later &mdash; matching the known biochemical timeline almost exactly.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-d)"></span>Fasciocytes, hyaluronan and the ground substance</h2>
+      <p>A newly identified rounded cell type, the fasciocyte, sits at gliding boundaries between connective tissue layers and is the primary producer of hyaluronan &mdash; a molecule that can exist as a sticky, honey-like aggregate or be broken into a slippery, liquid form by heat, vigorous massage, or injection. Tissue with far more hyaluronan (like the wrist retinaculum) reliably corresponds to tissue with the highest shear-gliding demand, suggesting production responds to movement rather than being fixed by anatomy. Newer evidence frames several fibrotic conditions, including frozen shoulder, as starting silently as ground-substance "densification" months before true collagen fibrosis sets in, plausibly driven by chronic sympathetic stress creating a pro-inflammatory chemical environment. Rather than clinics injecting hyaluronan directly into painful low backs, Schleip's preferred (though not yet clinically tested) suggestion is to stimulate the body's own production through regular shear-movement practices like child's pose and floor rolling.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-e)"></span>Fascia, the immune system and mechanical load</h2>
+      <p>Fascial envelopes around neurovascular bundles host a quiet, persistent "fascial microbiome," including dormant infections like Lyme disease or Epstein-Barr virus that can reactivate under immune stress. Marathon runners and astronauts &mdash; heavy mechanical exertion at one extreme, absent gravitational loading at the other &mdash; both show elevated reactivation rates, evidence that mechanical loading talks directly to immune regulation, likely mediated through fibroblasts acting as a go-between with the autonomic nervous system. Jay Shah's concept of "interstitial inflammatory stasis" reframes much myofascial pain as stagnant lymph, microcirculation and ground-substance fluid pooling into a locally pro-inflammatory soup, treatable with angled (not vertical) sponge-like compression. Newly discovered telocytes are implicated in Crohn's disease, psoriasis and systemic sclerosis, and respond to transplantation of healthy telocytes &mdash; but no direct treatment for restoring them yet exists, unlike fasciocyte hyaluronan production, which responds reliably to shear movement, shockwave therapy and endocannabinoid stimulation.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="dot" style="background:var(--accent-f)"></span>Trauma, stress physiology and clinical timing</h2>
+      <p>A study of roughly 200 low back pain patients found two distinct, separable trauma fingerprints: physical or sexual abuse history correlated with a lower pressure-pain threshold, while repeated emotional abuse correlated with an exaggerated "wind-up" response to repetitive stimulation &mdash; a split reproduced in an animal restraint-stress model, lending it real physiological weight beyond self-report. The clinical implication is pacing: a sensitised client may need minutes, not seconds, between repeated strokes to avoid triggering irritation at identical pressure. Elsewhere, comparative primate research shows osteoarthritis tracks under-use of a joint's available range rather than overuse, explaining why the human hip &mdash; used through its smallest range fraction &mdash; carries disproportionate arthritis risk. Circadian rhythm turns out to directly gate collagen remodelling timing (small fibres made on morning cortisol, larger ones in the afternoon), meaning poor sleep and light exposure can roughly double the time needed for fascial change. And with frozen shoulder resolving on its own in 80% of cases regardless of manual technique, Schleip's clearest practical message is to intervene earlier &mdash; restoring an arm's natural, felt movement in the months before restriction sets in &mdash; rather than treating the fully frozen result.</p>
+    </div>
+
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div id="takeaways" class="panel">
+    <div class="takeaways">
+
+      <div class="take-card">
+        <div class="take-num">1</div>
+        <p><strong>Diagnose which sensory system a client actually needs.</strong> Low back pain, scoliosis and whiplash respond to proprioceptive precision work; eating disorders, anxiety, depression and PTSD respond better to interoceptive, less-verbalised, more embodied approaches.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">2</div>
+        <p><strong>Invest in the relationship, not just the hands.</strong> Because interoceptive perception is over 90% predictive/expectation-driven, a client's sense of "great touch" depends heavily on trust, voice and context &mdash; storytelling and rapport are not a soft add-on, they're mechanistically central.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">3</div>
+        <p><strong>Match your touch style to the goal.</strong> Gentle 1&ndash;10cm/sec stroking at skin temperature works for social/safety-linked relaxation; slow, steady several-kilogram compression (the weighted-blanket mechanism) is a separate, useful channel for deep-pressure-seeking clients.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">4</div>
+        <p><strong>Make the room and your presence feel safe before you touch.</strong> Perceived safety lowers systemic inflammation on its own; a warm voice, warm room or warm blanket can achieve what's often attributed to precise technique.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">5</div>
+        <p><strong>Watch for your own attention, not just the client's.</strong> Distraction (client or practitioner) measurably reduces the benefit of touch even when the physical setup is ideal &mdash; treat presence as part of the technique.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">6</div>
+        <p><strong>Slow your repetition rate for stress-sensitised clients.</strong> A wind-up-prone or trauma-affected client may need five minutes rather than five seconds between repeated strokes at the same pressure to avoid triggering irritation.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">7</div>
+        <p><strong>Favour shear movement over injections for lubrication.</strong> Regular gliding movement (child's pose, floor rolling, joints moved through shear) stimulates the body's own hyaluronan production &mdash; a cheaper, unproven-but-plausible alternative to hyaluronan injections for stiffness.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">8</div>
+        <p><strong>Use full range of motion to protect joints long-term.</strong> Osteoarthritis tracks under-use, not overuse &mdash; deliberately moving joints (especially the hip) through their full available range is a genuine prevention strategy.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">9</div>
+        <p><strong>Get morning daylight for tissue repair.</strong> Collagen remodelling is circadian-gated; poor sleep/light exposure can roughly double the time needed for fascial exercises to produce change &mdash; treat circadian health as part of any fascia protocol.</p>
+      </div>
+
+      <div class="take-card">
+        <div class="take-num">10</div>
+        <p><strong>Act before frozen shoulder locks up, not after.</strong> With 80% resolving regardless of manual technique once fully frozen, the higher-value window is restoring natural arm movement in the preceding months, before the restricted arc sets in.</p>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Fascia as a Mediator Between Emotions, the Autonomic Nervous System &amp; Immune Regulation &middot; Dr. Robert Schleip, Technical University of Munich, Fascia Research Project &middot; Live webinar recording, 2 September 2026, hosted by Robert Granter &middot; Mind map generated from the recording's auto-transcript.
+</footer>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggleBranch(el) { el.classList.toggle('open'); }
+  function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+</body>
+</html>
