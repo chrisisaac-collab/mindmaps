@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6 Steps To Dissolve Plaque &amp; Unclog Arteries Naturally — Dr Alex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0c1420;
+    --bg-panel: #10192a;
+    --bg-card: #141f33;
+    --bg-card-hover: #182642;
+    --border: #223050;
+    --text: #e7ecf5;
+    --text-dim: #9fb0c9;
+    --text-faint: #6b7c99;
+    --accent: #ff6b5e;
+
+    --c1: #ff6b5e; /* science - coral red */
+    --c1-bg: rgba(255,107,94,0.12);
+    --c2: #4fd1c5; /* LDL/ApoB - teal */
+    --c2-bg: rgba(79,209,197,0.12);
+    --c3: #f2b84b; /* diet - amber */
+    --c3-bg: rgba(242,184,75,0.12);
+    --c4: #7ee081; /* movement - green */
+    --c4-bg: rgba(126,224,129,0.12);
+    --c5: #b895f0; /* inflammation/stress - purple */
+    --c5-bg: rgba(184,149,240,0.12);
+    --c6: #5b9df9; /* supplements/synthesis - blue */
+    --c6-bg: rgba(91,157,249,0.12);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  .wrap{ max-width: 920px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  header{ margin-bottom: 28px; }
+  .kicker{
+    font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 10px;
+  }
+  h1{
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600; font-size: clamp(26px, 4.2vw, 38px);
+    margin: 0 0 12px; line-height: 1.15; color: #fff;
+  }
+  .meta{ color: var(--text-dim); font-size: 14.5px; }
+  .meta a{ color: var(--c2); text-decoration: none; border-bottom: 1px solid rgba(79,209,197,0.35); }
+  .meta a:hover{ border-bottom-color: var(--c2); }
+
+  nav.tabs{
+    display: flex; gap: 6px; margin: 26px 0 24px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab{
+    appearance: none; border: none; background: none; cursor: pointer;
+    color: var(--text-faint); font-family: inherit; font-size: 14.5px; font-weight: 600;
+    padding: 12px 16px; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s ease, border-color .15s ease;
+  }
+  .tab:hover{ color: var(--text); }
+  .tab.active{ color: #fff; border-bottom-color: var(--accent); }
+
+  .panel{ display: none; }
+  .panel.active{ display: block; animation: fade .25s ease; }
+  @keyframes fade{ from{ opacity:0; transform: translateY(4px);} to{ opacity:1; transform: translateY(0);} }
+
+  /* ---- Mind map ---- */
+  .branch{
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: var(--bg-panel);
+  }
+  .branch-head{
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 18px; cursor: pointer; user-select: none;
+  }
+  .branch-num{
+    flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; font-family: 'Fraunces', serif;
+  }
+  .branch-title{ flex: 1; font-weight: 700; font-size: 16px; color: #fff; }
+  .branch-sub{ display:block; font-weight: 500; font-size: 12.5px; color: var(--text-faint); margin-top: 2px; }
+  .branch-chev{
+    flex: 0 0 auto; width: 20px; height: 20px; color: var(--text-faint);
+    transition: transform .2s ease;
+  }
+  .branch.open .branch-chev{ transform: rotate(180deg); }
+
+  .branch-body{
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    padding: 0 18px;
+  }
+  .branch.open .branch-body{ padding-bottom: 14px; }
+
+  .leaf{
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+  .leaf-head{
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; cursor: pointer; font-size: 14.5px; font-weight: 600; color: var(--text);
+  }
+  .leaf-head:hover{ background: var(--bg-card-hover); }
+  .leaf-dot{ flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; }
+  .leaf-plus{ margin-left: auto; color: var(--text-faint); font-size: 18px; line-height: 1; transition: transform .2s ease; }
+  .leaf.open .leaf-plus{ transform: rotate(45deg); }
+  .leaf-detail{
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    font-size: 14px; color: var(--text-dim); padding: 0 14px;
+  }
+  .leaf.open .leaf-detail{ padding: 0 14px 14px; max-height: 500px; }
+
+  /* branch color coding */
+  .branch[data-c="1"] .branch-num{ background: var(--c1-bg); color: var(--c1); }
+  .branch[data-c="2"] .branch-num{ background: var(--c2-bg); color: var(--c2); }
+  .branch[data-c="3"] .branch-num{ background: var(--c3-bg); color: var(--c3); }
+  .branch[data-c="4"] .branch-num{ background: var(--c4-bg); color: var(--c4); }
+  .branch[data-c="5"] .branch-num{ background: var(--c5-bg); color: var(--c5); }
+  .branch[data-c="6"] .branch-num{ background: var(--c6-bg); color: var(--c6); }
+  .branch[data-c="1"] .leaf-dot{ background: var(--c1); }
+  .branch[data-c="2"] .leaf-dot{ background: var(--c2); }
+  .branch[data-c="3"] .leaf-dot{ background: var(--c3); }
+  .branch[data-c="4"] .leaf-dot{ background: var(--c4); }
+  .branch[data-c="5"] .leaf-dot{ background: var(--c5); }
+  .branch[data-c="6"] .leaf-dot{ background: var(--c6); }
+
+  /* ---- Summary ---- */
+  .summary-section{ margin-bottom: 26px; }
+  .summary-section h2{
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 19px;
+    color: #fff; margin: 0 0 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .summary-section h2 .bar{ width: 4px; height: 18px; border-radius: 2px; display:inline-block; }
+  .summary-section p{ color: var(--text-dim); font-size: 15px; margin: 0 0 10px; }
+  .summary-section p strong{ color: var(--text); }
+
+  /* ---- Takeaways ---- */
+  .takeaways{ display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 640px){ .takeaways{ grid-template-columns: 1fr 1fr; } }
+  .tcard{
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; display: flex; gap: 12px;
+  }
+  .tnum{
+    flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--c6-bg); color: var(--c6); font-weight: 700; font-size: 12.5px;
+    display: flex; align-items: center; justify-content: center; font-family:'Fraunces',serif;
+  }
+  .tcard p{ margin: 0; font-size: 14px; color: var(--text-dim); }
+  .tcard p strong{ color: var(--text); }
+
+  footer{ margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--text-faint); font-size: 12.5px; }
+
+  ::-webkit-scrollbar{ height: 6px; width: 6px; }
+  ::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Podcast Mind Map</div>
+    <h1>6 Steps To Dissolve Plaque And Unclog Your Arteries Naturally</h1>
+    <div class="meta">
+      Doctor Alex (Dr Alex Wibberley) ·
+      <a href="https://youtu.be/qqeqYNaqIJY" target="_blank" rel="noopener">Watch on YouTube</a>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" onclick="switchTab('mindmap', this)">Mind Map</button>
+    <button class="tab" onclick="switchTab('summary', this)">Full Summary</button>
+    <button class="tab" onclick="switchTab('takeaways', this)">Actionable Takeaways</button>
+  </nav>
+
+  <!-- ============ MIND MAP ============ -->
+  <div id="mindmap" class="panel active">
+
+    <div class="branch" data-c="1">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-num">1</div>
+        <div class="branch-title">The Science Of Plaque
+          <span class="branch-sub">How it actually forms, and why "reversal" is real</span>
+        </div>
+        <svg class="branch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="branch-body">
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The pipe-and-limescale myth<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Most people picture arteries as pipes with plaque scaling up on the inside, like limescale you could flush away. That model is wrong. Plaque actually forms <em>within</em> the artery wall itself — closer to "a spot or a pimple that forms just under the skin and then protrudes out" than to surface buildup.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The endothelium: your non-stick lining<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">The endothelium is the thin living lining inside every blood vessel — "almost like a non-stick coating on a good frying pan." When it's smooth, blood flows freely. Chronic damage from high blood pressure, high blood sugar, smoking and high cholesterol wears this lining down over time.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The inflammatory cascade<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Once the endothelial barrier is worn, cholesterol infiltrates the artery wall. The immune system tries to clean it up but gets overwhelmed, creating an inflamed buildup — that inflamed lesion is what plaque actually is. With roughly 60,000 miles of blood vessels in the body, even slight wear compounds over decades, like several worn engine parts shortening a car's life.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Three achievable goals: stop, stabilize, regress<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail"><strong>Stop progression</strong> — simply halting the disease is already a major win. <strong>Stabilize</strong> — probably the goal that saves the most lives: a dangerous plaque is like "a nasty pimple or a boil with skin really thin on top that is ready to burst," triggering a clot and a heart attack; a stable plaque has "a thick, tough cap... more like a healed scar or a cyst." <strong>Regress</strong> — for decades thought impossible, real regression is achievable: "you can't undo it completely, but backwards is absolutely on the table."</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The landmark trials: Ornish &amp; ASTEROID<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">The <strong>Ornish Lifestyle Heart Trial</strong> put coronary disease patients on a very low-fat whole-food vegetarian diet, regular exercise, no smoking and group stress support versus usual care — about 80% of the lifestyle group showed some regression, and over years of follow-up the usual-care group had more than twice as many cardiac events. The <strong>ASTEROID study</strong> used intravascular ultrasound to measure plaque directly before and after ~2 years of high-dose statins, driving LDL to record lows — plaque volume fell by about 7%, with roughly two-thirds of patients showing measurable regression. A high coronary calcium score means more disease is present, but calcium hardening a shrinking plaque is actually a sign of stabilization, not necessarily worsening.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" data-c="2">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-num">2</div>
+        <div class="branch-title">Step 1 — Master Your LDL / ApoB
+          <span class="branch-sub">The single number that matters most</span>
+        </div>
+        <svg class="branch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="branch-body">
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Why ApoB, not just "cholesterol"<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">"If you change just one number in your whole body to protect your heart... make it this LDL, or more precisely, ApoB." LDL is the cholesterol that gets driven into the artery wall in the first place — controlling it stops plaque accumulating at the source.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Lifetime exposure, not today's snapshot<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">"It's not today's number that matters, it is your total exposure across a lifetime — like pack-years with smoking." A single good blood test doesn't undo years of higher exposure; what matters is the cumulative area under the curve.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>"Lower for longer" beats crash efforts<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Sustained, moderate control wins over dramatic short-term fixes: "lower for longer beats an absolute crash for a fortnight, but then you revert back to your normal way of eating." Consistency is what actually protects the artery wall over years.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>How to actually find your number<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Get LDL and/or ApoB measured through your GP or a private blood test paired with a proper medical conversation about what the result means for you specifically — this is the recommended starting point before anything else on this list.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" data-c="3">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-num">3</div>
+        <div class="branch-title">Step 2 — Eat Mediterranean-Style
+          <span class="branch-sub">Pattern over single "superfoods"</span>
+        </div>
+        <svg class="branch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="branch-body">
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Nitrate-rich foods and nitric oxide<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Dietary nitrates in leafy greens and beetroot convert to nitric oxide in the body, which "tells the artery wall to relax and widen and open up," helping to lower blood pressure directly.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The full Mediterranean pattern<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Rather than chasing individual foods, the emphasis is the overall eating pattern: "plenty of veg, olive oil, oily fish, pulses, nuts and seeds, and soluble fibre from oats and beans." This combination "helps to mop up your cholesterol" through several pathways at once.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Sustainability beats perfection<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">"A way of eating that you can sustain for many, many years — that is the most important thing." An imperfect diet followed for a decade beats a perfect one abandoned after a month.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Double duty: cholesterol and inflammation<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">This same vegetable-heavy, olive-oil-and-oily-fish pattern does double duty — it improves lipid profiles and dampens the chronic inflammation that keeps plaque active, linking directly back to Step 4.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" data-c="4">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-num">4</div>
+        <div class="branch-title">Step 3 — Move Consistently
+          <span class="branch-sub">Exercise literally scrubs the artery lining</span>
+        </div>
+        <svg class="branch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="branch-body">
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The "scrubbing" mechanism<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">"Movement and exercising helps to scrub the inside of your arteries." Brisk blood flow creates shear stress that signals the artery lining to release more nitric oxide and stay healthier — like a flowing river staying clear, while a stagnant pond turns murky.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Zone 2 is enough — you don't need to be an athlete<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Referencing his own national-level rowing background, the speaker notes "most of our training was zone 2 or low zone 3 — just steady-state aerobic exercise." High intensity isn't required for the artery-health benefit.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The practical prescription<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Base level: a brisk walk most days. Bonus effect: moving after meals to blunt blood-sugar spikes and support nitric oxide release. Venue doesn't matter — treadmill, bike, running or rowing machine all count.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Consistency over intensity<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">"Consistency is where the power lives... it's the regular stuff that you do at a low intensity that helps the most." A daily brisk walk beats an occasional hard session.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" data-c="5">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-num">5</div>
+        <div class="branch-title">Steps 4 &amp; 5 — Cool Inflammation, Manage Stress
+          <span class="branch-sub">Plaque is a "smoldering injury," not just fat</span>
+        </div>
+        <svg class="branch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="branch-body">
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Plaque is inflamed, not inert<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Plaque is "not just fat" — it's "a smoldering inflamed injury." Anything that keeps low-grade inflammation running is "quite literally pouring petrol on that injury," which is why inflammation control is its own separate step, not a footnote to diet.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Quitting smoking is the biggest single lever<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Smoking cessation is named as "one of the best things that you can do" to cool chronic inflammation directly at the source of endothelial damage.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Sleep: the "sneaky" inflammation driver<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">"Poor sleep is another sneaky one that drives inflammation that not many people know about." The fix is unglamorous but effective: a protected, consistent bedtime and wake time every day.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Stress as genuine cardiovascular medicine<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Chronic stress "pushes up your blood pressure and your inflammatory levels, and both of them batter the lining of your arteries directly." Group stress support was a built-in part of the Ornish trial's protocol. "Managing stress is genuine medication for your arteries — it's not just a nice add-on." The speaker acknowledges much stress is outside our control, but what's within it is worth addressing for long-term heart health.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" data-c="6">
+      <div class="branch-head" onclick="toggleBranch(this.parentElement)">
+        <div class="branch-num">6</div>
+        <div class="branch-title">Step 6 — Skip The Supplement Hype
+          <span class="branch-sub">And why the combination is what actually works</span>
+        </div>
+        <svg class="branch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="branch-body">
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>The marketing red flag<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Any supplement claiming to "cleanse your arteries," "reduce plaque" or "scrub out your arteries" is flagged directly: "the evidence behind it either doesn't exist or is pretty poor." The speaker commits to promoting anything that genuinely works if it's ever found, but doesn't expect that day to come.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Redirect the money<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Instead of buying artery-cleansing supplements, "save your money and buy a gym membership instead, or a pair of new running shoes — something that gets you out and moving that we know really does work."</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>No single food, workout or number does it alone<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">"The beetroot doesn't do it on its own. The leafy greens don't do it on its own. The walk after your meals doesn't do it on its own. It is all of it" — stacked together and repeated over years.</div>
+        </div>
+        <div class="leaf">
+          <div class="leaf-head" onclick="toggleLeaf(event, this.parentElement)"><span class="leaf-dot"></span>Start with your numbers<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">The closing advice: "start with foundations and go and get your numbers checked with your doctor" — establish your baseline LDL/ApoB and other markers before layering on the rest of the steps.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ SUMMARY ============ -->
+  <div id="summary" class="panel">
+
+    <div class="summary-section">
+      <h2><span class="bar" style="background:var(--c1)"></span>How Plaque Really Forms</h2>
+      <p>Most people imagine arteries as pipes and plaque as limescale that could be flushed away. Dr Alex corrects this: plaque forms inside the artery wall itself, more like a pimple developing under the skin than deposits building up on a surface. The endothelium, the thin living lining of every blood vessel, normally works like a non-stick coating that lets blood flow freely. Chronic exposure to high blood pressure, high blood sugar, smoking and high cholesterol wears this lining down. Once damaged, cholesterol gets driven into the wall, the immune system responds and becomes overwhelmed, and the resulting inflamed buildup is what we call plaque. Across roughly 60,000 miles of blood vessels, even minor wear compounds significantly over a lifetime.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="bar" style="background:var(--c1)"></span>Three Goals, And Why Regression Is Real</h2>
+      <p>Dr Alex frames disease management around three realistic goals. Stopping progression is already a major success on its own. Stabilizing plaque is arguably the most life-saving goal, since a thin-capped, unstable plaque behaves like a boil ready to burst and trigger a clot, whereas a thick-capped, stable plaque behaves more like a healed scar. Regression — genuinely shrinking plaque — was considered impossible for decades but is now demonstrated: "you can't undo it completely, but backwards is absolutely on the table." He also clarifies a common point of confusion: a rising coronary calcium score doesn't always mean things are getting worse, since calcium can be a sign that a shrinking, previously unstable plaque is hardening and stabilizing.</p>
+      <p>Two studies anchor these claims. The <strong>Ornish Lifestyle Heart Trial</strong> put coronary disease patients on an intensive low-fat, whole-food, vegetarian diet with regular exercise, smoking cessation and group stress support, compared with usual care. About 80% of the lifestyle group showed some regression, and the usual-care group went on to have more than twice as many cardiac events over long-term follow-up. The <strong>ASTEROID study</strong> used intravascular ultrasound to directly measure plaque before and after roughly two years of high-dose statin therapy that drove LDL to record lows — plaque volume fell by about 7%, with around two-thirds of patients showing measurable regression, a result once thought impossible.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="bar" style="background:var(--c2)"></span>Step 1: Master Your LDL / ApoB</h2>
+      <p>If there's one number to control, it's LDL — or more precisely, ApoB, since LDL is the cholesterol that gets driven into the artery wall in the first place. The key insight is that what matters isn't today's reading but total lifetime exposure, similar to how smoking risk is measured in pack-years. A sustained, moderately lower level beats a dramatic two-week crash followed by reverting to old habits — "lower for longer" is the operative principle. The practical first step is simply getting LDL or ApoB tested through a GP or private test alongside proper medical guidance.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="bar" style="background:var(--c3)"></span>Step 2: Eat Mediterranean-Style</h2>
+      <p>Rather than chasing single "superfoods," the emphasis is on an overall eating pattern: plenty of vegetables, olive oil, oily fish, pulses, nuts, seeds and soluble fibre from oats and beans. Leafy greens and beetroot specifically supply dietary nitrates that convert to nitric oxide, relaxing and widening artery walls and helping lower blood pressure. This pattern helps manage cholesterol and reduce inflammation simultaneously. The most important factor, though, is sustainability — a way of eating you can maintain for years outperforms a stricter approach you abandon after weeks.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="bar" style="background:var(--c4)"></span>Step 3: Move Consistently</h2>
+      <p>Exercise does more than burn energy — brisk blood flow creates shear stress that signals the artery lining to release nitric oxide and stay healthy, described as a flowing river staying clear versus a stagnant pond turning murky. Notably, elite intensity isn't required: Dr Alex notes that most of his own national-level rowing training was low-intensity, steady-state "zone 2" work. The practical baseline is a brisk walk most days, ideally including a short walk after meals, with consistency mattering far more than intensity.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="bar" style="background:var(--c5)"></span>Steps 4 &amp; 5: Cool Inflammation, Manage Stress</h2>
+      <p>Plaque is described as "a smoldering inflamed injury," not simply fat deposits — so anything sustaining low-grade inflammation actively worsens it. Quitting smoking is named as one of the single best moves available. Poor sleep is flagged as an under-recognised driver of inflammation, addressed with a consistent, protected bedtime and wake time. Chronic stress raises blood pressure and inflammatory markers, both of which directly damage the artery lining — the Ornish trial built group stress support directly into its successful protocol, and Dr Alex describes managing controllable stress as "genuine medication for your arteries," while acknowledging some stressors are simply outside anyone's control.</p>
+    </div>
+
+    <div class="summary-section">
+      <h2><span class="bar" style="background:var(--c6)"></span>Step 6: Skip The Supplement Hype — And Stack What Works</h2>
+      <p>Any supplement marketed as cleansing or scrubbing arteries or reducing plaque is called out directly as lacking good evidence, with a pledge to promote anything that genuinely works if that day ever comes. The suggested alternative is to redirect that money toward a gym membership or good running shoes instead. The closing message ties every step together: no single food, workout or number does the job alone — beetroot, leafy greens and a post-meal walk each contribute only a small piece. It's the combination, sustained consistently over years, that reshapes what's happening inside the artery walls. The recommended starting point is simple: get your numbers checked with your doctor first, then build the other habits on top of that baseline.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ TAKEAWAYS ============ -->
+  <div id="takeaways" class="panel">
+    <div class="takeaways">
+      <div class="tcard"><div class="tnum">1</div><p><strong>Get an ApoB or LDL test.</strong> Ask your GP for this specific marker rather than relying on total cholesterol alone — it's the number most directly tied to plaque formation.</p></div>
+      <div class="tcard"><div class="tnum">2</div><p><strong>Think in years, not weeks.</strong> Track LDL/ApoB over time — sustained moderate control beats a short, dramatic crash you can't maintain.</p></div>
+      <div class="tcard"><div class="tnum">3</div><p><strong>Add a daily nitrate source.</strong> A handful of leafy greens or a small beetroot serving supports nitric oxide production and healthier blood pressure.</p></div>
+      <div class="tcard"><div class="tnum">4</div><p><strong>Build a Mediterranean-style plate.</strong> Prioritise olive oil, oily fish, pulses, nuts, seeds and oats as your everyday default, not an occasional treat.</p></div>
+      <div class="tcard"><div class="tnum">5</div><p><strong>Walk after your biggest meal.</strong> A brisk 10–15 minute walk post-meal blunts blood sugar spikes and supports artery-lining health.</p></div>
+      <div class="tcard"><div class="tnum">6</div><p><strong>Default to zone 2 movement.</strong> Daily steady, conversational-pace activity does more for arteries long-term than occasional intense sessions.</p></div>
+      <div class="tcard"><div class="tnum">7</div><p><strong>If you smoke, quitting is priority one.</strong> It's named as one of the single highest-leverage anti-inflammatory moves available.</p></div>
+      <div class="tcard"><div class="tnum">8</div><p><strong>Protect a consistent sleep schedule.</strong> Same bedtime, same wake time — poor sleep quietly drives the inflammation that damages arteries.</p></div>
+      <div class="tcard"><div class="tnum">9</div><p><strong>Treat controllable stress as medicine.</strong> Address the stressors within your power — it's described as genuine treatment for your arteries, not a lifestyle extra.</p></div>
+      <div class="tcard"><div class="tnum">10</div><p><strong>Skip "artery-cleansing" supplements.</strong> Redirect that spend to a gym membership or decent running shoes — something with actual evidence behind it.</p></div>
+    </div>
+  </div>
+
+  <footer>
+    Source: "6 Steps To Dissolve Plaque And Unclog Your Arteries Naturally" — Doctor Alex (Dr Alex Wibberley) · <a href="https://youtu.be/qqeqYNaqIJY" target="_blank" rel="noopener" style="color:var(--text-faint)">youtu.be/qqeqYNaqIJY</a>. This mind map summarises the video's content for personal reference and is not medical advice — speak with your own doctor before changing medication, diet or exercise habits.
+  </footer>
+
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) {
+  el.classList.toggle('open');
+  const body = el.querySelector('.branch-body');
+  if (el.classList.contains('open')) {
+    body.style.maxHeight = body.scrollHeight + 200 + 'px';
+  } else {
+    body.style.maxHeight = 0;
+  }
+}
+function toggleLeaf(e, el) {
+  e.stopPropagation();
+  el.classList.toggle('open');
+  const detail = el.querySelector('.leaf-detail');
+  const branchBody = el.closest('.branch-body');
+  if (el.classList.contains('open')) {
+    detail.style.maxHeight = detail.scrollHeight + 'px';
+  } else {
+    detail.style.maxHeight = 0;
+  }
+  // re-measure parent branch height so it doesn't clip
+  if (branchBody && branchBody.parentElement.classList.contains('open')) {
+    setTimeout(() => { branchBody.style.maxHeight = branchBody.scrollHeight + 200 + 'px'; }, 310);
+  }
+}
+</script>
+</body>
+</html>
