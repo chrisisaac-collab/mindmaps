@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Annette Bosworth — Insulin, Ketosis & Dementia | Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1512;
+    --bg2:#131c18;
+    --card:#182420;
+    --card-hover:#1e2e28;
+    --border:#26362f;
+    --text:#eaf2ee;
+    --text-dim:#a9bdb4;
+    --text-faint:#748a80;
+    --accent-a:#5fd8a3;
+    --accent-b:#f2b84b;
+    --accent-c:#7cb8e8;
+    --accent-d:#e88a8a;
+    --accent-e:#c69ef2;
+    --accent-f:#6fd0d0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:radial-gradient(ellipse at top, var(--bg2), var(--bg));
+    color:var(--text);
+    font-family:'Manrope', sans-serif;
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  header{
+    padding:36px 24px 20px;
+    text-align:center;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .kicker{
+    font-size:12px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--accent-a);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(24px,4vw,38px);
+    line-height:1.2;
+    margin:0 0 12px;
+  }
+  .meta{
+    color:var(--text-dim);
+    font-size:14px;
+    line-height:1.6;
+  }
+  .meta strong{ color:var(--text); }
+  nav.tabs{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:26px auto 8px;
+    max-width:900px;
+    padding:0 16px;
+  }
+  .tab{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    padding:10px 20px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .2s ease;
+    font-family:'Manrope',sans-serif;
+  }
+  .tab:hover{ color:var(--text); border-color:var(--accent-a);}
+  .tab.active{
+    background:var(--accent-a);
+    color:#0e1512;
+    border-color:var(--accent-a);
+  }
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:20px 20px 40px;
+  }
+  .panel{ display:none; animation:fadeIn .35s ease; }
+  .panel.active{ display:block; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  /* MIND MAP */
+  .branch{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--branch-color, var(--accent-a));
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .branch:hover{ background:var(--card-hover); }
+  .branch-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 20px;
+    gap:12px;
+  }
+  .branch-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:17px;
+    font-weight:700;
+    font-family:'Fraunces', serif;
+  }
+  .branch-dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--branch-color, var(--accent-a));
+    flex-shrink:0;
+  }
+  .branch-arrow{
+    color:var(--text-faint);
+    transition:transform .25s ease;
+    font-size:18px;
+  }
+  .branch.open .branch-arrow{ transform:rotate(90deg); }
+  .leaves{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+  }
+  .branch.open .leaves{ max-height:2000px; }
+  .leaf{
+    margin:0 16px 12px;
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 16px;
+    cursor:pointer;
+  }
+  .leaf-title{
+    font-size:14.5px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+  }
+  .leaf-plus{ color:var(--text-faint); font-size:16px; transition:transform .2s ease; }
+  .leaf.open .leaf-plus{ transform:rotate(45deg); }
+  .leaf-detail{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    font-size:13.5px;
+    color:var(--text-dim);
+    line-height:1.6;
+  }
+  .leaf.open .leaf-detail{ max-height:400px; margin-top:10px; }
+
+  /* SUMMARY */
+  .summary-section{ margin-bottom:28px; }
+  .summary-section h3{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    margin:0 0 10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .summary-section h3::before{
+    content:"";
+    width:10px; height:10px; border-radius:50%;
+    background:var(--dot-color, var(--accent-a));
+    display:inline-block;
+  }
+  .summary-section p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.75;
+    margin:0 0 10px;
+  }
+
+  /* TAKEAWAYS */
+  .takeaway-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:14px;
+  }
+  .takeaway-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+    position:relative;
+  }
+  .takeaway-num{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    font-weight:600;
+    color:var(--accent-a);
+    margin-bottom:8px;
+    display:block;
+  }
+  .takeaway-card h4{
+    margin:0 0 8px;
+    font-size:15px;
+  }
+  .takeaway-card p{
+    margin:0;
+    color:var(--text-dim);
+    font-size:13.5px;
+    line-height:1.6;
+  }
+  footer{
+    text-align:center;
+    color:var(--text-faint);
+    font-size:12px;
+    padding:20px;
+  }
+  @media(max-width:600px){
+    .branch-title{ font-size:15.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">The Diary Of A CEO · Podcast Mind Map</div>
+  <h1>Insulin Doctor: This Is the First Sign of Dementia — The Shocking Link Between Keto &amp; Brain Decline</h1>
+  <div class="meta">
+    Guest: <strong>Dr. Annette Bosworth ("Dr. Boz")</strong>, internal medicine physician &amp; author of <em>KetoCONTINUUM</em><br>
+    Host: Steven Bartlett · Published <strong>24 November 2025</strong> · 1h 52m
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" onclick="switchTab('mindmap', this)">🧠 Mind Map</button>
+  <button class="tab" onclick="switchTab('summary', this)">📝 Full Summary</button>
+  <button class="tab" onclick="switchTab('takeaways', this)">✅ Actionable Takeaways</button>
+</nav>
+
+<main>
+
+  <!-- ===================== MIND MAP ===================== -->
+  <section id="mindmap" class="panel active">
+
+    <div class="branch" style="--branch-color:var(--accent-a)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-dot"></span> Insulin Resistance &amp; Warning Signs</div>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">High insulin, not just high sugar<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Bosworth argues chronic disease is driven by elevated insulin levels, which can stay high for years while glucose readings still look "normal." She describes this hidden insulin resistance as cellular "trash" that accumulates silently, often for decades, before any blood test flags a problem.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Physical tells on your skin and hair<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Skin tags in the armpits or groin, velvety darkened patches on the neck (acanthosis nigricans), hair loss starting at the toes and moving upward, and even premature gray hair are cited as visible markers of high circulating insulin — often noticed years before a diagnosis.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Needing to eat every 2–3 hours<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Constant hunger, brain fog, and an inability to focus for long stretches are framed as classic signs the body is stuck running on glucose and can't tap stored fat for steady energy — a pattern Bosworth calls "Stage 1" of insulin dependence.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Abdominal fat as the first flag<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Weight gain around the midsection is described as typically the very first visible sign of rising insulin, appearing well before other symptoms like skin changes or cognitive fog show up.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--accent-c)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-dot"></span> Ketosis &amp; the Keto Continuum</div>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Getting into ketosis<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Keeping total carbs (not "net" carbs) under 20g a day is the entry point. Most people reach ketosis in 7–10 days; those with severe insulin resistance can take up to 15 days. Once fat-adapted, the body can slip back into ketosis within about 12 hours after a high-carb meal.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The 12-stage Keto Continuum<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Bosworth's framework moves from Stage 1 (eating every 2–3 hours) through carb reduction, a first missed meal, and stabilization, into 16:8 time-restricted eating, then progressively wider fasting windows up to 23:1 (one meal a day), and finally advanced 36–72 hour fasts for those with 15–20 years of high insulin.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Fat-forward, not net-carb counting<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">She rejects net-carb math for insulin-resistant people ("fiber is for farting") and instead pushes total-carb limits alongside high-fat foods — pork belly, beef brisket, ribs, eggs, avocado, and a full day of butter as a fat "reset."</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The sardine protocol<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Used in her 21-day intensive course: a 3-day sardine-only phase (no eating windows, no carb counting, just satiety) reliably produces strong ketone readings by day six. One case study, "Jane," ran a 100-day sardine challenge and saw vitamin D rise from the 30s–40s to 108 ng/mL without any supplement.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Fiber and the microbiome myth<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Bosworth argues optimal gut health doesn't require high fiber — the beneficial compound butyrate can come from fermented fiber or from ketone metabolism itself. She cites carnivore-diet patients with IBS and chronic diarrhea seeing symptoms reverse once fiber-driven irritation was removed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--accent-b)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-dot"></span> Measuring Metabolic Health</div>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The "Dr. Boz Ratio"<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">A simple formula: blood glucose ÷ blood ketones. Lower numbers indicate healthier fat-burning metabolism. On the show, Steven's glucose of 86 and ketones of 0.9 gave a ratio near 95 (fat-burning), while a team member with glucose 88 and ketones just 0.1 scored roughly 880 — a sign of significant insulin resistance.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">What "good" looks like<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Dr. Bosworth's own numbers — glucose 83, ketones 1.7 — are held up as an excellent state. A ketone reading of 0.5 mmol/L or higher is treated as the threshold where meaningful fat-burning and its associated benefits begin.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Tools for testing at home<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Blood ketone meters are the most accurate option, costing roughly $60–70 for a kit with about 50 strips. Urine ketone strips are cheaper and simpler for beginners confirming early ketosis, while glucose monitoring works as an indirect proxy for insulin activity.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Test before you change anything<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Her core recommendation is to establish a baseline Dr. Boz Ratio before making dietary changes, then re-check glucose and ketones two to three times a week to track real progress rather than guessing from how you feel.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--accent-e)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-dot"></span> Brain Health &amp; Dementia Prevention</div>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Symptoms show up "15 years too late"<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">By the time someone reports getting lost while driving, Bosworth argues the underlying brain changes have been building for a decade or more. She frames insulin resistance as a slow, silent contributor to cognitive decline that's detectable long before obvious symptoms.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Ketones as "cleaner" brain fuel<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">When glucose metabolism in the brain is impaired — sometimes called "type 3 diabetes" — ketones offer neurons an alternative fuel source, alongside claimed reductions in neuroinflammation and improved mitochondrial function in brain cells.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Case study: Down syndrome &amp; early-onset Alzheimer's<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">A mother-daughter pair, the daughter age 40 with advanced insulin resistance and an early-onset Alzheimer's diagnosis, were placed on a strict ketogenic diet. Within three weeks the daughter spoke a three-syllable word for the first time in 41 years, showed improved executive function, and her ketones measured an exceptionally high 3.0.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">A practical prevention routine<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">For prevention, she recommends checking blood sugar and ketones two to three times weekly, eating within a tighter window (e.g., noon–3pm, finished no later than 6pm), and sustaining regular ketone production so the brain has a steady alternative fuel source available.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--accent-d)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-dot"></span> Cancer &amp; Metabolic Therapy</div>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">The Warburg effect<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Most cancer cells preferentially burn glucose and struggle to use ketones efficiently. The theory is that a ketogenic state creates a metabolic environment that's hostile to tumor growth while still fueling healthy tissue normally.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Case study: "Grandma Rose"<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Bosworth's own mother, diagnosed with recurrent cancer at 70, refused another round of chemotherapy and went ketogenic instead. Within six weeks her tumor markers dropped 70% — more than the roughly 30% typically expected from chemo — and she reportedly went from looking "100 years old" to looking 40.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Supporting, not replacing, treatment<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Bosworth is explicit that ketones aren't a guaranteed cure: exogenous ketone drinks are used to help patients who can't fast before chemo preserve muscle mass, mood, and brain function during treatment — the framing is "deal with it a lot better," not reversal.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">How Grandma Rose's story ended<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">She lived several more good years pursuing her own activities before ultimately dying of COVID, not the T-cell cancer itself — a detail Bosworth includes to keep the story honest about cause of death versus quality of life gained.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" style="--branch-color:var(--accent-f)" onclick="toggleBranch(this)">
+      <div class="branch-head">
+        <div class="branch-title"><span class="branch-dot"></span> Supplements &amp; Daily Protocol</div>
+        <span class="branch-arrow">›</span>
+      </div>
+      <div class="leaves">
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Vitamin D as a hormone<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Bosworth treats vitamin D as a cell-signaling hormone rather than a simple vitamin. Because it's fat-soluble, high insulin traps it inside fat cells; as insulin drops, it becomes bioavailable again — which she says explains cases like Jane's rise to 108 ng/mL with no supplementation at all.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Magnesium, the "spark plug"<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Needed for ATP recycling and most enzymatic reactions in the body, magnesium is described as chronically depleted from modern soil and food. She supplements orally and also uses magnesium float tanks for transdermal absorption, sleep quality, and muscle relaxation.</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Methylene blue for brain energy<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">A centuries-old dye with no pharmaceutical profit incentive behind it, methylene blue crosses the blood-brain barrier and is said to enhance mitochondrial electron transport. Bosworth adds it to her morning coffee and calls the effect on brain energy "amazing."</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Creatine is a brain supplement, not just for lifting<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Reframed away from bodybuilding stereotypes, creatine is discussed for focus, ADHD-type attention, and resilience to sleep deprivation and jet lag — with a post-flight protocol of 10g in the morning and 10g at night (20g total).</div>
+        </div>
+        <div class="leaf" onclick="toggleLeaf(event,this)">
+          <div class="leaf-title">Exogenous ketones as a bridge<span class="leaf-plus">+</span></div>
+          <div class="leaf-detail">Drinkable beta-hydroxybutyrate can jumpstart the liver's own ketone production in as little as 15–20 minutes, with elevated ketones lasting about 12 hours — useful for insulin-resistant patients, cancer patients who can't fast, or anyone who's "fallen off the wagon."</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===================== FULL SUMMARY ===================== -->
+  <section id="summary" class="panel">
+
+    <div class="summary-section" style="--dot-color:var(--accent-a)">
+      <h3>Insulin resistance is the hidden root cause</h3>
+      <p>Dr. Annette Bosworth's central argument is that chronically elevated insulin — not high blood sugar alone — is the quiet driver behind a huge range of chronic conditions, from obesity and diabetes to Alzheimer's, autoimmune disease, and cancer. She describes insulin resistance as accumulating like cellular "trash" for years, or even decades, while standard glucose tests still read as normal. By the time obvious signs appear — abdominal weight gain, skin tags, darkened velvety skin on the neck, hair loss creeping up from the toes, or constant hunger every two to three hours — the underlying dysfunction has typically been present far longer than most people realize.</p>
+    </div>
+
+    <div class="summary-section" style="--dot-color:var(--accent-c)">
+      <h3>Ketosis as a metabolic reset</h3>
+      <p>The proposed fix is shifting the body from glucose-burning to fat-and-ketone-burning by keeping total carbohydrates under 20 grams a day and eating "fat-forward" — pork belly, brisket, eggs, avocado, and even a full day of butter as a reset. Most people reach ketosis within 7 to 10 days, though severely insulin-resistant individuals can take up to 15. Bosworth structures the journey through her 12-stage "Keto Continuum," moving from frequent eating, to carb reduction, to progressively longer fasting windows (16:8, then 23:1), and finally advanced multi-day fasts for those with the longest histories of high insulin. She also champions an unconventional "sardine protocol" — a three-day sardine-only phase used in her 21-day course that reliably produces strong ketone readings by day six, alongside dismissing high-fiber diets as unnecessary for gut health once ketone-driven butyrate production takes over.</p>
+    </div>
+
+    <div class="summary-section" style="--dot-color:var(--accent-b)">
+      <h3>The "Dr. Boz Ratio" makes metabolic health measurable</h3>
+      <p>To make an invisible problem visible, Bosworth promotes a simple self-test: divide blood glucose by blood ketones. A low ratio signals healthy fat-burning; a high one signals insulin resistance, even when glucose alone looks fine. On the show, Steven Bartlett's numbers (glucose 86, ketones 0.9) produced a healthy ratio near 95, while a staff member with normal-looking glucose but almost no ketone production scored roughly 880. Home blood ketone meters run about $60–70 for a starter kit, making this a cheap, repeatable way to track progress two to three times a week rather than relying on the scale or how someone feels.</p>
+    </div>
+
+    <div class="summary-section" style="--dot-color:var(--accent-e)">
+      <h3>Brain health, dementia, and a striking case study</h3>
+      <p>Bosworth frames cognitive symptoms like getting lost while driving as showing up roughly 15 years after the underlying damage began, making early detection through insulin and ketone testing a potential prevention tool. She describes brain glucose-utilization problems as a kind of "type 3 diabetes," with ketones offering an alternative fuel source that may reduce neuroinflammation. The episode's most dramatic anecdote involves a 40-year-old woman with Down syndrome and an early-onset Alzheimer's diagnosis: after three weeks on a strict ketogenic diet alongside her mother, she spoke a three-syllable word for the first time in 41 years and showed marked gains in executive function, with ketone readings reaching an unusually high 3.0.</p>
+    </div>
+
+    <div class="summary-section" style="--dot-color:var(--accent-d)">
+      <h3>A cancer story, with careful caveats</h3>
+      <p>Bosworth connects the "Warburg effect" — cancer cells' preference for glucose over ketones — to the idea that a ketogenic state may create an environment less hospitable to tumor growth. She shares her own mother's story: diagnosed with recurrent cancer at 70 and refusing further chemotherapy, her mother's tumor markers dropped 70% within six weeks on a ketogenic diet, more than the roughly 30% typically expected from chemo, and she regained years of quality of life before eventually dying of COVID rather than the cancer. Bosworth is careful to frame this as patients coping better during treatment rather than claiming a cure, and exogenous ketone drinks are discussed as a support tool for patients who can't fast before chemotherapy.</p>
+    </div>
+
+    <div class="summary-section" style="--dot-color:var(--accent-f)">
+      <h3>A daily supplement and lifestyle stack</h3>
+      <p>Beyond diet, Bosworth outlines a personal supplement routine built around vitamin D (treated as a hormone that becomes bioavailable once insulin drops), magnesium (for ATP recycling, sleep, and muscle relaxation), methylene blue in her morning coffee (for mitochondrial and brain energy support), and creatine (reframed as a cognitive and stress-resilience supplement rather than a bodybuilding-only product). She also discusses meal timing at length — arguing that one bite eaten after 6pm carries roughly the metabolic cost of ten bites eaten before noon — and pushes back on GLP-1 medications like Ozempic, arguing the same appetite-suppressing hormone can often be raised naturally through a ketogenic, properly timed diet.</p>
+    </div>
+
+  </section>
+
+  <!-- ===================== TAKEAWAYS ===================== -->
+  <section id="takeaways" class="panel">
+    <div class="takeaway-grid">
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">01</span>
+        <h4>Test before you change anything</h4>
+        <p>Get a blood glucose and blood ketone reading to calculate your baseline "Dr. Boz Ratio" (glucose ÷ ketones) before adjusting your diet, so you have a real number to track against.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">02</span>
+        <h4>Check yourself for the visible signs</h4>
+        <p>Look for skin tags in the armpits/groin, darkened velvety skin on the neck, and hair thinning starting at the toes — early physical markers of insulin resistance worth flagging to a doctor.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">03</span>
+        <h4>Cut total carbs to under 20g/day to start</h4>
+        <p>Use total carbohydrate counts, not "net carbs," if you're aiming to trigger ketosis — Bosworth argues net-carb math undercounts the real metabolic load for insulin-resistant people.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">04</span>
+        <h4>Give it 7–15 days before judging results</h4>
+        <p>Don't expect ketosis overnight — most people take 7–10 days and those with long-standing insulin resistance may need up to 15 days of consistent low-carb, high-fat eating.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">05</span>
+        <h4>Shift your eating window earlier</h4>
+        <p>Aim to finish eating by 6pm at the latest, since late-night calories are framed as far more metabolically costly than the same calories eaten earlier in the day.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">06</span>
+        <h4>Get a home ketone meter</h4>
+        <p>A blood ketone meter (roughly $60–70 with strips) lets you confirm you're actually in ketosis rather than guessing from symptoms — recheck two to three times a week.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">07</span>
+        <h4>Consider the core supplement stack</h4>
+        <p>Vitamin D, magnesium, and omega-3s are positioned as baseline supplements regardless of diet approach — with creatine and methylene blue as more advanced additions.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">08</span>
+        <h4>Ease into fasting windows gradually</h4>
+        <p>If exploring extended fasting, progress step-by-step from 16:8 rather than jumping straight to one-meal-a-day (23:1) or multi-day fasts, which are framed as advanced-stage tools.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">09</span>
+        <h4>Don't fear fat-forward eating</h4>
+        <p>Foods like eggs, avocado, sardines, and fattier cuts of meat are positioned as tools to reach satiety and ketosis, rather than something to minimize.</p>
+      </div>
+
+      <div class="takeaway-card">
+        <span class="takeaway-num">10</span>
+        <h4>Treat this as informative, not prescriptive</h4>
+        <p>Many claims here (cancer marker reductions, Alzheimer's case studies) are single anecdotes without controlled trials — useful as hypotheses to discuss with your own doctor, not as guaranteed outcomes.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>Generated mind map · Source: The Diary Of A CEO with Steven Bartlett, 24 Nov 2025</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+</script>
+
+</body>
+</html>
