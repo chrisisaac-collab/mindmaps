@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brownstein on Iodine - Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#12161c;--card:#1b212a;--ink:#e8ebf0;--mute:#9aa4b2;--line:#2c3441;--accent:#5fb3a8;--note-bg:#2a2412;--note-line:#8a6d1f;--note-ink:#e9d79a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+.wrap{max-width:920px;margin:0 auto;padding:22px 16px 70px}
+h1{font-family:Fraunces,serif;font-size:1.95rem;margin:6px 0 6px;line-height:1.2}
+.sub{color:var(--mute);font-size:.9rem;margin-bottom:14px}
+.sub a{color:var(--accent)}
+.banner{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--note-line);border-radius:8px;padding:11px 14px;font-size:.85rem;margin-bottom:18px;color:#cfd5de}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:18px;flex-wrap:wrap}
+.tab{background:none;border:0;padding:10px 14px;font:500 .95rem Inter,sans-serif;color:var(--mute);cursor:pointer;border-bottom:3px solid transparent}
+.tab.active{color:var(--ink);border-bottom-color:var(--accent)}
+.panel{display:none}.panel.active{display:block}
+.branch{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:8px;margin-bottom:12px}
+.bh{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:Fraunces,serif;font-weight:700;font-size:1.08rem}
+.bh .n{font:500 .78rem Inter,sans-serif;color:var(--mute);white-space:nowrap}
+.bh .n:after{content:" +"}
+.branch.open .bh .n:after{content:" -"}
+.leaves{display:none;padding:0 16px 12px}
+.branch.open .leaves{display:block}
+.leaf{border-top:1px solid var(--line);padding:10px 0;cursor:pointer}
+.lt{font-weight:600;font-size:.95rem;color:var(--c)}
+.lt .ts{font-weight:400;color:var(--mute);font-size:.78rem;margin-left:8px}
+.ld{display:none;font-size:.9rem;margin-top:6px;color:#d4d9e1}
+.leaf.open .ld{display:block}
+.note{margin-top:8px;background:var(--note-bg);border:1px solid var(--note-line);color:var(--note-ink);border-radius:6px;padding:7px 10px;font-size:.84rem}
+.note b{font-weight:600}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-bottom:12px}
+.sec h3{font-family:Fraunces,serif;margin:0 0 8px;font-size:1.1rem}
+.sec p{margin:0 0 10px;font-size:.95rem;color:#d4d9e1}
+.sec p:last-child{margin:0}
+.tk{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.num{font:700 1.3rem Fraunces,serif;color:var(--accent);min-width:28px}
+.tk h4{margin:0 0 4px;font-size:.98rem}.tk p{margin:0;font-size:.9rem;color:#d4d9e1}
+.tk .note{margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Why 97% of People Are Iodine Deficient</h1>
+<div class="sub">The Jesse Chappus Show, Episode 695 &middot; Guest: Dr. David Brownstein &middot; Published 10 March 2026 &middot; 1h 48m &middot; <a href="https://www.youtube.com/watch?v=vlL9ZT0zUvQ">Watch on YouTube</a></div>
+<div class="banner"><strong>How to read this:</strong> Built from the full YouTube transcript of the episode. Everything in the main text is what Dr. Brownstein said or claimed, summarised here, not endorsed. Amber notes are added context from outside the episode, where his views differ from mainstream guidance. His cited studies and figures were not independently verified. This is not medical advice.</div>
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('take',this)">Actionable Takeaways</button>
+</div>
+
+<div id="map" class="panel active"></div>
+<div id="summary" class="panel"></div>
+<div id="take" class="panel"></div>
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(el) { el.classList.toggle('open'); }
+function toggleLeaf(e, el) { e.stopPropagation(); el.classList.toggle('open'); }
+
+// leaf: [title, timestamp, detail, optional context note]
+const branches = [
+ {t:"Deficiency and the Hashimoto's argument", c:"#e07a5f", l:[
+  ["The 97% claim","0:00 and 13:37","His practice has tested over 8,000 people for iodine and reports just under 98% as deficient, most of them severely. He says colleagues who test see the same, and that the only people not deficient are those already supplementing after reading his book or hearing his talks.","His figure comes from his own practice's testing, using a urinary iodine loading test. That test is not a mainstream diagnostic standard, and national surveys generally report population iodine status differently."],
+  ["The inverse-correlation argument","1:11 to 2:19","Asked about the claim that too much iodine causes Hashimoto's, he says US iodine levels fell by over 50% across 50 years while autoimmune thyroid disease rose sharply. He argues this inverse relationship rules iodine out as the cause, and calls the opposing claim misinformation. He adds that deficiency sets the thyroid up for autoimmunity.","Mainstream endocrinology links excess iodine with triggering or worsening thyroid autoimmunity in susceptible people. A population-level trend does not settle that question either way."],
+  ["Hashimoto's treated the same as anyone","11:00 to 14:48","He holds that Hashimoto's and Graves' are mostly due to iodine deficiency, so iodine is part of the treatment. He does not go slower with Hashimoto's patients, and says most see antibody titres fall, some losing the diagnosis. His two daughters, both with high TPO and thyroglobulin antibodies at 11 and 12, are his example, now antibody-free on 50 and 75 mg.","He calls this an N of two and says one counter-example is enough to disprove the 'iodine causes Hashimoto's' hypothesis. That logic only works if the opposing claim is absolute, which it is not."],
+  ["The one real risk he names","11:16 to 11:55","The exception is an autonomously functioning thyroid nodule. Given iodine, it can soak it up, make excess hormone and cause hyperthyroidism. He says he has seen only a handful in 30 years, and that a good clinician can screen for it. He also notes that people with heart failure or kidney failure need more caution."],
+  ["How he came to iodine","2:25 to 9:30","He lasted about six months in conventional practice before feeling he was only treating symptoms. His father, on 12 medications after heart attacks, improved on bioidentical thyroid hormone and testosterone, which pushed him toward holistic medicine. After roughly ten years of iodine not working for patients, he met Dr. Guy Abraham, who explained that the form of iodine he was using was the problem."]
+ ]},
+ {t:"Thyroid hormone, breast health and iodine", c:"#3d8fd1", l:[
+  ["The Eskin studies","5:57 to 7:50","He describes two studies by a researcher named Eskin: women on thyroid hormone had roughly 25 to 30% higher breast cancer risk, and those on it for 10 years or more about 50% higher. He read them as decent studies that nagged at him for years.","The studies were cited from memory in the episode and not checked here. Observational links like this can reflect the underlying condition being treated."],
+  ["His explanation","9:46 to 10:50","Thyroid hormone raises the body's metabolic rate, which raises iodine needs. If someone is already iodine deficient, he argues, hormone therapy deepens the deficiency, with consequences for the thyroid, breast, ovaries, uterus, prostate and pancreas. He ties this to rising rates of those cancers, which he attributes largely to iodine deficiency."],
+  ["Rule of thirds on thyroid medication","14:53 to 16:10","His average thyroid hormone dose fell from about two grains in his first ten years to roughly 30 to 60 mg now. For patients already on thyroid medication, he says about a third find they only needed iodine, a third need half the dose, and a third need the same dose. He says all groups tend to feel better."],
+  ["Iodine in T3 and T4 is not enough","17:26 to 18:50","The numbers in T3 and T4 refer to iodine atoms, but he says the amount in a thyroid pill is micrograms, enough only for thyroid purposes. Every tissue needs iodine, with the highest concentrations in fat, then muscle, and a saturated thyroid holding about 50 mg."],
+  ["Fibrocystic breast disease case","27:30 to 35:20","His long-running case is a nurse, about 40, booked for a double mastectomy for severe fibrocystic disease. She was put on 50 mg of iodine plus magnesium, B vitamins, vitamin D and A, improved gradually, and her exam normalised within about a year. Years later her symptoms returned when she ran out for a month and resolved when she restarted. He calls it his accidental blinded trial.","This is a single case history, not trial evidence."]
+ ]},
+ {t:"Dosing, testing and monitoring", c:"#6a994e", l:[
+  ["Typical doses","21:13 and 26:59","He starts adults at about 25 mg, higher and faster with glandular disease or cancer, and says he has had cancer patients on hundreds of mg. Children he started at 12.5 mg, rising to 25 to 75 mg as levels stalled.","These doses are many times the adult upper intake level of about 1.1 mg a day set by US and Australian authorities. High-dose iodine should only be considered under medical supervision."],
+  ["Test first, work with an iodine-literate doctor","26:06 to 27:00","He says do not be your own doctor. Get levels checked first and work with a holistic practitioner who understands iodine, because in his view conventional doctors are not iodine-literate. He also says people should read and educate themselves."],
+  ["The iodine loading test","30:19 to 31:20","The patient takes 50 mg of iodine and collects 24 hours of urine. In his account a normal result is about 95% excreted and 5% retained. Someone severely deficient holds on to far more. His breast patient excreted 50%."],
+  ["Why TSH rises","1:08:45 to 1:13:15","He says TSH commonly rises two to four times after starting iodine, because TSH drives production of the sodium-iodide symporter that moves iodine into the thyroid. He presents this as expected and not hypothyroidism, provided T3, T4, reverse T3 and antibodies are fine. He advises not rechecking TSH for six to nine months, and says it rises for roughly three to six months.","The usual clinical approach is to monitor TSH after changes, and a sustained TSH rise can reflect iodine-induced hypothyroidism in susceptible people. Agree the monitoring plan with your doctor."],
+  ["Too much, vitamin C and other nutrients","1:13:44 to 1:15:31","With normal kidney function he says the body excretes excess iodine, even at 100 mg to a gram, with extra caution for heart or renal failure. He does not separate vitamin C from iodine in practice. He also says iodine is one part of a broader plan including selenium, B vitamins, vitamin D, vitamin A, magnesium, diet and detox, and he finds selenium deficiency less common than the others in Michigan."]
+ ]},
+ {t:"Forms, products and quality", c:"#9b5de5", l:[
+  ["Lugol's solution and the two forms","35:38 to 39:35","Lugol's, from the 1800s, combines iodine and potassium iodide. One drop of 5% solution has 6.25 mg of iodine plus iodide. He explains that different tissues prefer different forms: thyroid and stomach mainly take iodide, breast tissue iodine. For whole-body effect he calls an almost 50/50 mix of both the best form. His first ten years used iodide only (SSKI), which he now sees as why it failed."],
+  ["Nascent iodine","39:35 to 42:48","His view is that nascent iodine is a decent product but only provides micrograms. It will not give the detox effect he wants against bromide and fluoride, and he argues the body at saturation holds about 2 grams of iodine that microgram dosing cannot reach."],
+  ["2% versus 5%","53:54 to 55:57","He says many 2% products are of unknown quality and he has not seen iodine levels rise on them. A patient on an Amazon 2% product had a thyroid nodule grow and was told to switch to 5% and recheck by ultrasound. He had not heard of a 15% product."],
+  ["The counterfeit-pill story","56:56 to 1:01:45","A competitor's 'iodine and iodide' tablets, bought at a conference, tested as iodide only in his office and by mass spectrometry. The maker admitted using iodide because it was cheaper and colouring it with riboflavin. He says counterfeit labels on filler products are common, particularly on Amazon, and that vitamin C and D products are affected too."],
+  ["Brands he named","1:01:50 to 1:03:13","His family uses 5% Lugol's solution. His practice makes its own tablets (iTabs), and he named Biotics Research Iodizyme-HP and LugoTabs as products he has tested and trusts. His rule is to buy through a practitioner and use independent testing, and he asks his manufacturers for a 10% overage so labels are never under-delivered.","The episode includes a show partner and affiliate links elsewhere, and the guest sells his own products, so factor that in when weighing brand recommendations."]
+ ]},
+ {t:"Salt, bromide and fluoride", c:"#e9a23b", l:[
+  ["The halide competition idea","39:50 to 41:23","Iodine sits in the halide family with fluoride, chloride and bromide, which compete for the same sites. He calls fluoride and bromide toxic with no therapeutic use, and says the body has iodine receptors but none for them. His claim is that modern life makes us over-brominated, over-fluoridated and under-iodinated, and that higher iodine intake displaces both."],
+  ["Salt as a partner to iodine","42:48 to 46:03","He wrote Salt Your Way to Health as a companion to his iodine book and never prescribes milligram iodine without assessing salt. Sodium and chloride help usher bromide out, and the sodium-iodide symporter needs two sodium atoms. If someone feels unwell after starting, he has them pause iodine, add about a teaspoon of unrefined salt a day for two weeks, then restart."],
+  ["Bread and the 1970 shift","48:17 to 50:22","Before 1970 he says iodine was used as a dough conditioner, with a slice of bread supplying roughly 150 to 200 micrograms. Bakers then moved to brominated flour, which he says worsened iodine deficiency and added a toxic halide to common foods. His advice is to read labels or call the company."],
+  ["Seaweed and fish","50:22 to 53:33 and 1:28:16","Seaweed uses the same transport mechanism as the thyroid and can also take up bromide. He found iodine and bromide levels varied between seaweed products. He says you cannot out-eat the toxic load through food, and that seafood adds mercury and arsenic concerns, with wild fish better than farmed.","Seaweed iodine content is known to vary widely between species and products, which is the practical reason it is an unreliable dose."],
+  ["Refined versus unrefined salt","1:24:30 to 1:28:08","He says all salt comes from the ocean, so the useful question is refined or unrefined. Refined is roughly 98% sodium chloride plus additives such as ferrocyanide and aluminium silicate, while unrefined has dozens of minerals. He named Celtic, Redmond Real Salt and Himalayan as brands he tested, and dismissed recent lead-in-salt concerns."]
+ ]},
+ {t:"Pregnancy, children, other uses and case stories", c:"#2ec4b6", l:[
+  ["Pregnancy and breastfeeding","1:03:19 to 1:07:30","His ideal is to check and correct iodine before conception, continue the same dose through pregnancy and breastfeeding, and monitor thyroid, iron and B vitamins. He cites three neonates in his practice who tested hypothyroid at birth and were on thyroid hormone for a month or two, and says staff blamed iodine. He links maternal deficiency to lower IQ and possibly ADHD.","Australian guidance recommends a 150 microgram daily iodine supplement in pregnancy and breastfeeding. Doses of 25 to 50 mg in pregnancy are far outside that and warrant specialist advice."],
+  ["Children","1:07:33 to 1:08:40","He supplements his 14-month-old grandchild with small doses in liquid Lugol's, scaled by weight. About one drop a day at 50 pounds and two drops (12.5 mg) at 100 pounds."],
+  ["Topical iodine and goitrogens","1:15:31 to 1:19:12","He dismisses the skin-patch absorption test as an old wives' tale. Topical use can help with breast lumps, Dupuytren's contracture and as an antiseptic, but will not correct deficiency. For goitrogens like broccoli and soy, he sees a problem mainly in strict vegans eating large amounts."],
+  ["Nebulised iodine and salt","1:19:21 to 1:22:13","He has patients nebulise dilute iodine with peroxide for bronchitis, viral infections and pneumonia, every hour when sick, and suggests nebulised salt water and a pinch of salt in each glass of water. He notes irritation and a drying effect on the larynx at first.","This is an unconventional practice. Inhaling iodine or peroxide carries irritation risks and should not replace medical care for pneumonia or other serious illness."],
+  ["The yellow nightshirt case","1:37:23 to 1:46:27","A woman with stage four inflammatory breast cancer, given three to six months, was on 50 mg of iodine in a study he ran with Dr. Abraham. Her urine showed near-zero iodine and very high bromide. Two weeks in, her nightshirt and nails turned yellow, which he read as bromine being released. Years later, lab testing of the recovered shirt found bromide in the front. She lived four more years, and he now says he would have used a higher dose.","One patient, not a controlled trial, and the interpretation is his own."]
+ ]}
+];
+
+const summary = [
+ ["Overview","Dr. David Brownstein, a Michigan family physician who practises holistic medicine, returns to The Jesse Chappus Show for a second conversation, roughly ninety minutes of Q&A and a closing set of case studies. His central claim is that iodine deficiency is almost universal, citing just under 98% of more than 8,000 people tested in his practice, and that it is behind a long list of glandular problems, including thyroid disease and breast, ovarian, prostate and pancreatic disease. Jesse's role is mostly to ask practical questions about forms, doses and how to start, which keeps the conversation focused on how Brownstein himself applies iodine."],
+ ["The Hashimoto's argument","The episode opens by taking on the idea that iodine causes Hashimoto's. Brownstein's case is an inverse correlation: US iodine levels have fallen over 50% across five decades while autoimmune thyroid disease has risen. He believes Hashimoto's and Graves' are mostly the result of deficiency and treats them with iodine as part of a wider plan, with the same approach as for people without those diagnoses. The one real hazard he names is an autonomously functioning nodule, and he says people with heart or kidney failure need more care. He leans heavily on his own daughters, who he says lost their antibody elevations while taking 50 and 75 mg."],
+ ["Thyroid hormone and breast cancer","He describes how two studies linking thyroid hormone use with higher breast cancer risk troubled him for years. His eventual explanation was that hormone therapy raises metabolic demand, which worsens an existing iodine deficiency. After adding iodine to his practice, he says his average thyroid hormone dose fell from around two grains to a fraction of that, and he describes a rule of thirds among patients already on medication. A long case of a woman who avoided a mastectomy for fibrocystic disease on iodine anchors this section."],
+ ["Forms, doses and testing","Brownstein starts most adults at about 25 mg and children at around 12.5 mg, going much higher for glandular disease or cancer. He recommends testing first, using a 24-hour urine loading test after a 50 mg dose, and working with a practitioner he considers iodine-literate. He prefers 5% Lugol's solution for its mix of iodine and iodide, dismisses nascent iodine as too low-dose, and warns about 2% products and counterfeit capsules, telling a story of a competitor's tablets that tested as iodide only. He explains that TSH typically rises after starting and advises waiting six to nine months before rechecking."],
+ ["Salt, bromide and fluoride","A recurring theme is that bromide and fluoride compete with iodine, which he says is why even a good diet cannot cover the gap. He argues iodine pushes these toxic halides out of the body and that unrefined salt helps carry them away, so he links the two products closely. He traces falling iodine levels to the 1970 move from iodised to brominated dough conditioners, rejects seaweed as a consistent source, and names unrefined salt brands he has tested."],
+ ["Special cases and his story","He supports iodine through pregnancy and breastfeeding, describes small liquid doses for children, and discusses topical and nebulised uses. The episode closes with his own path from a short, disillusioned stint in conventional practice, through his father's recovery on thyroid hormone and testosterone, to his own asthma and hypothyroidism improving, and a long case of a woman with metastatic breast cancer whose yellowed nightshirt he later tested for bromide. His four closing points are: iodine deficiency has risen for fifty years, iodine does not cause Hashimoto's, find an iodine-literate holistic doctor, and educate yourself. Many of his claims, doses and treatments differ sharply from standard guidance, so treat the episode as one practitioner's view to discuss with your own doctor."]
+];
+
+const takeaways = [
+ ["Get tested before you start","He says not to be your own doctor. Have iodine status and a full thyroid panel (TSH, T3, free T3, free T4, antibodies, reverse T3) checked first.","Ask your GP which tests are appropriate. The 24-hour loading test he uses is not a standard test."],
+ ["Rule out a hot thyroid nodule","His one named safety risk is an autonomously functioning nodule, which can drive hyperthyroidism when given iodine. A clinician can screen for it before you begin."],
+ ["Do not rely on dose numbers from the episode","His starting doses of 12.5 to 25 mg are far above official upper limits of about 1.1 mg a day.","Treat the doses as his clinical practice, not a safe self-dosing guide."],
+ ["Expect and track TSH changes","He says TSH commonly rises after starting and advises leaving it six to nine months while tracking how you feel and the other thyroid markers.","Agree a monitoring schedule with your doctor instead of ignoring it."],
+ ["Pair any iodine with salt","His rule is never to dose milligram iodine without checking salt intake. If you feel unwell, he pauses iodine and adds a teaspoon of unrefined salt a day for two weeks.","People with heart, kidney or blood pressure issues need advice before raising salt."],
+ ["Buy tested, trusted products","He tells people to be wary of cheap supplements, especially marketplace listings, and to prefer practitioner-supplied products with independent testing. Check the label states iodine and iodide content per drop or tablet."],
+ ["Do not count on seaweed or food alone","He argues food and seaweed cannot reliably cover the need, and that seaweed content and bromide levels vary by product."],
+ ["Check your bread and salt labels","He says to look for iodised rather than brominated flour and to choose unrefined over refined salt, with brands he tested named in the episode."],
+ ["Plan pregnancy iodine early, with standard guidance first","He suggests checking and correcting iodine before conception and continuing through breastfeeding, since the baby's only source is breast milk.","Australian guidance recommends 150 micrograms daily in pregnancy and breastfeeding, and any higher dose needs specialist advice."],
+ ["Treat it as a starting point for questions","His closing advice is to find a doctor aligned with you and to educate yourself. Take the episode's claims to a practitioner who can order tests, and compare them with mainstream thyroid guidance."]
+];
+
+function noteHtml(n){return n?`<div class="note"><b>Context:</b> ${n}</div>`:'';}
+document.getElementById('map').innerHTML = branches.map(b =>
+ `<div class="branch" style="--c:${b.c}" onclick="toggleBranch(this)">
+   <div class="bh"><span>${b.t}</span><span class="n">${b.l.length} topics</span></div>
+   <div class="leaves">${b.l.map(x=>`<div class="leaf" onclick="toggleLeaf(event,this)"><div class="lt">${x[0]}<span class="ts">${x[1]}</span></div><div class="ld">${x[2]}${noteHtml(x[3])}</div></div>`).join('')}</div>
+  </div>`).join('');
+document.getElementById('summary').innerHTML = summary.map(s=>`<div class="sec"><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('');
+document.getElementById('take').innerHTML = takeaways.map((t,i)=>`<div class="tk"><div class="num">${i+1}</div><div><h4>${t[0]}</h4><p>${t[1]}</p>${noteHtml(t[2])}</div></div>`).join('');
+</script>
+</body>
+</html>
