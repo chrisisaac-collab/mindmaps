@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schoeff on the 36-Hour Fast - Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ee;--card:#ffffff;--ink:#1f2a2e;--mute:#6a767b;--line:#dcd8cc;--accent:#2f7d6d;--note-bg:#fbf3dc;--note-line:#c9a23a;--note-ink:#5b4510}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+.wrap{max-width:920px;margin:0 auto;padding:22px 16px 70px}
+h1{font-family:Fraunces,serif;font-size:1.95rem;margin:6px 0 6px;line-height:1.2}
+.sub{color:var(--mute);font-size:.9rem;margin-bottom:14px}
+.sub a{color:var(--accent)}
+.banner{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--note-line);border-radius:8px;padding:11px 14px;font-size:.85rem;margin-bottom:18px;color:#3a4549}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:18px;flex-wrap:wrap}
+.tab{background:none;border:0;padding:10px 14px;font:500 .95rem Inter,sans-serif;color:var(--mute);cursor:pointer;border-bottom:3px solid transparent}
+.tab.active{color:var(--ink);border-bottom-color:var(--accent)}
+.panel{display:none}.panel.active{display:block}
+.branch{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:8px;margin-bottom:12px}
+.bh{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:Fraunces,serif;font-weight:700;font-size:1.08rem}
+.bh .n{font:500 .78rem Inter,sans-serif;color:var(--mute);white-space:nowrap}
+.bh .n:after{content:" +"}
+.branch.open .bh .n:after{content:" -"}
+.leaves{display:none;padding:0 16px 12px}
+.branch.open .leaves{display:block}
+.leaf{border-top:1px solid var(--line);padding:10px 0;cursor:pointer}
+.lt{font-weight:600;font-size:.95rem;color:var(--c)}
+.lt .ts{font-weight:400;color:var(--mute);font-size:.78rem;margin-left:8px}
+.ld{display:none;font-size:.9rem;margin-top:6px;color:#2c373b}
+.leaf.open .ld{display:block}
+.note{margin-top:8px;background:var(--note-bg);border:1px solid var(--note-line);color:var(--note-ink);border-radius:6px;padding:7px 10px;font-size:.84rem}
+.note b{font-weight:600}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-bottom:12px}
+.sec h3{font-family:Fraunces,serif;margin:0 0 8px;font-size:1.1rem}
+.sec p{margin:0 0 10px;font-size:.95rem;color:#2c373b}
+.sec p:last-child{margin:0}
+.tk{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.num{font:700 1.3rem Fraunces,serif;color:var(--accent);min-width:28px}
+.tk h4{margin:0 0 4px;font-size:.98rem}.tk p{margin:0;font-size:.9rem;color:#2c373b}
+.tk .note{margin-top:6px}
+@media(max-width:560px){h1{font-size:1.5rem}.bh{font-size:1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>The 36-Hour Fast for Insulin Resistance</h1>
+<div class="sub">Thomas DeLauer Podcast &middot; Guest: Dr. Jonathan Schoeff, MD &middot; Published 27 September 2026 &middot; 42 min &middot; <a href="https://www.youtube.com/watch?v=euFjdwEMCOc">Watch on YouTube</a></div>
+<div class="banner"><strong>How to read this:</strong> Built from the full YouTube auto-generated transcript, so spellings and some numbers may be slightly off (the captions render the guest's surname as "Chef"). Everything in the main text is what Dr. Schoeff said or claimed, summarised here, not established fact. His results come from his own clinic data, not published trials, and he says himself he is not giving medical advice. The Kepos sponsor segment (7:15 to 8:47) is left out. Amber notes are caveats added by me.</div>
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('take',this)">Actionable Takeaways</button>
+</div>
+
+<div id="map" class="panel active"></div>
+<div id="summary" class="panel"></div>
+<div id="take" class="panel"></div>
+</div>
+
+<script>
+var BRANCHES=[
+{c:"#2f7d6d",t:"1. The framework and who it suits",l:[
+["Fasting is a tool, not a timer","0:39","Dr. Schoeff argues that fasting duration matters less than the biological set-up you create around it. He breaks the approach into three parts: glycogen depletion, metabolic transition and refeed. His accelerator protocol is a 32 to 36 hour fast once a week for up to six weeks.",""],
+["Recreating a 7-day fast in 36 hours","1:05","He cites three days as the historic gold standard for ketone production and five to seven days before autophagy effects show up. His aim is to get the same effect in 32 to 36 hours, mainly to avoid the main liability of long fasts, which is loss of skeletal muscle. He calls muscle the hard stop because losing it removes your hardest-working longevity tool.","Equivalence to a 7-day fast is his claim, not something shown in the episode with trial evidence."],
+["No stacking extra restriction","3:52","He says adding 24 hour fasts on top of the weekly 36 hour fast is a disaster in the making. Restricting nutrients outside the fasting window has a damaging effect over time, and the first place failure shows is performance: brain, then gym. More fasting is not better; 36 hours is where he says the benefit sits.",""],
+["Entry criteria","5:10","Before starting, he wants the nutritional foundation locked in, meaning a known energy expenditure and a sensible macro split. He also uses markers: fasting insulin and visceral fat index each under about 10, plus liver markers for non-alcoholic fatty liver disease. Without meeting a basic standard he considers the protocol a bad idea.","The captions are unclear on the exact marker wording; check the video at 5:16 before relying on the thresholds."],
+["A three-day lock-in each week","9:05","The weekly unit is pre-fast day, fast day and post-fast day. What you do across those three days drives the outcome. On the other days he still wants growth signals on, so it is about eating with purpose, not extra restriction.",""]]},
+{c:"#c2703d",t:"2. Ketones as the measuring stick",l:[
+["Ketones are the biomarker","2:40","His logic is a chain: glycogen depletion, then insulin normalisation, then high-grade lipolysis, then ketones. If ketones are climbing, every earlier condition has been met, so ketones tell you whether the biology is working. He stresses that data should drive decisions rather than feelings.",""],
+["Exogenous ketones do not count","2:28","Taking ketone supplements makes the number on the meter look good but is not the point of the protocol. What matters is the body producing its own ketones through the sequence above.","He does mention using ketones as part of pre-training fuel at 9:46, a different purpose from chasing a number."],
+["How to measure","3:07","He says not to use urine strips. Use serum (blood) or interstitial fluid readings: a fingerstick meter such as Keto Mojo, or a continuous ketone monitor patch. He says wearing a CKM made his own biology come into focus, though he does not wear one year-round now that he knows how his body responds.",""],
+["Target numbers","19:19","Normally a healthy person needs roughly five to seven days to hit peak ketones around 4 mmol/L. He says his clients reach 4 to 4.5 within about 16 hours. He wants people starting the fast at 1 to 1.2, and checks at midday on the fast day for at least 1.5. A first-timer is unlikely to start in that range.",""],
+["Ketones and autophagy","26:04","He notes ketosis and lipolysis are the easy-to-measure markers, whereas true autophagy markers need expensive lab work or tissue biopsies. He calls the link between ketosis and autophagy mechanistically compelling but not proven, and poses an open research question: does area under the curve of ketone production correlate with autophagic flux?","This is a hypothesis he is open about, not a finding."]]},
+{c:"#3b6ea5",t:"3. Phase one: pre-fast depletion day",l:[
+["Empty the liver glycogen","5:52","Low glucose and low insulin are the first two conditions, and glycogen on board keeps insulin responding. Muscle glycogen cannot leave the muscle because muscle lacks G6Pase, so the target is liver glycogen, roughly 100 grams. He says people often notice effects within 24 to 48 hours.",""],
+["Heavy resistance first, not cardio alone","8:47","He recommends a lower-body or whole-body session at maximum load followed by cardiometabolic work, giving the example of goblet squats with heart rate near 170. In his view heavy weights beat pure cardio for burning glycogen, for men and women alike. He says resistance training is an inefficiency play, which is the point, because the body cannot become efficient at it.","He names Pilates and yoga as not doing the job here. His point is about the speed of glycogen depletion, not the value of those methods generally."],
+["Train early and still fuel","9:23","Earlier in the day is better, and intensity is the key driver. He still fuels the session with about 15 grams of fast carbs, ketones and essential amino acids. He would doubt anyone running a high-intensity fasting protocol with no resistance training, because muscle is the most critical piece, and he reports muscle rising by roughly half to one percent during the fasting period in his clients.",""],
+["Zero carbs after, early light dinner","12:54","After the session there are no added carbohydrates, though green vegetables are fine. This is the one time he wants people truly zero carb. Protein and quality fat, with dinner before 6 pm or skipped. Fasting physiology really starts four to six hours after the last bite, so a light meal like salad and salmon suits.",""],
+["Easy movement and sauna that evening","14:43","He prescribes about 60 minutes of very easy movement, such as a family or dog walk, then a sauna that evening. He ties this to a theme: the same steps taken around meals have a larger effect on glycemic variability than steps taken at random.",""]]},
+{c:"#8a5fb0",t:"4. Phase two: the fast day",l:[
+["Do not eat; caffeine is fine","20:37","Fasting and eating do not happen together. Coffee and zero-calorie, zero-sugar energy drinks are fine, and he says serial ketone measurements show no meaningful impact. Caffeine helps create a low-grade energy demand that favours fat burning.",""],
+["Move more: 20,000 plus steps","16:08","The common mistake is fasting and then lying on the couch, which he calls a net loss. His clients aim for 20,000 or more steps, using the roughly three and a half hours not spent eating. He includes stairs and short trips, and adds some light resistance to signal that muscle is still needed.",""],
+["High-heat sauna","15:37","He treats heat as a way to raise energy demand. Ideal is three 30 minute sessions or two 45 minute sessions, built up from 15 minutes over time. A very hot bath for about 20 minutes is a workable alternative. He is looking at hybrid saunas mixing high heat and infrared next.","He says plainly he is a physician but not giving medical advice here, only describing what he does."],
+["Electrolytes","23:08","Over a 36 hour fast most people do not develop the electrolyte problems seen at three to seven days. But because of heavy sauna use, electrolytes become imperative, and he points to products with 500 mg or more of sodium.",""],
+["What breaks the fast","27:52","No bone broth and no amino acids on the fast day. He says BCAAs and leucine can shut down ketosis through an insulin response, and that he has shown this repeatedly. Insulin is the regulator of lipolysis.",""]]},
+{c:"#b5485f",t:"5. Women, data and stop rules",l:[
+["Women are built to fast","25:39","He takes on the idea that fasting raises cortisol more in women. His position is that women are biologically optimised for lipolysis and ketosis and often reach a higher grade of ketosis. Where women do worse is under chronic energy restriction such as time-restricted eating or ongoing calorie deficits.",""],
+["Hard and fast, not chronic","32:40","For women especially he suggests a short, aggressive fast followed by a return to sufficient food, rather than mild restriction all the time. This fast is the restriction, so nothing extra is layered on. The reasoning is that the body wants to be fed.",""],
+["What his evidence is","31:34","He says his evidence is the database from his own clinical practice and that his results follow no menstrual cycle trend. Thomas recalls research on female fat oxidation and the response to adrenaline, but no study is named.","This is practice data from one clinician, not a randomised trial."],
+["Stop the fast when data says so","28:33","If at midday on the fast day ketones are still in a nutritional or sub-nutritional range, and the person is not secretly eating, he considers the body unprepared. Stress shows up as cortisol, higher glucose curves and low ketones. He stops people's fasts often: do not waste your time, reset and come back.",""],
+["The influenza example","29:07","He tells of a client two days into a reboot protocol with a sore throat who was in urgent care with influenza within six hours. Inflammatory states like raised IL-6 or a viral load can make you glucose intolerant and cripple mitochondrial function, so the fast will not work well then.",""]]},
+{c:"#7a8a2f",t:"6. Refeed, training and add-ons",l:[
+["Feelings versus facts","33:52","On the morning after, this is the one time he cares about feelings. Either you feel wiped, in which case you refeed straight away, or you feel locked in, in which case you can sauna and move a little more. Early weeks tend to feel better. Comparing feelings with ketone data lets you learn what each reading feels like.",""],
+["Bone broth refeed","35:10","Refeed with bone broth and nothing else. He gives two reasons: it activates the gut, and it is low labour and lacks leucine. Wait at least two hours before whole food, since the gut lining thins during a fast (he once broke a fast with a ribeye and regretted it). Then protein first, then fat, then carbohydrates.",""],
+["Training around the fast","36:38","Avoid high-intensity training on the fast day and post-fast day, as ketones are not a great fuel for it. Lifting at about 50 percent is fine. The next intense session should be the day after the post-fast day, so in the Monday example, Wednesday. Training underfueled risks injury.",""],
+["Carb cycling in the rest of the week","37:49","More carbs on training days and about 75 to 100 grams at most on non-training days. Carbs go in before and after training, and with a CKM you can see that you can stay in nutritional ketosis while still eating them. He says to treat the week as an investment, being more focused during the programme than outside it.",""],
+["GLP-1s and mitochondrial support","39:44","In his clinic he uses GLP-1 drugs such as tirzepatide around the fast. Peak effect is about 24 hours, so the dose goes in on the pre-fast morning, with split dosing on other days. He also mentions dihydroberberine and urolithin A to raise AMPK activity. He claims a 50 percent drop in body fat mass over six weeks is possible when everything is dialled in.","Prescription drugs are a decision for a doctor. The 50 percent figure is a claim made in the episode."]]}
+];
+
+var SUMMARY=[
+["The core idea","Dr. Schoeff opens by saying that how long you fast matters less than the biological setup you build before, during and after the fast. His accelerator protocol is a 32 to 36 hour fast once a week for up to six weeks, built to reproduce what he says a seven-day fast delivers while avoiding the main drawback of long fasts, which is losing skeletal muscle. He treats muscle as the hard stop, the thing never to sacrifice, and he rejects stacking extra fasting windows on top of the weekly fast."],
+["Preparing the ground","He says the protocol only works on a solid foundation: a settled nutritional routine, a known energy expenditure and a sensible macro split, plus markers such as fasting insulin, visceral fat index and liver health that show the person is a reasonable candidate. Without that foundation he expects the first failure to show in performance, with a fogged brain and a poor gym session. The weekly unit is three days, pre-fast, fast and post-fast, and what happens across them determines the result."],
+["Phase one and the pre-fast day","The first phase is glycogen depletion, because low glucose and low insulin come first. Muscle glycogen is locked inside the muscle, so he aims at roughly 100 grams in the liver. He prescribes an early, heavy lower-body or whole-body resistance session followed by cardiometabolic work, then a strict zero-carb window, a light protein and fat dinner before 6 pm, an hour of easy movement and a sauna. He stresses that heavy weights drain glycogen better than pure cardio, and that people who are not lifting probably should not use this protocol."],
+["Phase two and the fast day","On the fast day nothing is eaten, though coffee and zero-calorie drinks are allowed. He wants people moving a lot, with a target of 20,000 or more steps and two to three structured sessions, and he wants long hot sauna sessions of two to three blocks totalling around 90 minutes, with electrolytes to replace sodium. Amino acids, BCAAs and bone broth are excluded because the leucine-driven insulin response can interrupt ketosis. The aim is to create an energy demand so the body mobilises fat rather than conserving."],
+["Ketones, women and stop rules","Ketones are his measuring stick, read from blood or a continuous monitor and not from urine strips. He wants 1 to 1.2 at the start of the fast, at least 1.5 by midday and peaks around 4 to 4.5 within about 16 hours. If the readings lag, or the person is ill or stressed, he stops the fast and resets, citing a client who developed influenza within hours. He also argues that women are well suited to short, hard fasts but do worse with chronic restriction, while accepting his evidence is his own clinic database and not trial data."],
+["Refeed, training and medical add-ons","The post-fast morning is judged by comparing feelings with data. The refeed is bone broth alone for at least two hours, then protein, fat and carbohydrate in that order. High-intensity training is avoided on fast and post-fast days, and the next hard session comes the day after. The rest of the week uses carb cycling, with more carbohydrate around training and 75 to 100 grams on rest days. In his practice he also uses GLP-1 medication timed to the pre-fast day and mitochondrial supports such as dihydroberberine and urolithin A, which are medical decisions and not general advice."]
+];
+
+var TAKE=[
+["Check the foundation first","Before trying this, get your regular nutrition and training stable, and ask a doctor about fasting insulin, visceral fat and liver markers. He says the protocol is not for people off the street.","Fasting suits some people badly, including those with certain medical conditions or medications. Speak to a doctor."],
+["Fix one weekly three-day block","Choose a pre-fast, fast and post-fast sequence, for example Sunday, Monday and Tuesday, and keep it constant. Do not add other 24 hour fasts or calorie restriction around it.",""],
+["Train early and heavy the day before","Do a lower-body or whole-body session at high load, followed by metabolic work such as goblet squats at a high heart rate. Aim to empty liver glycogen rather than do easy cardio.",""],
+["Go zero-carb after training","After the session eat only protein, quality fat and green vegetables, with a light dinner before 6 pm such as salad and salmon. Fasting physiology starts four to six hours after the last meal.",""],
+["Walk and sauna that evening","Take a 60 minute easy walk and a sauna, or a very hot bath of about 20 minutes if you have no sauna. Keep the movement unhurried.",""],
+["On the fast day, move all day","Drink only coffee, water and zero-calorie drinks, take electrolytes especially if using sauna, aim for 20,000 or more steps and two to three structured movement sessions. Avoid bone broth, amino acids and BCAAs.",""],
+["Measure ketones properly","Use a blood meter or continuous monitor, not urine strips. His reference points are about 1 to 1.2 at the start, at least 1.5 at midday and 4 to 4.5 at peak.","These are targets from his clinic; they are not medical thresholds."],
+["Set a stop rule","If you are ill, stressed or still low on ketones at midday, end the fast and try again another week. Do not push through when the body is not primed.",""],
+["Refeed slowly","Break the fast with bone broth only, wait at least two hours, then eat protein first, then fat, then carbohydrate. Keep training light on the fast and post-fast days and schedule the next hard session the day after.",""],
+["Cycle carbs for the rest of the week","Use more carbohydrate before and after training and roughly 75 to 100 grams on rest days. Treat GLP-1 medication or supplements like dihydroberberine as questions for your own physician.","He uses these in clinic; do not self-prescribe."]
+];
+
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e;}
+function switchTab(id,btn){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBranch(e){e.classList.toggle('open')}
+function toggleLeaf(ev,e){ev.stopPropagation();e.classList.toggle('open')}
+
+var map=document.getElementById('map');
+BRANCHES.forEach(function(b){
+  var br=el('div','branch');br.style.setProperty('--c',b.c);
+  var h=el('div','bh','<span>'+b.t+'</span><span class="n">'+b.l.length+' points</span>');
+  h.onclick=function(){toggleBranch(br)};
+  br.appendChild(h);
+  var lv=el('div','leaves');
+  b.l.forEach(function(x){
+    var lf=el('div','leaf');
+    lf.onclick=function(ev){toggleLeaf(ev,lf)};
+    lf.appendChild(el('div','lt',x[0]+'<span class="ts">'+x[1]+'</span>'));
+    var d=el('div','ld',x[2]);
+    if(x[3]) d.appendChild(el('div','note','<b>Note:</b> '+x[3]));
+    lf.appendChild(d);lv.appendChild(lf);
+  });
+  br.appendChild(lv);map.appendChild(br);
+});
+var sm=document.getElementById('summary');
+SUMMARY.forEach(function(s){var d=el('div','sec','<h3>'+s[0]+'</h3><p>'+s[1]+'</p>');sm.appendChild(d)});
+var tk=document.getElementById('take');
+TAKE.forEach(function(t,i){
+  var d=el('div','tk','<div class="num">'+(i+1)+'</div><div><h4>'+t[0]+'</h4><p>'+t[1]+'</p>'+(t[2]?'<div class="note"><b>Note:</b> '+t[2]+'</div>':'')+'</div>');
+  tk.appendChild(d);
+});
+</script>
+</body>
+</html>
