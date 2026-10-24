@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Longo: FMD, Autophagy and Visceral Fat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f3ee;--card:#fff;--ink:#222;--muted:#6b6b6b;--line:#e3ddd2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+header{padding:28px 20px 12px;max-width:900px;margin:0 auto}
+h1{font-family:Fraunces,serif;font-size:1.7rem;line-height:1.25;margin:0 0 8px}
+.meta{color:var(--muted);font-size:.9rem}
+.tabs{display:flex;gap:8px;max-width:900px;margin:12px auto 0;padding:0 20px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--card);padding:9px 16px;border-radius:999px;font:500 .9rem Inter,sans-serif;cursor:pointer;color:var(--ink)}
+.tab.active{background:#222;color:#fff;border-color:#222}
+.panel{display:none;max-width:900px;margin:0 auto;padding:18px 20px 60px}
+.panel.active{display:block}
+.branch{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.bhead{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.bhead h3{margin:0;font-family:Fraunces,serif;font-size:1.1rem;color:var(--c)}
+.bhead small{display:block;color:var(--muted);font-size:.8rem}
+.arrow{transition:transform .2s;color:var(--c);font-size:1.2rem}
+.branch.open .arrow{transform:rotate(90deg)}
+.leaves{display:none;padding:0 12px 12px}
+.branch.open .leaves{display:block}
+.leaf{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:8px;cursor:pointer;background:#fcfbf8}
+.leaf .lt{font-weight:600;font-size:.95rem}
+.leaf .ld{display:none;margin-top:6px;font-size:.92rem;color:#333}
+.leaf.open .ld{display:block}
+.leaf.open{border-color:var(--c)}
+.hint{color:var(--muted);font-size:.85rem;margin-bottom:12px}
+.sec{margin-bottom:22px}
+.sec h3{font-family:Fraunces,serif;margin:0 0 6px;font-size:1.15rem}
+.sec p{margin:0 0 10px}
+.cards{display:grid;gap:12px}
+.tk{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;gap:14px}
+.tk .n{font:700 1.4rem Fraunces,serif;color:#b4572f;min-width:32px}
+.tk h4{margin:0 0 4px;font-size:1rem}
+.tk p{margin:0;font-size:.92rem;color:#333}
+.note{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
+@media(min-width:700px){.cards{grid-template-columns:1fr 1fr}h1{font-size:2rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>Eating This is Better than a 3 Day Fast for Autophagy and Visceral Fat</h1>
+<div class="meta">Thomas DeLauer Podcast with Dr. Valter Longo &middot; 17 Oct 2026</div>
+</header>
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('take',this)">Actionable Takeaways</button>
+</div>
+
+<div id="map" class="panel active"><div class="hint">Tap a branch to open it, then tap a node for detail.</div><div id="branches"></div></div>
+<div id="summary" class="panel"><div id="sumbody"></div></div>
+<div id="take" class="panel"><div class="cards" id="cards"></div>
+<div class="note">Built from the episode's published chapter list and description plus Dr. Longo's published research. General information only, not medical advice. Check with a doctor before any fasting-style diet, especially if you take medication, have diabetes, are underweight or pregnant.</div></div>
+
+<script>
+const branches=[
+{c:"#2f6db5",t:"Western Diet vs 5 Days of FMD",s:"0:22 - 11:29",leaves:[
+["The mouse experiment","Longo describes mice fed a high-fat, high-sugar Western diet for most of the month, then given five days of the fasting-mimicking diet (FMD). On key outcomes they looked statistically similar to mice on a good diet all the time. Lifespan curves for the Western-plus-FMD group still sat slightly earlier than the good-diet group."],
+["Is bad food a cumulative switch?","The episode asks whether the harm from poor eating builds up like a switch being flipped, or whether it can be turned back. Longo's work suggests periodic FMD cycles can interrupt the build-up rather than just slowing it."],
+["Temporary LDL, resets and the 500-person trial","This segment covers how LDL can rise temporarily and then settle as the body resets, and draws on a trial of around 500 people. The point is that a short-term marker change during or after a cycle is not the same as a lasting one."],
+["Cholesterol, glycemia and middle-age mice","Middle-aged mice are used to test whether FMD cycles improve cholesterol and blood glucose once damage has already started. Starting later in life is more relevant to most people than prevention in young animals."],
+["Can you switch back from the bad program?","The discussion turns to whether the body returns to a healthy state after a stretch on the bad diet. Longo frames FMD as a way to move from a damaging metabolic programme to a repairing one, not as permission to eat badly."]]},
+{c:"#b4572f",t:"Set Points, Obesity and Evolution",s:"11:29 - 13:26",leaves:[
+["Weight set points","Body weight tends to defend a set point, which is why many people regain weight after dieting. Longo's interest is in whether periodic fasting-style cycles can shift that defended level, particularly for abdominal fat."],
+["Why obesity is hard to reverse","The evolutionary angle is that humans were built to store energy against scarcity, so the system resists loss. Modern food supply is abundant, which pushes the same biology in an unhelpful direction."],
+["Visceral fat as the target","The FMD research links five-day cycles with loss of visceral (organ-surrounding) fat while lean mass and bone density are largely preserved. That is the core of the episode's claim about fat loss versus a plain multi-day fast."],
+["Why not just fast for three days?","A water-only fast is hard to sustain and can cost muscle. FMD is designed to trigger fasting-like signalling while still supplying specific nutrients, making it easier to complete."]]},
+{c:"#6a4fb3",t:"The Master Pathway: Growth Hormone Signalling",s:"13:26 - 15:51",leaves:[
+["Growth hormone and IGF-1","Longo calls growth hormone signalling the master pathway of ageing. Lower activity in this pathway is tied to protection from age-related disease in animals and in people with a rare receptor deficiency."],
+["Why it matters for autophagy","When this pathway is dialled down, cells shift from growth mode to maintenance and recycling. Autophagy is part of that recycling, which is why the diet's composition matters and not just its duration."],
+["Nutrient sensing","Protein and sugar are the main inputs that keep growth signalling high. FMD is deliberately low in both, which is how it mimics fasting without zero food."],
+["Growth versus repair trade-off","Switching off growth signalling in short bursts, then refeeding, is meant to give repair without long-term loss of muscle or function."]]},
+{c:"#2e8b57",t:"Protein Targets and the Longevity Superhuman",s:"15:51 - 24:41",leaves:[
+["Protein targets","Longo's published position is moderate protein for most adults, roughly 0.7 to 0.8 g per kg of body weight a day, with a little more in later life to protect muscle. This is lower than many fitness communities recommend."],
+["The longevity superhuman","The episode contrasts the maximal muscle and performance view of protein with the longevity view. The question is whether a person can have both strength and low long-term risk."],
+["Less protein, less cost","Lower protein intake is also cheaper. The segment asks whether extra protein beyond the target actually delivers benefit worth the cost, and for whom."],
+["Plant and fish sources","Longo's everyday longevity diet leans pescatarian with mostly plant protein. Source matters as well as quantity."],
+["Does FMD reset damage from high protein?","The question is whether a five-day cycle can offset a period of high protein intake. Longo's mouse results on the Western diet suggest cycles do reduce damage, though not necessarily to the level of a consistently good diet."]]},
+{c:"#c0392b",t:"FMD as a Reset: Stem Cells and Regeneration",s:"24:41 - 27:06",leaves:[
+["Reset, not a break","Longo distinguishes a reset from simply pausing eating. During the cycle damaged or old cells are cleared, and refeeding triggers rebuilding."],
+["Stem cells and reprogramming","In his lab, fasting-mimicking cycles activate stem cell populations and shift cells toward a younger state. The idea is regeneration by diet-driven signalling rather than drugs."],
+["Kidneys and pancreas","Animal work reports regeneration of damaged kidney tissue and of insulin-producing pancreatic cells. These are mouse results and human evidence is still emerging."],
+["Reading the evidence","The 2024 human trial of three to four FMD cycles reported lower biological age, less liver fat and improved insulin resistance. It is promising but not proof of regeneration in people."]]},
+{c:"#d4a017",t:"Muscle Rejuvenation and Athletic Shelf Life",s:"27:06 - 32:02",leaves:[
+["Muscle rejuvenation","The episode explores whether FMD cycles can refresh muscle rather than break it down. Longo's earlier data show fat loss with muscle mass largely maintained."],
+["Athletic maintenance","For regular exercisers, the reset is timed so training is not compromised. Refeeding after the cycle supplies the building blocks for rebuilding."],
+["Olympic athletes and special forces","The discussion covers elite athletes and special forces whose bodies are used hard and have a limited shelf life. The idea is that periodic cycles may extend how long that performance lasts."],
+["Where to find more","Dr. Longo is on Instagram (prof_valterlongo) and leads the Create Cures Foundation (createcures.org)."]]}
+];
+const summary=[
+["Bad diet, five-day reset","The episode opens with one of Valter Longo's more provocative mouse experiments. Animals fed a Western high-fat, high-sugar diet for most of each month, with five days of the fasting-mimicking diet, ended up statistically close to animals eating well all the time. The lifespan curves still hinted that a consistently good diet is slightly better. The rest of the first half asks how far that idea carries: whether poor eating is cumulative, how LDL and glucose behave around a cycle, and whether the body can switch back."],
+["Set points and the master pathway","Longo then turns to why weight is so hard to shift. Bodies defend a set point shaped by evolution for scarcity, and modern food supply exploits it. He ties this to growth hormone signalling, which he treats as the master ageing pathway. When protein and sugar are low, growth signalling falls, cells move toward maintenance, and processes such as autophagy increase. That is why the composition of the diet matters and why a fasting-mimicking diet can do what a short water fast may not."],
+["Protein and the longevity trade-off","A large section deals with protein. Longo's stance is moderate intake, roughly 0.7 to 0.8 g per kg a day for most adults and slightly more later in life, mostly from plant and fish sources. DeLauer pushes on the performance side of the argument, and the pair discuss cost and whether extra protein is worth it. They also ask whether a five-day cycle can undo damage from a period of high protein, with Longo's mouse data suggesting it reduces it."],
+["Regeneration and athletes","The final third covers regeneration. Longo describes FMD as a reset rather than a break, with stem cell activation and reports of kidney and pancreas repair in animals, and the human trial showing lower biological age and liver fat. The conversation closes on muscle and athletic longevity, including Olympic athletes and special forces, and whether periodic cycles can extend an elite body's useful life."]
+];
+const take=[
+["Use FMD as a periodic reset","Longo's protocol is five days every few months, not a weekly habit. Plan it on the calendar rather than doing it ad hoc."],
+["Do not treat it as licence","In the mouse data, the consistently good diet still tracked slightly better. The reset helps, but baseline eating still counts."],
+["Aim for fat, not weight","Track waist circumference and a visceral fat measure if available, not just the scale. Visceral fat is the stated target."],
+["Keep protein moderate","Roughly 0.7 to 0.8 g per kg per day for most adults, a little more in later life. Compare that to what you actually eat now."],
+["Favour plant and fish protein","Longo's everyday pattern leans pescatarian. Shift a few meals before changing amounts."],
+["Expect temporary lab changes","LDL and glucose can move during or just after a cycle. Test at a sensible interval afterwards rather than mid-cycle."],
+["Time training around cycles","Keep sessions light during the five days and refeed with adequate protein afterwards to protect muscle."],
+["Do not confuse short fasts with autophagy","Longo has said meaningful autophagy takes days, not hours. A 36 hour fast is not equivalent."],
+["Separate mouse from human evidence","Kidney, pancreas and stem cell claims are mostly animal data. Human trials so far show biological age, liver fat and insulin resistance changes."],
+["Get medical advice first","Check with a doctor if you take medication, have diabetes, are underweight, pregnant, or have a history of disordered eating."]
+];
+const B=document.getElementById('branches');
+branches.forEach(b=>{
+ const d=document.createElement('div');d.className='branch';d.style.setProperty('--c',b.c);
+ d.innerHTML='<div class="bhead" onclick="toggleBranch(this.parentNode)"><div><h3>'+b.t+'</h3><small>'+b.s+'</small></div><span class="arrow">&#9656;</span></div><div class="leaves">'+b.leaves.map(l=>'<div class="leaf" onclick="toggleLeaf(event,this)"><div class="lt">'+l[0]+'</div><div class="ld">'+l[1]+'</div></div>').join('')+'</div>';
+ B.appendChild(d);
+});
+document.getElementById('sumbody').innerHTML=summary.map(s=>'<div class="sec"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>').join('');
+document.getElementById('cards').innerHTML=take.map((t,i)=>'<div class="tk"><div class="n">'+(i+1)+'</div><div><h4>'+t[0]+'</h4><p>'+t[1]+'</p></div></div>').join('');
+function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+function toggleBranch(el){el.classList.toggle('open');}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open');}
+</script>
+</body>
+</html>
