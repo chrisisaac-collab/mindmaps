@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fasting, Lipolysis and Lipophagy - Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ee;--card:#ffffff;--ink:#1f2a2e;--mute:#5d6a6f;--line:#e2dccf;--accent:#1f2a2e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+header{padding:28px 18px 8px;max-width:900px;margin:0 auto}
+header .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+header h1{font-family:Fraunces,Georgia,serif;font-size:clamp(24px,5vw,38px);line-height:1.15;margin:6px 0 8px}
+header p{margin:0;color:var(--mute);font-size:14px}
+.tabs{display:flex;gap:6px;max-width:900px;margin:18px auto 0;padding:0 18px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;font:500 14px Inter,sans-serif;color:var(--mute);cursor:pointer;white-space:nowrap}
+.tab.active{color:var(--ink);border-bottom-color:var(--ink)}
+.panel{display:none;max-width:900px;margin:0 auto;padding:22px 18px 60px}
+.panel.active{display:block}
+.root{background:var(--ink);color:#fff;border-radius:14px;padding:16px 18px;margin-bottom:18px;font-family:Fraunces,Georgia,serif;font-size:18px}
+.root small{display:block;font-family:Inter,sans-serif;font-size:12px;opacity:.75;margin-top:4px}
+.branch{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.bh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;cursor:pointer;user-select:none}
+.bh h3{margin:0;font-size:16px;font-weight:600}
+.bh span.sub{display:block;font-size:12.5px;color:var(--mute);font-weight:400;margin-top:2px}
+.chev{width:9px;height:9px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg);transition:transform .2s;flex:none}
+.branch.open>.bh .chev{transform:rotate(-135deg)}
+.leaves{display:none;padding:0 14px 14px}
+.branch.open>.leaves{display:block}
+.leaf{border:1px solid var(--line);border-radius:10px;margin-top:8px;background:color-mix(in srgb,var(--c) 6%,white);cursor:pointer}
+.lh{padding:10px 12px;font-size:14.5px;font-weight:500;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.lh:after{content:"+";color:var(--c);font-weight:600;font-size:18px;line-height:1}
+.leaf.open .lh:after{content:"\2212"}
+.ld{display:none;padding:0 12px 12px;font-size:14px;color:#33413f}
+.leaf.open .ld{display:block}
+.hint{font-size:12.5px;color:var(--mute);margin:0 0 14px}
+.note{background:#fff8e6;border:1px solid #ecd9a0;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:18px}
+.sec h2{font-family:Fraunces,Georgia,serif;font-size:21px;margin:26px 0 6px;padding-left:12px;border-left:5px solid var(--c)}
+.sec p{margin:0 0 10px;font-size:15.5px}
+.cards{display:grid;gap:12px}
+.tk{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:40px 1fr;gap:12px}
+.num{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:600;font-size:14px}
+.tk h4{margin:2px 0 4px;font-size:15.5px}
+.tk p{margin:0;font-size:14.5px;color:#33413f}
+footer{max-width:900px;margin:0 auto;padding:0 18px 40px;font-size:12.5px;color:var(--mute)}
+footer a{color:var(--mute)}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Physionic - Dr. Nicolas Verhoeven, PhD - 27 Oct 2025</div>
+  <h1>The Most Incredible Fasting Study I've Ever Read</h1>
+  <p>How fat cells shift from classic lipolysis to lipophagy as a fast deepens</p>
+</header>
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+  <button class="tab" onclick="switchTab('summary',this)">Full Summary</button>
+  <button class="tab" onclick="switchTab('take',this)">Actionable Takeaways</button>
+</div>
+
+<div id="map" class="panel active">
+  <div class="root">Fasting and fat release<small>Study: Naveen Kumar et al., Nature Communications 2025</small></div>
+  <p class="hint">Tap a branch to open it, then tap any point for the detail.</p>
+  <div id="branches"></div>
+</div>
+
+<div id="summary" class="panel"><div id="sumbody"></div></div>
+<div id="take" class="panel"><div class="cards" id="cards"></div></div>
+
+<footer>Built from Dr. Verhoeven's written companion to the video (free portion) and the study reference it cites. Premium sections of his analysis are not covered. Educational summary, not medical advice.</footer>
+
+<script>
+const B=[
+{c:"#2b6cb0",t:"The Study",s:"What was published and how strong it is",l:[
+["Source paper","Naveen Kumar GV, Wang R-S, Sharma AX and colleagues, Nature Communications 2025, volume 16, article 1330. The title is 'Non-canonical lysosomal lipolysis drives mobilization of adipose tissue energy stores with fasting'. Verhoeven references it as Study 534 in his library."],
+["Evidence type","He describes it as human-supported but animal-tested. The core mechanism was worked out in animal models, and human data were then used to check whether the same signals appear in people."],
+["Core claim","Fasting does not simply turn up the usual fat-burning machinery. It shifts fat cells to a different and faster route for releasing stored fat, one that is based on autophagy rather than only on classic lipolysis enzymes."],
+["Funding and conflicts","The work was publicly funded through NIH grants and reports no industry funding. Some authors disclose consulting, advisory or research relationships with pharmaceutical companies, but these are stated as outside the submitted work."]]},
+{c:"#c05621",t:"Classic Lipolysis",s:"The textbook way fat leaves a fat cell",l:[
+["What it is","Enzymes such as ATGL and HSL break stored triglycerides into free fatty acids and glycerol. Those products leave the fat cell and fuel other organs when no calories are coming in."],
+["What triggers it","Early in a fast, hormones such as catecholamines bind to fat cells and switch on this pathway. It is the standard, well-known first response."],
+["Why it is not the whole story","Moving very large amounts of fat through enzymes alone would require huge quantities of those enzymes. Verhoeven calls this a throughput bottleneck, meaning the canonical path is too slow to keep up by itself in a deep fast."]]},
+{c:"#c53030",t:"The Surprise",s:"What the researchers actually observed",l:[
+["Enzymes did not rise as expected","During fasting, several of the lipolysis enzymes were not elevated the way the classic model predicts. That mismatch is what makes the finding notable."],
+["Autophagy proteins did rise","Proteins tied to autophagy, the cell's recycling system, increased instead. This pointed to a second system doing much of the work."],
+["What autophagy means here","Autophagy packages material into vesicles for degradation. In this setting those vesicles engulf lipid droplets so the fat can be broken down and released."],
+["Why it is called non-canonical","The paper's title uses this term because lysosomal breakdown of fat sits outside the standard enzyme-based lipolysis pathway."]]},
+{c:"#2f855a",t:"The Lipophagy Hand-Off",s:"From lipolysis to an autophagy-based route",l:[
+["Lipophagy defined","Lipophagy is autophagy aimed specifically at lipid droplets, freeing fat for use as energy."],
+["The sequence","Early in a fast, catecholamines drive classic lipolysis. As fasting continues, the stimulus changes and fat cells up-regulate autophagy machinery so lipophagy takes a larger share of the load."],
+["The dam analogy","Verhoeven compares it to opening a dam wider. Lipophagy can process large chunks of fat at once, which relieves the bottleneck that enzymes alone would face."],
+["Why switch at all","The most plausible explanation is efficiency. Early on the body leans on glycogen plus a modest fat trickle. Once glycogen runs down, energy demand shifts heavily to fat, and an autophagy route suits large, steady lipid loads."],
+["What it may explain","The hand-off is offered as a reason fat loss can seem to accelerate as a fast deepens, and why longer fasts can feel metabolically different from short ones."]]},
+{c:"#6b46c1",t:"Human Evidence",s:"Do people show the same fingerprints?",l:[
+["Why molecular fingerprints","Invasive experiments of the kind done in animals are not possible in people, so researchers look for molecular signs instead."],
+["Prolonged fasting data","In individuals who fasted for about 10 days, expression of multiple autophagy-controlling genes rose in fat tissue. This lines up with the animal findings."],
+["Ex vivo test","Using human fat samples outside the body in a nutrient-deprived state, blocking autophagy reduced fat release. That supports a functional role for lipophagy in human fat mobilization."],
+["Reading note","Gene expression and lab experiments on tissue samples are supportive signals, not direct measurements of fat flux inside a fasting person. This is a general caution rather than a point made in the video."]]},
+{c:"#0f766e",t:"Meaning and Limits",s:"What this does and does not tell us",l:[
+["Mechanism, not prescription","Verhoeven is explicit that this is a mechanistic advance. It does not say everyone should fast and does not define an optimal fasting length."],
+["Quality of fat mobilization","The main practical idea is that the way fat is mobilized changes as a fast progresses, a window into how biology adapts rather than a directive."],
+["Immune and fat cross-talk","Earlier work hints that fat can be exported in vesicles taken up by immune cells, which may handle that load using their own autophagy programs. This fits a picture of multiple tissues coordinating energy flow."],
+["What is not covered","His deeper sections on blocking autophagy, how autophagy is controlled and the effects of inhibiting it sit behind a paid tier, so this map does not include them. The paper itself is the place to look."]]}
+];
+const S=[
+["The study and its standing","The video examines a 2025 Nature Communications paper by Naveen Kumar, Wang, Sharma and colleagues, titled on non-canonical lysosomal lipolysis and the mobilization of adipose tissue energy stores with fasting. Dr. Nicolas Verhoeven describes it as human-supported and animal-tested: the mechanism was established in animal models and then checked against human data. It was publicly funded through NIH grants with no industry funding reported, although a few authors disclose outside advisory or consulting ties.","#2b6cb0"],
+["How fat normally leaves a fat cell","When calories stop arriving, fat cells begin exporting stored fat to fuel other organs. The classic route is lipolysis, in which enzymes such as ATGL and HSL split triglycerides into free fatty acids and glycerol. Early in a fast this is switched on by hormones such as catecholamines. The difficulty is capacity: keeping up with a large, sustained fat demand using enzymes alone would require very large amounts of them, a throughput bottleneck.","#c05621"],
+["What the researchers saw","During fasting, several lipolysis enzymes were not elevated as the standard model would predict. Proteins linked to autophagy rose instead. Autophagy is the cell's recycling system, which packages material into vesicles for breakdown, and in this context the vesicles engulf lipid droplets so the fat can be degraded and released.","#c53030"],
+["The hand-off to lipophagy","Verhoeven frames the result as a hand-off. Early on, classic lipolysis does the work. As the fast continues and the stimulus changes, fat cells increase their autophagy machinery and lipophagy takes over a growing share, processing large chunks of lipid at once. He likens this to opening a dam wider. The likely reason is efficiency: glycogen covers energy needs early, and once it wanes, a higher-capacity route better suits a body running mainly on fat.","#2f855a"],
+["Evidence in humans","Because invasive experiments are not possible in people, the human support is indirect. In individuals who fasted for about ten days, multiple autophagy-controlling genes were more highly expressed in fat tissue. In separate experiments on human fat samples outside the body under nutrient deprivation, blocking autophagy reduced fat release. Together these suggest lipophagy plays a real functional role in people, though they remain supportive rather than conclusive measures.","#6b46c1"],
+["Interpretation and limits","Verhoeven stresses that the study is a mechanistic advance, not a prescription. It does not argue that everyone should fast or identify an ideal duration. It does offer an explanation for why longer fasts can feel metabolically different from shorter ones, and he notes related work on fat and immune cells exchanging lipid in vesicles. His fuller treatment of what happens when autophagy is blocked or how it is controlled is part of his paid analysis and is not reflected here.","#0f766e"]
+];
+const T=[
+["Treat it as mechanism, not a protocol","The video itself says the finding is not a directive to fast and sets no optimal duration. Use it to understand biology, not to choose a fasting length."],
+["Learn the two terms","Lipolysis is enzyme-based breakdown of triglycerides. Lipophagy is autophagy that engulfs lipid droplets. Being able to say which one you mean makes fasting claims easier to evaluate."],
+["Note the evidence tier","The core mechanism is from animal work, with human gene-expression and tissue experiments as support. When you repeat the finding, say 'shown in animals and supported by human data' rather than 'proven in people'."],
+["Read the primary paper","Find Nature Communications 2025;16:1330 and read the abstract and main figures yourself. Check how the human samples were collected and how long people fasted."],
+["Separate glycogen phase from fat phase","The proposed hand-off happens as glycogen wanes. When discussing fasting with others, keep early-fast and deep-fast physiology distinct rather than treating a fast as one uniform state."],
+["Do not equate release with loss","Faster mobilization of stored fat is not the same as net body-fat loss. Overall energy balance still matters, and the video does not claim otherwise."],
+["Do not over-read gene expression","Rising autophagy-gene expression suggests activity but is not a direct measure of fat flux. Hold conclusions loosely until functional data are shown."],
+["Check funding and conflicts","This study reports public funding and no industry support, with some authors disclosing outside pharmaceutical ties. Make a habit of checking that section for any paper you rely on."],
+["Stay within your scope with clients","This study offers no basis for advising clients to fast, especially prolonged fasts. Anyone considering one should speak with their doctor or a dietitian first."],
+["Go to the source for what is missing","The video's deeper questions about blocking autophagy and how it is regulated are behind a paid tier. The full paper is the open route to those answers."]
+];
+const br=document.getElementById('branches');
+B.forEach(b=>{
+  const d=document.createElement('div');d.className='branch';d.style.setProperty('--c',b.c);
+  d.innerHTML='<div class="bh" onclick="toggleBranch(this.parentNode)"><h3>'+b.t+'<span class="sub">'+b.s+'</span></h3><i class="chev"></i></div><div class="leaves">'+
+  b.l.map(x=>'<div class="leaf" onclick="toggleLeaf(event,this)"><div class="lh">'+x[0]+'</div><div class="ld">'+x[1]+'</div></div>').join('')+'</div>';
+  br.appendChild(d);
+});
+document.getElementById('sumbody').innerHTML='<div class="note">Written from the video\'s free companion article and the cited paper. It is not a transcript.</div>'+S.map(s=>'<div class="sec" style="--c:'+s[2]+'"><h2>'+s[0]+'</h2><p>'+s[1]+'</p></div>').join('');
+document.getElementById('cards').innerHTML=T.map((t,i)=>'<div class="tk"><div class="num">'+(i+1)+'</div><div><h4>'+t[0]+'</h4><p>'+t[1]+'</p></div></div>').join('');
+function switchTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
+}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>
