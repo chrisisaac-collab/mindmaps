@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Blueprint to Get Flexible Once, Forever — Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf8f4;--ink:#23211d;--mute:#6b665c;--card:#fff;--line:#e6e1d6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6}
+header{padding:28px 20px 8px;max-width:900px;margin:0 auto}
+h1{font-family:'Fraunces',serif;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 6px}
+.sub{color:var(--mute);font-size:.92rem}
+.note{max-width:900px;margin:10px auto 0;padding:0 20px;color:var(--mute);font-size:.82rem}
+.tabs{display:flex;gap:6px;max-width:900px;margin:18px auto 0;padding:0 20px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--card);padding:9px 16px;border-radius:999px;cursor:pointer;font:500 .9rem 'Inter',sans-serif;color:var(--ink)}
+.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.panel{display:none;max-width:900px;margin:18px auto 60px;padding:0 20px}
+.panel.active{display:block}
+.branch{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.bh{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.bh span.t{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--c)}
+.bh:after{content:'+';font-size:1.3rem;color:var(--mute)}
+.branch.open .bh:after{content:'–'}
+.leaves{display:none;padding:0 14px 12px}
+.branch.open .leaves{display:block}
+.leaf{border:1px solid var(--line);border-radius:8px;margin-top:8px;padding:10px 12px;cursor:pointer;background:#fdfcf9}
+.leaf b{font-weight:600;font-size:.95rem}
+.leaf p{display:none;margin:8px 0 0;font-size:.9rem;color:#403c35}
+.leaf.open p{display:block}
+.leaf.open{border-color:var(--c)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.sec h3{font-family:'Fraunces',serif;margin:0 0 8px}
+.sec p{margin:0 0 10px;font-size:.95rem}
+.tk{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+.tk h4{margin:0 0 4px;font-size:1rem}.tk p{margin:0;font-size:.9rem;color:#403c35}
+</style>
+</head>
+<body>
+<header>
+<h1>The Blueprint to Get Flexible Once, Forever</h1>
+<div class="sub">Matt Smith · Mobility &amp; flexibility coach · ~39 min</div>
+</header>
+<div class="note">Built from the video title and the creator's published outline of this blueprint; no transcript was available, so details are the blueprint's framework rather than a verbatim account.</div>
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('sum',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('act',this)">Actionable Takeaways</button>
+</div>
+<div id="map" class="panel active"></div>
+<div id="sum" class="panel"></div>
+<div id="act" class="panel"></div>
+<script>
+const branches=[
+{t:"1. The Flexibility Ladder",c:"#b5532f",l:[
+["Your personal ladder","Range of motion is limited by a hierarchy of factors, such as specific muscles, nerve tension, technique and strength gaps. Whatever sits below your goal level is your bottleneck, so progress means finding and working on that rung."],
+["Why training is individual","Two people with the same tight hamstrings may have different limiting factors. A generic routine ignores this, which is why people who stretch daily can stay tight."],
+["Making progress","You move up the ladder by addressing the current limiter, then reassessing. Each rung changes what the next best stretch is."],
+["Why routines fail","A fixed 'stretching routine' treats every body the same. The blueprint replaces it with a small set of targeted exercises chosen for your limiter."]]},
+{t:"2. Finding What Limits You",c:"#2f6f8f",l:[
+["Measure your baseline","Start by testing your current range in the movements you care about, so you have a number or a picture to compare against later."],
+["Self-assessments","Simple self-tests show where you stop and what the stopping point feels like: a muscle pull, a pinch, or a nerve sensation. The type of sensation points to the limiter."],
+["Pick the area","Choose where to start based on the most obvious restriction. Freeing the main knot often improves neighbouring areas too."],
+["Full body vs skill-based","You can build a full-body routine or aim at a specific skill such as a split or overhead position. The goal decides how narrow the programme should be."]]},
+{t:"3. How Stretching Works",c:"#4c7a3a",l:[
+["The brain adaptation","Training raises stretch tolerance, meaning how much stretch sensation your nervous system will allow. This is the lasting adaptation behind getting flexible."],
+["Tissue changes fade","Physical changes in the tissue are real but fade within weeks of stopping, and warm-up effects wear off within hours. Tolerance is what lets flexibility last."],
+["Keeping it long term","Once tolerance has risen, a small dose of maintenance and regular use of the range keeps it. Acquiring the range is the hard part."],
+["Reaching the ceiling","At your maximum tolerable stretch perception you cannot go further in a session, so more time past that point adds little."]]},
+{t:"4. Time-Efficient Training",c:"#7a4ca0",l:[
+["Stretch stacking","Pair stretches that target the same area so the first opens range for the second. The effect compounds and lets you progress in most sessions."],
+["3–5 exercises","A small stack of three to five well-chosen exercises forms the core. More variety is not the same as more progress."],
+["1–2 sessions a week","Frequency is low compared with daily stretching. One or two focused sessions per week are enough to drive adaptation."],
+["Less, but better","The blueprint's claim is more from less: pick the right exercises, do them with intent, and stop."]]},
+{t:"5. Assisted to Resisted",c:"#b08a1e",l:[
+["Assisted stretching","Bodyweight, gravity or a prop deepens the stretch. This builds total range of motion."],
+["Resisted stretching","You use strength to hold or push into the end range, optionally with load. This builds strength and stability inside the range so it becomes usable."],
+["The spectrum","Training sits anywhere between the two. Alternating along the spectrum is synergistic: assisted work adds range, resisted work claims it."],
+["Why usable range matters","Range you cannot control gains little in sport or daily life. Strength at end range is what turns flexibility into function."]]},
+{t:"6. Fitting It Into Life",c:"#a03c5c",l:[
+["Combine with sport or gym","The blueprint covers example schedules and key considerations for pairing flexibility with training, so one does not undermine the other."],
+["Timing","Ideally train flexibility two or more days after sport or strength work on the same area. Same day with flexibility in the evening is second best."],
+["Dose","There are minimum and maximum effective doses. Below the minimum nothing changes; above the maximum you only add soreness and time."],
+["Putting it into action","The core structure is 3–5 exercises, 1–2 times a week, reassessed as you climb the ladder."]]}
+];
+const summary=[
+["The Flexibility Ladder","The central idea is that flexibility is limited by a personal hierarchy of factors rather than by a lack of stretching. Muscle length, nerve tension, technique and strength can each be the thing that stops you. Anything below your goal on that ladder is your bottleneck, which is why daily stretching leaves some people tight: they are working on the wrong rung. Training should be individualised around the current limiter and reassessed as it changes."],
+["Identifying What Limits You","Before choosing exercises, you measure where you are and learn what the end of your range feels like. A muscle pull, a pinch and a nerve sensation point to different limiters. You then pick the area to start with, usually the most obvious restriction, and decide between a full-body approach and one aimed at a particular skill."],
+["What Changes in the Body","The lasting adaptation is mostly in the nervous system. Training raises stretch tolerance, so the brain allows more range before it signals that it is too much. Tissue changes occur but fade within weeks of stopping, and warm-up effects last only hours. This is why flexibility can be built once and kept with little maintenance."],
+["Time-Efficient Methods","Stretch stacking pairs aligned stretches so that the first opens range for the second. A stack of three to five exercises, done once or twice a week, is the core structure. The claim is that the right few exercises beat a long daily routine."],
+["The Assisted-to-Resisted Spectrum","Assisted stretches, where gravity or bodyweight deepens the position, build total range. Resisted stretches, where you apply strength at end range, make that range stable and usable. Moving along this spectrum, and alternating between its ends, builds both capacity and control."],
+["Frequency, Combining and Acting","Training should usually sit two or more days after sport or strength work on the same area, with same-day evening sessions second best. There are minimum and maximum effective doses, and the practical plan is to apply the 3–5 exercise stack one to two times per week, reassessing as you progress."]
+];
+const takeaways=[
+["Find your limiter first","Test the movement you want and note what stops you: muscle, nerve, pinch or strength. Pick exercises for that, not a generic list."],
+["Choose 3–5 exercises","Keep the stack small and aligned to one area so each stretch builds on the last."],
+["Stretch 1–2 times a week","Replace daily token stretching with one or two focused sessions."],
+["Stack aligned stretches","Put the stretch that opens the area first, then the one that uses the new range."],
+["Add resisted work","After an assisted stretch, hold the end range with muscle effort so the range becomes usable."],
+["Train your tolerance","Treat the goal as raising how much stretch you tolerate, not forcing tissue. Stay in a strong but controlled sensation."],
+["Time it around training","Place flexibility two or more days after lifting or sport on the same area; otherwise do it in the evening of the same day."],
+["Do not use stretching as recovery","Avoid deep stretching the day after hard strength work on that area."],
+["Retest every few weeks","Repeat your baseline test, and change the exercises when your limiter moves up the ladder."],
+["Maintain with a light dose","Once you have the range, keep it with occasional sessions and by actually using it."]
+];
+const m=document.getElementById('map');
+branches.forEach(b=>{const d=document.createElement('div');d.className='branch';d.style.setProperty('--c',b.c);
+d.innerHTML='<div class="bh" onclick="toggleBranch(this.parentNode)"><span class="t">'+b.t+'</span></div><div class="leaves">'+b.l.map(x=>'<div class="leaf" onclick="toggleLeaf(event,this)"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>').join('')+'</div>';m.appendChild(d)});
+document.getElementById('sum').innerHTML=summary.map(s=>'<div class="sec"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>').join('');
+document.getElementById('act').innerHTML=takeaways.map((t,i)=>'<div class="tk"><div class="n">'+(i+1)+'</div><div><h4>'+t[0]+'</h4><p>'+t[1]+'</p></div></div>').join('');
+function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>
