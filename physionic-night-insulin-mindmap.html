@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Study Reveals Why We Need to Change WHEN We Eat — Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#10141c;--ink:#e8ebf2;--mute:#9aa3b5;--card:#181e2a;--line:#2a3345}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6}
+header{padding:28px 20px 8px;max-width:900px;margin:0 auto}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,4vw,2.1rem);margin:0 0 6px}
+.sub{color:var(--mute);font-size:.92rem}
+.tabs{display:flex;gap:6px;max-width:900px;margin:18px auto 0;padding:0 20px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--card);padding:9px 16px;border-radius:999px;cursor:pointer;font:500 .9rem 'Inter',sans-serif;color:var(--ink)}
+.tab.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.panel{display:none;max-width:900px;margin:18px auto 60px;padding:0 20px}
+.panel.active{display:block}
+.branch{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.bh{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.bh span.t{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--c)}
+.bh:after{content:'+';font-size:1.3rem;color:var(--mute)}
+.branch.open .bh:after{content:'–'}
+.leaves{display:none;padding:0 14px 12px}
+.branch.open .leaves{display:block}
+.leaf{border:1px solid var(--line);border-radius:8px;margin-top:8px;padding:10px 12px;cursor:pointer;background:#141a25}
+.leaf b{font-weight:600;font-size:.95rem}
+.leaf p{display:none;margin:8px 0 0;font-size:.9rem;color:#c3cadb}
+.leaf.open p{display:block}
+.leaf.open{border-color:var(--c)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.sec h3{font-family:'Space Grotesk',sans-serif;margin:0 0 8px}
+.sec p{margin:0 0 10px;font-size:.95rem;color:#d3d8e6}
+.tk{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700}
+.tk h4{margin:0 0 4px;font-size:1rem}.tk p{margin:0;font-size:.9rem;color:#c3cadb}
+</style>
+</head>
+<body>
+<header>
+<h1>New Study Reveals Why We Need to Change WHEN We Eat</h1>
+<div class="sub">Dr. Nicolas Verhoeven · Physionic · ~10 min</div>
+</header>
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('sum',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('act',this)">Actionable Takeaways</button>
+</div>
+<div id="map" class="panel active"></div>
+<div id="sum" class="panel"></div>
+<div id="act" class="panel"></div>
+<script>
+const branches=[
+{t:"1. Time of Day Matters",c:"#f0a04b",l:[
+["Beyond nutrition and exercise","The study shows health is affected not just by nutrition, exercise and genetics but by time of day, specifically night. He is not talking about sleep but about eating later in the day being potentially more harmful."],
+["Insulin resistance primer","Rising glucose makes the pancreas secrete insulin, which binds receptors and triggers a cascade that places glucose transporters in the cell membrane so glucose can enter. If any part of that is inhibited, it is called insulin resistance, the condition fundamental to type 2 diabetes."],
+["Day vs night comparison","Researchers measured glucose uptake per unit of insulin in a poor-health group (poor liver health, overweight) and a healthier group, by day and by night. Higher bars mean better insulin sensitivity."],
+["The key finding","In the daytime the healthier group is more sensitive, as expected. The real result is that the unhealthy group becomes more insulin resistant at night, while the healthier group does not."]]},
+{t:"2. The Liver",c:"#4cc2b0",l:[
+["Gluconeogenesis","This is the creation of new glucose, mainly in the liver, the same glucose in the blood that insulin is meant to control."],
+["More glucose from the liver","In metabolically compromised people a higher proportion of blood glucose is produced by the liver and released, keeping levels higher than normal."],
+["Insulin fails to switch it off","Insulin normally binds the liver and reduces gluconeogenesis, but here that does not happen readily, especially at night."],
+["Double hit","The body is not clearing glucose because of insulin resistance and is also adding glucose because it cannot stop new production, all especially at night."]]},
+{t:"3. The Pancreas",c:"#e0607e",l:[
+["Is insulin resistance unfairly blamed?","Data on pancreatic insulin secretion rate shows the lines should stay steady, but in the metabolically compromised group secretion dips way down at night."],
+["Not just resistant, also less insulin","These people are potentially insulin resistant and also simply secrete less insulin at night. This does not happen during the day."],
+["Faster insulin clearance","The body also clears insulin, and clearance is slightly faster in the metabolically compromised."],
+["The whole picture","More body fat and a poorer metabolic profile means harder glucose clearing, more liver glucose output, slower insulin production and faster insulin clearance at night: many physiological issues tied to time of day."]]},
+{t:"4. Does Weight Loss Fix It?",c:"#6a8cff",l:[
+["Cross-sectional limits","The earlier data matched two groups by age and sex and compared them, which is not a controlled way to do research."],
+["12 weeks of weight loss","After 12 weeks of improved nutrition, body fat and liver enzymes normalised to be similar to the healthier controls."],
+["Problems persist","Despite that, there was still a significant reduction in insulin secretion at night. This could imply permanent damage, though he says he is not bold enough to claim that yet."],
+["Remaining differences","Participants still weighed more than controls even with equal body fat percentage, leaving room for other differences to explain the persistent issues."]]},
+{t:"5. Shifting Meal Timing",c:"#a67bd6",l:[
+["The timing study","Another study kept all else equal and pushed all meals to the beginning and middle of the day. One group clearly had lower insulin resistance."],
+["Other measures improved","The pancreas was more responsive, releasing more insulin."],
+["The intermittent fasting caveat","He cannot control for the control group eating their last meal later the previous day, so the benefit might just come from a longer time without eating."],
+["His verdict","Not end-all evidence, but moderately strong evidence that changing the timing of food may help the night-time problems in metabolically compromised people."]]},
+{t:"6. Limits and Who It Applies To",c:"#8fb339",l:[
+["Healthy people","The night-time findings were exclusively in people with long-term metabolic dysfunction. If you are healthy and your blood values are in normal ranges, you do not need to change anything."],
+["Small sample","The study was extensive but included only a small group of people."],
+["More research needed","He calls it a cool study that tells us a lot but says more studies are needed to confirm it more robustly."],
+["What this video leaves out","He has two more studies on exercise timing and further mechanisms covering fat cell and liver cross-talk and mitochondria, which are in the extended edition for Physionic Insiders and are not covered here."]]}
+];
+const summary=[
+["Why Time of Day Matters","Dr. Verhoeven introduces a study showing that health depends on time of day as well as nutrition, exercise and genetics. This is not about sleep: it is about eating later in the day being potentially more harmful. As an illustration he uses insulin resistance, the condition fundamental to type 2 diabetes, in which cells cannot take up glucose from the blood because some step in the insulin signalling pathway is inhibited."],
+["Day Versus Night Insulin Sensitivity","The data compare glucose uptake per unit of insulin in people in poor health, such as those with poor liver health and excess weight, and in healthier people, measured in the day and at night. By day the healthy group is more sensitive, as expected. The key finding is that the unhealthy group becomes more insulin resistant at night while the healthier group does not, so people with metabolic dysfunction are worse off later in the day and into the night."],
+["Liver Glucose Production","One reason is gluconeogenesis, the creation of new glucose, mainly in the liver. In people with metabolic dysfunction a higher proportion of blood glucose comes from the liver, even though insulin normally binds the liver and reduces this. The effect is a double hit: glucose is not cleared well because of insulin resistance and more is added because production does not switch off, especially at night."],
+["The Pancreas and Insulin Clearance","He then asks whether insulin resistance is blamed unfairly. Insulin secretion at night dips way down in the metabolically compromised, which does not happen during the day, and their bodies also clear insulin slightly faster. The overall picture is of people with more body fat and a poorer metabolic profile having greater difficulty clearing glucose, more liver glucose output, slower insulin secretion and faster insulin clearance at night."],
+["Weight Loss and Meal Timing","The first data are cross-sectional, which is not a controlled design. After 12 weeks of weight loss through better nutrition, body fat and liver enzymes normalised to match the healthy controls, yet insulin secretion at night was still significantly reduced, which might imply permanent damage though he will not claim it. A separate study moved all meals to the beginning and middle of the day and found lower insulin resistance and a more responsive pancreas. He notes a confound: the early-eating group simply went longer without eating."],
+["Caveats","He calls the evidence moderately strong but not end-all. The night-time problems were found only in people with long-term metabolic dysfunction, so healthy people with normal blood values need not change anything. The study was small, and participants still weighed more than controls even with equal body fat percentage. More studies are needed to confirm it. Parts on exercise timing, fat cell and liver cross-talk and mitochondria are in an extended members-only version."]
+];
+const takeaways=[
+["Treat timing as a variable","Think about when you eat, not only what and how much, especially if you have metabolic dysfunction."],
+["Check whether it applies to you","The night-time problems were seen in people with long-term metabolic dysfunction. If your blood values are normal he says you need not change anything."],
+["Shift meals earlier","The timing study moved all meals to the beginning and middle of the day, and insulin resistance fell."],
+["Avoid late eating if metabolically compromised","Insulin sensitivity worsens, insulin secretion falls and the liver keeps producing glucose at night."],
+["Know your markers","Poor liver health, extra body fat and a poor metabolic profile are the features of the group affected, so review those with your doctor."],
+["Do not rely on weight loss alone","After 12 weeks of weight and fat loss, night-time insulin secretion was still significantly reduced."],
+["Keep the loss anyway","Weight loss normalised body fat and liver enzymes, so it remains worthwhile even if not a complete fix."],
+["Read the fasting results carefully","The earlier-eating group also fasted longer overnight, so part of the benefit may be a longer food-free window."],
+["Do not overstate the evidence","It was a small study and he regards it as moderately strong at best; avoid treating it as settled."],
+["Look to the references","The paper is Marjot et al., Cell Metabolism 2026, plus exercise timing trials listed in the description if you want more."]
+];
+const m=document.getElementById('map');
+branches.forEach(b=>{const d=document.createElement('div');d.className='branch';d.style.setProperty('--c',b.c);
+d.innerHTML='<div class="bh" onclick="toggleBranch(this.parentNode)"><span class="t">'+b.t+'</span></div><div class="leaves">'+b.l.map(x=>'<div class="leaf" onclick="toggleLeaf(event,this)"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>').join('')+'</div>';m.appendChild(d)});
+document.getElementById('sum').innerHTML=summary.map(s=>'<div class="sec"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>').join('');
+document.getElementById('act').innerHTML=takeaways.map((t,i)=>'<div class="tk"><div class="n">'+(i+1)+'</div><div><h4>'+t[0]+'</h4><p>'+t[1]+'</p></div></div>').join('');
+function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>
