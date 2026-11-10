@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Isometric Exercise Lowers Blood Pressure — Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf8f4;--ink:#23211d;--mute:#6b665c;--card:#fff;--line:#e6e1d6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6}
+header{padding:28px 20px 8px;max-width:900px;margin:0 auto}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,4vw,2.1rem);margin:0 0 6px}
+.sub{color:var(--mute);font-size:.92rem}
+.tabs{display:flex;gap:6px;max-width:900px;margin:18px auto 0;padding:0 20px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--card);padding:9px 16px;border-radius:999px;cursor:pointer;font:500 .9rem 'Inter',sans-serif;color:var(--ink)}
+.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.panel{display:none;max-width:900px;margin:18px auto 60px;padding:0 20px}
+.panel.active{display:block}
+.branch{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.bh{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.bh span.t{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--c)}
+.bh:after{content:'+';font-size:1.3rem;color:var(--mute)}
+.branch.open .bh:after{content:'–'}
+.leaves{display:none;padding:0 14px 12px}
+.branch.open .leaves{display:block}
+.leaf{border:1px solid var(--line);border-radius:8px;margin-top:8px;padding:10px 12px;cursor:pointer;background:#fdfcf9}
+.leaf b{font-weight:600;font-size:.95rem}
+.leaf p{display:none;margin:8px 0 0;font-size:.9rem;color:#403c35}
+.leaf.open p{display:block}
+.leaf.open{border-color:var(--c)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.sec h3{font-family:'Space Grotesk',sans-serif;margin:0 0 8px}
+.sec p{margin:0 0 10px;font-size:.95rem;color:#403c35}
+.tk{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.tk h4{margin:0 0 4px;font-size:1rem}.tk p{margin:0;font-size:.9rem;color:#403c35}
+</style>
+</head>
+<body>
+<header>
+<h1>Why is this the BEST Exercise for Lowering Blood Pressure?</h1>
+<div class="sub">Dr. Nicolas Verhoeven · Physionic · ~5 min</div>
+</header>
+<div class="tabs">
+<button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
+<button class="tab" onclick="switchTab('sum',this)">Full Summary</button>
+<button class="tab" onclick="switchTab('act',this)">Actionable Takeaways</button>
+</div>
+<div id="map" class="panel active"></div>
+<div id="sum" class="panel"></div>
+<div id="act" class="panel"></div>
+<script>
+const branches=[{"t": "1. What Isometric Exercise Is", "c": "#2f6f8f", "l": [["A static hold", "Isometric exercise is literally holding a stable position, so the muscle is neither shortening nor lengthening as it would through the rest of a movement."], ["Why it matters", "It has come up on top as the best exercise for reducing blood pressure in the clinical data covered in the previous video, ahead of running, lifting weights and other forms."], ["What was asked", "Several viewers asked why isometric exercise has such a profound effect, so this video goes through the mechanisms proposed in the research reviews."], ["The source", "He draws on an exercise-research review of the mechanisms, plus a systematic review and meta-analysis that confirms much of the heart and blood pressure effects."]]}, {"t": "2. Reactive Hyperemia", "c": "#b5532f", "l": [["Clamping during the hold", "While the muscle is stuck in one position, muscle fibres and structure clamp down on the blood vessels in the area, which raises blood pressure quite dramatically at first."], ["Release and rebound", "When the hold is released the muscle relaxes, which relaxes the vessels, and the blood rushes in. The sudden influx of blood is called hyperemia."], ["What the blood brings", "It carries oxygen, nutrients and importantly factors such as nitric oxide and adenosine, which bind the smooth muscle cells of the vessel wall."], ["Dropping below baseline", "Those factors encourage the smooth muscle to relax further, opening the vessels wider and dropping blood pressure beyond the initial point, which is the part that helps."]]}, {"t": "3. Baroreceptors", "c": "#4c7a3a", "l": [["Built-in pressure sensors", "Baroreceptors sit in specific sections of the heart and some blood vessels and are sensitive to changes in blood pressure."], ["The signal", "When pressure rises, as when holding an isometric position, they send a signal to the brain to reduce it."], ["The brain's response", "Through the nervous system the brain encourages heart rate to fall and the blood vessels to stay open."], ["Long-lasting effect", "The review mentions studies where isometric exercise reduced heart rate and blood pressure 7 hours after the exercise, suggesting a lasting effect."]]}, {"t": "4. Neurons and Blood Vessels", "c": "#7a4ca0", "l": [["Neurons talk to vessel cells", "Neurons communicate with the cells that make up blood vessels, including endothelial cells, which control vessel size. Bigger vessels generally mean lower blood pressure."], ["Sympathetic drive", "Neurons can push endothelial cells to release vessel-constricting or vessel-relaxing factors. Isometric exercise does not seem to activate sympathetic drive, the constricting pathway, which would normally be expected."], ["Parasympathetic drive", "Neurons themselves, independent of endothelial cells, can release factors like nitric oxide that directly bind and relax the vessels."], ["Still unfolding", "He says there is a lot left to uncover but this gives some idea of what makes isometric exercise unique and so potent."]]}];
+const summary=[["What Is Special About Isometric Exercise", "Dr. Verhoeven starts from the finding that isometric exercise, a static hold, came out as the best exercise for lowering blood pressure, even ahead of running and weight lifting. Isometric means holding a stable position so the muscle neither shortens nor lengthens. Something about that position seems to give added benefit over exercise with lengthening and shortening, and this video covers the mechanisms researchers have proposed."], ["Reactive Hyperemia", "During the hold, the muscle clamps down on the nearby blood vessels, which raises blood pressure dramatically. When the hold is released the muscle and vessels relax, and blood rushes in carrying oxygen, nutrients and factors such as nitric oxide and adenosine. These bind the smooth muscle cells in the vessel wall and make them relax further, so the vessels open wider and blood pressure falls below where it started. The influx of blood is called hyperemia."], ["Baroreceptors", "The body has pressure-sensitive baroreceptors in parts of the heart and some vessels. When pressure rises during a hold, they signal the brain to bring it down, and the brain acts through the nervous system to slow the heart and keep vessels open. A review he cites mentions studies where heart rate and blood pressure were reduced 7 hours after the exercise, which points to a lasting effect."], ["Neural Control of the Vessels", "Neurons can influence endothelial cells, which control vessel size, to release constricting or relaxing factors. Isometric exercise does not seem to activate sympathetic drive, the pathway that drives constriction, which is surprising. Neurons can also release nitric oxide themselves to relax vessels directly, called parasympathetic drive. He says much remains to be uncovered."], ["What Is Not Covered", "The most effective isometric exercise and how to do it are left to the next video. A step-by-step hand isometric protocol he created is in his premium Physionic Insiders platform and is not part of this video."]];
+const takeaways=[["Use static holds", "Isometric exercise, holding a stable position, is the type linked to the largest blood pressure drops in the data he refers to."], ["Expect a rise during the hold", "Pressure goes up while the muscle clamps the vessels, then falls below baseline after release, so the benefit comes after the hold."], ["The release matters", "Blood rushing back after the hold brings nitric oxide and adenosine that relax the vessel walls further."], ["Benefits can last hours", "Studies mentioned in the review found lower heart rate and blood pressure 7 hours after exercise."], ["Your baroreceptors help", "They respond to the pressure rise by signalling the brain to slow the heart and keep vessels open."], ["It works without the usual stress pathway", "Isometric exercise does not seem to activate sympathetic drive, so it avoids the constricting signal you might expect."], ["Nitric oxide is central", "Both the blood-flow rebound and the neuron-driven parasympathetic pathway involve nitric oxide relaxing the vessels."], ["Treat mechanisms as provisional", "He says there is a lot left to uncover, so these are proposed explanations."], ["Get the exercise details next", "The best isometric exercise and how to do it are in the follow-up video, so do not guess the protocol from this one."], ["Check with your doctor if you have hypertension", "This video does not cover safety or dosing, and pressure rises sharply during the hold. This is my reminder, not something he says."]];
+const m=document.getElementById('map');
+branches.forEach(b=>{const d=document.createElement('div');d.className='branch';d.style.setProperty('--c',b.c);
+d.innerHTML='<div class="bh" onclick="toggleBranch(this.parentNode)"><span class="t">'+b.t+'</span></div><div class="leaves">'+b.l.map(x=>'<div class="leaf" onclick="toggleLeaf(event,this)"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>').join('')+'</div>';m.appendChild(d)});
+document.getElementById('sum').innerHTML=summary.map(s=>'<div class="sec"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>').join('');
+document.getElementById('act').innerHTML=takeaways.map((t,i)=>'<div class="tk"><div class="n">'+(i+1)+'</div><div><h4>'+t[0]+'</h4><p>'+t[1]+'</p></div></div>').join('');
+function switchTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+function toggleBranch(el){el.classList.toggle('open')}
+function toggleLeaf(e,el){e.stopPropagation();el.classList.toggle('open')}
+</script>
+</body>
+</html>
