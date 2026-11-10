@@ -12,7 +12,6 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-ser
 header{padding:28px 20px 8px;max-width:900px;margin:0 auto}
 h1{font-family:'Fraunces',serif;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 6px}
 .sub{color:var(--mute);font-size:.92rem}
-.note{max-width:900px;margin:10px auto 0;padding:0 20px;color:var(--mute);font-size:.82rem}
 .tabs{display:flex;gap:6px;max-width:900px;margin:18px auto 0;padding:0 20px;flex-wrap:wrap}
 .tab{border:1px solid var(--line);background:var(--card);padding:9px 16px;border-radius:999px;cursor:pointer;font:500 .9rem 'Inter',sans-serif;color:var(--ink)}
 .tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -41,9 +40,8 @@ h1{font-family:'Fraunces',serif;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 6p
 <body>
 <header>
 <h1>The Blueprint to Get Flexible Once, Forever</h1>
-<div class="sub">Matt Smith · Mobility &amp; flexibility coach · ~39 min</div>
+<div class="sub">Matt Smith (matthewismith) · Mobility &amp; flexibility coach · 39 min</div>
 </header>
-<div class="note">Built from the video title and the creator's published outline of this blueprint; no transcript was available, so details are the blueprint's framework rather than a verbatim account.</div>
 <div class="tabs">
 <button class="tab active" onclick="switchTab('map',this)">Mind Map</button>
 <button class="tab" onclick="switchTab('sum',this)">Full Summary</button>
@@ -55,55 +53,55 @@ h1{font-family:'Fraunces',serif;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 6p
 <script>
 const branches=[
 {t:"1. The Flexibility Ladder",c:"#b5532f",l:[
-["Your personal ladder","Range of motion is limited by a hierarchy of factors, such as specific muscles, nerve tension, technique and strength gaps. Whatever sits below your goal level is your bottleneck, so progress means finding and working on that rung."],
-["Why training is individual","Two people with the same tight hamstrings may have different limiting factors. A generic routine ignores this, which is why people who stretch daily can stay tight."],
-["Making progress","You move up the ladder by addressing the current limiter, then reassessing. Each rung changes what the next best stretch is."],
-["Why routines fail","A fixed 'stretching routine' treats every body the same. The blueprint replaces it with a small set of targeted exercises chosen for your limiter."]]},
-{t:"2. Finding What Limits You",c:"#2f6f8f",l:[
-["Measure your baseline","Start by testing your current range in the movements you care about, so you have a number or a picture to compare against later."],
-["Self-assessments","Simple self-tests show where you stop and what the stopping point feels like: a muscle pull, a pinch, or a nerve sensation. The type of sensation points to the limiter."],
-["Pick the area","Choose where to start based on the most obvious restriction. Freeing the main knot often improves neighbouring areas too."],
-["Full body vs skill-based","You can build a full-body routine or aim at a specific skill such as a split or overhead position. The goal decides how narrow the programme should be."]]},
-{t:"3. How Stretching Works",c:"#4c7a3a",l:[
-["The brain adaptation","Training raises stretch tolerance, meaning how much stretch sensation your nervous system will allow. This is the lasting adaptation behind getting flexible."],
-["Tissue changes fade","Physical changes in the tissue are real but fade within weeks of stopping, and warm-up effects wear off within hours. Tolerance is what lets flexibility last."],
-["Keeping it long term","Once tolerance has risen, a small dose of maintenance and regular use of the range keeps it. Acquiring the range is the hard part."],
-["Reaching the ceiling","At your maximum tolerable stretch perception you cannot go further in a session, so more time past that point adds little."]]},
-{t:"4. Time-Efficient Training",c:"#7a4ca0",l:[
-["Stretch stacking","Pair stretches that target the same area so the first opens range for the second. The effect compounds and lets you progress in most sessions."],
-["3–5 exercises","A small stack of three to five well-chosen exercises forms the core. More variety is not the same as more progress."],
-["1–2 sessions a week","Frequency is low compared with daily stretching. One or two focused sessions per week are enough to drive adaptation."],
-["Less, but better","The blueprint's claim is more from less: pick the right exercises, do them with intent, and stop."]]},
-{t:"5. Assisted to Resisted",c:"#b08a1e",l:[
-["Assisted stretching","Bodyweight, gravity or a prop deepens the stretch. This builds total range of motion."],
-["Resisted stretching","You use strength to hold or push into the end range, optionally with load. This builds strength and stability inside the range so it becomes usable."],
-["The spectrum","Training sits anywhere between the two. Alternating along the spectrum is synergistic: assisted work adds range, resisted work claims it."],
-["Why usable range matters","Range you cannot control gains little in sport or daily life. Strength at end range is what turns flexibility into function."]]},
-{t:"6. Fitting It Into Life",c:"#a03c5c",l:[
-["Combine with sport or gym","The blueprint covers example schedules and key considerations for pairing flexibility with training, so one does not undermine the other."],
-["Timing","Ideally train flexibility two or more days after sport or strength work on the same area. Same day with flexibility in the evening is second best."],
-["Dose","There are minimum and maximum effective doses. Below the minimum nothing changes; above the maximum you only add soreness and time."],
-["Putting it into action","The core structure is 3–5 exercises, 1–2 times a week, reassessed as you climb the ladder."]]}
+["What the ladder is","It is every factor restricting your flexibility and the level at which each one limits you: different muscles, nerve tensions, technique issues, strength deficits and more. To reach a goal flexibility you must bring everything up to at least that level, and anything below it is the limiter."],
+["Why most people stall","Most people stretch the commonly focused areas, like hamstrings or lats, or just where they feel it. That is probably not their personal limitation. Breakthrough progress comes from working on the lowest items on your own ladder."],
+["Fix, then repeat","Assess to find the lowest item, fix it, then fix the next lowest, and repeat until you reach the level you want. Matt spent 6 years of normal stretching staying tight and nowhere near the splits before he worked out his own ladder."],
+["Path one vs path two","Path one is stretching like an amateur: choosing by feel and never measuring. Path two is stretching like a pro: measure first, test what is tight, decide between range and strength, then choose 3–5 stretches. He compares it to sharpening the axe for 30 minutes so the tree falls in half the time."]]},
+{t:"2. Assess and Set the Goal",c:"#2f6f8f",l:[
+["Muscle length tests","His shoulder example uses bands to isolate pec major, subscapularis with teres major, and lats during overhead reach, by changing arm position and rounding the lower back. The test showed the person needed to focus on the lats."],
+["Test strength too","Touching toes involves more than hamstrings: adductor magnus, gastrocnemius, strong hip and spine flexors, and tension on the sciatic nerve. So you also test whether you have the strength to lift the leg and test the nerve."],
+["Goals are skills","Strength goals are movement patterns like squat or overhead press, and flexibility goals should be too. The skills are pike, pancake, side split, front split, bridge, shoulder flexion, shoulder extension and comfortable squat."],
+["Why skills matter","Skills involve many joints working together, so they transfer better than vague hip or shoulder drills. His example is Cam McEvoy, where the bridge was the metric for shoulder, spine and hip mobility for swimming, and Andre Strong needed pancake and side splits."]]},
+{t:"3. Stretch Stacking",c:"#4c7a3a",l:[
+["Opposite order to strength","In strength training you start with the big compound lift and finish with accessories. In flexibility you start with smaller isolated stretches, for example hamstrings and hip flexors, which open range for the bigger movement like a front split."],
+["1 + 1 = 3","Two stretches for different areas give two units of progress. Two stretches for the same area compound: the first opens the pec major, so the lat stretch that follows goes further. The effect stacks on top of the previous exercise."],
+["3–5 aligned stretches","Choose three to five stretches all aimed at the same skill. Done this way you will likely see progress almost every session."],
+["Dennis's side-split stack","Tests: Taylor's pose (could not), pancake hip tilt with round back (could not), and passive versus isometric versus active strength. The stack: a bent-leg adductor and rotator exercise, then pancake training, then technique drills, then the side split itself."]]},
+{t:"4. The Assisted-to-Resisted Spectrum",c:"#7a4ca0",l:[
+["The spectrum","Using side splits: heavily assisted is full body weight and gravity, assisted adds ankle weights, then neutral, then a standing tilt lifting the leg against gravity, then weighted resisted work. Flexibility and strength are two ends of one spectrum."],
+["What each end does","Assisted training pushes the ceiling of total flexibility. Resisted training makes your range stronger and more usable. The middle develops a bit of both. You choose based on which one is your limit."],
+["Stacking across the spectrum","A resisted exercise strengthens into the new range and contracts the antagonist, which relaxes the stretched muscles so you go deeper next time. Alternating the two gives another 1 + 1 = 3 effect."],
+["Sundra vs Sunniva","Sunniva is more flexible but Sundra is stronger in his range, so they have different ladders. Sunniva should do more active work and get stronger, Sundra more passive work to increase total range."]]},
+{t:"5. The 10 Training Methods",c:"#b08a1e",l:[
+["Methods 1–4","PIR or contract-relax; isometric stretching; isometric holds for reps (about 3 seconds per rep with rests, so each rep goes deeper); and active lifts, including eccentric overload with a bent knee to build strength at the top of the range."],
+["Methods 5–6","Dynamic stretching uses speed and momentum and helps flexibility transfer to kicks and acrobatics. Ballistic stretching he learned living with Shaolin monks; he now prefers rapid contract-relax, using your own muscles to pull in so you control the depth."],
+["Methods 7–9","Joint capsule releases for stiff people when other methods fail. Nerve flosses, glides and tensioners, since a nerve entrapment can stop progress without you knowing; the sciatic nerve stretches only about 8–10%. Soft tissue work through the stretch rather than blind foam rolling."],
+["Method 10: technique","Technique drills are underrated. Side splits by just opening the legs jams the hip bone on bone; tilt the hips forward or turn the feet up. Bridge cues lifting up then arching over, and front splits keep hips square."]]},
+{t:"6. Brain vs Body, and Scheduling",c:"#a03c5c",l:[
+["Two kinds of adaptation","Brain: stretch tolerance improves at the supraspinal CNS level, so you can go further before the signal maxes out. Body: tendon stiffness and sarcomeres added in series. Brain changes are most powerful and stay long term."],
+["What fades","Body changes like sarcomerogenesis reverse after about 6 weeks without use. Warming up only changes viscoelastic properties, like warm honey pouring more easily, and lasts a few hours. That is why people stretch for hours and stay stuck."],
+["Fatigue blocks the brain","Calcium builds up in stretched sarcomeres, activating calpains, causing muscle fibre damage and inflammation that the brain detects as fatigue. That fatigue takes up room in your stretch perception, so train when it is not present."],
+["When to train","Best: two or more days after sport or strength work that could affect it. Next: same day, with strength or sport in the morning and flexibility in the evening. Third: after the other training, reducing volume of each. Common mistake: stretching the day after, or as active recovery."]]}
 ];
 const summary=[
-["The Flexibility Ladder","The central idea is that flexibility is limited by a personal hierarchy of factors rather than by a lack of stretching. Muscle length, nerve tension, technique and strength can each be the thing that stops you. Anything below your goal on that ladder is your bottleneck, which is why daily stretching leaves some people tight: they are working on the wrong rung. Training should be individualised around the current limiter and reassessed as it changes."],
-["Identifying What Limits You","Before choosing exercises, you measure where you are and learn what the end of your range feels like. A muscle pull, a pinch and a nerve sensation point to different limiters. You then pick the area to start with, usually the most obvious restriction, and decide between a full-body approach and one aimed at a particular skill."],
-["What Changes in the Body","The lasting adaptation is mostly in the nervous system. Training raises stretch tolerance, so the brain allows more range before it signals that it is too much. Tissue changes occur but fade within weeks of stopping, and warm-up effects last only hours. This is why flexibility can be built once and kept with little maintenance."],
-["Time-Efficient Methods","Stretch stacking pairs aligned stretches so that the first opens range for the second. A stack of three to five exercises, done once or twice a week, is the core structure. The claim is that the right few exercises beat a long daily routine."],
-["The Assisted-to-Resisted Spectrum","Assisted stretches, where gravity or bodyweight deepens the position, build total range. Resisted stretches, where you apply strength at end range, make that range stable and usable. Moving along this spectrum, and alternating between its ends, builds both capacity and control."],
-["Frequency, Combining and Acting","Training should usually sit two or more days after sport or strength work on the same area, with same-day evening sessions second best. There are minimum and maximum effective doses, and the practical plan is to apply the 3–5 exercise stack one to two times per week, reassessing as you progress."]
+["The Flexibility Ladder and the Two Paths","Matt Smith opens with the flexibility ladder: all the things restricting your flexibility and the level at which each limits you, including muscles, nerve tension, technique and strength deficits. To reach a goal you must raise everything to at least that level, and anything below it is the limiter. Most people stretch the usual areas or where they feel it, which is probably not their personal limitation. He says he stretched normally for six years, stayed very tight and nowhere near the splits, and only changed once he worked out his own ladder. He contrasts stretching like an amateur, by feel and without measurement, with stretching like a pro, who measures, tests, decides between range and strength and then picks three to five stretches. The axe analogy makes the point: sharpening for 30 minutes means the tree falls in an hour instead of four."],
+["Assessment and Flexibility Skills","The assessment finds the lowest rung. For overhead mobility he isolates pec major, subscapularis with teres major and the lats using bands and arm or spine position. For touching toes he notes that hamstrings are only part of it: adductor magnus, calves, hip and spine flexor strength and sciatic nerve tension all matter, so you test range, strength and nerve. He argues that flexibility goals should be skills, like strength goals are movement patterns. The skills he lists are pike, pancake, side split, front split, bridge, shoulder flexion, shoulder extension and the comfortable squat. Because these involve many joints, they transfer better to sport and daily life than vague hip or shoulder drills. His examples include Olympic swimmer Cam McEvoy using the bridge as a mobility metric, and Andre Strong working on pancake and side splits."],
+["Stretch Stacking","The order of exercises in flexibility training is the opposite of strength training. You start with smaller isolated stretches, such as hamstrings and hip flexors, which open range for a bigger movement like the front split. Stretch stacking is the multiplying effect: two stretches for different areas give two units of progress, but two for the same area compound, because the first, for the pec major, lets the second, for the lats, go further. He calls this one plus one equals three. Choosing three to five stretches aligned towards one skill means you will likely see progress almost every session."],
+["The Assisted-to-Resisted Spectrum and the Ten Methods","Using side splits, he shows a spectrum from heavily assisted, through assisted with ankle weights and neutral, to a standing tilt against gravity and weighted resisted work. Flexibility and strength are two ends of one spectrum: assisted work pushes the ceiling of total range, resisted work makes the range stronger and usable. Alternating the two stacks, since the resisted exercise strengthens into new range and relaxes the muscles stretched before. His ten methods are PIR, isometrics, isometric reps, active lifts, dynamic stretching, ballistic or rapid contract-relax, joint capsule releases, nerve flosses and glides, soft tissue work, and technique drills. Technique matters: opening the legs sideways jams the hip, so you tilt the hips forward or turn the feet up."],
+["The Worked Example and Focusing on Skills","He applies everything to an acrobat, Dennis. Taylor's pose and a pancake hip-tilt test both fail, and strength is checked passively, isometrically and actively. The resulting four-exercise stack runs from a bent-leg adductor and rotator exercise, to pancake training, to technique drills, to the side split, each making the next better. He argues that targeted sessions of three to five stretches per skill beat full-body routines, like completing a circle one skill at a time. To the worry about losing flexibility elsewhere, he replies that he can still drop into the side splits without proper training for over three years, because the lasting adaptation is mostly in the brain and skills overlap."],
+["Brain Adaptation and Scheduling","Flexibility comes from changes in the brain, improved stretch tolerance at the supraspinal level, and from changes in the body such as tendon stiffness and added sarcomeres. The brain changes last, while body changes reverse after about six weeks without use and warm-up effects last only hours. Stretching causes calcium to enter the sarcomere through stretch-mediated channels, activating calpains, causing fibre damage and inflammation, which the brain detects as fatigue, much like strength training. That fatigue limits how much stretch you can tolerate, so timing matters. The best time is two or more days after sport or strength work that could affect the area, next best is the same day with flexibility in the evening, and third is after training with reduced volume. Stretching the day after, or as active recovery, is the most common mistake. His summary: set one or two skills, assess, stack three to five exercises one to two times per week, and schedule for lasting adaptation."]
 ];
 const takeaways=[
-["Find your limiter first","Test the movement you want and note what stops you: muscle, nerve, pinch or strength. Pick exercises for that, not a generic list."],
-["Choose 3–5 exercises","Keep the stack small and aligned to one area so each stretch builds on the last."],
-["Stretch 1–2 times a week","Replace daily token stretching with one or two focused sessions."],
-["Stack aligned stretches","Put the stretch that opens the area first, then the one that uses the new range."],
-["Add resisted work","After an assisted stretch, hold the end range with muscle effort so the range becomes usable."],
-["Train your tolerance","Treat the goal as raising how much stretch you tolerate, not forcing tissue. Stay in a strong but controlled sensation."],
-["Time it around training","Place flexibility two or more days after lifting or sport on the same area; otherwise do it in the evening of the same day."],
-["Do not use stretching as recovery","Avoid deep stretching the day after hard strength work on that area."],
-["Retest every few weeks","Repeat your baseline test, and change the exercises when your limiter moves up the ladder."],
-["Maintain with a light dose","Once you have the range, keep it with occasional sessions and by actually using it."]
+["Pick one or two skills","Choose from pike, pancake, side split, front split, bridge, shoulder flexion or extension, or the squat, based on what you want to do."],
+["Assess before you stretch","Measure your starting level and test muscle length, strength and nerve tension for that skill to find the lowest rung on your ladder."],
+["Fix the lowest rung first","Work on the limiter, then the next lowest, and repeat until you reach the level you need."],
+["Choose 3–5 stretches for one skill","Keep every exercise aligned to the same skill rather than a full-body routine."],
+["Start with isolated stretches","Put the smaller isolated stretches first so they open range for the bigger compound movement at the end."],
+["Mix assisted and resisted work","Use assisted work to push total range and resisted work to make it strong, and alternate them in a stack."],
+["Use isometric reps","Replace one long hold with reps of about 3 seconds so each rep can go deeper at higher quality."],
+["Check your technique","For side splits, tilt the hips forward or turn the feet up instead of just opening the legs, and learn the cue for each skill."],
+["Train 1–2 times a week","Schedule sessions two or more days after related sport or strength work; otherwise do strength or sport in the morning and flexibility in the evening."],
+["Avoid the day-after mistake","Do not stretch the day after strength training or treat it as active recovery, because fatigue limits the brain adaptation you want."]
 ];
 const m=document.getElementById('map');
 branches.forEach(b=>{const d=document.createElement('div');d.className='branch';d.style.setProperty('--c',b.c);
